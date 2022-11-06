@@ -8,6 +8,7 @@ using Terraria.GameContent.Bestiary;
 using Terraria.DataStructures;
 using System;
 using Terraria.Graphics.CameraModifiers;
+using Terraria.Audio;
 
 namespace Wisplantern.NPCs.Other
 {
@@ -37,8 +38,12 @@ namespace Wisplantern.NPCs.Other
             NPC.width = 54;
             NPC.height = 56;
             NPC.lifeMax = 3;
+            SoundStyle hitStyle = SoundID.DD2_WitherBeastCrystalImpact;
+            hitStyle.Volume *= 1.5f;
             NPC.HitSound = SoundID.DD2_WitherBeastCrystalImpact;
-            NPC.DeathSound = SoundID.DD2_WitherBeastDeath;
+            SoundStyle deathStyle = SoundID.DD2_WitherBeastDeath;
+            deathStyle.Volume *= 2f;
+            NPC.DeathSound = deathStyle;
             NPC.aiStyle = -1;
             NPC.noTileCollide = true;
             NPC.noGravity = true;
@@ -57,6 +62,7 @@ namespace Wisplantern.NPCs.Other
             NPC.ai[2] = position.Y;
         }
 
+        int timeUntilRainbowGun = 0;
         public override void HitEffect(int hitDirection, double damage)
         {
             if (!protecting)
@@ -72,6 +78,14 @@ namespace Wisplantern.NPCs.Other
 
                     PunchCameraModifier modifier = new PunchCameraModifier(NPC.Center, Main.rand.NextVector2CircularEdge(1f, 1f), Main.rand.NextFloat(15f, 25f), 6f, 20, 1000f);
                     Main.instance.CameraModifiers.Add(modifier);
+
+                    for (int i = 0; i < Main.rand.Next(125, 150); i++)
+                    {
+                        Dust dust = Main.dust[Dust.NewDust(NPC.Center, 1, 1, ModContent.DustType<Dusts.HyperstoneDust>())];
+                        dust.velocity = Main.rand.NextVector2Circular(10f, 10f);
+                    }
+
+                    timeUntilRainbowGun = 2;
                 }
 
                 NPC.ai[3] = 3000;
@@ -174,6 +188,15 @@ namespace Wisplantern.NPCs.Other
             if (NPC.ai[3] > 0)
             {
                 NPC.ai[3]--;
+            }
+
+            if (timeUntilRainbowGun > 0)
+            {
+                timeUntilRainbowGun--;
+                if (timeUntilRainbowGun <= 0)
+                {
+                    SoundEngine.PlaySound(SoundID.Item67, NPC.Center);
+                }
             }
         }
     }

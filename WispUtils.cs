@@ -1,11 +1,31 @@
 ﻿using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.WorldBuilding;
+using System.Threading;
+using System;
+using ReLogic.Content;
 
 namespace Wisplantern
 {
     public static class WispUtils
     {
+        public static void InvokeOnMainThread(Action action)
+        {
+            if (!AssetRepository.IsMainThread)
+            {
+                ManualResetEvent evt = new(false);
+
+                Main.QueueMainThreadAction(() => {
+                    action();
+                    evt.Set();
+                });
+
+                evt.WaitOne();
+            }
+            else
+                action();
+        }
+
         public static bool TileCanBeLush(int i, int j)
         {
             if (WorldGen.TileEmpty(i + 1, j) || !Main.tileSolid[Main.tile[i + 1, j].TileType])
