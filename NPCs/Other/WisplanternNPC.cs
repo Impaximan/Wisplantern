@@ -51,6 +51,11 @@ namespace Wisplantern.NPCs.Other
             NPC.defense = 9999;
         }
 
+        public override void OnKill()
+        {
+            if (Main.netMode != NetmodeID.MultiplayerClient) Projectile.NewProjectile(NPC.GetSource_Death(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<WisplanternVortex>(), 0, 0f);
+        }
+
         public override void OnSpawn(IEntitySource source)
         {
             NPC.ai[1] = NPC.Center.X;
@@ -197,6 +202,71 @@ namespace Wisplantern.NPCs.Other
                 {
                     SoundEngine.PlaySound(SoundID.Item67, NPC.Center);
                 }
+            }
+        }
+    }
+
+    class WisplanternVortex : ModProjectile
+    {
+        public override string Texture => "Wisplantern/VFX/Vortex4";
+
+        int trueTimeLeft = 180;
+        public override void SetDefaults()
+        {
+            Projectile.friendly = false;
+            Projectile.hostile = false;
+            Projectile.timeLeft = trueTimeLeft + 60;
+            Projectile.width = 1000;
+            Projectile.height = 1000;
+            Projectile.tileCollide = false;
+            Projectile.scale = 0.3f;
+            Projectile.alpha = 255;
+        }
+
+        public void SpawnItem()
+        {
+            Item.NewItem(Projectile.GetSource_FromThis(), Projectile.Center, (int)Projectile.ai[0]);
+        }
+
+        public override bool PreDraw(ref Color lightColor)
+        {
+            Main.spriteBatch.Draw(ModContent.Request<Texture2D>("Wisplantern/VFX/Vortex4").Value, //Texture
+                Projectile.Center - Main.screenPosition, //Position
+                null, //Source Rectangle
+                Projectile.GetAlpha(new Color(187, 206, 238)) * 0.5f, //Color
+                Projectile.rotation, //Rotation
+                new Vector2(500, 500), //Origin
+                Projectile.scale, //Scale
+                SpriteEffects.None, //SpriteEffects
+                0f); //LayerDepth
+            return false;
+        }
+
+        public override void AI()
+        {
+            Projectile.rotation += MathHelper.ToRadians(5f);
+
+            if (trueTimeLeft > 0)
+            {
+                if (Projectile.alpha > 0)
+                {
+                    Projectile.alpha -= 255 / 60;
+                }
+                trueTimeLeft--;
+                if (trueTimeLeft == 90 && Wisplantern.wisplanternLoot.Count > 0)
+                {
+                    Projectile.ai[0] = Main.rand.Next(Wisplantern.wisplanternLoot);
+                    NetMessage.SendData(MessageID.SyncProjectile, number: Projectile.whoAmI);
+                }
+                if (trueTimeLeft == 60 && Wisplantern.wisplanternLoot.Count > 0)
+                {
+                    if (Main.netMode != NetmodeID.MultiplayerClient) SpawnItem();
+                }
+            }
+            else
+            {
+                Projectile.scale *= 0.98f;
+                Projectile.alpha += 255 / 60;
             }
         }
     }

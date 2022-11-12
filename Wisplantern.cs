@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Audio;
 using System.IO;
 using Microsoft.Xna.Framework;
 using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 
@@ -55,6 +56,8 @@ namespace Wisplantern
         public static int freezeFrames = 0;
         public static bool freezeFrameLight = false;
 
+        public static List<int> wisplanternLoot = new List<int>();
+
         private static string savingFolder = Path.Combine(Main.SavePath, "Mods", "Cache");
         public override void Load()
         {
@@ -77,6 +80,7 @@ namespace Wisplantern
         public override void Unload()
         {
             Detours.Unload();
+            wisplanternLoot.Clear();
         }
     }
 }
