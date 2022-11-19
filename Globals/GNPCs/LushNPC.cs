@@ -6,7 +6,7 @@ using Terraria.ModLoader.Utilities;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.GameContent.Bestiary;
 
-namespace Wisplantern.Globals
+namespace Wisplantern.Globals.GNPCs
 {
     class LushNPC : GlobalNPC
     {

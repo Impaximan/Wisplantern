@@ -4,6 +4,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.GameContent.Creative;
 
 namespace Wisplantern.Items.Weapons.Ranged.Bows
 {
@@ -13,11 +14,14 @@ namespace Wisplantern.Items.Weapons.Ranged.Bows
         {
             Tooltip.SetDefault("Fires in reverse and relative to you" +
                 "\n'Weirdly strange, oddly'");
+            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+
+            Wisplantern.wisplanternLoot.Add(Type);
         }
 
         public override void SetDefaults()
         {
-            Item.damage = 10;
+            Item.damage = 9;
             Item.DamageType = DamageClass.Ranged;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.shoot = ProjectileID.PurificationPowder;
@@ -107,10 +111,11 @@ namespace Wisplantern.Items.Weapons.Ranged.Bows
 
             if (Main.netMode != NetmodeID.Server)
             {
-                for (int i = 0; i < Main.rand.Next(25, 35); i++)
+                for (int i = 0; i < Main.rand.Next(15, 22); i++)
                 {
                     Dust dust = Main.dust[Dust.NewDust(Projectile.Center, 1, 1, ModContent.DustType<Dusts.HyperstoneDust>())];
-                    dust.velocity = Main.rand.NextVector2Circular(5f, 5f);
+                    dust.velocity = Main.rand.NextVector2Circular(3f, 3f);
+                    dust.scale *= 0.75f;
                 }
 
                 //SoundStyle style = SoundID.Item9;
