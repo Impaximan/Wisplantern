@@ -37,7 +37,7 @@ namespace Wisplantern.Tiles
         {
             if (!effectOnly)
             {
-                if (Main.netMode != NetmodeID.Server)
+                if (Main.netMode != NetmodeID.Server && !Main.gameMenu)
                 {
                     Player player = Main.player[Player.FindClosest(new Vector2(i * 16, j * 16), 16, 16)];
                     player.itemTime /= 3;
