@@ -10,13 +10,16 @@ namespace Wisplantern.Items.Equipable.Accessories
 {
     class WispNecklace : ModItem
     {
+        public override void Load()
+        {
+            Wisplantern.wisplanternLoot.Add(Type);
+        }
+
         public override void SetStaticDefaults()
         {
             Tooltip.SetDefault("Weapons benefit from mining speed" +
                 "\n10% increased mining speed");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-
-            Wisplantern.wisplanternLoot.Add(Type);
         }
 
         public override Color? GetAlpha(Color lightColor)

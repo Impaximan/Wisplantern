@@ -10,13 +10,16 @@ namespace Wisplantern.Items.Tools.Pickaxes
 {
     class HyperstonePick : ModItem
     {
+        public override void Load()
+        {
+            Wisplantern.wisplanternLoot.Add(Type);
+        }
+
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Timid Pick");
             Tooltip.SetDefault("Gains more speed from hyperstone and wisplanterns than most pickaxes");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-
-            Wisplantern.wisplanternLoot.Add(Type);
         }
 
         public override void SetDefaults()

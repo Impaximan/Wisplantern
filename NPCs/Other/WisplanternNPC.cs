@@ -49,6 +49,7 @@ namespace Wisplantern.NPCs.Other
             NPC.noGravity = true;
             NPC.lavaImmune = true;
             NPC.defense = 9999;
+            NPC.rarity = 2;
         }
 
         public override void OnKill()
@@ -159,7 +160,7 @@ namespace Wisplantern.NPCs.Other
 
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
-            return SpawnCondition.Cavern.Chance * 0.1f;
+            return SpawnCondition.Cavern.Chance * 0.075f;
         }
 
         public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
