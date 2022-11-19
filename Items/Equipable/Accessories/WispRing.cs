@@ -10,11 +10,6 @@ namespace Wisplantern.Items.Equipable.Accessories
 {
     class WispRing : ModItem
     {
-        public override void Load()
-        {
-            Wisplantern.wisplanternLoot.Add(Type);
-        }
-
         public override void SetStaticDefaults()
         {
             Tooltip.SetDefault("Chance when mining to get the 'Hyperspeed' buff for 3 seconds");

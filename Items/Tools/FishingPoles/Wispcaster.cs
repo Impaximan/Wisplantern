@@ -10,11 +10,6 @@ namespace Wisplantern.Items.Tools.FishingPoles
 {
     class Wispcaster : ModItem
     {
-        public override void Load()
-        {
-            Wisplantern.wisplanternLoot.Add(Type);
-        }
-
         public override void SetStaticDefaults()
         {
             Tooltip.SetDefault("Creates a bobber at your cursor position, within a certain distance");

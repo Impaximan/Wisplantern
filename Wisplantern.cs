@@ -74,6 +74,12 @@ namespace Wisplantern
             ModContent.Request<SoundEffect>("Wisplantern/Sounds/Effects/StoneHit1", AssetRequestMode.ImmediateLoad);
             ModContent.Request<SoundEffect>("Wisplantern/Sounds/Effects/StoneHit2", AssetRequestMode.ImmediateLoad);
 
+            wisplanternLoot.Add(ModContent.ItemType<Items.Equipable.Accessories.WispNecklace>());
+            wisplanternLoot.Add(ModContent.ItemType<Items.Equipable.Accessories.WispRing>());
+            wisplanternLoot.Add(ModContent.ItemType<Items.Tools.FishingPoles.Wispcaster>());
+            wisplanternLoot.Add(ModContent.ItemType<Items.Tools.Pickaxes.HyperstonePick>());
+            wisplanternLoot.Add(ModContent.ItemType<Items.Weapons.Ranged.Bows.OtherBow>());
+
             Detours.Load();
         }
 

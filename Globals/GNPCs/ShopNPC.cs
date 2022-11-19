@@ -19,6 +19,15 @@ namespace Wisplantern.Globals.GNPCs
                 shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Equipable.Accessories.Pill>());
                 nextSlot++;
             }
+
+            if (type == NPCID.TravellingMerchant)
+            {
+                if (Main.moonPhase % 3 == 0)
+                {
+                    shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Info.FourLeafClover>());
+                    nextSlot++;
+                }
+            }
         }
     }
 }
