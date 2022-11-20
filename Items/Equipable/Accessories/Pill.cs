@@ -34,7 +34,7 @@ namespace Wisplantern.Items.Equipable.Accessories
         int lifeRegenTime = 0;
         public override void UpdateEquip(Player player)
         {
-            if (player.statLife <= player.statLifeMax2 * 0.2f)
+            if (player.statLife <= player.statLifeMax2 * 0.25f)
             {
                 lifeRegenTime = 300;
             }
