@@ -122,7 +122,7 @@ namespace Wisplantern.Items.Weapons.Melee.Shortswords
 
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Example Shortsword");
+			DisplayName.SetDefault("Depthrock Dagger");
 		}
 
 		public override void SetDefaults()
@@ -151,6 +151,8 @@ namespace Wisplantern.Items.Weapons.Melee.Shortswords
 
 				PunchCameraModifier modifier = new PunchCameraModifier(Projectile.Center, Projectile.velocity.ToRotation().ToRotationVector2(), 20f, 10f, 10, 1000f);
 				Main.instance.CameraModifiers.Add(modifier);
+
+				SoundEngine.PlaySound(SoundID.DD2_MonkStaffGroundImpact, target.Center);
 
 				Wisplantern.freezeFrames = 5;
 
