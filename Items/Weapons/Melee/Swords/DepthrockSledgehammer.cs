@@ -11,28 +11,28 @@ using Terraria.Audio;
 
 namespace Wisplantern.Items.Weapons.Melee.Swords
 {
-    class WeatheredSledgehammer : ModItem
+    class DepthrockSledgehammer : ModItem
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Guarenteed critical strike on uninjured enemies" +
-                "\nCan be upgraded with better stone");
+            DisplayName.SetDefault("Reinforced Sledgehammer");
+            Tooltip.SetDefault("Guarenteed critical strike on uninjured enemies");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()
         {
-            Item.width = 40;
-            Item.height = 40;
+            Item.width = 46;
+            Item.height = 46;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.rare = ItemRarityID.Blue;
-            Item.damage = 17;
-            Item.useTime = 35;
-            Item.useAnimation = 35;
+            Item.damage = 26;
+            Item.useTime = 32;
+            Item.useAnimation = 32;
             Item.UseSound = SoundID.DD2_MonkStaffSwing;
             Item.knockBack = 10f;
-            Item.scale = 1.25f;
-            Item.crit = 6;
+            Item.scale = 1.2f;
+            Item.crit = 10;
             Item.value = Item.sellPrice(0, 0, 50, 0);
             Item.autoReuse = false;
             Item.DamageType = DamageClass.Melee;
@@ -53,6 +53,17 @@ namespace Wisplantern.Items.Weapons.Melee.Swords
                 style.PitchVariance = 0.5f;
                 SoundEngine.PlaySound(style, target.Center);
             }
+        }
+
+        public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddIngredient<WeatheredSledgehammer>()
+                .AddIngredient<Placeable.Blocks.Depthrock>(75)
+                .AddIngredient<Placeable.Blocks.Fulgarite>(15)
+                .AddIngredient(ItemID.Ruby, 3)
+                .AddTile(TileID.Anvils)
+                .Register();
         }
     }
 }

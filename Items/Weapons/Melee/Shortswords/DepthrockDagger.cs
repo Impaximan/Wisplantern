@@ -152,7 +152,9 @@ namespace Wisplantern.Items.Weapons.Melee.Shortswords
 				PunchCameraModifier modifier = new PunchCameraModifier(Projectile.Center, Projectile.velocity.ToRotation().ToRotationVector2(), 20f, 10f, 10, 1000f);
 				Main.instance.CameraModifiers.Add(modifier);
 
-				SoundEngine.PlaySound(SoundID.DD2_MonkStaffGroundImpact, target.Center);
+				SoundStyle style = SoundID.DD2_MonkStaffGroundImpact;
+				style.Volume *= 1.5f;
+				SoundEngine.PlaySound(style, target.Center);
 
 				Wisplantern.freezeFrames = 5;
 
