@@ -28,8 +28,8 @@ namespace Wisplantern.NPCs.Other
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
         {
             bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[] {
-                BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Underground,
-                new FlavorTextBestiaryInfoElement("Mysterious lanterns said to contain spirits linger in the caverns, waiting to be uncovered. Fleeing on contact, the Wisplanterns will eventually shattered if damaged enough.")
+                BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Caverns,
+                new FlavorTextBestiaryInfoElement("Mysterious lanterns said to contain spirits linger in the caverns, waiting to be uncovered. Fleeing on contact, the Wisplanterns will eventually shatter if damaged enough.")
             });
         }
 
