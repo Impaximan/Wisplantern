@@ -1,6 +1,7 @@
 ﻿using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.GameContent.Creative;
 
 namespace Wisplantern.Items.Placeable.Blocks
 {
@@ -10,6 +11,7 @@ namespace Wisplantern.Items.Placeable.Blocks
         {
             DisplayName.SetDefault("Depthrock Block");
             Tooltip.SetDefault("'It's lukewarm'");
+            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 100;
         }
 
         public override void SetDefaults()

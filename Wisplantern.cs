@@ -79,6 +79,7 @@ namespace Wisplantern
             wisplanternLoot.Add(ModContent.ItemType<Items.Equipable.Accessories.WispRing>());
             wisplanternLoot.Add(ModContent.ItemType<Items.Tools.FishingPoles.Wispcaster>());
             wisplanternLoot.Add(ModContent.ItemType<Items.Tools.Pickaxes.HyperstonePick>());
+            wisplanternLoot.Add(ModContent.ItemType<Items.Tools.Movement.Hooklantern>());
             wisplanternLoot.Add(ModContent.ItemType<Items.Weapons.Ranged.Bows.OtherBow>());
 
             Detours.Load();

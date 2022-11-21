@@ -10,6 +10,7 @@ using Terraria.Audio;
 
 namespace Wisplantern.Items.Weapons.Melee.Shortswords
 {
+	//TODO: Add an indicator for when the fourth hit is charged up and for when you lose the jab counter
     class DepthrockDagger : ModItem
     {
         public override void SetStaticDefaults()
@@ -82,7 +83,7 @@ namespace Wisplantern.Items.Weapons.Melee.Shortswords
             {
 				totalShots = 0;
 				Item.stack--;
-				int proj = Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI, 0, 1);
+				if (Main.netMode != NetmodeID.MultiplayerClient) Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI, 0, 1);
 				SoundEngine.PlaySound(SoundID.DD2_MonkStaffSwing, player.Center);
 				cooldown = 20;
 				return false;
@@ -159,6 +160,7 @@ namespace Wisplantern.Items.Weapons.Melee.Shortswords
 				Wisplantern.freezeFrames = 5;
 
 				Projectile.localNPCHitCooldown = 10;
+				Projectile.ownerHitCheck = false;
 			}
         }
 

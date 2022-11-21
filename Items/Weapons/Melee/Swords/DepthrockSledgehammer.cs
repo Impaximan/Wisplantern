@@ -30,10 +30,10 @@ namespace Wisplantern.Items.Weapons.Melee.Swords
             Item.useTime = 32;
             Item.useAnimation = 32;
             Item.UseSound = SoundID.DD2_MonkStaffSwing;
-            Item.knockBack = 10f;
+            Item.knockBack = 9f;
             Item.scale = 1.2f;
             Item.crit = 10;
-            Item.value = Item.sellPrice(0, 0, 50, 0);
+            Item.value = Item.sellPrice(0, 1, 25, 0);
             Item.autoReuse = false;
             Item.DamageType = DamageClass.Melee;
         }
