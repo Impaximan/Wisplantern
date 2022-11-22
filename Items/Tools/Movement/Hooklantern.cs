@@ -15,7 +15,7 @@ namespace Wisplantern.Items.Tools.Movement
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Can be thrown an grappled to" +
+            Tooltip.SetDefault("Can be thrown and grappled to" +
                 "\nOnly two can be active at once");
         }
 
@@ -81,8 +81,28 @@ namespace Wisplantern.Items.Tools.Movement
             Projectile.height = 36;
             Projectile.friendly = false;
             Projectile.hostile = false;
-            Projectile.tileCollide = false;
+            Projectile.tileCollide = true;
             Projectile.ignoreWater = true;
+        }
+
+        public override bool OnTileCollide(Vector2 oldVelocity)
+        {
+            if (oldVelocity.X != Projectile.velocity.X)
+            {
+                Projectile.velocity.X = oldVelocity.X * -1;
+            }
+            if (oldVelocity.Y != Projectile.velocity.Y)
+            {
+                Projectile.velocity.Y = oldVelocity.Y * -1;
+            }
+            return false;
+        }
+
+        public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
+        {
+            width = 20;
+            height = 20;
+            return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
         }
 
         public override void OnSpawn(IEntitySource source)
@@ -97,11 +117,14 @@ namespace Wisplantern.Items.Tools.Movement
             Projectile.ai[0]++;
 
             Player player = Main.player[Player.FindClosest(Projectile.position, Projectile.width, Projectile.height)];
-            if (player.Distance(Projectile.Center) <= 40f && Projectile.ai[0] > 30)
+            if (player.Distance(Projectile.Center) <= 30f && Projectile.ai[0] > 20 && Projectile.ai[1] != 0)
             {
+                player.velocity *= 1.2f;
                 Projectile.timeLeft = 0;
                 NetMessage.SendData(MessageID.SyncProjectile, number: Projectile.whoAmI);
             }
+
+            Projectile.ai[1] = 0;
         }
 
         public override void Kill(int timeLeft)
@@ -128,6 +151,18 @@ namespace Wisplantern.Items.Tools.Movement
         public override void OnSpawn(Projectile projectile, IEntitySource source)
         {
             hasGrappled = false;
+
+            if (Main.projHook[projectile.type])
+            {
+                for (int i = 0; i < Main.maxProjectiles; i++)
+                {
+                    Projectile hooklantern = Main.projectile[i];
+                    if (hooklantern != null && hooklantern.type == ModContent.ProjectileType<HooklanternProjectile>() && hooklantern.active && hooklantern.Distance(projectile.Center) < 1000f)
+                    {
+                        projectile.velocity = projectile.velocity.ToRotation().AngleTowards(projectile.DirectionTo(hooklantern.Center + (hooklantern.Distance(projectile.Center) / projectile.velocity.Length()) * hooklantern.velocity * 0.95f).ToRotation(), MathHelper.ToRadians(15f)).ToRotationVector2() * projectile.velocity.Length();
+                    }
+                }
+            }
         }
 
         public override void PostAI(Projectile projectile)
@@ -137,13 +172,14 @@ namespace Wisplantern.Items.Tools.Movement
                 for (int i = 0; i < Main.maxProjectiles; i++)
                 {
                     Projectile hooklantern = Main.projectile[i];
-                    if (hooklantern != null && hooklantern.type == ModContent.ProjectileType<HooklanternProjectile>() && hooklantern.active && hooklantern.Distance(projectile.Center) <= 20f && hooklantern.ai[0] > 30)
+                    if (hooklantern != null && hooklantern.type == ModContent.ProjectileType<HooklanternProjectile>() && hooklantern.active && hooklantern.Distance(projectile.Center) <= 30f && hooklantern.ai[0] > 20)
                     {
                         if (!hasGrappled)
                         {
                             SoundEngine.PlaySound(SoundID.NPCHit42, hooklantern.position);
                         }
                         SetGrapple(hooklantern.Center, projectile);
+                        hooklantern.ai[1] = 1;
                     }
                 }
             }
