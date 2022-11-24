@@ -21,8 +21,8 @@ namespace Wisplantern.Items.Tools.Movement
 
         public override void SetDefaults()
         {
-            Item.width = 24;
-            Item.height = 36;
+            Item.width = 20;
+            Item.height = 34;
             Item.noUseGraphic = true;
             Item.useTime = 20;
             Item.useAnimation = 20;
@@ -77,8 +77,8 @@ namespace Wisplantern.Items.Tools.Movement
         public override void SetDefaults()
         {
             Projectile.timeLeft = 600;
-            Projectile.width = 24;
-            Projectile.height = 36;
+            Projectile.width = 20;
+            Projectile.height = 34;
             Projectile.friendly = false;
             Projectile.hostile = false;
             Projectile.tileCollide = true;
@@ -114,10 +114,26 @@ namespace Wisplantern.Items.Tools.Movement
         {
             Projectile.rotation *= 0.9f;
             Projectile.velocity *= 0.95f;
+
             Projectile.ai[0]++;
+            if (Projectile.ai[0] == 30)
+            {
+                if (Main.netMode != NetmodeID.Server)
+                {
+                    for (int i = 0; i < Main.rand.Next(10, 15); i++)
+                    {
+                        Dust dust = Main.dust[Dust.NewDust(Projectile.Center, 1, 1, ModContent.DustType<Dusts.HyperstoneDust>())];
+                        dust.velocity = Main.rand.NextVector2Circular(1f, 1f);
+                    }
+                }
+
+                SoundStyle style = SoundID.Item9;
+                style.MaxInstances = 0;
+                SoundEngine.PlaySound(style, Projectile.Center);
+            }
 
             Player player = Main.player[Player.FindClosest(Projectile.position, Projectile.width, Projectile.height)];
-            if (player.Distance(Projectile.Center) <= 30f && Projectile.ai[0] > 20 && Projectile.ai[1] != 0)
+            if (player.Distance(Projectile.Center) <= 30f && Projectile.ai[0] > 30 && Projectile.ai[1] != 0)
             {
                 player.velocity *= 1.2f;
                 Projectile.timeLeft = 0;
@@ -154,12 +170,18 @@ namespace Wisplantern.Items.Tools.Movement
 
             if (Main.projHook[projectile.type])
             {
+                float hookDistance = 300f;
                 for (int i = 0; i < Main.maxProjectiles; i++)
                 {
                     Projectile hooklantern = Main.projectile[i];
-                    if (hooklantern != null && hooklantern.type == ModContent.ProjectileType<HooklanternProjectile>() && hooklantern.active && hooklantern.Distance(projectile.Center) < 1000f)
+                    if (hooklantern != null && hooklantern.type == ModContent.ProjectileType<HooklanternProjectile>() && hooklantern.active && hooklantern.Distance(Main.MouseWorld) < hookDistance)
                     {
-                        projectile.velocity = projectile.velocity.ToRotation().AngleTowards(projectile.DirectionTo(hooklantern.Center + (hooklantern.Distance(projectile.Center) / projectile.velocity.Length()) * hooklantern.velocity * 0.95f).ToRotation(), MathHelper.ToRadians(15f)).ToRotationVector2() * projectile.velocity.Length();
+                        hookDistance = hooklantern.Distance(projectile.Center);
+                        if (projectile.owner == Main.myPlayer)
+                        {
+                            projectile.velocity = projectile.velocity.ToRotation().AngleTowards(projectile.DirectionTo(hooklantern.Center + (hooklantern.Distance(projectile.Center) / projectile.velocity.Length()) * hooklantern.velocity * 0.95f).ToRotation(), MathHelper.ToRadians(15f)).ToRotationVector2() * projectile.velocity.Length();
+                            NetMessage.SendData(MessageID.SyncProjectile, number: projectile.whoAmI);
+                        }
                     }
                 }
             }
@@ -172,7 +194,7 @@ namespace Wisplantern.Items.Tools.Movement
                 for (int i = 0; i < Main.maxProjectiles; i++)
                 {
                     Projectile hooklantern = Main.projectile[i];
-                    if (hooklantern != null && hooklantern.type == ModContent.ProjectileType<HooklanternProjectile>() && hooklantern.active && hooklantern.Distance(projectile.Center) <= 30f && hooklantern.ai[0] > 20)
+                    if (hooklantern != null && hooklantern.type == ModContent.ProjectileType<HooklanternProjectile>() && hooklantern.active && hooklantern.Distance(projectile.Center) <= 30f && hooklantern.ai[0] > 30)
                     {
                         if (!hasGrappled)
                         {

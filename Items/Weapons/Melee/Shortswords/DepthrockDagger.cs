@@ -91,6 +91,10 @@ namespace Wisplantern.Items.Weapons.Melee.Shortswords
             else
 			{
 				totalShots++;
+				if (totalShots == 3)
+                {
+					player.DoManaRechargeEffect();
+				}
 			}
             return base.Shoot(player, source, position, velocity, type, damage, knockback);
         }
