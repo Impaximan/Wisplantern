@@ -146,7 +146,6 @@ namespace Wisplantern.Items.Tools.Movement
         public override void Kill(int timeLeft)
         {
             Wisplantern.freezeFrames = 5;
-            Wisplantern.freezeFrameLight = true;
             SoundEngine.PlaySound(SoundID.DD2_WitherBeastDeath);
             if (Main.netMode != NetmodeID.Server)
             {

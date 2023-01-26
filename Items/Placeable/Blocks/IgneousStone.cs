@@ -5,11 +5,12 @@ using Terraria.GameContent.Creative;
 
 namespace Wisplantern.Items.Placeable.Blocks
 {
-    class Depthrock : ModItem
+    class IgneousStone : ModItem
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Depthrock Block");
+            DisplayName.SetDefault("Igneous Stone Block");
+            Tooltip.SetDefault("'It's lukewarm'");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 100;
         }
 
@@ -24,7 +25,7 @@ namespace Wisplantern.Items.Placeable.Blocks
             Item.useTime = 10;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.consumable = true;
-            Item.createTile = ModContent.TileType<Tiles.Depthrock>();
+            Item.createTile = ModContent.TileType<Tiles.IgneousStone>();
         }
     }
 }

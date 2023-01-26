@@ -25,6 +25,56 @@ namespace Wisplantern.Systems.Worldgen
             }));
         }
 
+        public static void TryPlaceLushPlant(int i, int j)
+        {
+            if (Main.tileSolid[Main.tile[i, j - 1].TileType] &&
+                Main.tile[i, j - 1].Slope == SlopeType.Solid &&
+                !WorldGen.TileEmpty(i, j - 1) &&
+                Main.tile[i, j - 1].TileType == ModContent.TileType<Tiles.LushGrass>() &&
+                Main.tileSolid[Main.tile[i + 1, j - 1].TileType] &&
+                Main.tile[i + 1, j - 1].Slope == SlopeType.Solid &&
+                !WorldGen.TileEmpty(i + 1, j - 1) &&
+                Main.tile[i + 1, j - 1].TileType == ModContent.TileType<Tiles.LushGrass>() &&
+                WorldGen.TileEmpty(i, j) && 
+                WorldGen.TileEmpty(i + 1, j) &&
+                WorldGen.genRand.NextBool(8))
+            {
+                WorldGen.PlaceTile(i, j, ModContent.TileType<Tiles.LushLantern>());
+            }
+
+
+            if (Main.tileSolid[Main.tile[i, j + 1].TileType] &&
+                Main.tile[i, j + 1].Slope == SlopeType.Solid &&
+                !WorldGen.TileEmpty(i, j + 1) &&
+                Main.tile[i, j + 1].TileType == ModContent.TileType<Tiles.LushGrass>() &&
+                Main.tileSolid[Main.tile[i + 1, j + 1].TileType] &&
+                Main.tile[i + 1, j + 1].Slope == SlopeType.Solid &&
+                !WorldGen.TileEmpty(i + 1, j + 1) &&
+                Main.tile[i + 1, j + 1].TileType == ModContent.TileType<Tiles.LushGrass>() &&
+                WorldGen.genRand.NextBool(8))
+            {
+                WorldGen.PlaceTile(i, j, ModContent.TileType<Tiles.Moonflower>(), forced: false);
+            }
+
+            if (Main.tileSolid[Main.tile[i, j + 1].TileType] &&
+                Main.tile[i, j + 1].Slope == SlopeType.Solid &&
+                !WorldGen.TileEmpty(i, j + 1) &&
+                Main.tile[i, j + 1].TileType == ModContent.TileType<Tiles.LushGrass>() &&
+                WorldGen.genRand.NextBool(30))
+            {
+                WorldGen.PlaceTile(i, j, ModContent.TileType<Tiles.GhostRose_1>(), forced: false);
+            }
+
+            if (Main.tileSolid[Main.tile[i, j + 1].TileType] &&
+                Main.tile[i, j + 1].Slope == SlopeType.Solid &&
+                !WorldGen.TileEmpty(i, j + 1) &&
+                Main.tile[i, j + 1].TileType == ModContent.TileType<Tiles.LushGrass>() &&
+                WorldGen.genRand.NextBool(30))
+            {
+                WorldGen.PlaceTile(i, j, ModContent.TileType<Tiles.GhostRose_2>(), forced: false);
+            }
+        }
+
         public void LushPatches()
         {
             FastNoiseLite noise = new FastNoiseLite(WorldGen.genRand.Next(1, 5000));
@@ -35,9 +85,23 @@ namespace Wisplantern.Systems.Worldgen
             noise.SetFractalGain(0.5f);
             noise.SetFractalPingPongStrength(2f);
 
-            for (int i = 2; i < Main.maxTilesX - 2; i++)
+            List<int> convertableStoneTiles = new List<int>()
             {
-                for (int j = (int)WorldGen.rockLayer; j < Main.maxTilesY - 2; j++)
+                TileID.Stone,
+                TileID.ArgonMoss,
+                TileID.BlueMoss,
+                TileID.BrownMoss,
+                TileID.GreenMoss,
+                TileID.KryptonMoss,
+                TileID.LavaMoss,
+                TileID.RedMoss,
+                TileID.XenonMoss,
+                TileID.PurpleMoss
+            };
+
+            for (int i = 10; i < Main.maxTilesX - 10; i++)
+            {
+                for (int j = (int)WorldGen.rockLayer; j < Main.maxTilesY - 10; j++)
                 {
                     Tile tile = Main.tile[i, j];
 
@@ -45,15 +109,37 @@ namespace Wisplantern.Systems.Worldgen
                     {
                         if (noise.GetNoise(i / 12f, j / 12f) >= 0.75f)
                         {
-                            if (tile.TileType == TileID.Stone)
+                            if (convertableStoneTiles.Contains(tile.TileType))
                             {
                                 tile.TileType = TileID.Dirt;
                             }
+
                             if (tile.TileType == TileID.Dirt && WispUtils.TileCanBeLush(i, j))
                             {
                                 tile.TileType = (ushort)ModContent.TileType<Tiles.LushGrass>();
                             }
+
+                            if (tile.LiquidType == LiquidID.Lava)
+                            {
+                                tile.LiquidType = LiquidID.Water;
+                            }
+
+                            if (!tile.HasTile && Main.rand.NextBool(8))
+                            {
+                                WorldGen.PlaceLiquid(i, j, LiquidID.Water, 255);
+                            }
                         }
+                    }
+                }
+            }
+
+            for (int i = 10; i < Main.maxTilesX - 10; i++)
+            {
+                for (int j = (int)WorldGen.rockLayer; j < Main.maxTilesY - 10; j++)
+                {
+                    if (noise.GetNoise(i / 12f, j / 12f) >= 0.75f)
+                    {
+                        TryPlaceLushPlant(i, j);
                     }
                 }
             }
