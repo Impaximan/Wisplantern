@@ -31,6 +31,7 @@ namespace Wisplantern.Globals.GItems
 
         public override void HoldItem(Item item, Player player)
         {
+            //TODO: Make this not broken for some weapons (like the Starfury)
             if (!player.ItemAnimationActive && wasUsingBattleArt)
             {
                 if (battleArt != null)
