@@ -50,8 +50,10 @@ namespace Wisplantern.Prefixes
         {
             if (GetExtraLifeCount(item) != 0)
             {
-                TooltipLine line = new TooltipLine(Mod, "MaxLifePrefix", "+" + GetExtraLifeCount(item).ToString() + " max life");
-                line.IsModifier = true;
+                TooltipLine line = new TooltipLine(Mod, "MaxLifePrefix", "+" + GetExtraLifeCount(item).ToString() + " max life")
+                {
+                    IsModifier = true
+                };
                 tooltips.Add(line);
             }
         }

@@ -23,8 +23,10 @@ namespace Wisplantern.Tiles
             Main.tileMerge[Type][TileID.Ash] = true;
             Main.tileMerge[TileID.Ash][Type] = true;
 
-            SoundStyle style = new SoundStyle("Wisplantern/Sounds/Effects/StoneHit2");
-            style.PitchVariance = 0.25f;
+            SoundStyle style = new SoundStyle("Wisplantern/Sounds/Effects/StoneHit2")
+            {
+                PitchVariance = 0.25f
+            };
             style.Pitch += 0.15f;
             HitSound = style;
 
