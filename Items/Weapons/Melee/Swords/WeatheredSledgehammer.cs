@@ -48,9 +48,11 @@ namespace Wisplantern.Items.Weapons.Melee.Swords
                 PunchCameraModifier modifier = new PunchCameraModifier(target.Center, new Vector2(Math.Sign(target.Center.X - player.Center.X), 0), 20f, 10f, 10, 1000f);
                 Main.instance.CameraModifiers.Add(modifier);
 
-                SoundStyle style = new SoundStyle("Wisplantern/Sounds/Effects/HeavyHit");
-                style.MaxInstances = 0;
-                style.PitchVariance = 0.5f;
+                SoundStyle style = new SoundStyle("Wisplantern/Sounds/Effects/HeavyHit")
+                {
+                    MaxInstances = 0,
+                    PitchVariance = 0.5f
+                };
                 SoundEngine.PlaySound(style, target.Center);
             }
         }

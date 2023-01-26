@@ -6,6 +6,7 @@ using System;
 using ReLogic.Content;
 using Terraria.Audio;
 using Terraria.ID;
+using Wisplantern.Globals.GItems;
 
 namespace Wisplantern
 {
@@ -143,6 +144,12 @@ namespace Wisplantern
             }
 
             return returned;
+        }
+
+        public static void SetAsBattleArtItem(this Item item, BattleArt battleArt)
+        {
+            item.GetGlobalItem<BattleArtItem>().isBattleArtItem = true;
+            item.GetGlobalItem<BattleArtItem>().battleArtItemBattleArt = battleArt;
         }
     }
 }

@@ -48,8 +48,10 @@ namespace Wisplantern.Tiles
             Main.tileMerge[Type][TileID.HallowHardenedSand] = true;
             Main.tileMerge[TileID.HallowHardenedSand][Type] = true;
 
-            SoundStyle style = new SoundStyle("Wisplantern/Sounds/Effects/StoneHit1");
-            style.PitchVariance = 0.25f;
+            SoundStyle style = new SoundStyle("Wisplantern/Sounds/Effects/StoneHit1")
+            {
+                PitchVariance = 0.25f
+            };
             style.Pitch += 0.3f;
             HitSound = style;
 
