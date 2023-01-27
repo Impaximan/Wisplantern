@@ -1,7 +1,6 @@
 ﻿using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
-using Terraria.ModLoader.IO;
 using Wisplantern.ID;
 using Microsoft.Xna.Framework;
 using Terraria.Graphics.CameraModifiers;
@@ -9,7 +8,6 @@ using Terraria.Audio;
 
 namespace Wisplantern.BattleArts
 {
-    //TODO: Make this more risky to pull off
     class Parry : BattleArt
     {
         public override int ItemType => ModContent.ItemType<Items.BattleArtItems.SwordParry>();
@@ -17,7 +15,7 @@ namespace Wisplantern.BattleArts
         public override int ID => BattleArtID.Parry;
 
         public override string BattleArtDescription => "Right click right before an attack hits you to negate 80% of the damage and knock nearby enemies away" +
-            "\n8 second cooldown, but only if you miss the parry";
+            "\nMissing a parry leaves you vulnerable and causes an 5 second cooldown";
 
         public override string BattleArtName => "Sword Parry";
 
@@ -28,20 +26,21 @@ namespace Wisplantern.BattleArts
         float rotationAddend = 0f;
         public override void PreUseBattleArt(ref Item item, Player player)
         {
-            item.useTime = 10;
-            item.useAnimation = 10;
+            item.useTime = 7;
+            item.useAnimation = 7;
             item.shoot = ProjectileID.None;
             item.knockBack = 0;
             item.UseSound = new SoundStyle("Wisplantern/Sounds/Effects/SwordUnsheath");
             rotationAddend = 0f;
             player.GetModPlayer<ParryPlayer>().parryTime = item.useTime;
-            player.AddBuff(ModContent.BuffType<Buffs.BattleArtCooldown>(), 60 * 8);
+            player.GetModPlayer<ParryPlayer>().parryDangerTime = 60;
+            player.AddBuff(ModContent.BuffType<Buffs.BattleArtCooldown>(), 60 * 5);
         }
 
         public override void UseStyle(Item item, Player player, Rectangle heldItemFrame)
         {
             player.itemRotation = MathHelper.ToRadians(90 + rotationAddend) * player.direction;
-            rotationAddend -= 4f;
+            rotationAddend -= 6f;
             player.itemLocation = player.Center + new Vector2(0, -16);
         }
 
@@ -59,12 +58,15 @@ namespace Wisplantern.BattleArts
     class ParryPlayer : ModPlayer
     {
         public int parryTime;
+        public int parryDangerTime;
 
         public void Parry()
         {
             Wisplantern.freezeFrameLight = true;
             Wisplantern.freezeFrames = 5;
             Player.immuneTime = 60;
+
+            parryDangerTime = 0;
 
             PunchCameraModifier modifier = new PunchCameraModifier(Player.Center, new Vector2(Player.direction, 0), 15f, 10f, 8, 1000f);
             Main.instance.CameraModifiers.Add(modifier);
@@ -89,6 +91,10 @@ namespace Wisplantern.BattleArts
                 Parry();
                 damage /= 5;
             }
+            else if (parryDangerTime > 0)
+            {
+                damage *= 2;
+            }
         }
 
         public override void ModifyHitByProjectile(Projectile proj, ref int damage, ref bool crit)
@@ -98,6 +104,10 @@ namespace Wisplantern.BattleArts
                 Parry();
                 damage /= 5;
             }
+            else if (parryDangerTime > 0)
+            {
+                damage *= 2;
+            }
         }
 
         public override void PostUpdate()
@@ -105,6 +115,10 @@ namespace Wisplantern.BattleArts
             if (parryTime > 0)
             {
                 parryTime--;
+            }
+            if (parryDangerTime > 0)
+            {
+                parryDangerTime--;
             }
         }
     }

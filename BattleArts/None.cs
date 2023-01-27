@@ -1,8 +1,4 @@
-﻿using Terraria;
-using Terraria.ModLoader;
-using Terraria.ID;
-using Terraria.ModLoader.IO;
-using Wisplantern.ID;
+﻿using Wisplantern.ID;
 
 namespace Wisplantern.BattleArts
 {

@@ -1,17 +1,5 @@
-﻿using System.Collections.Generic;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
-using Terraria.WorldBuilding;
-using Terraria.Utilities;
+﻿using Terraria.ModLoader;
 using System;
-using Microsoft.Xna.Framework;
-using Terraria.GameContent.Generation;
-using Terraria.ModLoader.IO;
-using Terraria.DataStructures;
-using Terraria.IO;
-using Terraria.UI;
-using System.Linq;
 
 namespace Wisplantern.Systems
 {

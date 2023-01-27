@@ -1,10 +1,5 @@
-﻿using Microsoft.Xna.Framework;
-using Terraria.DataStructures;
-using Terraria;
-using Terraria.ID;
+﻿using Terraria;
 using Terraria.ModLoader;
-using Terraria.GameContent.Creative;
-using Terraria.Audio;
 using System.Collections.Generic;
 
 namespace Wisplantern.Prefixes

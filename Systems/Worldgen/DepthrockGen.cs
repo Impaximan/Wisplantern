@@ -6,9 +6,6 @@ using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria.GameContent.Generation;
 using Terraria.IO;
-using Terraria.Utilities;
-using Terraria.DataStructures;
-using System;
 
 namespace Wisplantern.Systems.Worldgen
 {

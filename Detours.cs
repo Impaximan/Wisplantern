@@ -1,14 +1,7 @@
-﻿using System;
-using MonoMod.Cil;
-using Microsoft.Xna.Framework.Audio;
-using System.Collections.Generic;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
-using Terraria.Audio;
 using Terraria.ModLoader;
-using Terraria.ID;
-using ReLogic.Utilities;
 
 namespace Wisplantern
 {

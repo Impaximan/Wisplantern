@@ -1,14 +1,9 @@
 ﻿using Terraria;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
-using Terraria.ID;
-using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria.GameContent.Generation;
 using Terraria.IO;
-using Terraria.Utilities;
-using Terraria.DataStructures;
-using System;
 
 namespace Wisplantern.Systems.Worldgen
 {

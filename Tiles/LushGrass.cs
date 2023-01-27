@@ -2,7 +2,6 @@
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
-using Terraria.DataStructures;
 using Terraria.Audio;
 
 namespace Wisplantern.Tiles

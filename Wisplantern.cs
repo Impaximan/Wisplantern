@@ -3,14 +3,13 @@ using ReLogic.Content;
 using Microsoft.Xna.Framework.Audio;
 using System.IO;
 using Microsoft.Xna.Framework;
-using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 
 namespace Wisplantern
 {
-	public class Wisplantern : Mod
+    public class Wisplantern : Mod
     {
         #region Image Generation
         public virtual void SetColors(ref Color[] colors, int width, int height)
