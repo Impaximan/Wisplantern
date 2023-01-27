@@ -48,7 +48,7 @@ namespace Wisplantern
 
             if (Wisplantern.freezeFrames > 0 && Wisplantern.freezeFrameLight)
             {
-                freezeFrameLightAlpha = 0.2f;
+                freezeFrameLightAlpha = 0.15f;
             }
             else
             {

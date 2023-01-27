@@ -7,9 +7,12 @@ using Wisplantern.ID;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Input;
+using Terraria.DataStructures;
+using Terraria.Audio;
 
 namespace Wisplantern.Globals.GItems
 {
+    //TODO: Add netcode
     class BattleArtItem : GlobalItem
     {
         public override bool InstancePerEntity => true;
@@ -31,8 +34,7 @@ namespace Wisplantern.Globals.GItems
 
         public override void HoldItem(Item item, Player player)
         {
-            //TODO: Make this not broken for some weapons (like the Starfury)
-            if (!player.ItemAnimationActive && wasUsingBattleArt)
+            if ((!player.ItemAnimationActive || player.altFunctionUse != 2) && wasUsingBattleArt)
             {
                 if (battleArt != null)
                 {
@@ -47,13 +49,14 @@ namespace Wisplantern.Globals.GItems
                 item.mana = ogMana;
                 item.shoot = ogShoot;
                 item.noMelee = ogNoMelee;
-                wasUsingBattleArt = false;
+                item.UseSound = ogSoundStyle;
+                if (player.altFunctionUse != 2 && player.ItemTimeIsZero) wasUsingBattleArt = false;
             }
         }
 
         public override void UpdateInventory(Item item, Player player)
         {
-            if (!player.ItemAnimationActive && wasUsingBattleArt)
+            if ((!player.ItemAnimationActive || player.altFunctionUse != 2) && wasUsingBattleArt)
             {
                 if (battleArt != null)
                 {
@@ -68,7 +71,8 @@ namespace Wisplantern.Globals.GItems
                 item.mana = ogMana;
                 item.shoot = ogShoot;
                 item.noMelee = ogNoMelee;
-                wasUsingBattleArt = false;
+                item.UseSound = ogSoundStyle;
+                if (player.altFunctionUse != 2 && player.ItemTimeIsZero) wasUsingBattleArt = false;
             }
         }
 
@@ -105,6 +109,7 @@ namespace Wisplantern.Globals.GItems
         float ogKnockback;
         int ogShoot;
         bool ogNoMelee;
+        SoundStyle? ogSoundStyle;
 
         bool wasJustUsed = false;
         bool wasUsingBattleArt = false;
@@ -113,18 +118,25 @@ namespace Wisplantern.Globals.GItems
         {
             if (ShouldApplyBattleArt(player))
             {
-                ogDamage = item.damage;
-                ogShootSpeed = item.shootSpeed;
-                ogUseAnimation = item.useAnimation;
-                ogUseTime = item.useTime;
-                ogUseStyle = item.useStyle;
-                ogMana = item.mana;
-                ogKnockback = item.knockBack;
-                ogShoot = item.shoot;
-                ogNoMelee = item.noMelee;
+                Item dummy = new Item(item.type);
+                ogDamage = dummy.damage;
+                ogShootSpeed = dummy.shootSpeed;
+                ogUseAnimation = dummy.useAnimation;
+                ogUseTime = dummy.useTime;
+                ogUseStyle = dummy.useStyle;
+                ogMana = dummy.mana;
+                ogKnockback = dummy.knockBack;
+                ogShoot = dummy.shoot;
+                ogNoMelee = dummy.noMelee;
+                ogSoundStyle = dummy.UseSound;
+                wasJustUsed = true;
+
+                if (player.HasBuff<Buffs.BattleArtCooldown>())
+                {
+                    return false;
+                }
 
                 battleArt.PreUseBattleArt(ref item, player);
-                wasJustUsed = true;
             }
 
             return base.CanUseItem(item, player);
@@ -158,13 +170,38 @@ namespace Wisplantern.Globals.GItems
             return base.AltFunctionUse(item, player);
         }
 
+        public override bool CanRightClick(Item item)
+        {
+            if (isBattleArtItem)
+            {
+                Player player = Main.player[Main.myPlayer];
+                return battleArtItemBattleArt.CanBeAppliedToItem(player.HeldItem);
+            }
+            return base.CanRightClick(item);
+        }
+
         public override void RightClick(Item item, Player player)
         {
             if (isBattleArtItem)
             {
                 if (battleArtItemBattleArt.CanBeAppliedToItem(player.HeldItem))
                 {
-                    player.HeldItem.GetGlobalItem<BattleArtItem>().battleArt = battleArtItemBattleArt;
+                    if (Main.mouseItem != null && Main.mouseItem.type != ItemID.None && !Main.mouseItem.IsAir)
+                    {
+                        if (Main.mouseItem.GetGlobalItem<BattleArtItem>().battleArt != null && Main.mouseItem.GetGlobalItem<BattleArtItem>().battleArt is not None)
+                        {
+                            player.QuickSpawnItem(new EntitySource_Misc("BattleArtReplacement"), Main.mouseItem.GetGlobalItem<BattleArtItem>().battleArt.ItemType);
+                        }
+                        Main.mouseItem.GetGlobalItem<BattleArtItem>().battleArt = battleArtItemBattleArt;
+                    }
+                    else
+                    {
+                        if (player.HeldItem.GetGlobalItem<BattleArtItem>().battleArt != null && player.HeldItem.GetGlobalItem<BattleArtItem>().battleArt is not None)
+                        {
+                            player.QuickSpawnItem(new EntitySource_Misc("BattleArtReplacement"), player.HeldItem.GetGlobalItem<BattleArtItem>().battleArt.ItemType);
+                        }
+                        player.HeldItem.GetGlobalItem<BattleArtItem>().battleArt = battleArtItemBattleArt;
+                    }
                 }
             }
         }

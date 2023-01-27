@@ -74,6 +74,8 @@ namespace Wisplantern
             ModContent.Request<SoundEffect>("Wisplantern/Sounds/Effects/StoneHit1", AssetRequestMode.ImmediateLoad);
             ModContent.Request<SoundEffect>("Wisplantern/Sounds/Effects/StoneHit2", AssetRequestMode.ImmediateLoad);
             ModContent.Request<SoundEffect>("Wisplantern/Sounds/Effects/HeavyHit", AssetRequestMode.ImmediateLoad);
+            ModContent.Request<SoundEffect>("Wisplantern/Sounds/Effects/HeavyMetal", AssetRequestMode.ImmediateLoad);
+            ModContent.Request<SoundEffect>("Wisplantern/Sounds/Effects/SwordUnsheath", AssetRequestMode.ImmediateLoad);
 
             wisplanternLoot.Add(ModContent.ItemType<Items.Equipable.Accessories.WispNecklace>());
             wisplanternLoot.Add(ModContent.ItemType<Items.Equipable.Accessories.WispRing>());

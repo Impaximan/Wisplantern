@@ -7,6 +7,7 @@ using ReLogic.Content;
 using Terraria.Audio;
 using Terraria.ID;
 using Wisplantern.Globals.GItems;
+using Terraria.GameContent.Creative;
 
 namespace Wisplantern
 {
@@ -150,6 +151,8 @@ namespace Wisplantern
         {
             item.GetGlobalItem<BattleArtItem>().isBattleArtItem = true;
             item.GetGlobalItem<BattleArtItem>().battleArtItemBattleArt = battleArt;
+            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[item.type] = 1;
+            item.maxStack = 20;
         }
     }
 }

@@ -9,6 +9,8 @@ namespace Wisplantern
 {
     public abstract class BattleArt
     {
+        public virtual int ItemType => ItemID.None;
+
         public static BattleArt GetBattleArtFromID(int ID)
         {
             return ID switch
