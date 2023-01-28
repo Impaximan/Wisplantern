@@ -11,16 +11,6 @@ namespace Wisplantern
     {
         public virtual int ItemType => ItemID.None;
 
-        public static BattleArt GetBattleArtFromID(int ID)
-        {
-            return ID switch
-            {
-                BattleArtID.None => new None(),
-                BattleArtID.Parry => new Parry(),
-                _ => new None()
-            };
-        }
-
         /// <summary>
         /// Whether or not this battle art can be applied to x item.
         /// Note that overriding this method makes whatever you put for battleArtType irrelevant as it overrides that logic.
@@ -29,7 +19,7 @@ namespace Wisplantern
         /// <returns></returns>
         public virtual bool CanBeAppliedToItem(Item item)
         {
-            if (item.damage == 0 || item.accessory)
+            if (item.damage == 0 || item.accessory || item.maxStack > 1)
             {
                 return false;
             }
@@ -39,6 +29,7 @@ namespace Wisplantern
                 BattleArtType.Axe => item.useStyle == ItemUseStyleID.Swing && item.axe != 0,
                 BattleArtType.Pick => item.useStyle == ItemUseStyleID.Swing && item.pick != 0,
                 BattleArtType.Hammer => item.useStyle == ItemUseStyleID.Swing && item.pick != 0,
+                BattleArtType.BowAndRepeater => item.DamageType == DamageClass.Ranged && item.useAmmo == AmmoID.Arrow,
                 _ => true,
             };
         }
@@ -56,6 +47,7 @@ namespace Wisplantern
                 BattleArtType.Axe => "axes",
                 BattleArtType.Pick => "pickaxes",
                 BattleArtType.Hammer => "hammers",
+                BattleArtType.BowAndRepeater => "bows and repeaters",
                 _ => "anything",
             };
         }
@@ -132,6 +124,39 @@ namespace Wisplantern
         }
 
         /// <summary>
+        /// Called in an item's OnHitNPC when the battle art is active.
+        /// </summary>
+        /// <param name="player"></param>
+        public virtual void OnHitNPC(Item item, Player player, NPC target, int damage, float knockBack, bool crit)
+        {
+
+        }
+
+        /// <summary>
+        /// Allows you to modify melee hitboxes while the battle art is being used.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="player"></param>
+        /// <param name="hitbox"></param>
+        /// <param name="noHitbox"></param>
+        public virtual void UseItemHitbox(Item item, Player player, ref Rectangle hitbox, ref bool noHitbox)
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="player"></param>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public virtual bool? CanHitNPC(Item item, Player player, NPC target)
+        {
+            return null;
+        }
+
+        /// <summary>
         /// The BattleArtID of the battle art. Unfortunately, this is needed. Extremely tragic.
         /// </summary>
         public virtual int ID => BattleArtID.None;
@@ -149,5 +174,6 @@ namespace Wisplantern
         Axe = 2,
         Pick = 3,
         Hammer = 4,
+        BowAndRepeater = 5,
     }
 }

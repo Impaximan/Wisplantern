@@ -1,6 +1,8 @@
 ﻿using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
+using Wisplantern.Items.BattleArtItems;
+using System.Collections.Generic;
 
 namespace Wisplantern.Systems.Worldgen
 {
@@ -11,6 +13,13 @@ namespace Wisplantern.Systems.Worldgen
             for (int i = 0; i < 1000; i++)
             {
                 Chest chest = Main.chest[i];
+
+                List<int> availableBattleArts = new List<int>()
+                {
+                    ModContent.ItemType<SwordParry>(),
+                    ModContent.ItemType<AerialRetreat>(),
+                    ModContent.ItemType<Uppercut>()
+                };
 
                 if (chest != null)
                 {
@@ -23,6 +32,18 @@ namespace Wisplantern.Systems.Worldgen
                                 if (chest.item[inventoryIndex].type == ItemID.None)
                                 {
                                     chest.item[inventoryIndex].SetDefaults(ModContent.ItemType<Items.Weapons.Melee.Swords.WeatheredSledgehammer>());
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (WorldGen.genRand.NextBool(4))
+                        {
+                            for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)
+                            {
+                                if (chest.item[inventoryIndex].type == ItemID.None)
+                                {
+                                    chest.item[inventoryIndex].SetDefaults(Main.rand.Next(availableBattleArts));
                                     break;
                                 }
                             }
@@ -42,6 +63,18 @@ namespace Wisplantern.Systems.Worldgen
                                 }
                             }
                         }
+
+                        if (WorldGen.genRand.NextBool(4))
+                        {
+                            for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)
+                            {
+                                if (chest.item[inventoryIndex].type == ItemID.None)
+                                {
+                                    chest.item[inventoryIndex].SetDefaults(Main.rand.Next(availableBattleArts));
+                                    break;
+                                }
+                            }
+                        }
                     }
 
                     if (Main.tile[chest.x, chest.y].TileType == TileID.Containers && Main.tile[chest.x, chest.y].TileFrameX == 8 * 36) //Rich mahogany chest
@@ -53,6 +86,18 @@ namespace Wisplantern.Systems.Worldgen
                                 if (chest.item[inventoryIndex].type == ItemID.None)
                                 {
                                     chest.item[inventoryIndex].SetDefaults(ModContent.ItemType<Items.Weapons.Melee.Swords.WeatheredSledgehammer>());
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (WorldGen.genRand.NextBool(4))
+                        {
+                            for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)
+                            {
+                                if (chest.item[inventoryIndex].type == ItemID.None)
+                                {
+                                    chest.item[inventoryIndex].SetDefaults(Main.rand.Next(availableBattleArts));
                                     break;
                                 }
                             }
@@ -72,6 +117,18 @@ namespace Wisplantern.Systems.Worldgen
                                 }
                             }
                         }
+
+                        if (WorldGen.genRand.NextBool(4))
+                        {
+                            for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)
+                            {
+                                if (chest.item[inventoryIndex].type == ItemID.None)
+                                {
+                                    chest.item[inventoryIndex].SetDefaults(Main.rand.Next(availableBattleArts));
+                                    break;
+                                }
+                            }
+                        }
                     }
 
                     if (Main.tile[chest.x, chest.y].TileType == TileID.Containers && Main.tile[chest.x, chest.y].TileFrameX == 11 * 36) //Ice chest
@@ -83,6 +140,18 @@ namespace Wisplantern.Systems.Worldgen
                                 if (chest.item[inventoryIndex].type == ItemID.None)
                                 {
                                     chest.item[inventoryIndex].SetDefaults(ModContent.ItemType<Items.Weapons.Melee.Swords.WeatheredSledgehammer>());
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (WorldGen.genRand.NextBool(4))
+                        {
+                            for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)
+                            {
+                                if (chest.item[inventoryIndex].type == ItemID.None)
+                                {
+                                    chest.item[inventoryIndex].SetDefaults(Main.rand.Next(availableBattleArts));
                                     break;
                                 }
                             }

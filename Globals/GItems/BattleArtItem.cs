@@ -83,7 +83,7 @@ namespace Wisplantern.Globals.GItems
 
         public override void LoadData(Item item, TagCompound tag)
         {
-            battleArt = BattleArt.GetBattleArtFromID(tag.GetInt("BattleArt"));
+            battleArt = BattleArtID.GetBattleArtFromID(tag.GetInt("BattleArt"));
         }
 
         bool ShouldApplyBattleArt(Player player)
@@ -140,6 +140,31 @@ namespace Wisplantern.Globals.GItems
             }
 
             return base.CanUseItem(item, player);
+        }
+
+        public override void OnHitNPC(Item item, Player player, NPC target, int damage, float knockBack, bool crit)
+        {
+            if (ShouldApplyBattleArt(player))
+            {
+                battleArt.OnHitNPC(item, player, target, damage, knockBack, crit);
+            }
+        }
+
+        public override bool? CanHitNPC(Item item, Player player, NPC target)
+        {
+            if (ShouldApplyBattleArt(player))
+            {
+                return battleArt.CanHitNPC(item, player, target);
+            }
+            return base.CanHitNPC(item, player, target);
+        }
+
+        public override void UseItemHitbox(Item item, Player player, ref Rectangle hitbox, ref bool noHitbox)
+        {
+            if (ShouldApplyBattleArt(player))
+            {
+                battleArt.UseItemHitbox(item, player, ref hitbox, ref noHitbox);
+            }
         }
 
         public override void UseStyle(Item item, Player player, Rectangle heldItemFrame)
@@ -239,7 +264,7 @@ namespace Wisplantern.Globals.GItems
                     OverrideColor = new Color(255, 255, 200)
                 };
 
-                TooltipLine line2 = new (Mod, "BattleArt2", "Can be used on: " + battleArtItemBattleArt.BattleArtApplicabilityDescription());
+                TooltipLine line2 = new (Mod, "BattleArt2", "Can be used on " + battleArtItemBattleArt.BattleArtApplicabilityDescription());
 
                 TooltipLine line3 = new (Mod, "BattleArt3", "Gives a weapon the following effect: ");
 

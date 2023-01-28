@@ -14,7 +14,12 @@ namespace Wisplantern.BattleArts
 
         public override int ID => BattleArtID.Parry;
 
-        public override string BattleArtDescription => "Right click right before an attack hits you to negate 80% of the damage and knock nearby enemies away" +
+        public override bool? CanHitNPC(Item item, Player player, NPC target)
+        {
+            return false;
+        }
+
+        public override string BattleArtDescription => "Right click right before an attack hits you to negate 80% of the damage and ravage nearby enemies" +
             "\nMissing a parry leaves you vulnerable and causes an 5 second cooldown";
 
         public override string BattleArtName => "Sword Parry";
@@ -26,8 +31,8 @@ namespace Wisplantern.BattleArts
         float rotationAddend = 0f;
         public override void PreUseBattleArt(ref Item item, Player player)
         {
-            item.useTime = 7;
-            item.useAnimation = 7;
+            item.useTime = 6;
+            item.useAnimation = 6;
             item.shoot = ProjectileID.None;
             item.knockBack = 0;
             item.UseSound = new SoundStyle("Wisplantern/Sounds/Effects/SwordUnsheath");
