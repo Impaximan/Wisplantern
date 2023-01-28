@@ -23,6 +23,16 @@ namespace Wisplantern.Systems.Worldgen
 
         public static void TryPlaceLushPlant(int i, int j)
         {
+
+            if (Main.tileSolid[Main.tile[i, j + 1].TileType] &&
+                Main.tile[i, j + 1].Slope == SlopeType.Solid &&
+                !WorldGen.TileEmpty(i, j + 1) &&
+                Main.tile[i, j + 1].TileType == ModContent.TileType<Tiles.LushGrass>() &&
+                WorldGen.genRand.NextBool(400))
+            {
+                WorldGen.PlaceTile(i, j, ModContent.TileType<Tiles.Plantscalibur>(), forced: false);
+            }
+
             if (Main.tileSolid[Main.tile[i, j - 1].TileType] &&
                 Main.tile[i, j - 1].Slope == SlopeType.Solid &&
                 !WorldGen.TileEmpty(i, j - 1) &&
