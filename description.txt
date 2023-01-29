@@ -1,3 +1,12 @@
+Welcome to Wisplantern, a content mod designed with one, sole purpose: being fun! By adding content in areas that were previously boring to many players and adding tools that let you get more creative than ever before in many areas, Wisplantern's goal is to create a truly smooth experience with little frustration. It makes the world feel more alive and interesting to explore and hopes to ensure that you don't get moments in your playthrough where you just feel stuck or bored.
+
+Though it is WIP and in its very early stages, it currently has plenty of content early game, boasting:
+-2 new underground minibiomes, the lush caves and the volcanic caves, that you can find randomly, adding a ton of visual variety.
+-New types of stone for decoration, and to make the underground feel less bland when explored outside of special biomes.
+-5 new naturally generating 'structures'
+-Battle arts, which allow you to give right click functions of your choice to weapons that did not already have them.
+-30+ new items to discover
+
 ---Credits---
 Dev team:
 -Penumbral (lead dev, coder, composer, and spriter)

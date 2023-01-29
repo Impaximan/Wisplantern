@@ -98,6 +98,14 @@ namespace Wisplantern.Globals.GItems
                 battleArt.ModifyShootStats(item, player, ref position, ref velocity, ref type, ref damage, ref knockback);
             }
         }
+        public override bool Shoot(Item item, Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
+            if (ShouldApplyBattleArt(player))
+            {
+                return battleArt.Shoot(item, player, source, position, velocity, type, damage, knockback);
+            }
+            return base.Shoot(item, player, source, position, velocity, type, damage, knockback);
+        }
 
         //Saved stats
         int ogDamage;
@@ -136,6 +144,7 @@ namespace Wisplantern.Globals.GItems
                     return false;
                 }
 
+                wasUsingBattleArt = true;
                 battleArt.PreUseBattleArt(ref item, player);
             }
 

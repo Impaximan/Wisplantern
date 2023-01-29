@@ -12,6 +12,7 @@ namespace Wisplantern.ID
                 Parry => new Parry(),
                 Uppercut => new Uppercut(),
                 AerialRetreat => new AerialRetreat(),
+                TriCast => new TriCast(),
                 _ => new None()
             };
         }
@@ -20,5 +21,6 @@ namespace Wisplantern.ID
         public const int Parry = 1;
         public const int Uppercut = 2;
         public const int AerialRetreat = 3;
+        public const int TriCast = 4;
     }
 }

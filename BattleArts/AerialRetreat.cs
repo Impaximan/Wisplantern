@@ -14,7 +14,7 @@ namespace Wisplantern.BattleArts
 
         public override int ID => BattleArtID.AerialRetreat;
 
-        public override string BattleArtDescription => "Flee into the air, briefly giving yourself featherfall" +
+        public override string BattleArtDescription => "Right click to flee into the air, briefly giving yourself featherfall" +
             "\n15 second cooldown";
 
         public override string BattleArtName => "Aerial Retreat";
@@ -36,11 +36,6 @@ namespace Wisplantern.BattleArts
             player.immune = true;
             player.jump = 0;
             SoundEngine.PlaySound(SoundID.Item102, player.Center);
-        }
-
-        public override void UseBattleArt(Item item, Player player, bool firstFrame)
-        {
-
         }
     }
 }

@@ -4,6 +4,7 @@ using Terraria.ID;
 using Wisplantern.ID;
 using Wisplantern.BattleArts;
 using Microsoft.Xna.Framework;
+using Terraria.DataStructures;
 
 namespace Wisplantern
 {
@@ -29,7 +30,13 @@ namespace Wisplantern
                 BattleArtType.Axe => item.useStyle == ItemUseStyleID.Swing && item.axe != 0,
                 BattleArtType.Pick => item.useStyle == ItemUseStyleID.Swing && item.pick != 0,
                 BattleArtType.Hammer => item.useStyle == ItemUseStyleID.Swing && item.pick != 0,
-                BattleArtType.BowAndRepeater => item.DamageType == DamageClass.Ranged && item.useAmmo == AmmoID.Arrow,
+                BattleArtType.BowAndRepeater => item.useAmmo == AmmoID.Arrow,
+                BattleArtType.MagicStaff => Item.staff[item.type],
+                BattleArtType.Melee => item.DamageType == DamageClass.Melee,
+                BattleArtType.Ranged => item.DamageType == DamageClass.Ranged,
+                BattleArtType.Magic => item.DamageType == DamageClass.Magic,
+                BattleArtType.Summon => item.DamageType == DamageClass.Summon,
+                BattleArtType.Whip => item.DamageType == DamageClass.SummonMeleeSpeed,
                 _ => true,
             };
         }
@@ -48,6 +55,12 @@ namespace Wisplantern
                 BattleArtType.Pick => "pickaxes",
                 BattleArtType.Hammer => "hammers",
                 BattleArtType.BowAndRepeater => "bows and repeaters",
+                BattleArtType.MagicStaff => "magic staffs",
+                BattleArtType.Melee => "melee weapons",
+                BattleArtType.Ranged => "ranged weapons",
+                BattleArtType.Magic => "magic weapons",
+                BattleArtType.Summon => "summoner weapons",
+                BattleArtType.Whip => "whips",
                 _ => "anything",
             };
         }
@@ -109,6 +122,11 @@ namespace Wisplantern
 
         }
 
+        public virtual bool Shoot(Item item, Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
+            return true;
+        }
+
         public virtual void ModifyShootStats(Item item, Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {
 
@@ -165,6 +183,24 @@ namespace Wisplantern
         /// The displayed color of the battle art.
         /// </summary>
         public virtual Color Color => Color.Red;
+
+        public void ShootExtraShot(Item item, Vector2 velocity, Vector2 position, Player player, float damageMult = 1f, float knockbackMult = 1f)
+        {
+            if (item.shoot != ProjectileID.None)
+            {
+                if (ItemLoader.CanShoot(item, player))
+                {
+                    int damage = (int)player.GetDamage(item.DamageType).ApplyTo(item.damage * damageMult);
+                    float knockBack = player.GetKnockback(item.DamageType).ApplyTo(item.knockBack * knockbackMult);
+                    int type = item.shoot;
+                    ItemLoader.ModifyShootStats(item, player, ref position, ref velocity, ref type, ref damage, ref knockBack);
+                    if (ItemLoader.Shoot(item, player, player.GetSource_ItemUse_WithPotentialAmmo(item, item.useAmmo) as EntitySource_ItemUse_WithAmmo, position, velocity, item.shoot, damage, knockBack))
+                    {
+                        Projectile.NewProjectile(player.GetSource_ItemUse_WithPotentialAmmo(item, item.useAmmo), position, velocity, type, damage, knockBack, player.whoAmI);
+                    }
+                }
+            }
+        }
     }
 
     public enum BattleArtType : byte
@@ -175,5 +211,11 @@ namespace Wisplantern
         Pick = 3,
         Hammer = 4,
         BowAndRepeater = 5,
+        MagicStaff = 6,
+        Melee = 7,
+        Ranged = 8,
+        Magic = 9,
+        Summon = 10,
+        Whip = 11
     }
 }

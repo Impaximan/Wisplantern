@@ -58,6 +58,14 @@ namespace Wisplantern
         public static List<int> wisplanternLoot = new List<int>();
 
         private static string savingFolder = Path.Combine(Main.SavePath, "Mods", "Cache");
+
+        //Config stuff
+        public static bool generateHellevators = true;
+        public static bool generateLakes = true;
+        public static bool generateFrostFortresses = true;
+        public static bool generateCanyons = true;
+        public static bool generateChastisedChurch = true;
+
         public override void Load()
         {
             //WispUtils.InvokeOnMainThread(() =>
