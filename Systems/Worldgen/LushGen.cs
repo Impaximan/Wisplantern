@@ -125,12 +125,12 @@ namespace Wisplantern.Systems.Worldgen
                                 tile.TileType = (ushort)ModContent.TileType<Tiles.LushGrass>();
                             }
 
-                            if (tile.LiquidType == LiquidID.Lava)
+                            if (tile.LiquidType == LiquidID.Lava && j < Main.UnderworldLayer)
                             {
                                 tile.LiquidType = LiquidID.Water;
                             }
 
-                            if (!tile.HasTile && Main.rand.NextBool(8))
+                            if (!tile.HasTile && Main.rand.NextBool(8) && j < Main.UnderworldLayer)
                             {
                                 WorldGen.PlaceLiquid(i, j, LiquidID.Water, 255);
                             }

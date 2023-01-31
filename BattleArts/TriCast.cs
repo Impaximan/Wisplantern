@@ -15,8 +15,8 @@ namespace Wisplantern.BattleArts
 
         public override int ID => BattleArtID.TriCast;
 
-        public override string BattleArtDescription => "Right click to fire 3 spells at once, consuming 3x as much mana" +
-            "\n5 second cooldown";
+        public override string BattleArtDescription => "Right click to fire 3 spells at once" +
+            "\nCooldown scales with item use speed";
 
         public override string BattleArtName => "Tri-Cast";
 
@@ -27,9 +27,8 @@ namespace Wisplantern.BattleArts
         bool alreadyDoneExtraShot = false;
         public override void PreUseBattleArt(ref Item item, Player player)
         {
-            item.mana *= 3;
             alreadyDoneExtraShot = false;
-            player.AddBuff(ModContent.BuffType<Buffs.BattleArtCooldown>(), 60 * 5);
+            player.AddBuff(ModContent.BuffType<Buffs.BattleArtCooldown>(), item.useTime * 10);
         }
 
         public override bool Shoot(Item item, Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
