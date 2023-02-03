@@ -9,17 +9,20 @@ namespace Wisplantern.Systems.Events
     class CalmNight : ModSystem
     {
         public static bool calmNight = false;
+        int forcedCalmNightState = 0;
 
         public override void SaveWorldData(TagCompound tag)
         {
             tag.Add("calmNight", calmNight);
             tag.Add("wasDay", wasDay);
+            tag.Add("forcedCalmNightState", forcedCalmNightState);
         }
 
         public override void LoadWorldData(TagCompound tag)
         {
             calmNight = tag.GetBool("calmNight");
             wasDay = tag.GetBool("wasDay");
+            forcedCalmNightState = tag.GetInt("forcedCalmNightState");
         }
 
         bool wasDay = false;
@@ -39,9 +42,23 @@ namespace Wisplantern.Systems.Events
             if (!Main.dayTime && wasDay)
             {
                 wasDay = false;
-                if (Main.rand.NextBool(5) && !Main.bloodMoon)
+                if (!Main.bloodMoon)
                 {
-                    calmNight = true;
+                    if (Main.rand.NextBool(10))
+                    {
+                        calmNight = true;
+                    }
+
+                    if (forcedCalmNightState == 0 || (forcedCalmNightState == 1 && Main.hardMode))
+                    {
+                        forcedCalmNightState++;
+                        calmNight = true;
+                    }
+
+                    if (calmNight)
+                    {
+                        Main.NewText("The moon shimmers soothingly in the night sky...", Color.LightGreen);
+                    }
                 }
             }
         }
