@@ -9,10 +9,8 @@ Though it is WIP and in its very early stages, it currently has plenty of conten
 
 ---Credits---
 Dev team:
--Penumbral (lead dev, coder, composer, and spriter)
+-Penumbral (lead dev, coder, and composer)
 -JellyBru (spriter)
--Sir Pogsalot (spriter and composer)
--RedShift (spriter and composer)
-
-Contributors:
 -Torra th (spriter)
+-Sir Pogsalot (spriter)
+-RedShift (spriter)
