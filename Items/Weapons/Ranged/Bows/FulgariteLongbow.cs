@@ -11,7 +11,7 @@ namespace Wisplantern.Items.Weapons.Ranged.Bows
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Fires supercharged arrows");
+            // Tooltip.SetDefault("Fires supercharged arrows");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -96,7 +96,7 @@ namespace Wisplantern.Items.Weapons.Ranged.Bows
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Fulgarite Lightning");
+            // DisplayName.SetDefault("Fulgarite Lightning");
         }
 
         public override void SetDefaults()

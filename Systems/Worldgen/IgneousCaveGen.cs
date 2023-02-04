@@ -10,7 +10,7 @@ namespace Wisplantern.Systems.Worldgen
 {
     class IgneousCaveGen : ModSystem
     {
-        public override void ModifyWorldGenTasks(List<GenPass> tasks, ref float totalWeight)
+        public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
         {
             int genIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Micro Biomes"));
             tasks.Insert(genIndex + 1, new PassLegacy("IgneousCave", delegate (GenerationProgress progress, GameConfiguration config)
@@ -60,7 +60,7 @@ namespace Wisplantern.Systems.Worldgen
             int extraCheckAmount = 10;
             for (int i = extraCheckAmount + 1; i < Main.maxTilesX - extraCheckAmount - 1; i++)
             {
-                for (int j = (int)WorldGen.rockLayer; j < Main.maxTilesY - extraCheckAmount - 1; j++)
+                for (int j = (int)GenVars.rockLayer; j < Main.maxTilesY - extraCheckAmount - 1; j++)
                 {
                     Tile tile = Main.tile[i, j];
 

@@ -9,7 +9,7 @@ namespace Wisplantern.Items.Info
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Displays your current luck");
+            // Tooltip.SetDefault("Displays your current luck");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 

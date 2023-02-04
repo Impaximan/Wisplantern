@@ -9,8 +9,8 @@ namespace Wisplantern.Items.Placeable.Blocks
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Fulgarite Block");
-            Tooltip.SetDefault("'Fresh from the oven'");
+            // DisplayName.SetDefault("Fulgarite Block");
+            // Tooltip.SetDefault("'Fresh from the oven'");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 100;
         }
 

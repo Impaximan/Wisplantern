@@ -10,7 +10,7 @@ namespace Wisplantern.Items.Equipable.Accessories
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Chance when mining to get the 'Hyperspeed' buff for 3 seconds");
+            // Tooltip.SetDefault("Chance when mining to get the 'Hyperspeed' buff for 3 seconds");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 

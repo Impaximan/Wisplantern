@@ -11,8 +11,8 @@ namespace Wisplantern.Items.Equipable.Accessories
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Allows you to swing magic staffs, recovering mana on melee hits" +
-                "\n+20 max mana");
+            /* Tooltip.SetDefault("Allows you to swing magic staffs, recovering mana on melee hits" +
+                "\n+20 max mana"); */
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 

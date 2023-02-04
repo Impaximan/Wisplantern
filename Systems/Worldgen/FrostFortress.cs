@@ -21,7 +21,7 @@ namespace Wisplantern.Systems.Worldgen
             fortresses.Clear();
         }
 
-        public override void ModifyWorldGenTasks(List<GenPass> tasks, ref float totalWeight)
+        public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
         {
             int genIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Buried Chests"));
             tasks.Insert(genIndex + 1, new PassLegacy("FrostFortress", delegate (GenerationProgress progress, GameConfiguration config)
@@ -39,7 +39,7 @@ namespace Wisplantern.Systems.Worldgen
 
             while (amountGenerated < amount)
             {
-                Vector2 position = new Vector2(WorldGen.genRand.Next(200, Main.maxTilesX - 200), WorldGen.genRand.Next((int)WorldGen.rockLayer, Main.maxTilesY - 200));
+                Vector2 position = new Vector2(WorldGen.genRand.Next(200, Main.maxTilesX - 200), WorldGen.genRand.Next((int)GenVars.rockLayer, Main.maxTilesY - 200));
 
                 List<int> allowedTiles = new List<int>()
                 {
@@ -49,7 +49,7 @@ namespace Wisplantern.Systems.Worldgen
                 bool tooClose = true;
                 while (Main.tile[(int)position.X, (int)position.Y] == null || !allowedTiles.Contains(Main.tile[(int)position.X, (int)position.Y].TileType) || tooClose)
                 {
-                    position = new Vector2(WorldGen.genRand.Next(200, Main.maxTilesX - 200), WorldGen.genRand.Next((int)WorldGen.rockLayer, Main.maxTilesY - 200));
+                    position = new Vector2(WorldGen.genRand.Next(200, Main.maxTilesX - 200), WorldGen.genRand.Next((int)GenVars.rockLayer, Main.maxTilesY - 200));
 
                     tooClose = false;
                     foreach (Vector2 fort in fortresses)

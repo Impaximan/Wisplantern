@@ -10,8 +10,8 @@ namespace Wisplantern.Items.Equipable.Accessories
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Emergency Pill");
-            Tooltip.SetDefault("Greatly increases life regen for a moment when at low health");
+            // DisplayName.SetDefault("Emergency Pill");
+            // Tooltip.SetDefault("Greatly increases life regen for a moment when at low health");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 

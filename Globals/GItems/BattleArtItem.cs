@@ -21,7 +21,7 @@ namespace Wisplantern.Globals.GItems
         public bool isBattleArtItem = false;
         public BattleArt battleArtItemBattleArt;
 
-        public override void OnCreate(Item item, ItemCreationContext context)
+        public override void OnCreated(Item item, ItemCreationContext context)
         {
 
         }

@@ -13,8 +13,8 @@ namespace Wisplantern.Items.Weapons.Melee.Swords
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Reinforced Sledgehammer");
-            Tooltip.SetDefault("Guarenteed critical strike on uninjured enemies");
+            // DisplayName.SetDefault("Reinforced Sledgehammer");
+            // Tooltip.SetDefault("Guarenteed critical strike on uninjured enemies");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 

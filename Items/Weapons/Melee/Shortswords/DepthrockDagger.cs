@@ -15,7 +15,7 @@ namespace Wisplantern.Items.Weapons.Melee.Shortswords
     {
         public override void SetStaticDefaults()
         {
-			Tooltip.SetDefault("Every fourth hit will jab a dagger into the target");
+			// Tooltip.SetDefault("Every fourth hit will jab a dagger into the target");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 100;
         }
 
@@ -127,7 +127,7 @@ namespace Wisplantern.Items.Weapons.Melee.Shortswords
 
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Depthrock Dagger");
+			// DisplayName.SetDefault("Depthrock Dagger");
 		}
 
 		public override void SetDefaults()

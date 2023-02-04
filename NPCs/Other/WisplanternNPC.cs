@@ -21,7 +21,7 @@ namespace Wisplantern.NPCs.Other
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Wisplantern");
+            // DisplayName.SetDefault("Wisplantern");
             Main.npcFrameCount[Type] = 9;
         }
 

@@ -10,8 +10,8 @@ namespace Wisplantern.Items.Equipable.Accessories
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Critical strikes are more deadly" +
-                "\n5% increased critical strike chance");
+            /* Tooltip.SetDefault("Critical strikes are more deadly" +
+                "\n5% increased critical strike chance"); */
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 

@@ -14,7 +14,7 @@ namespace Wisplantern.Systems.Worldgen
 {
     class AbandonedHellevator : ModSystem
     {
-        public override void ModifyWorldGenTasks(List<GenPass> tasks, ref float totalWeight)
+        public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
         {
             int genIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Micro Biomes"));
             tasks.Insert(genIndex + 1, new PassLegacy("AbandonedHellevator", delegate (GenerationProgress progress, GameConfiguration config)

@@ -11,7 +11,7 @@ namespace Wisplantern.Systems.Worldgen
 {
     class DepthrockGen : ModSystem
     {
-        public override void ModifyWorldGenTasks(List<GenPass> tasks, ref float totalWeight)
+        public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
         {
             int genIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Jungle"));
             tasks.Insert(genIndex + 1, new PassLegacy("Depthrock", delegate (GenerationProgress progress, GameConfiguration config)

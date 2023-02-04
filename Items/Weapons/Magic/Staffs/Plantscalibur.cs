@@ -13,8 +13,8 @@ namespace Wisplantern.Items.Weapons.Magic.Staffs
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Unleashes a lingering, blinding light that confuses victims" +
-                "\nDoes more damage the closer the target is");
+            /* Tooltip.SetDefault("Unleashes a lingering, blinding light that confuses victims" +
+                "\nDoes more damage the closer the target is"); */
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             Item.staff[Type] = true;
         }
@@ -49,7 +49,7 @@ namespace Wisplantern.Items.Weapons.Magic.Staffs
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Plantscalibur beam");
+            // DisplayName.SetDefault("Plantscalibur beam");
         }
 
         Vector2 properScale;

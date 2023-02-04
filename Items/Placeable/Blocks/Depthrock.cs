@@ -9,7 +9,7 @@ namespace Wisplantern.Items.Placeable.Blocks
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Depthrock Block");
+            // DisplayName.SetDefault("Depthrock Block");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 100;
         }
 

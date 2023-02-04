@@ -13,8 +13,8 @@ namespace Wisplantern.Items.Weapons.Melee.Swords
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Guarenteed critical strike on uninjured enemies" +
-                "\nCan be upgraded with better stone");
+            /* Tooltip.SetDefault("Guarenteed critical strike on uninjured enemies" +
+                "\nCan be upgraded with better stone"); */
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 

@@ -11,7 +11,7 @@ namespace Wisplantern.Systems.Worldgen
 {
     class FulgariteGen : ModSystem
     {
-        public override void ModifyWorldGenTasks(List<GenPass> tasks, ref float totalWeight)
+        public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
         {
             int genIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Full Desert"));
             tasks.Insert(genIndex + 1, new PassLegacy("Fulgarite", delegate (GenerationProgress progress, GameConfiguration config)

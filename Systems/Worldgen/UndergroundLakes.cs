@@ -22,7 +22,7 @@ namespace Wisplantern.Systems.Worldgen
             lakes.Clear();
         }
 
-        public override void ModifyWorldGenTasks(List<GenPass> tasks, ref float totalWeight)
+        public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
         {
             int genIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Jungle"));
             tasks.Insert(genIndex + 1, new PassLegacy("Canyon", delegate (GenerationProgress progress, GameConfiguration config)
@@ -42,7 +42,7 @@ namespace Wisplantern.Systems.Worldgen
 
             for (int i = 0; i < (int)Math.Round(Main.maxTilesX * 0.0035f); i++)
             {
-                Vector2 position = new Vector2(WorldGen.genRand.Next(300, Main.maxTilesX - 300), WorldGen.genRand.Next((int)WorldGen.rockLayer, Main.maxTilesY - 400));
+                Vector2 position = new Vector2(WorldGen.genRand.Next(300, Main.maxTilesX - 300), WorldGen.genRand.Next((int)GenVars.rockLayer, Main.maxTilesY - 400));
 
                 bool canGen = true;
                 foreach (Vector2 oldLake in lakes)
@@ -67,7 +67,7 @@ namespace Wisplantern.Systems.Worldgen
             float yMult = radiusX / radiusY;
 
             int type = LiquidID.Water;
-            if (position.Y > WorldGen.rockLayer + Main.maxTilesY / 3) type = LiquidID.Lava;
+            if (position.Y > GenVars.rockLayer + Main.maxTilesY / 3) type = LiquidID.Lava;
 
             int tileType = TileID.Mud;
 
