@@ -46,10 +46,7 @@ namespace Wisplantern.Globals.GNPCs
 
         public override void OnSpawn(NPC npc, IEntitySource source)
         {
-            if (!npc.friendly)
-            {
-                aggravated = true;
-            }
+
         }
 
         NPC targetNPC = null;

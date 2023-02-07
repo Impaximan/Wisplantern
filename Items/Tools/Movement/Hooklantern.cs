@@ -175,7 +175,7 @@ namespace Wisplantern.Items.Tools.Movement
                         hookDistance = hooklantern.Distance(projectile.Center);
                         if (projectile.owner == Main.myPlayer)
                         {
-                            projectile.velocity = projectile.velocity.ToRotation().AngleTowards(projectile.DirectionTo(hooklantern.Center + (hooklantern.Distance(projectile.Center) / projectile.velocity.Length()) * hooklantern.velocity * 0.95f).ToRotation(), MathHelper.ToRadians(15f)).ToRotationVector2() * projectile.velocity.Length();
+                            projectile.velocity = projectile.velocity.ToRotation().AngleTowards(projectile.DirectionTo(hooklantern.Center + hooklantern.Distance(projectile.Center) / projectile.velocity.Length() * hooklantern.velocity * 0.95f).ToRotation(), MathHelper.ToRadians(15f)).ToRotationVector2() * projectile.velocity.Length();
                             NetMessage.SendData(MessageID.SyncProjectile, number: projectile.whoAmI);
                         }
                     }

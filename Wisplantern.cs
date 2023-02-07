@@ -32,7 +32,7 @@ namespace Wisplantern
                     Vector2 noisePosition = rotation.ToRotationVector2().RotatedBy(MathHelper.ToRadians(distance / 2f)) * 1000f;
                     float noiseValue = (noise.GetNoise(noisePosition.X, noisePosition.Y) + 1f) / 2f;
                     noiseValue = 1f;
-                    float glowValue = (1f - (distance / (width / 2f)));
+                    float glowValue = 1f - (distance / (width / 2f));
                     float value = MathHelper.Lerp(glowValue, noiseValue, distance / (width / 2f)) * glowValue;
 
                     colors[index] = new Color(value, value, value, value);
@@ -83,6 +83,9 @@ namespace Wisplantern
             ModContent.Request<SoundEffect>("Wisplantern/Sounds/Effects/HeavyHit", AssetRequestMode.ImmediateLoad);
             ModContent.Request<SoundEffect>("Wisplantern/Sounds/Effects/HeavyMetal", AssetRequestMode.ImmediateLoad);
             ModContent.Request<SoundEffect>("Wisplantern/Sounds/Effects/SwordUnsheath", AssetRequestMode.ImmediateLoad);
+            ModContent.Request<SoundEffect>("Wisplantern/Sounds/Effects/Enchant1", AssetRequestMode.ImmediateLoad);
+            ModContent.Request<SoundEffect>("Wisplantern/Sounds/Effects/Enchant2", AssetRequestMode.ImmediateLoad);
+            ModContent.Request<SoundEffect>("Wisplantern/Sounds/Effects/Enchant3", AssetRequestMode.ImmediateLoad);
 
             wisplanternLoot.Add(ModContent.ItemType<Items.Equipable.Accessories.WispNecklace>());
             wisplanternLoot.Add(ModContent.ItemType<Items.Equipable.Accessories.WispRing>());

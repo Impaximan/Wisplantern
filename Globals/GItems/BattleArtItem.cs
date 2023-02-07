@@ -226,6 +226,9 @@ namespace Wisplantern.Globals.GItems
                         {
                             player.QuickSpawnItem(new EntitySource_Misc("BattleArtReplacement"), Main.mouseItem.GetGlobalItem<BattleArtItem>().battleArt.ItemType);
                         }
+                        SoundStyle sound = new SoundStyle("Wisplantern/Sounds/Effects/Enchant" + Main.rand.Next(1, 4));
+                        sound.Volume = 2f;
+                        SoundEngine.PlaySound(sound);
                         Main.mouseItem.GetGlobalItem<BattleArtItem>().battleArt = battleArtItemBattleArt;
                     }
                     else
@@ -234,6 +237,9 @@ namespace Wisplantern.Globals.GItems
                         {
                             player.QuickSpawnItem(new EntitySource_Misc("BattleArtReplacement"), player.HeldItem.GetGlobalItem<BattleArtItem>().battleArt.ItemType);
                         }
+                        SoundStyle sound = new SoundStyle("Wisplantern/Sounds/Effects/Enchant" + Main.rand.Next(1, 4));
+                        sound.Volume = 2f;
+                        SoundEngine.PlaySound(sound);
                         player.HeldItem.GetGlobalItem<BattleArtItem>().battleArt = battleArtItemBattleArt;
                     }
                 }

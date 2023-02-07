@@ -152,7 +152,7 @@ namespace Wisplantern.Items.Weapons.Melee.Shortswords
 			if (stuckNPC == null && Projectile.ai[1] == 1)
             {
 				stuckNPC = target;
-				stuckOffset = (Projectile.position + Projectile.velocity * 2f) - target.position;
+				stuckOffset = Projectile.position + Projectile.velocity * 2f - target.position;
 
 				PunchCameraModifier modifier = new PunchCameraModifier(Projectile.Center, Projectile.velocity.ToRotation().ToRotationVector2(), 15f, 10f, 8, 1000f);
 				Main.instance.CameraModifiers.Add(modifier);

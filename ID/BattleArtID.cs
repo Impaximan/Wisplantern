@@ -13,6 +13,7 @@ namespace Wisplantern.ID
                 Uppercut => new Uppercut(),
                 AerialRetreat => new AerialRetreat(),
                 TriCast => new TriCast(),
+                BloodySlash => new BloodySlash(),
                 _ => new None()
             };
         }
@@ -22,5 +23,6 @@ namespace Wisplantern.ID
         public const int Uppercut = 2;
         public const int AerialRetreat = 3;
         public const int TriCast = 4;
+        public const int BloodySlash = 5;
     }
 }

@@ -20,7 +20,7 @@ namespace Wisplantern.BattleArts
         }
 
         public override string BattleArtDescription => "Right click right before an attack hits you to negate 80% of the damage and ravage nearby enemies" +
-            "\nMissing a parry leaves you vulnerable and causes an 5 second cooldown";
+            "\nMissing a parry leaves you vulnerable and causes a 5 second cooldown";
 
         public override string BattleArtName => "Sword Parry";
 

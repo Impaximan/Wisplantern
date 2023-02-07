@@ -59,7 +59,7 @@ namespace Wisplantern.Items.Equipable.Accessories
                 {
                     if (usedPickSpeed < 0.75f) usedPickSpeed = 0.75f;
                 }
-                Player.GetAttackSpeed(DamageClass.Generic) *= MathHelper.Lerp((1f / usedPickSpeed), 1f, 0.5f);
+                Player.GetAttackSpeed(DamageClass.Generic) *= MathHelper.Lerp(1f / usedPickSpeed, 1f, 0.5f);
             }
         }
     }
