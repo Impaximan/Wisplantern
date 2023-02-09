@@ -9,6 +9,7 @@ using Terraria.GameContent.Generation;
 using Terraria.IO;
 using Terraria.GameContent.Biomes;
 using Terraria.GameContent.Biomes.CaveHouse;
+using IL.Terraria.GameContent.UI.States;
 
 namespace Wisplantern.Systems.Worldgen
 {
@@ -23,7 +24,12 @@ namespace Wisplantern.Systems.Worldgen
 
         public override void ModifyWorldGenTasks(List<GenPass> tasks, ref float totalWeight)
         {
+            GenPass jungleGrass = tasks.Find(x => x.Name.Equals("Mud Caves To Grass"));
+
+            tasks.Remove(jungleGrass);
+
             int genIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Wavy Caves"));
+
             tasks.Insert(genIndex + 1, new PassLegacy("Special Cave Shapes", delegate (GenerationProgress progress, GameConfiguration config)
             {
                 progress.Message = "Massive Caves";
@@ -39,6 +45,7 @@ namespace Wisplantern.Systems.Worldgen
             }));
 
             genIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Shinies"));
+
             tasks.Insert(genIndex + 1, new PassLegacy("Mountain Shinies", delegate (GenerationProgress progress, GameConfiguration config)
             {
                 progress.Message = "Mountain Shines";
@@ -49,17 +56,23 @@ namespace Wisplantern.Systems.Worldgen
             }));
 
             genIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Full Desert"));
-            tasks.Insert(genIndex + 1, new PassLegacy("Misc Surface Structures", delegate (GenerationProgress progress, GameConfiguration config)
+
+            tasks.Insert(genIndex + 1, jungleGrass);
+
+            tasks.Insert(genIndex + 1, new PassLegacy("Mountain", delegate (GenerationProgress progress, GameConfiguration config)
             {
-                progress.Message = "Creating History";
-
-                Fulgarite();
-
                 progress.Message = "Massive Mountain";
                 Mountain();
             }));
 
+            tasks.Insert(genIndex + 1, new PassLegacy("Misc Surface Structures", delegate (GenerationProgress progress, GameConfiguration config)
+            {
+                progress.Message = "Striking the Earth";
+                Fulgarite();
+            }));
+
             genIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Buried Chests"));
+
             tasks.Insert(genIndex + 1, new PassLegacy("Mountain Chests", delegate (GenerationProgress progress, GameConfiguration config)
             {
                 progress.Message = "Mountain Chests";
@@ -202,6 +215,7 @@ namespace Wisplantern.Systems.Worldgen
             }));
 
             genIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Micro Biomes"));
+
             tasks.Insert(genIndex + 1, new PassLegacy("Mountain Cleanup", delegate (GenerationProgress progress, GameConfiguration config)
             {
                 progress.Message = "Cleaning Up Mountain";
@@ -268,7 +282,58 @@ namespace Wisplantern.Systems.Worldgen
             return false;
         }
 
-        #region Special Cave Shapes
+        #region Surface Obstacles
+
+        void SurfaceObstacles()
+        {
+            int amount = 20;
+
+            for (int a = 0; a < amount; a++)
+            {
+                int side = WorldGen.genRand.NextBool() ? 1 : -1;
+                Vector2 currentPosition = new Vector2(Main.maxTilesX / 2 + side * WorldGen.genRand.Next(0, Main.maxTilesX / 2 - 300), 100);
+                while (!WorldUtils.Find(currentPosition.ToPoint(), Searches.Chain(new Searches.Down(1), new GenCondition[]
+                    {
+        new Conditions.IsSolid()
+                    }), out _))
+                {
+                    currentPosition.Y++;
+                }
+
+
+                Point position = currentPosition.ToPoint();
+
+                FastNoiseLite noise1 = new FastNoiseLite(WorldGen.genRand.Next(5000, 10000));
+                noise1.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
+                noise1.SetFrequency(0.01f);
+                noise1.SetFractalOctaves(5);
+                noise1.SetFractalLacunarity(2f);
+                noise1.SetFractalGain(0.5f);
+                noise1.SetFractalPingPongStrength(2f);
+
+                switch (WorldGen.genRand.Next(1))
+                {
+                    case 0: //Stone pillars
+                        int height = 20;
+                        for (int i = -WorldGen.genRand.Next(3, 6); i < WorldGen.genRand.Next(3, 6); i++)
+                        {
+                            for (int j = -height + (int)(Math.Abs(i) * (2 + noise1.GetNoise((position.X + i) * 5f, 0f))); j < 4; j++)
+                            {
+                                int rI = position.X + i;
+                                int rJ = position.Y + j;
+                                rI += (int)(7f * noise1.GetNoise((position.Y + j) * 3f, 0f));
+                                WorldGen.PlaceTile(rI, rJ, TileID.Stone);
+                            }
+                        }
+                        break;
+                }
+
+            }
+        }
+
+        #endregion
+
+        #region Mountain
 
         Vector2 mountainPosition;
         List<Tuple<Point, int>> oresToPlace = new List<Tuple<Point, int>>();
@@ -431,12 +496,17 @@ namespace Wisplantern.Systems.Worldgen
                 iceWall = WallID.Dirt;
             }
 
-            if (CheckForTile(position.X, position.Y, TileID.JungleGrass, 25))
+            if (CheckForTile(position.X, position.Y, TileID.JungleGrass, 25) || CheckForTile(position.X, position.Y, TileID.Mud, 25))
             {
-                soilType = TileID.Mud;
-                soilWall1 = WallID.MudUnsafe;
+                soilType = TileID.Mudstone;
+                stoneType = TileID.Mud;
+                soilWall1 = WallID.MudstoneBrick;
                 soilWall2 = WallID.MudUnsafe;
-                if (Main.rand.NextBool(4)) liquidType = LiquidID.Honey;
+                snowType = TileID.Stone;
+                iceType = TileID.Mudstone;
+                snowWall = WallID.MudstoneBrick;
+                iceWall = rockWall1;
+                if (Main.rand.NextBool(2)) liquidType = LiquidID.Honey;
             }
 
             if (CheckForTile(position.X, position.Y, TileID.SnowBlock, 25))
@@ -447,6 +517,7 @@ namespace Wisplantern.Systems.Worldgen
                 soilWall2 = WallID.SnowWallUnsafe;
                 rockWall1 = WallID.IceBrick;
                 rockWall2 = WallID.SnowWallUnsafe;
+                liquidType = LiquidID.Water;
             }
 
             for (int i = -mountainWidth / 2; i < mountainWidth / 2; i++)
@@ -504,7 +575,7 @@ namespace Wisplantern.Systems.Worldgen
                                         if (dirtNoise.GetNoise(i * 5f, j * 5f) > 0.5f)
                                         {
                                             type = soilType;
-                                            if (soilType == TileID.Mud && WispUtils.TileCanBeGrass(rI, rJ)) type = TileID.JungleGrass;
+                                            if (type == TileID.Mud && WispUtils.TileCanBeGrass(rI, rJ)) type = TileID.JungleGrass;
                                             if (shouldBeSnow) type = iceType;
                                         }
                                         WorldGen.PlaceTile(rI, rJ, type, true, false);
@@ -551,6 +622,10 @@ namespace Wisplantern.Systems.Worldgen
                 }
             }
         }
+
+        #endregion
+
+        #region Special Cave Shapes
 
         void FissuresFromHell()
         {

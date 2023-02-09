@@ -1,7 +1,189 @@
+
 Mods: {
 	Wisplantern: {
-		InfoDisplayName: {
-			LuckIndicator: "Luck"
-				}
+		InfoDisplays.LuckIndicator.DisplayName: Luck
+
+		Projectiles: {
+			BloodySlashProjectile.DisplayName: Bloody Slash Projectile
+			WispcasterBobber.DisplayName: Wispcaster Bobber
+			HooklanternProjectile.DisplayName: Hooklantern
+			PlantscaliburSpotlight.DisplayName: Plantscalibur beam
+			DepthrockDaggerProjectile.DisplayName: Depthrock Dagger
+			FulgariteLongbowBolt.DisplayName: Fulgarite Lightning
+			OtherArrow.DisplayName: Other Arrow
+			WisplanternVortex.DisplayName: Wisplantern Vortex
 		}
+
+		Biomes: {
+			CalmNightClairDeLune.DisplayName: Calm Night Clair De Lune
+			FarUnderground.DisplayName: Far Underground
+			LushCave.DisplayName: Lush Cave
+		}
+
+		Buffs: {
+			BattleArtCooldown: {
+				DisplayName: Battle Art Cooldown
+				Description: You must wait to use another battle art
+			}
+
+			Hyperspeed: {
+				DisplayName: Hyperspeed
+				Description: Greatly increased mining speed
+			}
+
+			Pensive: {
+				DisplayName: Pensive
+				Description: Max stats increased and monster spawns reduced
+			}
+		}
+
+		Items: {
+			AerialRetreat.DisplayName: Aerial Retreat
+			BloodySlash.DisplayName: Bloody Slash
+			SwordParry.DisplayName: Sword Parry
+			TriCast.DisplayName: Tri-Cast
+			Uppercut.DisplayName: Uppercut
+
+			FocusingCrystal: {
+				DisplayName: Focusing Crystal
+				Tooltip:
+					'''
+					Critical strikes are more deadly
+					5% increased critical strike chance
+					'''
+			}
+
+			GlintstoneGlove: {
+				DisplayName: Glintstone Glove
+				Tooltip:
+					'''
+					Allows you to swing magic staffs, recovering mana on melee hits
+					+20 max mana
+					'''
+			}
+
+			Pill: {
+				DisplayName: Emergency Pill
+				Tooltip: Greatly increases life regen for a moment when at low health
+			}
+
+			WispNecklace: {
+				DisplayName: Wisp Necklace
+				Tooltip:
+					'''
+					Weapons benefit from mining speed
+					10% increased mining speed
+					'''
+			}
+
+			WispRing: {
+				DisplayName: Wisp Ring
+				Tooltip: Chance when mining to get the 'Hyperspeed' buff for 3 seconds
+			}
+
+			FourLeafClover: {
+				DisplayName: Four Leaf Clover
+				Tooltip: Displays your current luck
+			}
+
+			Depthrock.DisplayName: Depthrock Block
+
+			Fulgarite: {
+				DisplayName: Fulgarite Block
+				Tooltip: "'Fresh from the oven'"
+			}
+
+			IgneousStone: {
+				DisplayName: Igneous Stone Block
+				Tooltip: "'It's lukewarm'"
+			}
+
+			LushLantern.DisplayName: Lush Lantern
+
+			Moonflower: {
+				DisplayName: Moonflower
+				Tooltip: Smells nice under the moonlight
+			}
+
+			Wispcaster: {
+				DisplayName: Wispcaster
+				Tooltip: Creates a bobber at your cursor position, within a certain distance
+			}
+
+			Hooklantern: {
+				DisplayName: Hooklantern
+				Tooltip:
+					'''
+					Can be thrown and grappled to
+					Only two can be active at once
+					'''
+			}
+
+			HyperstonePick: {
+				DisplayName: Timid Pick
+				Tooltip: Gains more speed from hyperstone and wisplanterns than most pickaxes
+			}
+
+			Plantscalibur: {
+				DisplayName: Plantscalibur
+				Tooltip:
+					'''
+					Unleashes a lingering, blinding light that confuses victims
+					Does more damage the closer the target is
+					'''
+			}
+
+			DepthrockDagger: {
+				DisplayName: Depthrock Dagger
+				Tooltip: Every fourth hit will jab a dagger into the target
+			}
+
+			DepthrockSledgehammer: {
+				DisplayName: Reinforced Sledgehammer
+				Tooltip: Guarenteed critical strike on uninjured enemies
+			}
+
+			WeatheredSledgehammer: {
+				DisplayName: Weathered Sledgehammer
+				Tooltip:
+					'''
+					Guarenteed critical strike on uninjured enemies
+					Can be upgraded with better stone
+					'''
+			}
+
+			FulgariteLongbow: {
+				DisplayName: Fulgarite Longbow
+				Tooltip: Fires supercharged arrows
+			}
+
+			OtherBow: {
+				DisplayName: Other Bow
+				Tooltip:
+					'''
+					Fires in reverse and relative to you
+					'Weirdly strange, oddly'
+					'''
+			}
+		}
+
+		NPCs: {
+			Lushfly.DisplayName: Lushfly
+			WisplanternNPC.DisplayName: Wisplantern
+		}
+
+		Prefixes: {
+			Hopeful.DisplayName: Hopeful
+			Lively.DisplayName: Lively
+			Steadfast.DisplayName: Steadfast
+			Vital.DisplayName: Vital
+		}
+	}
+
+	GameTips: {
+		MountainTip0: "[Wisplantern] Tales tell of a massive mountain found on the surface, containing an abundance of minerals inside..."
+		ChastisedChurch: "[Wisplantern] In the far side of the underworld, an accursed church lays buried, containing a banished evil within."
+		Wisplantern0: "[Wisplantern] Legendary ancient spirits inhabit lamps in the caverns. Hit them thrice for a reward from the astral plane!"
+		BattleArt0: "[Wisplantern] Battle arts found around the world can be used to give new functionalities to your arnaments. Experiment with them to find what works best!"
+	}
 }
