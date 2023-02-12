@@ -85,7 +85,7 @@ namespace Wisplantern.BattleArts
                 }
             }
             SoundEngine.PlaySound(new SoundStyle("Wisplantern/Sounds/Effects/HeavyMetal"), Player.Center);
-            Player.DoManaRechargeEffect();
+            Player.DoBattleArtRechargeEffect();
             Player.ClearBuff(ModContent.BuffType<Buffs.BattleArtCooldown>());
         }
 

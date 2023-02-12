@@ -86,6 +86,42 @@ namespace Wisplantern.Globals.GItems
             battleArt = BattleArtID.GetBattleArtFromID(tag.GetInt("BattleArt"));
         }
 
+        List<int> blacklist = new()
+        {
+            ItemID.BookStaff,
+            ItemID.MonkStaffT3,
+            ItemID.DD2SquireDemonSword,
+            ItemID.BouncingShield
+        };
+
+        public bool CanGetBattleArt(Item item, Player player)
+        {
+            if (item.GetGlobalItem<BattleArtItem>().battleArt != null && item.GetGlobalItem<BattleArtItem>().battleArt is not None)
+            {
+                return true;
+            }
+            if (item.ModItem != null)
+            {
+                if (item.ModItem.AltFunctionUse(player))
+                {
+                    return false;
+                }
+            }
+            if (ItemLoader.AltFunctionUse(item, player))
+            {
+                return false;
+            }
+            if (blacklist.Contains(item.type))
+            {
+                return false;
+            }
+            if (item.channel)
+            {
+                return false;
+            }
+            return true;
+        }
+
         bool ShouldApplyBattleArt(Player player)
         {
             return battleArt is not None && battleArt != null && player.altFunctionUse == 2;
@@ -124,7 +160,7 @@ namespace Wisplantern.Globals.GItems
 
         public override bool CanUseItem(Item item, Player player)
         {
-            if (ShouldApplyBattleArt(player))
+            if (ShouldApplyBattleArt(player) && player.statMana >= item.mana)
             {
                 Item dummy = new Item(item.type);
                 ogDamage = dummy.damage;
@@ -146,6 +182,7 @@ namespace Wisplantern.Globals.GItems
 
                 wasUsingBattleArt = true;
                 battleArt.PreUseBattleArt(ref item, player);
+                player.GetModPlayer<BattleArtPlayer>().usingBattleArt = true;
             }
 
             return base.CanUseItem(item, player);
@@ -209,7 +246,7 @@ namespace Wisplantern.Globals.GItems
             if (isBattleArtItem)
             {
                 Player player = Main.player[Main.myPlayer];
-                return battleArtItemBattleArt.CanBeAppliedToItem(player.HeldItem);
+                return battleArtItemBattleArt.CanBeAppliedToItem(player.HeldItem) && CanGetBattleArt(player.HeldItem, player);
             }
             return base.CanRightClick(item);
         }
@@ -296,11 +333,26 @@ namespace Wisplantern.Globals.GItems
                 tooltips.Add(line4);
                 tooltips.Add(line5);
             }
+
+            if (!CanGetBattleArt(item, Main.player[Main.myPlayer]))
+            {
+                TooltipLine noBattleArtLine = new TooltipLine(Mod, "NoBattleArt", "Cannot be given a battle art");
+                noBattleArtLine.IsModifier = true;
+                noBattleArtLine.IsModifierBad = true;
+                tooltips.Add(noBattleArtLine);
+            }
         }
     }
 
     class BattleArtPlayer : ModPlayer
     {
+        public bool usingBattleArt = false;
+
+        public override void ResetEffects()
+        {
+            usingBattleArt = false;
+        }
+
         public override void PostUpdate()
         {
             if (Player.ItemAnimationActive && Player.HeldItem.GetGlobalItem<BattleArtItem>().battleArt != null && Player.HeldItem.GetGlobalItem<BattleArtItem>().battleArt is not None && Player.altFunctionUse == 2)

@@ -34,6 +34,7 @@ namespace Wisplantern.Items.Weapons.Melee.Swords
             Item.value = Item.sellPrice(0, 1, 25, 0);
             Item.autoReuse = false;
             Item.DamageType = DamageClass.Melee;
+            Item.hammer = 60;
         }
 
         public override void ModifyHitNPC(Player player, NPC target, ref int damage, ref float knockBack, ref bool crit)

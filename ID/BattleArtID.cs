@@ -14,6 +14,8 @@ namespace Wisplantern.ID
                 AerialRetreat => new AerialRetreat(),
                 TriCast => new TriCast(),
                 BloodySlash => new BloodySlash(),
+                Siphon => new Siphon(),
+                RadialCast => new RadialCast(),
                 _ => new None()
             };
         }
@@ -24,5 +26,7 @@ namespace Wisplantern.ID
         public const int AerialRetreat = 3;
         public const int TriCast = 4;
         public const int BloodySlash = 5;
+        public const int Siphon = 6;
+        public const int RadialCast = 7;
     }
 }

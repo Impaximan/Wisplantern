@@ -2,7 +2,6 @@
 using Terraria.ModLoader;
 using Terraria.ID;
 using Wisplantern.ID;
-using Wisplantern.BattleArts;
 using Microsoft.Xna.Framework;
 using Terraria.DataStructures;
 

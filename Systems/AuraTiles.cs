@@ -1,6 +1,5 @@
 ﻿using Terraria.ModLoader;
 using System;
-using System.Collections.Generic;
 
 namespace Wisplantern.Systems
 {

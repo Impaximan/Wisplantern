@@ -22,7 +22,7 @@ namespace Wisplantern.Buffs
             {
                 if (player.buffTime[buffIndex] == 1)
                 {
-                    player.DoManaRechargeEffect();
+                    player.DoBattleArtRechargeEffect();
                 }
             }
         }

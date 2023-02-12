@@ -24,6 +24,15 @@ namespace Wisplantern.Globals.GNPCs
                     nextSlot++;
                 }
             }
+
+            if (type == NPCID.SkeletonMerchant)
+            {
+                if (Main.moonPhase % 2 == 0)
+                {
+                    shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Equipable.Accessories.GlintstoneGlove>());
+                    nextSlot++;
+                }
+            }
         }
     }
 }

@@ -3,6 +3,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.Audio;
 using Terraria.GameContent.Creative;
 
 namespace Wisplantern.Items.Weapons.Ranged.Bows
@@ -85,6 +86,7 @@ namespace Wisplantern.Items.Weapons.Ranged.Bows
             {
                 Vector2 velocity = projectile.velocity;
                 velocity.Normalize();
+                SoundEngine.PlaySound(SoundID.Item92, target.Center);
                 Projectile.NewProjectile(projectile.GetSource_OnHit(target, "FulgariteLongbow"), projectile.Center, velocity * 10f, ModContent.ProjectileType<FulgariteLongbowBolt>(), projectile.damage / 2, projectile.knockBack / 4, projectile.owner);
             }
         }

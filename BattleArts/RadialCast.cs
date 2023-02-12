@@ -2,20 +2,23 @@
 using Terraria.ModLoader;
 using Wisplantern.ID;
 using Microsoft.Xna.Framework;
+using System;
 using Terraria.DataStructures;
 
 namespace Wisplantern.BattleArts
 {
-    class TriCast : BattleArt
+    class RadialCast : BattleArt
     {
-        public override int ItemType => ModContent.ItemType<Items.BattleArtItems.TriCast>();
+        public override int ItemType => ModContent.ItemType<Items.BattleArtItems.RadialCast>();
 
-        public override int ID => BattleArtID.TriCast;
+        public override int ID => BattleArtID.RadialCast;
 
-        public override string BattleArtDescription => "Right click to fire 3 spells at once" +
+        const int amount = 12;
+
+        public override string BattleArtDescription => "Right click to fire " + amount + " spells at once, radially" +
             "\nCooldown scales with use speed";
 
-        public override string BattleArtName => "Tri-Cast";
+        public override string BattleArtName => "Radial Cast";
 
         public override BattleArtType BattleArtType => BattleArtType.Magic;
 
@@ -25,7 +28,7 @@ namespace Wisplantern.BattleArts
         public override void PreUseBattleArt(ref Item item, Player player)
         {
             alreadyDoneExtraShot = false;
-            player.AddBuff(ModContent.BuffType<Buffs.BattleArtCooldown>(), item.useTime * 15);
+            player.AddBuff(ModContent.BuffType<Buffs.BattleArtCooldown>(), item.useTime * 25);
         }
 
         public override bool Shoot(Item item, Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
@@ -33,8 +36,11 @@ namespace Wisplantern.BattleArts
             if (!alreadyDoneExtraShot) //To prevent the game from freezing
             {
                 alreadyDoneExtraShot = true;
-                ShootExtraShot(item, velocity.RotatedBy(-MathHelper.Pi / 8f), position, player);
-                ShootExtraShot(item, velocity.RotatedBy(MathHelper.Pi / 8f), position, player);
+                
+                for (int i = 1; i < amount; i++)
+                {
+                    ShootExtraShot(item, velocity.RotatedBy(Math.PI / amount * i * 2f), position, player);
+                }
             }
             return base.Shoot(item, player, source, position, velocity, type, damage, knockback);
         }

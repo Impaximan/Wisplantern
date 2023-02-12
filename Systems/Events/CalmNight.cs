@@ -1,5 +1,4 @@
 ﻿using Terraria.ModLoader;
-using System;
 using Terraria.ModLoader.IO;
 using Terraria;
 using Microsoft.Xna.Framework;

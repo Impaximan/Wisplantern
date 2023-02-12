@@ -7,9 +7,6 @@ using System.Collections.Generic;
 using System;
 using Terraria.GameContent.Generation;
 using Terraria.IO;
-using Terraria.GameContent.Biomes;
-using Terraria.GameContent.Biomes.CaveHouse;
-using IL.Terraria.GameContent.UI.States;
 
 namespace Wisplantern.Systems.Worldgen
 {
