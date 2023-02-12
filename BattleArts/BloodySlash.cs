@@ -7,6 +7,8 @@ using Terraria.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.DataStructures;
 using System.Collections.Generic;
+using Terraria.ModLoader.IO;
+using System.IO;
 
 namespace Wisplantern.BattleArts
 {
@@ -118,6 +120,7 @@ namespace Wisplantern.BattleArts
             BloodySlashNPC sNPC = target.GetGlobalNPC<BloodySlashNPC>();
             sNPC.stacks.Add((int)(damage * 1.8f));
             sNPC.timeToDecreaseStack = 120;
+            NetMessage.SendData(MessageID.SyncNPC, number: target.whoAmI);
         }
 
         public override void AI()
@@ -131,19 +134,42 @@ namespace Wisplantern.BattleArts
     {
         public int timeToDecreaseStack = 0;
         public List<int> stacks = new List<int>();
+        public List<int> multiPlayerStacks = new List<int>();
 
         public override bool InstancePerEntity => true;
 
         public override void UpdateLifeRegen(NPC npc, ref int damage)
         {
-            if (stacks.Count > 0)
+            if (stacks.Count > 0 || multiPlayerStacks.Count > 0)
             {
                 foreach (int stack in stacks)
                 {
                     npc.lifeRegen -= stack;
                     damage += stack / 15 + 1;
                 }
+                foreach (int stack in multiPlayerStacks)
+                {
+                    npc.lifeRegen -= stack;
+                    damage += stack / 15 + 1;
+                }
             }
+        }
+
+        public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
+        {
+            int num = 0;
+            foreach (int stack in stacks)
+            {
+                num += stack;
+            }
+            binaryWriter.Write(num);
+        }
+
+        public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
+        {
+            int num = binaryReader.ReadInt32();
+            multiPlayerStacks.Clear();
+            multiPlayerStacks.Add(num);
         }
 
         public override void PostAI(NPC npc)

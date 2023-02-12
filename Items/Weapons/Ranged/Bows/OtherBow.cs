@@ -44,23 +44,26 @@ namespace Wisplantern.Items.Weapons.Ranged.Bows
 
         public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {
-            if (player.whoAmI == Main.myPlayer)
+            Vector2 targetPosition = Main.MouseWorld;
+            while (!Collision.SolidCollision(position, 1, 1, false) && position.Distance(targetPosition) >= 15 && position.Distance(player.Center) <= 600f)
             {
-                Vector2 targetPosition = Main.MouseWorld;
-                while (!Collision.SolidCollision(position, 1, 1, false) && position.Distance(targetPosition) >= 15 && position.Distance(player.Center) <= 600f)
-                {
-                    position += position.DirectionTo(targetPosition) * 10f;
-                }
-                velocity.Normalize();
-                type = ModContent.ProjectileType<OtherArrow>();
+                position += position.DirectionTo(targetPosition) * 10f;
             }
+            velocity.Normalize();
+            type = ModContent.ProjectileType<OtherArrow>();
         }
 
-        //public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-        //{
-        //    Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
-        //    return false;
-        //}
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
+            if (player.whoAmI == Main.myPlayer)
+            {
+                int p = Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
+                Main.projectile[p].netUpdate = true;
+                NetMessage.SendData(MessageID.SyncProjectile, number: p);
+            }
+
+            return false;
+        }
     }
 
     class OtherArrow : ModProjectile

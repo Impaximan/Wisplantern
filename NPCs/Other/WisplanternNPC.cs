@@ -226,7 +226,7 @@ namespace Wisplantern.NPCs.Other
 
         public void SpawnItem()
         {
-            Item.NewItem(Projectile.GetSource_FromThis(), Projectile.Center, (int)Projectile.ai[0]);
+            if (Main.netMode != NetmodeID.MultiplayerClient) Item.NewItem(Projectile.GetSource_FromThis(), Projectile.Center, (int)Projectile.ai[0]);
         }
 
         public override bool PreDraw(ref Color lightColor)

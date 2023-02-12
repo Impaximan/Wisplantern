@@ -38,10 +38,11 @@ namespace Wisplantern.Items.Weapons.Ranged.Bows
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            if (Main.myPlayer == player.whoAmI)
             {
                 int p = Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
                 Main.projectile[p].GetGlobalProjectile<FulgariteLongbowArrow>().supercharged = true;
+                Main.projectile[p].netUpdate = true;
             }
 
             return false;
@@ -82,7 +83,7 @@ namespace Wisplantern.Items.Weapons.Ranged.Bows
 
         public override void OnHitNPC(Projectile projectile, NPC target, int damage, float knockback, bool crit)
         {
-            if (Main.netMode != NetmodeID.MultiplayerClient && supercharged)
+            if (Main.myPlayer == projectile.owner && supercharged)
             {
                 Vector2 velocity = projectile.velocity;
                 velocity.Normalize();

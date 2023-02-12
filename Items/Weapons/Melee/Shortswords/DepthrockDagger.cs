@@ -83,7 +83,7 @@ namespace Wisplantern.Items.Weapons.Melee.Shortswords
             {
 				totalShots = 0;
 				Item.stack--;
-				if (Main.netMode != NetmodeID.MultiplayerClient) Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI, 0, 1);
+				if (Main.myPlayer == player.whoAmI) Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI, 0, 1);
 				SoundEngine.PlaySound(SoundID.DD2_MonkStaffSwing, player.Center);
 				cooldown = 20;
 				return false;

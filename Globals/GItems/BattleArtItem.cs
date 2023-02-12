@@ -9,10 +9,12 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework.Input;
 using Terraria.DataStructures;
 using Terraria.Audio;
+using System.IO;
+using Terraria.IO;
+using Terraria.Localization;
 
 namespace Wisplantern.Globals.GItems
 {
-    //TODO: Add netcode
     class BattleArtItem : GlobalItem
     {
         public override bool InstancePerEntity => true;
@@ -20,6 +22,30 @@ namespace Wisplantern.Globals.GItems
         public BattleArt battleArt;
         public bool isBattleArtItem = false;
         public BattleArt battleArtItemBattleArt;
+
+        public override void NetSend(Item item, BinaryWriter writer)
+        {
+            if (battleArt != null && battleArt is not None)
+            {
+                writer.Write(battleArt.ID);
+                writer.Write(multiplayerShouldApplyBattleArt ? 1 : 0);
+            }
+            else
+            {
+                writer.Write(0);
+                writer.Write(0);
+            }
+        }
+
+        public override void NetReceive(Item item, BinaryReader reader)
+        {
+            int battleArtID = reader.ReadInt32();
+            if (battleArtID != 0)
+            {
+                battleArt = BattleArtID.GetBattleArtFromID(battleArtID);
+            }
+            multiplayerShouldApplyBattleArt = reader.ReadInt32() == 1;
+        }
 
         public override void OnCreate(Item item, ItemCreationContext context)
         {
@@ -32,8 +58,27 @@ namespace Wisplantern.Globals.GItems
             return base.NewInstance(target);
         }
 
+        const int syncInterval = 10;
+        int syncTimer = syncInterval;
         public override void HoldItem(Item item, Player player)
         {
+            syncTimer++;
+            if (syncTimer >= syncInterval)
+            {
+                syncTimer = 0;
+                if (battleArt != null && battleArt is not None && player.whoAmI == Main.myPlayer)
+                {
+                    for (int i = 0; i < player.inventory.Length; i++)
+                    {
+                        if (player.inventory[i] == item)
+                        {
+                            NetMessage.SendData(MessageID.SyncEquipment, ignoreClient: player.whoAmI, number: player.whoAmI, number2: i);  // syncs the i slot in the player's inventory
+                            break;
+                        }
+                    }
+                }
+            }
+
             if ((!player.ItemAnimationActive || player.altFunctionUse != 2) && wasUsingBattleArt)
             {
                 if (battleArt != null)
@@ -50,7 +95,11 @@ namespace Wisplantern.Globals.GItems
                 item.shoot = ogShoot;
                 item.noMelee = ogNoMelee;
                 item.UseSound = ogSoundStyle;
-                if (player.altFunctionUse != 2 && player.ItemTimeIsZero) wasUsingBattleArt = false;
+                if (player.altFunctionUse != 2 && player.ItemTimeIsZero)
+                {
+                    wasUsingBattleArt = false;
+                }
+                player.GetModPlayer<BattleArtPlayer>().usingBattleArt = false;
             }
         }
 
@@ -72,7 +121,11 @@ namespace Wisplantern.Globals.GItems
                 item.shoot = ogShoot;
                 item.noMelee = ogNoMelee;
                 item.UseSound = ogSoundStyle;
-                if (player.altFunctionUse != 2 && player.ItemTimeIsZero) wasUsingBattleArt = false;
+                if (player.altFunctionUse != 2 && player.ItemTimeIsZero)
+                {
+                    wasUsingBattleArt = false;
+                }
+                player.GetModPlayer<BattleArtPlayer>().usingBattleArt = false;
             }
         }
 
@@ -122,9 +175,15 @@ namespace Wisplantern.Globals.GItems
             return true;
         }
 
+        bool multiplayerShouldApplyBattleArt = false;
         bool ShouldApplyBattleArt(Player player)
         {
-            return battleArt is not None && battleArt != null && player.altFunctionUse == 2;
+            if (player.whoAmI != Main.myPlayer && multiplayerShouldApplyBattleArt)
+            {
+                return true;
+            }
+            multiplayerShouldApplyBattleArt = battleArt is not None && battleArt != null && player.altFunctionUse == 2;
+            return multiplayerShouldApplyBattleArt;
         }
 
         public override void ModifyShootStats(Item item, Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
@@ -182,6 +241,7 @@ namespace Wisplantern.Globals.GItems
 
                 wasUsingBattleArt = true;
                 battleArt.PreUseBattleArt(ref item, player);
+
                 player.GetModPlayer<BattleArtPlayer>().usingBattleArt = true;
             }
 
@@ -218,13 +278,20 @@ namespace Wisplantern.Globals.GItems
             if (ShouldApplyBattleArt(player))
             {
                 battleArt.UseStyle(item, player, heldItemFrame);
+                NetMessage.SendData(MessageID.SyncPlayer, player.whoAmI);
             }
         }
 
         public override bool? UseItem(Item item, Player player)
         {
-            if (ShouldApplyBattleArt(player))
+            //if (battleArt != null && battleArt is not None && player.whoAmI == Main.myPlayer)
+            //{
+            //    NetMessage.SendData(MessageID.SyncPlayer, player.whoAmI);
+            //    NetMessage.SendData(MessageID.PlayerControls, player.whoAmI);
+            //}
+            if (ShouldApplyBattleArt(player) && player.whoAmI == Main.myPlayer)
             {
+                NetMessage.SendData(MessageID.SyncPlayer, player.whoAmI);
                 battleArt.UseBattleArt(item, player, wasJustUsed);
                 wasUsingBattleArt = true;
                 if (wasJustUsed) wasJustUsed = false;
@@ -234,6 +301,10 @@ namespace Wisplantern.Globals.GItems
 
         public override bool AltFunctionUse(Item item, Player player)
         {
+            if (multiplayerShouldApplyBattleArt)
+            {
+                return true;
+            }
             if (battleArt != null && battleArt is not None)
             {
                 return true;
@@ -279,6 +350,8 @@ namespace Wisplantern.Globals.GItems
                         SoundEngine.PlaySound(sound);
                         player.HeldItem.GetGlobalItem<BattleArtItem>().battleArt = battleArtItemBattleArt;
                     }
+                    NetMessage.SendData(MessageID.SyncPlayer, number: player.whoAmI);
+                    //NetMessage.SendData(MessageID.SyncItem, number: item.netID);
                 }
             }
         }

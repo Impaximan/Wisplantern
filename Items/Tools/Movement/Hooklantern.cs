@@ -142,8 +142,10 @@ namespace Wisplantern.Items.Tools.Movement
 
         public override void Kill(int timeLeft)
         {
+            Projectile.netUpdate = true;
+            NetMessage.SendData(MessageID.KillProjectile, number: Projectile.whoAmI);
             Wisplantern.freezeFrames = 5;
-            SoundEngine.PlaySound(SoundID.DD2_WitherBeastDeath);
+            SoundEngine.PlaySound(SoundID.DD2_WitherBeastDeath, Projectile.Center);
             if (Main.netMode != NetmodeID.Server)
             {
                 for (int i = 0; i < Main.rand.Next(25, 35); i++)

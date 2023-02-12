@@ -73,6 +73,7 @@ namespace Wisplantern.BattleArts
             player.immuneTime = 60;
             player.immune = true;
             player.noFallDmg = true;
+            NetMessage.SendData(MessageID.SyncNPC, number: target.whoAmI);
         }
 
         public override void PostUpdatePlayer(Player player)

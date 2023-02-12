@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Wisplantern
@@ -23,6 +24,11 @@ namespace Wisplantern
         {
             if (Wisplantern.freezeFrames > 0)
             {
+                if (Main.netMode != NetmodeID.SinglePlayer)
+                {
+                    Wisplantern.freezeFrames = 0;
+                    orig(self, ref gameTime);
+                }
                 Wisplantern.freezeFrames--;
             }
             else

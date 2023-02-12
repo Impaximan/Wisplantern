@@ -82,6 +82,7 @@ namespace Wisplantern.BattleArts
                 {
                     npc.StrikeNPC(Player.HeldItem.damage * 3, 8f, (int)(npc.Center.X - Player.Center.X), true, false, false);
                     npc.netUpdate = true;
+                    NetMessage.SendData(MessageID.DamageNPC, number: npc.whoAmI, number2: Player.HeldItem.damage * 3, number3: 8f, number4: (int)(npc.Center.X - Player.Center.X), number5: 1);
                 }
             }
             SoundEngine.PlaySound(new SoundStyle("Wisplantern/Sounds/Effects/HeavyMetal"), Player.Center);
