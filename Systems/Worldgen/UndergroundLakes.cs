@@ -22,16 +22,16 @@ namespace Wisplantern.Systems.Worldgen
             lakes.Clear();
         }
 
-        public override void ModifyWorldGenTasks(List<GenPass> tasks, ref float totalWeight)
-        {
-            int genIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Jungle"));
-            tasks.Insert(genIndex + 1, new PassLegacy("Canyon", delegate (GenerationProgress progress, GameConfiguration config)
-            {
-                progress.Message = "Underground lakes";
+        //public override void ModifyWorldGenTasks(List<GenPass> tasks, ref float totalWeight)
+        //{
+        //    int genIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Jungle"));
+        //    tasks.Insert(genIndex + 1, new PassLegacy("Canyon", delegate (GenerationProgress progress, GameConfiguration config)
+        //    {
+        //        progress.Message = "Underground lakes";
 
-                GenerateLakes();
-            }));
-        }
+        //        GenerateLakes();
+        //    }));
+        //}
 
         public void GenerateLakes()
         {

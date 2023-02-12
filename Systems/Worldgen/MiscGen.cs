@@ -48,7 +48,7 @@ namespace Wisplantern.Systems.Worldgen
 
             tasks.Insert(genIndex + 1, new PassLegacy("Mountain Shinies", delegate (GenerationProgress progress, GameConfiguration config)
             {
-                progress.Message = "Mountain Shines";
+                progress.Message = "Mountain Shinies";
                 foreach (Tuple<Point, int> ore in oresToPlace)
                 {
                     WorldGen.PlaceTile(ore.Item1.X, ore.Item1.Y, ore.Item2, true, false);
@@ -322,7 +322,7 @@ namespace Wisplantern.Systems.Worldgen
                                 int rI = position.X + i;
                                 int rJ = position.Y + j;
                                 rI += (int)(7f * noise1.GetNoise((position.Y + j) * 3f, 0f));
-                                WorldGen.PlaceTile(rI, rJ, TileID.Stone);
+                                WorldGen.PlaceTile(rI, rJ, TileID.Stone, true, false);
                             }
                         }
                         break;
@@ -575,7 +575,6 @@ namespace Wisplantern.Systems.Worldgen
                                         if (dirtNoise.GetNoise(i * 5f, j * 5f) > 0.5f)
                                         {
                                             type = soilType;
-                                            if (type == TileID.Mud && WispUtils.TileCanBeGrass(rI, rJ)) type = TileID.JungleGrass;
                                             if (shouldBeSnow) type = iceType;
                                         }
                                         WorldGen.PlaceTile(rI, rJ, type, true, false);
@@ -595,12 +594,12 @@ namespace Wisplantern.Systems.Worldgen
                                     if (wallNoise2.GetNoise(i * 3f + 1000f, j * 3f + 1000f) > 0f)
                                     {
                                         if (!shouldBeSnow) WorldGen.PlaceWall(rI, rJ, soilWall1);
-                                        else WorldGen.PlaceWall(rI, rJ, snowWall);
+                                        else WorldGen.PlaceWall(rI, rJ, snowWall, true);
                                     }
                                     else
                                     {
                                         if (!shouldBeSnow) WorldGen.PlaceWall(rI, rJ, soilWall2);
-                                        else WorldGen.PlaceWall(rI, rJ, iceWall);
+                                        else WorldGen.PlaceWall(rI, rJ, iceWall, true);
                                     }
                                 }
                                 else
@@ -608,12 +607,12 @@ namespace Wisplantern.Systems.Worldgen
                                     if (wallNoise2.GetNoise(i * 5f, j * 5f) > 0f)
                                     {
                                         if (!shouldBeSnow) WorldGen.PlaceWall(rI, rJ, rockWall1);
-                                        else WorldGen.PlaceWall(rI, rJ, snowWall);
+                                        else WorldGen.PlaceWall(rI, rJ, snowWall, true);
                                     }
                                     else
                                     {
                                         if (!shouldBeSnow) WorldGen.PlaceWall(rI, rJ, rockWall2);
-                                        else WorldGen.PlaceWall(rI, rJ, iceWall);
+                                        else WorldGen.PlaceWall(rI, rJ, iceWall, true);
                                     }
                                 }
                             }

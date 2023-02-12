@@ -5,6 +5,8 @@ namespace Wisplantern.Items.BattleArtItems
 {
     class TriCast : ModItem
     {
+        public override string Texture => "Wisplantern/Items/BattleArtItems/Magic";
+
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Tri-Cast");

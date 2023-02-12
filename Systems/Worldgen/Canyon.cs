@@ -198,7 +198,7 @@ namespace Wisplantern.Systems.Worldgen
                     {
                         for (int i = -(int)(spikeSizeX * (1f - Math.Abs(j)) + Main.rand.Next(spikeSizeX / 2)); i < 0; i++)
                         {
-                            WorldGen.PlaceTile(position.X + i, (int)(position.Y + spikeSizeY * j * 0.5f), type, false, false);
+                            WorldGen.PlaceTile(position.X + i, (int)(position.Y + spikeSizeY * j * 0.5f), type, true, false);
                         }
                     }
                 }
@@ -216,7 +216,7 @@ namespace Wisplantern.Systems.Worldgen
                     {
                         for (int i = (int)(spikeSizeX * (1f - Math.Abs(j)) + Main.rand.Next(spikeSizeX / 2)); i > 0; i--)
                         {
-                            WorldGen.PlaceTile(position.X + i, (int)(position.Y + spikeSizeY * j * 0.5f), type, false, false);
+                            WorldGen.PlaceTile(position.X + i, (int)(position.Y + spikeSizeY * j * 0.5f), type, true, false);
                         }
                     }
                 }
