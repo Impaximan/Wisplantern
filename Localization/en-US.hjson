@@ -3,6 +3,10 @@ Mods: {
 	Wisplantern: {
 		InfoDisplays.LuckIndicator.DisplayName: Luck
 
+		DamageClassName: {
+			ManipulativeMagic: manipulative damage
+		}
+
 		Projectiles: {
 			BloodySlashProjectile.DisplayName: Bloody Slash Projectile
 			WispcasterBobber.DisplayName: Wispcaster Bobber

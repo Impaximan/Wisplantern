@@ -8,6 +8,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Wisplantern.Globals.GItems;
 using Terraria.GameContent.Creative;
+using Wisplantern.Globals.GNPCs;
 
 namespace Wisplantern
 {
@@ -206,6 +207,54 @@ namespace Wisplantern
             item.GetGlobalItem<BattleArtItem>().battleArtItemBattleArt = battleArt;
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[item.type] = 1;
             item.maxStack = 20;
+        }
+
+        public static void Aggravate(this NPC npc, float amount, int damage, float knockback, int critChance, Player player, bool combatText = true)
+        {
+            InfightingNPC iNPC = npc.GetGlobalNPC<InfightingNPC>();
+            amount = amount * 100 / npc.life;
+            if (npc.HasBuff(BuffID.Confused))
+            {
+                amount *= 1.5f;
+            }
+            if (amount > 1f)
+            {
+                amount = 1f;
+            }
+            if (!iNPC.aggravated)
+            {
+                iNPC.aggravation += amount;
+                CombatText.NewText(npc.getRect(), Color.MediumPurple * 0.5f, Math.Round((double)amount * 100, 1).ToString() + "%", false, false);
+            }
+            if (iNPC.aggravation >= 1f)
+            {
+                if (!iNPC.aggravated)
+                {
+                    CombatText.NewText(npc.getRect(), Color.MediumPurple, "Aggravated!", true, false);
+                    SoundEngine.PlaySound(SoundID.Item113, npc.Center);
+                }
+                iNPC.aggravation = 1f;
+                iNPC.aggravated = true;
+                iNPC.infightPlayer = player.whoAmI;
+                iNPC.infightCritChance = critChance;
+                iNPC.infightDamage = damage;
+                iNPC.infightKnockback = knockback;
+            }
+        }
+
+        public static void Aggravate(this NPC npc, Item item, Player player)
+        {
+            item.AggravateNPC(npc, player);
+        }
+
+        public static void AggravateNPC(this Item item, NPC npc, Player player)
+        {
+            npc.Aggravate(item.GetGlobalItem<AggravatingItem>().manipulativePower, player.GetWeaponDamage(item), player.GetWeaponKnockback(item), player.GetWeaponCrit(item), player);
+        }
+
+        public static void SetManipulativePower(this Item item, float amount)
+        {
+            item.GetGlobalItem<AggravatingItem>().manipulativePower = amount;
         }
     }
 }

@@ -10,8 +10,6 @@ using Microsoft.Xna.Framework.Input;
 using Terraria.DataStructures;
 using Terraria.Audio;
 using System.IO;
-using Terraria.IO;
-using Terraria.Localization;
 
 namespace Wisplantern.Globals.GItems
 {

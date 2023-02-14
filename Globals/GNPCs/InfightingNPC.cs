@@ -9,9 +9,11 @@ namespace Wisplantern.Globals.GNPCs
     class InfightingNPC : GlobalNPC
     {
         public bool aggravated = false;
+        public float aggravation = 0f;
         public int infightDamage = 10;
         public float infightKnockback = 3f;
         public int infightCritChance = 4;
+        public int infightPlayer = 0;
 
         /// <summary>
         /// How many infighting iframes this enemy gives other enemies on hit.
@@ -44,13 +46,14 @@ namespace Wisplantern.Globals.GNPCs
 
         public override void OnSpawn(NPC npc, IEntitySource source)
         {
-
+            aggravation = 0f;
         }
 
         NPC targetNPC = null;
         Vector2? originalPlayerPosition = null;
         int ogTarget = 0;
         bool shouldTeleportBack = false;
+        int timeUntilCountdown = 0;
 
         public override bool PreAI(NPC npc)
         {
@@ -65,9 +68,21 @@ namespace Wisplantern.Globals.GNPCs
                     shouldTeleportBack = true;
                 }
             }
+            else
+            {
+                timeUntilCountdown = 60;
+            }
             return base.PreAI(npc);
         }
 
+        public override void OnKill(NPC npc)
+        {
+            if (targetNPC != null && originalPlayerPosition.HasValue && shouldTeleportBack)
+            {
+                Main.player[ogTarget].position = originalPlayerPosition.Value;
+                shouldTeleportBack = false;
+            }
+        }
 
         public override void PostAI(NPC npc)
         {
@@ -83,8 +98,25 @@ namespace Wisplantern.Globals.GNPCs
                 {
                     if (target.active && target.whoAmI != npc.whoAmI && target.Hitbox.Intersects(npc.Hitbox) && target.GetGlobalNPC<InfightingNPC>().infightIframes <= 0)
                     {
-                        target.StrikeNPC(infightDamage, infightKnockback, Math.Sign(target.Center.X - npc.Center.X), Main.rand.NextBool(infightCritChance, 100));
+                        int damage = Main.DamageVar(infightDamage, Main.player[infightPlayer].luck);
+                        int struckDamage = (int)target.StrikeNPC(damage, infightKnockback, Math.Sign(target.Center.X - npc.Center.X), Main.rand.NextBool(infightCritChance, 100));
+                        Main.player[infightPlayer].addDPS(struckDamage);
                         target.GetGlobalNPC<InfightingNPC>().infightIframes = infightGivenIframes;
+                    }
+                }
+
+                if (timeUntilCountdown > 0)
+                {
+                    timeUntilCountdown--;
+                }
+                else
+                {
+                    aggravation -= 1f / 540f;
+                    if (aggravation <= 0f)
+                    {
+                        aggravation = 0f;
+                        aggravated = false;
+                        CombatText.NewText(npc.getRect(), Color.MediumPurple * 0.5f, "Calmed down...", false, true);
                     }
                 }
             }
