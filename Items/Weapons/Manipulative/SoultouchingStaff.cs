@@ -34,7 +34,6 @@ namespace Wisplantern.Items.Weapons.Manipulative
             Item.height = 42;
             Item.useTime = 20;
             Item.useAnimation = 20;
-            Item.mana = 3;
             Item.noMelee = true;
             Item.knockBack = 3f;
             Item.rare = ItemRarityID.Blue;
