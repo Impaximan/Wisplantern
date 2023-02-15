@@ -25,23 +25,65 @@ namespace Wisplantern.Globals.GNPCs
         /// </summary>
         public int infightIframes = 0;
 
+        public bool decoy = false;
+
         public override bool InstancePerEntity => true;
 
         public NPC GetNPCTarget(NPC me)
         {
             NPC target = null;
-            float distance = Main.player[me.target].Distance(me.Center);
+            float distance = Main.player[me.target].Distance(me.Center) * 1.5f;
+            float decoyDistance = Main.player[me.target].Distance(me.Center) * 2f;
 
             foreach (NPC npc in Main.npc)
             {
-                if (npc.active && npc.Distance(me.Center) < distance && npc.whoAmI != me.whoAmI && !npc.dontTakeDamage)
+                bool prioritize = npc.Distance(me.Center) < distance;
+                if (npc.TryGetGlobalNPC(out InfightingNPC result))
+                {
+                    if (result.decoy && npc.Distance(me.Center) < decoyDistance) prioritize = true;
+                }
+                if (npc.active && prioritize && npc.whoAmI != me.whoAmI && !npc.dontTakeDamage)
                 {
                     target = npc;
                     distance = npc.Distance(me.Center);
+                    if (result.decoy)
+                    {
+                        decoyDistance = distance;
+                    }
                 }
             }
 
             return target;
+        }
+
+        public bool CanSeeTarget(NPC me, NPC other)
+        {
+            if (me.noTileCollide)
+            {
+                return true;
+            }
+            else if (Collision.CanHitLine(me.Center, 1, 1, other.Center, 1, 1))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool AnyVisibleDecoys(NPC me)
+        {
+            float distance = Main.player[me.target].Distance(me.Center);
+
+            foreach (NPC npc in Main.npc)
+            {
+                if (npc.TryGetGlobalNPC(out InfightingNPC result))
+                {
+                    if (npc.active && npc.Distance(me.Center) < distance && npc.whoAmI != me.whoAmI && !npc.dontTakeDamage && result.decoy)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         public override void OnSpawn(NPC npc, IEntitySource source)
@@ -57,8 +99,12 @@ namespace Wisplantern.Globals.GNPCs
 
         public override bool PreAI(NPC npc)
         {
-            if (aggravated)
+            if (aggravated || AnyVisibleDecoys(npc))
             {
+                if (npc.aiStyle == 1 && npc.life == npc.lifeMax)
+                {
+                    npc.life--;
+                }
                 targetNPC = GetNPCTarget(npc);
                 if (targetNPC != null && npc.target != 255)
                 {
@@ -96,7 +142,7 @@ namespace Wisplantern.Globals.GNPCs
             {
                 foreach (NPC target in Main.npc)
                 {
-                    if (target.active && target.whoAmI != npc.whoAmI && target.Hitbox.Intersects(npc.Hitbox) && target.GetGlobalNPC<InfightingNPC>().infightIframes <= 0)
+                    if (target.active && target.whoAmI != npc.whoAmI && target.Hitbox.Intersects(npc.Hitbox) && target.GetGlobalNPC<InfightingNPC>().infightIframes <= 0 && !target.friendly)
                     {
                         int damage = Main.DamageVar(infightDamage, Main.player[infightPlayer].luck);
                         int struckDamage = (int)target.StrikeNPC(damage, infightKnockback, Math.Sign(target.Center.X - npc.Center.X), Main.rand.NextBool(infightCritChance, 100));

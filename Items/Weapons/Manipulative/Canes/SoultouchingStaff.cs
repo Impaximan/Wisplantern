@@ -5,7 +5,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.GameContent.Creative;
 
-namespace Wisplantern.Items.Weapons.Manipulative
+namespace Wisplantern.Items.Weapons.Manipulative.Canes
 {
     class SoultouchingStaff : ModItem
     {

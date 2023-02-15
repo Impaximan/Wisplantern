@@ -22,13 +22,13 @@ namespace Wisplantern.Globals.GItems
                     TooltipLine powerLine = new TooltipLine(Mod, "ManipulativePower", Math.Round(manipulativePower * 100f, 1).ToString() + "% manipulative power");
                     tooltips.Insert(index + 1, powerLine);
                 }
-                index = tooltips.FindIndex(x => x.Name == "ItemName" && x.Mod == "Terraria");
-                if (index != -1)
-                {
-                    TooltipLine manipLine = new TooltipLine(Mod, "ManipulativeWeapon", "-Manipulative Weapon-");
-                    manipLine.OverrideColor = Color.MediumPurple;
-                    tooltips.Insert(index + 1, manipLine);
-                }
+                //index = tooltips.FindIndex(x => x.Name == "ItemName" && x.Mod == "Terraria");
+                //if (index != -1)
+                //{
+                //    TooltipLine manipLine = new TooltipLine(Mod, "ManipulativeWeapon", "-Manipulator Class-");
+                //    manipLine.OverrideColor = Color.MediumPurple;
+                //    tooltips.Insert(index + 1, manipLine);
+                //}
             }
         }
     }

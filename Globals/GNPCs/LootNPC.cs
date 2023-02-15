@@ -11,17 +11,17 @@ namespace Wisplantern.Globals.GNPCs
         {
             if (NPCID.Sets.Skeletons[npc.type])
             {
-                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Items.Weapons.Manipulative.SoultouchingStaff>(), 50));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Items.Weapons.Manipulative.Canes.SoultouchingStaff>(), 50));
             }
 
             if (NPCID.Sets.Zombies[npc.type])
             {
-                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Items.Weapons.Manipulative.SoultouchingStaff>(), 75));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Items.Weapons.Manipulative.Canes.SoultouchingStaff>(), 75));
             }
 
             if (NPCID.Sets.DemonEyes[npc.type])
             {
-                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Items.Weapons.Manipulative.SoultouchingStaff>(), 100));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Items.Weapons.Manipulative.Canes.SoultouchingStaff>(), 100));
             }
         }
     }
