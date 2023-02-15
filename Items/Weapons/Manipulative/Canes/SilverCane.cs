@@ -7,7 +7,7 @@ using Terraria.GameContent.Creative;
 
 namespace Wisplantern.Items.Weapons.Manipulative.Canes
 {
-    class WoodenCane : CaneWeapon
+    class SilverCane : CaneWeapon
     {
         public override void SetStaticDefaults()
         {
@@ -17,26 +17,26 @@ namespace Wisplantern.Items.Weapons.Manipulative.Canes
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddRecipeGroup(RecipeGroupID.Wood, 11)
-                .AddTile(TileID.WorkBenches)
+                .AddIngredient(ItemID.SilverBar, 10)
+                .AddTile(TileID.Anvils)
                 .Register();
         }
 
         public override void CaneSetDefaults()
         {
-            Item.damage = 6;
+            Item.damage = 10;
+            Item.SetManipulativePower(0.095f);
             Item.DamageType = ModContent.GetInstance<DamageClasses.Manipulative>();
             Item.width = 40;
             Item.height = 40;
-            Item.useTime = 35;
-            Item.useAnimation = 35;
+            Item.useTime = 25;
+            Item.useAnimation = 25;
             Item.rare = ItemRarityID.White;
             Item.value = Item.sellPrice(0, 0, 0, 25);
-            Item.SetManipulativePower(0.08f);
         }
 
-        public override float MaxDistance => 225f;
+        public override float MaxDistance => 255f;
 
-        public override int DustType => DustID.WoodFurniture;
+        public override int DustType => DustID.Silver;
     }
 }

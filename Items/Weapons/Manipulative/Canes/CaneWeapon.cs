@@ -1,0 +1,79 @@
+﻿using Microsoft.Xna.Framework;
+using Terraria;
+using Terraria.DataStructures;
+using Terraria.ID;
+using Terraria.ModLoader;
+using Terraria.Audio;
+using Terraria.GameContent.Creative;
+
+namespace Wisplantern.Items.Weapons.Manipulative.Canes
+{
+    abstract class CaneWeapon : ModItem
+    {
+
+        /// <summary>
+        /// Don't override this for canes, use CaneSetDefaults instead.
+        /// Automatically sets useStyle, shoot, noMelee, knockBack, UseSound, autoReuse, and shootSpeed.
+        /// </summary>
+        public override void SetDefaults()
+        {
+            Item.useStyle = ItemUseStyleID.Swing;
+            Item.shoot = 1;
+            Item.noMelee = true;
+            Item.knockBack = 3f;
+            Item.UseSound = SoundID.Item152;
+            Item.autoReuse = true;
+            Item.shootSpeed = 1f;
+            CaneSetDefaults();
+        }
+
+        /// <summary>
+        /// You know how it is.
+        /// </summary>
+        public virtual void CaneSetDefaults()
+        {
+
+        }
+
+        /// <summary>
+        /// The radius of the cane's effect.
+        /// </summary>
+        public virtual float MaxDistance => 225f;
+
+        /// <summary>
+        /// The type of dust used to show the cane's effect.
+        /// </summary>
+        public virtual int DustType => DustID.PurpleTorch;
+
+        /// <summary>
+        /// Don't override this for canes.
+        /// </summary>
+        /// <param name="player"></param>
+        /// <param name="source"></param>
+        /// <param name="position"></param>
+        /// <param name="velocity"></param>
+        /// <param name="type"></param>
+        /// <param name="damage"></param>
+        /// <param name="knockback"></param>
+        /// <returns></returns>
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
+            foreach (NPC npc in Main.npc)
+            {
+                if (npc.active && !npc.friendly && npc.Distance(player.Center) <= MaxDistance)
+                {
+                    Item.AggravateNPC(npc, player);
+                }
+            }
+            for (int i = 0; i < 150; i++)
+            {
+                Vector2 dustPos = Main.rand.NextVector2CircularEdge(MaxDistance, MaxDistance) + player.Center;
+                Dust dust = Dust.NewDustPerfect(dustPos, DustType, player.velocity);
+                dust.noGravity = true;
+                dust.noLight = true;
+            }
+            SoundEngine.PlaySound(SoundID.Item8, player.Center);
+            return false;
+        }
+    }
+}
