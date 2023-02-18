@@ -62,18 +62,28 @@ namespace Wisplantern.Items.Weapons.Manipulative.Canes
             {
                 if (npc.active && !npc.friendly && npc.Distance(player.Center) <= MaxDistance)
                 {
-                    Item.AggravateNPC(npc, player);
+                     if (Item.AggravateNPC(npc, player)) OnAggravate(npc);
                 }
             }
             for (int i = 0; i < 150; i++)
             {
                 Vector2 dustPos = Main.rand.NextVector2CircularEdge(MaxDistance, MaxDistance) + player.Center;
-                Dust dust = Dust.NewDustPerfect(dustPos, DustType, player.velocity);
-                dust.noGravity = true;
-                dust.noLight = true;
+                if (!Collision.SolidCollision(dustPos + player.velocity * 8f, 1, 1) && !Collision.SolidCollision(dustPos, 1, 1))
+                {
+                    int dust = Dust.NewDust(dustPos, 0, 0, DustType);
+                    Main.dust[dust].velocity = player.velocity;
+                    Main.dust[dust].noGravity = true;
+                    Main.dust[dust].noLightEmittence = true;
+                    Main.dust[dust].noLight = true;
+                }
             }
             SoundEngine.PlaySound(SoundID.Item8, player.Center);
             return false;
+        }
+
+        public virtual void OnAggravate(NPC npc)
+        {
+
         }
     }
 }

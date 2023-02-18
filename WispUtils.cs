@@ -209,7 +209,18 @@ namespace Wisplantern
             item.maxStack = 20;
         }
 
-        public static void Aggravate(this NPC npc, float amount, int damage, float knockback, int critChance, Player player, bool combatText = true)
+        /// <summary>
+        /// Gradually aggravates this NPC. Returns true if the NPC was fully aggravated: otherwise, returns false.
+        /// </summary>
+        /// <param name="npc"></param>
+        /// <param name="amount"></param>
+        /// <param name="damage"></param>
+        /// <param name="knockback"></param>
+        /// <param name="critChance"></param>
+        /// <param name="player"></param>
+        /// <param name="combatText"></param>
+        /// <returns></returns>
+        public static bool Aggravate(this NPC npc, float amount, int damage, float knockback, int critChance, Player player, bool combatText = true)
         {
             InfightingNPC iNPC = npc.GetGlobalNPC<InfightingNPC>();
             amount = amount * 100 / npc.life;
@@ -239,17 +250,41 @@ namespace Wisplantern
                 iNPC.infightCritChance = critChance;
                 iNPC.infightDamage = damage;
                 iNPC.infightKnockback = knockback;
+                return true;
             }
+            return false;
         }
 
-        public static void Aggravate(this NPC npc, Item item, Player player)
+        /// <summary>
+        /// Gradually aggravates this NPC. Returns true if the NPC was fully aggravated: otherwise, returns false.
+        /// </summary>
+        /// <param name="npc"></param>
+        /// <param name="amount"></param>
+        /// <param name="damage"></param>
+        /// <param name="knockback"></param>
+        /// <param name="critChance"></param>
+        /// <param name="player"></param>
+        /// <param name="combatText"></param>
+        /// <returns></returns>
+        public static bool Aggravate(this NPC npc, Item item, Player player)
         {
-            item.AggravateNPC(npc, player);
+            return item.AggravateNPC(npc, player);
         }
 
-        public static void AggravateNPC(this Item item, NPC npc, Player player)
+        /// <summary>
+        /// Gradually aggravates an NPC. Returns true if the NPC was fully aggravated: otherwise, returns false.
+        /// </summary>
+        /// <param name="npc"></param>
+        /// <param name="amount"></param>
+        /// <param name="damage"></param>
+        /// <param name="knockback"></param>
+        /// <param name="critChance"></param>
+        /// <param name="player"></param>
+        /// <param name="combatText"></param>
+        /// <returns></returns>
+        public static bool AggravateNPC(this Item item, NPC npc, Player player)
         {
-            npc.Aggravate(item.GetGlobalItem<AggravatingItem>().manipulativePower, player.GetWeaponDamage(item), player.GetWeaponKnockback(item), player.GetWeaponCrit(item), player);
+            return npc.Aggravate(item.GetGlobalItem<AggravatingItem>().manipulativePower, player.GetWeaponDamage(item), player.GetWeaponKnockback(item), player.GetWeaponCrit(item), player);
         }
 
         public static void SetManipulativePower(this Item item, float amount)
