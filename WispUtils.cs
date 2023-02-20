@@ -9,6 +9,7 @@ using Terraria.ID;
 using Wisplantern.Globals.GItems;
 using Terraria.GameContent.Creative;
 using Wisplantern.Globals.GNPCs;
+using Wisplantern.ModPlayers;
 
 namespace Wisplantern
 {
@@ -290,6 +291,25 @@ namespace Wisplantern
         public static void SetManipulativePower(this Item item, float amount)
         {
             item.GetGlobalItem<AggravatingItem>().manipulativePower = amount;
+        }
+
+        public static void SmokeBomb(this Player player, int time)
+        {
+            player.GetModPlayer<ManipulativePlayer>().smokeBombTime = time;
+            player.SmokeBombEffect();
+        }
+
+        public static void SmokeBombEffect(this Player player)
+        {
+            SoundStyle style = SoundID.DoubleJump;
+            style.Pitch += 0.25f;
+            style.Volume *= 2f;
+            SoundEngine.PlaySound(style, player.Center);
+            for (int i = 0; i < 40; i++)
+            {
+                int d = Dust.NewDust(player.position, player.width, player.height, DustID.Smoke);
+                Main.dust[d].velocity += new Vector2(player.velocity.X, player.velocity.Y - Main.rand.Next(10));
+            }
         }
     }
 }

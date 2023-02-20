@@ -37,10 +37,10 @@ namespace Wisplantern.Globals.GNPCs
 
             foreach (NPC npc in Main.npc)
             {
-                bool prioritize = npc.Distance(me.Center) < distance;
+                bool prioritize = npc.Distance(me.Center) < distance || Main.player[me.target].GetModPlayer<ModPlayers.ManipulativePlayer>().smokeBombTime > 0;
                 if (npc.TryGetGlobalNPC(out InfightingNPC result))
                 {
-                    if (result.decoy && npc.Distance(me.Center) < decoyDistance) prioritize = true;
+                    if (result.decoy && (npc.Distance(me.Center) < decoyDistance || Main.player[me.target].GetModPlayer<ModPlayers.ManipulativePlayer>().smokeBombTime > 0)) prioritize = true;
                 }
                 if (npc.active && prioritize && npc.whoAmI != me.whoAmI && !npc.dontTakeDamage)
                 {
@@ -101,7 +101,7 @@ namespace Wisplantern.Globals.GNPCs
         {
             if (aggravated || AnyVisibleDecoys(npc))
             {
-                if (npc.aiStyle == 1 && npc.life == npc.lifeMax)
+                if (npc.aiStyle == 1 && npc.life == npc.lifeMax && aggravated)
                 {
                     npc.life--;
                 }

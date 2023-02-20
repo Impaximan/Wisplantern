@@ -405,7 +405,7 @@ namespace Wisplantern.Globals.GItems
                 tooltips.Add(line5);
             }
 
-            if (!CanGetBattleArt(item, Main.player[Main.myPlayer]))
+            if (!CanGetBattleArt(item, Main.player[Main.myPlayer]) && !item.consumable)
             {
                 TooltipLine noBattleArtLine = new TooltipLine(Mod, "NoBattleArt", "Cannot be given a battle art");
                 noBattleArtLine.IsModifier = true;
