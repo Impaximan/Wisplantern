@@ -16,6 +16,7 @@ namespace Wisplantern.ID
                 BloodySlash => new BloodySlash(),
                 Siphon => new Siphon(),
                 RadialCast => new RadialCast(),
+                ExtendedSmokeBomb => new ExtendedSmokeBomb(),
                 _ => new None()
             };
         }
@@ -28,5 +29,6 @@ namespace Wisplantern.ID
         public const int BloodySlash = 5;
         public const int Siphon = 6;
         public const int RadialCast = 7;
+        public const int ExtendedSmokeBomb = 8;
     }
 }

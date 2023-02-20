@@ -23,6 +23,7 @@ namespace Wisplantern.Systems.Worldgen
                     ModContent.ItemType<TriCast>(),
                     ModContent.ItemType<Siphon>(),
                     ModContent.ItemType<RadialCast>(),
+                    ModContent.ItemType<ExtendedSmokeBomb>(),
                 };
 
                 if (chest != null)

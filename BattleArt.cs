@@ -35,7 +35,9 @@ namespace Wisplantern
                 BattleArtType.Ranged => item.DamageType == DamageClass.Ranged,
                 BattleArtType.Magic => item.DamageType == DamageClass.Magic,
                 BattleArtType.Summon => item.DamageType == DamageClass.Summon,
+                BattleArtType.Manipulative => item.DamageType is DamageClasses.Manipulative,
                 BattleArtType.Whip => item.DamageType == DamageClass.SummonMeleeSpeed,
+                BattleArtType.Cane => item.DamageType is DamageClasses.Manipulative && item.useStyle == ItemUseStyleID.Swing,
                 _ => true,
             };
         }
@@ -58,8 +60,10 @@ namespace Wisplantern
                 BattleArtType.Melee => "melee weapons",
                 BattleArtType.Ranged => "ranged weapons",
                 BattleArtType.Magic => "magic weapons",
-                BattleArtType.Summon => "summoner weapons",
+                BattleArtType.Summon => "summoning weapons",
+                BattleArtType.Manipulative => "manipulative weapons",
                 BattleArtType.Whip => "whips",
+                BattleArtType.Cane => "canes",
                 _ => "anything",
             };
         }
@@ -215,6 +219,8 @@ namespace Wisplantern
         Ranged = 8,
         Magic = 9,
         Summon = 10,
-        Whip = 11
+        Manipulative = 11,
+        Whip = 12,
+        Cane = 13
     }
 }
