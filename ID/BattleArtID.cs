@@ -17,6 +17,7 @@ namespace Wisplantern.ID
                 Siphon => new Siphon(),
                 RadialCast => new RadialCast(),
                 ExtendedSmokeBomb => new ExtendedSmokeBomb(),
+                FinishOff => new FinishOff(),
                 _ => new None()
             };
         }
@@ -30,5 +31,6 @@ namespace Wisplantern.ID
         public const int Siphon = 6;
         public const int RadialCast = 7;
         public const int ExtendedSmokeBomb = 8;
+        public const int FinishOff = 9;
     }
 }

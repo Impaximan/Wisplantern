@@ -33,11 +33,12 @@ namespace Wisplantern.Globals.GNPCs
         {
             NPC target = null;
             float distance = Main.player[me.target].Distance(me.Center) * 1.5f;
-            float decoyDistance = Main.player[me.target].Distance(me.Center) * 2f;
+            float decoyDistance = Main.player[me.target].Distance(me.Center) * 1.5f;
+            bool foundDecoy = false;
 
             foreach (NPC npc in Main.npc)
             {
-                bool prioritize = npc.Distance(me.Center) < distance || Main.player[me.target].GetModPlayer<ModPlayers.ManipulativePlayer>().smokeBombTime > 0;
+                bool prioritize = (npc.Distance(me.Center) < distance || Main.player[me.target].GetModPlayer<ModPlayers.ManipulativePlayer>().smokeBombTime > 0) && !foundDecoy;
                 if (npc.TryGetGlobalNPC(out InfightingNPC result))
                 {
                     if (result.decoy && (npc.Distance(me.Center) < decoyDistance || Main.player[me.target].GetModPlayer<ModPlayers.ManipulativePlayer>().smokeBombTime > 0)) prioritize = true;
@@ -48,6 +49,7 @@ namespace Wisplantern.Globals.GNPCs
                     distance = npc.Distance(me.Center);
                     if (result.decoy)
                     {
+                        foundDecoy = true;
                         decoyDistance = distance;
                     }
                 }

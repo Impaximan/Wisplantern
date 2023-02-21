@@ -24,6 +24,7 @@ namespace Wisplantern.Systems.Worldgen
                     ModContent.ItemType<Siphon>(),
                     ModContent.ItemType<RadialCast>(),
                     ModContent.ItemType<ExtendedSmokeBomb>(),
+                    ModContent.ItemType<FinishOff>(),
                 };
 
                 if (chest != null)
@@ -37,6 +38,18 @@ namespace Wisplantern.Systems.Worldgen
                                 if (chest.item[inventoryIndex].type == ItemID.None)
                                 {
                                     chest.item[inventoryIndex].SetDefaults(ModContent.ItemType<Items.Weapons.Melee.Swords.WeatheredSledgehammer>());
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (WorldGen.genRand.NextBool(4))
+                        {
+                            for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)
+                            {
+                                if (chest.item[inventoryIndex].type == ItemID.None)
+                                {
+                                    chest.item[inventoryIndex].SetDefaults(ModContent.ItemType<Items.Weapons.Manipulative.Decoys.BouncyDummy>());
                                     break;
                                 }
                             }
@@ -75,6 +88,18 @@ namespace Wisplantern.Systems.Worldgen
                             {
                                 if (chest.item[inventoryIndex].type == ItemID.None)
                                 {
+                                    chest.item[inventoryIndex].SetDefaults(ModContent.ItemType<Items.Weapons.Manipulative.Decoys.BouncyDummy>());
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (WorldGen.genRand.NextBool(4))
+                        {
+                            for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)
+                            {
+                                if (chest.item[inventoryIndex].type == ItemID.None)
+                                {
                                     chest.item[inventoryIndex].SetDefaults(Main.rand.Next(availableBattleArts));
                                     break;
                                 }
@@ -91,6 +116,18 @@ namespace Wisplantern.Systems.Worldgen
                                 if (chest.item[inventoryIndex].type == ItemID.None)
                                 {
                                     chest.item[inventoryIndex].SetDefaults(ModContent.ItemType<Items.Weapons.Melee.Swords.WeatheredSledgehammer>());
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (WorldGen.genRand.NextBool(4))
+                        {
+                            for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)
+                            {
+                                if (chest.item[inventoryIndex].type == ItemID.None)
+                                {
+                                    chest.item[inventoryIndex].SetDefaults(ModContent.ItemType<Items.Weapons.Manipulative.Decoys.BouncyDummy>());
                                     break;
                                 }
                             }
@@ -129,6 +166,18 @@ namespace Wisplantern.Systems.Worldgen
                             {
                                 if (chest.item[inventoryIndex].type == ItemID.None)
                                 {
+                                    chest.item[inventoryIndex].SetDefaults(ModContent.ItemType<Items.Weapons.Manipulative.Decoys.BouncyDummy>());
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (WorldGen.genRand.NextBool(4))
+                        {
+                            for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)
+                            {
+                                if (chest.item[inventoryIndex].type == ItemID.None)
+                                {
                                     chest.item[inventoryIndex].SetDefaults(Main.rand.Next(availableBattleArts));
                                     break;
                                 }
@@ -145,6 +194,18 @@ namespace Wisplantern.Systems.Worldgen
                                 if (chest.item[inventoryIndex].type == ItemID.None)
                                 {
                                     chest.item[inventoryIndex].SetDefaults(ModContent.ItemType<Items.Weapons.Melee.Swords.WeatheredSledgehammer>());
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (WorldGen.genRand.NextBool(4))
+                        {
+                            for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)
+                            {
+                                if (chest.item[inventoryIndex].type == ItemID.None)
+                                {
+                                    chest.item[inventoryIndex].SetDefaults(ModContent.ItemType<Items.Weapons.Manipulative.Decoys.BouncyDummy>());
                                     break;
                                 }
                             }

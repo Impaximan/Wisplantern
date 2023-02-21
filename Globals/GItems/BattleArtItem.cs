@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using Terraria.DataStructures;
 using Terraria.Audio;
 using System.IO;
+using Microsoft.VisualBasic;
 
 namespace Wisplantern.Globals.GItems
 {
@@ -251,6 +252,14 @@ namespace Wisplantern.Globals.GItems
             if (ShouldApplyBattleArt(player))
             {
                 battleArt.OnHitNPC(item, player, target, damage, knockBack, crit);
+            }
+        }
+
+        public override void ModifyHitNPC(Item item, Player player, NPC target, ref int damage, ref float knockBack, ref bool crit)
+        {
+            if (ShouldApplyBattleArt(player))
+            {
+                battleArt.ModifyHitNPC(item, player, target, ref damage, ref knockBack, ref crit);
             }
         }
 

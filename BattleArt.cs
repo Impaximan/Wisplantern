@@ -69,6 +69,20 @@ namespace Wisplantern
         }
 
         /// <summary>
+        /// Same old same old, operates ther same as ModifyHitNPC in a global item.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="player"></param>
+        /// <param name="target"></param>
+        /// <param name="damage"></param>
+        /// <param name="knockBack"></param>
+        /// <param name="crit"></param>
+        public virtual void ModifyHitNPC(Item item, Player player, NPC target, ref int damage, ref float knockBack, ref bool crit)
+        {
+
+        }
+
+        /// <summary>
         /// Determines the logic for what weapons this can be applied to.
         /// Does nothing if you override CanBeAppliedToItem(Item item).
         /// </summary>

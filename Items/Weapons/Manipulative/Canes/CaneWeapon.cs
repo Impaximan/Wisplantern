@@ -19,7 +19,6 @@ namespace Wisplantern.Items.Weapons.Manipulative.Canes
         {
             Item.useStyle = ItemUseStyleID.Swing;
             Item.shoot = 1;
-            Item.noMelee = true;
             Item.knockBack = 3f;
             Item.UseSound = SoundID.Item152;
             Item.autoReuse = true;
@@ -33,6 +32,15 @@ namespace Wisplantern.Items.Weapons.Manipulative.Canes
         public virtual void CaneSetDefaults()
         {
 
+        }
+
+        public override bool? CanHitNPC(Player player, NPC target)
+        {
+            if (player.altFunctionUse == 2 && Item.GetGlobalItem<Globals.GItems.BattleArtItem>().battleArt is BattleArts.FinishOff)
+            {
+                return base.CanHitNPC(player, target);
+            }
+            return false;
         }
 
         /// <summary>
