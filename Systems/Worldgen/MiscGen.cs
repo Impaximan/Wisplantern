@@ -29,14 +29,16 @@ namespace Wisplantern.Systems.Worldgen
 
             tasks.Insert(genIndex + 1, new PassLegacy("Special Cave Shapes", delegate (GenerationProgress progress, GameConfiguration config)
             {
-                progress.Message = "Massive Caves";
+                progress.Message = "Generating massive caves";
                 LargeCaves();
 
+                progress.Message = "Creating sinkholes";
+                Sinkholes();
 
-                progress.Message = "Sine Caves";
+                progress.Message = "Sine caves";
                 SineCaves();
 
-                progress.Message = "Fissures from Hell";
+                progress.Message = "Erupting fissures from Hell";
                 FissuresFromHell();
 
             }));
@@ -281,14 +283,28 @@ namespace Wisplantern.Systems.Worldgen
 
         #region Surface Obstacles
 
-        void SurfaceObstacles()
+        void Sinkholes()
         {
-            int amount = 20;
+            int amount = Main.maxTilesX / 750;
 
             for (int a = 0; a < amount; a++)
             {
+                FastNoiseLite noise = new FastNoiseLite(WorldGen.genRand.Next(5000, 10000));
+                noise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
+                noise.SetFrequency(0.01f);
+                noise.SetFractalOctaves(5);
+                noise.SetFractalLacunarity(2f);
+                noise.SetFractalGain(0.5f);
+                noise.SetFractalPingPongStrength(2f);
+
+
                 int side = WorldGen.genRand.NextBool() ? 1 : -1;
                 Vector2 currentPosition = new Vector2(Main.maxTilesX / 2 + side * WorldGen.genRand.Next(0, Main.maxTilesX / 2 - 300), 100);
+                while (!(Main.tileSolid[Main.tile[(int)currentPosition.X, (int)currentPosition.Y].TileType] || currentPosition.Y >= Main.maxTilesY * 0.75f))
+                {
+                    currentPosition.Y++;
+                }
+
                 while (!WorldUtils.Find(currentPosition.ToPoint(), Searches.Chain(new Searches.Down(1), new GenCondition[]
                     {
         new Conditions.IsSolid()
@@ -297,34 +313,39 @@ namespace Wisplantern.Systems.Worldgen
                     currentPosition.Y++;
                 }
 
-
                 Point position = currentPosition.ToPoint();
+                float maxDistance = WorldGen.genRand.Next(30, 65);
+                position.Y += WorldGen.genRand.Next((int)maxDistance - 20);
 
-                FastNoiseLite noise1 = new FastNoiseLite(WorldGen.genRand.Next(5000, 10000));
-                noise1.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
-                noise1.SetFrequency(0.01f);
-                noise1.SetFractalOctaves(5);
-                noise1.SetFractalLacunarity(2f);
-                noise1.SetFractalGain(0.5f);
-                noise1.SetFractalPingPongStrength(2f);
+                bool hasLiquid = WorldGen.genRand.NextBool(3);
+                int liquidType = LiquidID.Water;
 
-                switch (WorldGen.genRand.Next(1))
+                for (int i = position.X - 100; i < position.X + 100; i++)
                 {
-                    case 0: //Stone pillars
-                        int height = 20;
-                        for (int i = -WorldGen.genRand.Next(3, 6); i < WorldGen.genRand.Next(3, 6); i++)
+                    if (i > 0 && i < Main.maxTilesX)
+                    {
+                        for (int j = position.Y - 100; j < position.Y + 100; j++)
                         {
-                            for (int j = -height + (int)(Math.Abs(i) * (2 + noise1.GetNoise((position.X + i) * 5f, 0f))); j < 4; j++)
+                            if (j > 0 && j < Main.maxTilesY)
                             {
-                                int rI = position.X + i;
-                                int rJ = position.Y + j;
-                                rI += (int)(7f * noise1.GetNoise((position.Y + j) * 3f, 0f));
-                                WorldGen.PlaceTile(rI, rJ, TileID.Stone, true, false);
+                                Point tilePos = new(i, j);
+                                float multAmount = WorldGen.genRand.Next(97, 104);
+                                Vector2 rotationPosition = position.ToVector2().DirectionTo(tilePos.ToVector2()) * multAmount;
+                                float distance = MathHelper.Lerp((noise.GetNoise(rotationPosition.X, rotationPosition.Y) + 1f) / 2f, 1f, 0.5f) * maxDistance;
+
+                                if (tilePos.ToVector2().Distance(position.ToVector2()) < distance)
+                                {
+                                    WorldGen.KillTile(i, j);
+
+                                    if (hasLiquid && WorldGen.genRand.NextBool(3, 5))
+                                    {
+                                        WorldGen.PlaceLiquid(i, j, (byte)liquidType, 255);
+                                    }
+                                }
                             }
                         }
-                        break;
+                    }
                 }
-
             }
         }
 
@@ -705,7 +726,7 @@ namespace Wisplantern.Systems.Worldgen
 
         void LargeCaves()
         {
-            int amount = Main.maxTilesX / 300;
+            int amount = Main.maxTilesX / 260;
 
             for (int a = 0; a < amount; a++)
             {

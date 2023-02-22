@@ -44,7 +44,7 @@ namespace Wisplantern.Systems.Worldgen
             }));
 
             genIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Shinies"));
-            tasks.Insert(genIndex + 1, new PassLegacy("CanyonOres", delegate (GenerationProgress progress, GameConfiguration config)
+            tasks.Insert(genIndex + 1, new PassLegacy("Canyon Ores", delegate (GenerationProgress progress, GameConfiguration config)
             {
                 progress.Message = "Heating up stones";
 
@@ -61,8 +61,15 @@ namespace Wisplantern.Systems.Worldgen
                     {
                         ores.Add(TileID.Demonite);
                     }
+                    ores.Add(WorldGen.SavedOreTiers.Gold);
 
-                    WorldGen.TileRunner(pos.X, pos.Y, WorldGen.genRand.Next(6, 10), 5, WorldGen.genRand.Next(ores), false, 0, 0, false, true);
+
+                    if (!(Main.tile[pos.X, pos.Y].TileType == TileID.Sand || Main.tile[pos.X, pos.Y].TileType == TileID.Sandstone || Main.tile[pos.X, pos.Y].TileType == TileID.HardenedSand ||
+                    Main.tile[pos.X, pos.Y].TileType == TileID.Ebonsand || Main.tile[pos.X, pos.Y].TileType == TileID.CorruptSandstone || Main.tile[pos.X, pos.Y].TileType == TileID.CorruptHardenedSand ||
+                    Main.tile[pos.X, pos.Y].TileType == TileID.Crimsand || Main.tile[pos.X, pos.Y].TileType == TileID.CrimsonSandstone || Main.tile[pos.X, pos.Y].TileType == TileID.CrimsonHardenedSand))
+                    {
+                        WorldGen.TileRunner(pos.X, pos.Y, WorldGen.genRand.Next(6, 10), 5, WorldGen.genRand.Next(ores), false, 0, 0, false, true);
+                    }
                 }
 
             }));
@@ -104,12 +111,7 @@ namespace Wisplantern.Systems.Worldgen
                     positionY++;
                 }
 
-
-                List<int> allowedTiles = new List<int>()
-                {
-                    TileID.Dirt, TileID.Grass
-                };
-                if (allowedTiles.Contains(Main.tile[positionX, positionY].TileType) && positionY > 200)
+                if (positionY > 200 && Main.tileSolid[Main.tile[positionX, positionY].TileType])
                 {
                     canGenHere = true;
                     break;
@@ -190,6 +192,10 @@ namespace Wisplantern.Systems.Worldgen
                 if (Main.tile[position.X, position.Y] != null && Main.tile[position.X, position.Y].HasTile && Main.tileSolid[Main.tile[position.X, position.Y].TileType])
                 {
                     int type = Main.tile[position.X, position.Y].TileType;
+                    if (type == TileID.Sand)
+                    {
+                        type = WorldGen.genRand.NextBool() ? TileID.HardenedSand : TileID.Sandstone;
+                    }
                     int spikeSizeY = WorldGen.genRand.Next(4, 11);
                     int spikeSizeX = (int)WorldGen.genRand.NextFloat(sizeXTop * 0.15f, sizeXTop * 0.35f);
 
