@@ -25,6 +25,7 @@ namespace Wisplantern.Systems.Worldgen
                     ModContent.ItemType<RadialCast>(),
                     ModContent.ItemType<ExtendedSmokeBomb>(),
                     ModContent.ItemType<FinishOff>(),
+                    ModContent.ItemType<FocusShot>(),
                 };
 
                 if (chest != null)
