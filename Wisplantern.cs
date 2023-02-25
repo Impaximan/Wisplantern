@@ -86,6 +86,7 @@ namespace Wisplantern
             ModContent.Request<SoundEffect>("Wisplantern/Sounds/Effects/Enchant1", AssetRequestMode.ImmediateLoad);
             ModContent.Request<SoundEffect>("Wisplantern/Sounds/Effects/Enchant2", AssetRequestMode.ImmediateLoad);
             ModContent.Request<SoundEffect>("Wisplantern/Sounds/Effects/Enchant3", AssetRequestMode.ImmediateLoad);
+            ModContent.Request<SoundEffect>("Wisplantern/Sounds/Effects/Gunfire5", AssetRequestMode.ImmediateLoad);
 
             wisplanternLoot.Add(ModContent.ItemType<Items.Equipable.Accessories.WispNecklace>());
             wisplanternLoot.Add(ModContent.ItemType<Items.Equipable.Accessories.WispRing>());

@@ -30,6 +30,7 @@ namespace Wisplantern
                 BattleArtType.Pick => item.useStyle == ItemUseStyleID.Swing && item.pick != 0,
                 BattleArtType.Hammer => item.useStyle == ItemUseStyleID.Swing && item.pick != 0,
                 BattleArtType.BowAndRepeater => item.useAmmo == AmmoID.Arrow,
+                BattleArtType.Gun => item.useAmmo == AmmoID.Bullet,
                 BattleArtType.MagicStaff => Item.staff[item.type],
                 BattleArtType.Melee => item.DamageType == DamageClass.Melee,
                 BattleArtType.Ranged => item.DamageType == DamageClass.Ranged,
@@ -56,6 +57,7 @@ namespace Wisplantern
                 BattleArtType.Pick => "pickaxes",
                 BattleArtType.Hammer => "hammers",
                 BattleArtType.BowAndRepeater => "bows and repeaters",
+                BattleArtType.Gun => "guns",
                 BattleArtType.MagicStaff => "magic staffs",
                 BattleArtType.Melee => "melee weapons",
                 BattleArtType.Ranged => "ranged weapons",
@@ -235,6 +237,7 @@ namespace Wisplantern
         Summon = 10,
         Manipulative = 11,
         Whip = 12,
-        Cane = 13
+        Cane = 13,
+        Gun = 14
     }
 }

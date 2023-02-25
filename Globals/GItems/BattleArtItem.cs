@@ -175,7 +175,7 @@ namespace Wisplantern.Globals.GItems
         }
 
         bool multiplayerShouldApplyBattleArt = false;
-        bool ShouldApplyBattleArt(Player player)
+        public bool ShouldApplyBattleArt(Player player)
         {
             if (player.whoAmI != Main.myPlayer && multiplayerShouldApplyBattleArt)
             {
