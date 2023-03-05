@@ -18,6 +18,7 @@ namespace Wisplantern.ID
                 RadialCast => new RadialCast(),
                 ExtendedSmokeBomb => new ExtendedSmokeBomb(),
                 FinishOff => new FinishOff(),
+                FocusShot => new FocusShot(),
                 _ => new None()
             };
         }
@@ -32,5 +33,6 @@ namespace Wisplantern.ID
         public const int RadialCast = 7;
         public const int ExtendedSmokeBomb = 8;
         public const int FinishOff = 9;
+        public const int FocusShot = 10;
     }
 }
