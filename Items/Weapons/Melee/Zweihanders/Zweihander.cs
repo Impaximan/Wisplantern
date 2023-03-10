@@ -19,10 +19,16 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 			SacrificeTotal = 1;
 		}
 
+		/// <summary>
+		/// Use this instead of SetDefaults() for Zweihanders.
+		/// </summary>
 		public virtual void ZweihanderDefaults()
 		{
 		}
 
+		/// <summary>
+		/// DON'T USE THIS FOR ZWEIHANDERS!!! Use ZweihanderDefaults() instead.
+		/// </summary>
         public override void SetDefaults()
 		{
 			Item.noMelee = false;
@@ -79,6 +85,9 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 		bool goneYet = false;
 		int perfectChargeTime = 0;
 		bool hasHitAlready = false;
+		public virtual bool HasSwungDust => false;
+		public virtual int SwungDustType => DustID.Torch;
+
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
 			rotation = velocity.ToRotation();
@@ -104,11 +113,24 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 				player.compositeFrontArm.rotation = rotation;
 				if (player.direction == 1) player.compositeFrontArm.rotation -= MathHelper.Pi;
 
+				swordRotationAdd += MathHelper.Pi / ((float)Item.useAnimation / player.GetWeaponAttackSpeed(Item));
+				rotation += MathHelper.Pi / ((float)Item.useAnimation / player.GetWeaponAttackSpeed(Item)) * player.direction;
+
 				player.itemRotation = rotation + swordRotationAdd * player.direction + MathHelper.ToRadians(player.direction == 1 ? -45 : -135);
 				player.itemLocation = player.Center + rotation.ToRotationVector2().RotatedBy(-90 * player.direction) * 12.5f + new Vector2(10, 0).RotatedBy(rotation);
 
-				swordRotationAdd += MathHelper.Pi / ((float)Item.useAnimation / player.GetWeaponAttackSpeed(Item));
-				rotation += MathHelper.Pi / ((float)Item.useAnimation / player.GetWeaponAttackSpeed(Item)) * player.direction;
+				if (perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f && HasSwungDust)
+				{
+					for (float i = 0f; i < 1f; i += 0.25f)
+					{
+						Vector2 dustPos = player.itemLocation + Item.Size.RotatedBy(rotation + swordRotationAdd * player.direction + MathHelper.Pi * 0.5f * player.direction + MathHelper.Pi * 0.75f - (MathHelper.Pi / ((float)Item.useAnimation / player.GetWeaponAttackSpeed(Item))) * i);
+						int num3 = Dust.NewDust(dustPos - new Vector2(5, 5), 10, 10, SwungDustType, 0f, 0f, 255, default(Color), (float)Main.rand.Next(20, 26) * 0.1f);
+						Main.dust[num3].noLight = true;
+						Main.dust[num3].noGravity = true;
+						Dust obj = Main.dust[num3];
+						obj.velocity *= 0.5f;
+					}
+				}
 			}
             else
 			{
