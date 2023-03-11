@@ -21,7 +21,7 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 			Item.width = 56;
 			Item.height = 56;
 			Item.damage = 19;
-			Item.shootSpeed = 7f;
+			Item.shootSpeed = 8.5f;
 			Item.rare = ItemRarityID.White;
 			Item.DamageType = DamageClass.Melee;
 		}
