@@ -73,7 +73,12 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 
 		public override bool? CanHitNPC(Player player, NPC target)
         {
-            return !target.friendly && target.Distance(player.itemLocation) < Item.Size.Length() && AngleDifference(player.DirectionTo(target.Center).ToRotation(), rotation + swordRotationAdd * player.direction) <= MathHelper.ToRadians(15f) && goneYet;
+			Vector2 closestPointOnHitbox = target.Hitbox.Center.ToVector2();
+			while (target.Hitbox.Contains((int)closestPointOnHitbox.X, (int)closestPointOnHitbox.Y))
+            {
+				closestPointOnHitbox += target.DirectionTo(player.itemLocation);
+            }
+            return !target.friendly && closestPointOnHitbox.Distance(player.itemLocation) < Item.Size.Length() && AngleDifference(player.DirectionTo(target.Center).ToRotation(), rotation + swordRotationAdd * player.direction) <= MathHelper.ToRadians(15f) && goneYet;
         }
 
         public virtual int DustType => DustID.Torch;
@@ -85,6 +90,7 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 		bool goneYet = false;
 		int perfectChargeTime = 0;
 		bool hasHitAlready = false;
+		float ogRotation = 0f;
 		public virtual bool HasSwungDust => false;
 		public virtual int SwungDustType => DustID.Torch;
 
@@ -121,14 +127,31 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 
 				if (perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f && HasSwungDust)
 				{
-					for (float i = 0f; i < 1f; i += 0.25f)
+					for (float i = 0f; i <= 1f; i += 0.25f)
 					{
-						Vector2 dustPos = player.itemLocation + Item.Size.RotatedBy(rotation + swordRotationAdd * player.direction + MathHelper.Pi * 0.5f * player.direction + MathHelper.Pi * 0.75f - (MathHelper.Pi / ((float)Item.useAnimation / player.GetWeaponAttackSpeed(Item))) * i);
+						float dRotation = rotation + swordRotationAdd * player.direction + MathHelper.Pi * 0.5f * player.direction + MathHelper.Pi * 0.75f - (MathHelper.Pi / ((float)Item.useAnimation / player.GetWeaponAttackSpeed(Item)) * player.direction) * i;
+						Vector2 dustPos = player.itemLocation + Item.Size.RotatedBy(dRotation);
 						int num3 = Dust.NewDust(dustPos - new Vector2(5, 5), 10, 10, SwungDustType, 0f, 0f, 255, default(Color), (float)Main.rand.Next(20, 26) * 0.1f);
 						Main.dust[num3].noLight = true;
 						Main.dust[num3].noGravity = true;
 						Dust obj = Main.dust[num3];
 						obj.velocity *= 0.5f;
+					}
+
+				}
+
+				if (perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f && player.GetModPlayer<Equipable.Accessories.FlintPlayer>().equipped)
+                {
+					for (float i = 0f; i <= 1f; i += 0.25f)
+					{
+						float dRotation = rotation + swordRotationAdd * player.direction + MathHelper.Pi * 0.5f * player.direction + MathHelper.Pi * 0.75f - (MathHelper.Pi / ((float)Item.useAnimation / player.GetWeaponAttackSpeed(Item)) * player.direction) * i;
+						Vector2 dustPos = player.itemLocation + Item.Size.RotatedBy(dRotation);
+						int num3 = Dust.NewDust(dustPos - new Vector2(5, 5), 10, 10, DustID.Torch, 0f, 0f, 255, default(Color), (float)Main.rand.Next(20, 26) * 0.1f);
+						Main.dust[num3].noGravity = true;
+						Dust obj = Main.dust[num3];
+						obj.velocity *= 0.5f;
+						obj.velocity += new Vector2(2.5f, 2.5f).RotatedBy(dRotation + Math.PI / 2f * player.direction);
+						obj.scale *= 0.75f;
 					}
 				}
 			}
@@ -163,6 +186,7 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 					Vector2 dustPos = player.itemLocation + Item.Size.RotatedBy(rotation + MathHelper.Pi * 0.75f) * chargeProgress;
 					int num3 = Dust.NewDust(dustPos - new Vector2(5, 5), 10, 10, 45, 0f, 0f, 255, default(Color), (float)Main.rand.Next(20, 26) * 0.1f);
 					Main.dust[num3].noLight = true;
+					Main.dust[num3].noLightEmittence = true;
 					Main.dust[num3].noGravity = true;
 					Dust obj = Main.dust[num3];
 					obj.velocity *= 0.5f;
@@ -183,6 +207,7 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 						SoundEngine.PlaySound(SoundID.Item117, player.Center);
 					}
 					player.velocity += rotation.ToRotationVector2() * Item.shootSpeed * chargeProgress * 0.85f;
+					ogRotation = rotation;
 					OnSwing(player);
 					SoundEngine.PlaySound(SoundID.DD2_MonkStaffSwing, player.Center);
                 }
@@ -196,19 +221,31 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
         {
 			damage = (int)(damage * MathHelper.Lerp(chargeProgress, 1f, 0.2f));
 			knockBack *= chargeProgress + 0.2f;
-			if (perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f && !hasHitAlready)
-            {
-				SoundStyle style = new SoundStyle("Wisplantern/Sounds/Effects/HeavyMetal");
-				style.Volume *= 0.75f;
-				style.PitchVariance = 0.35f;
-				SoundEngine.PlaySound(style, target.Center);
-				Wisplantern.freezeFrames = 5;
-				PunchCameraModifier modifier = new PunchCameraModifier(target.Center, player.velocity.ToRotation().ToRotationVector2(), 15f, 10f, 8, 1000f);
-				Main.instance.CameraModifiers.Add(modifier);
+			if (!hasHitAlready)
+			{
+				Vector2 velocityChange = ogRotation.ToRotationVector2() * Item.shootSpeed * chargeProgress;
+				velocityChange.Y *= 2f;
+				if (perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f)
+				{
+					velocityChange.Y *= 1.25f;
+					velocityChange.Y += 2.5f;
+					SoundStyle style = new SoundStyle("Wisplantern/Sounds/Effects/HeavyMetal");
+					style.Volume *= 0.75f;
+					style.PitchVariance = 0.35f;
+					SoundEngine.PlaySound(style, target.Center);
+					//Wisplantern.freezeFrames = 2;
+					PunchCameraModifier modifier = new PunchCameraModifier(target.Center, player.velocity.ToRotation().ToRotationVector2().RotatedBy(swordRotationAdd * player.direction + Math.PI / 2), 15f, 10f, 8, 1000f);
+					Main.instance.CameraModifiers.Add(modifier);
+				}
+				player.velocity -= velocityChange;
 			}
 			hasHitAlready = true;
+			if (player.GetModPlayer<Equipable.Accessories.FlintPlayer>().equipped && perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f)
+			{
+				target.AddBuff(BuffID.OnFire, 180);
+			}
 			ModifyHitNPCZweihanderVersion(player, target, perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f, ref damage, ref knockBack, ref crit);
-        }
+		}
 
 		public virtual void ModifyHitNPCZweihanderVersion(Player player, NPC target, bool perfectCharge, ref int damage, ref float knockBack, ref bool crit)
         {
