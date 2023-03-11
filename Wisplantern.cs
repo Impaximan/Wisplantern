@@ -6,6 +6,9 @@ using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.Graphics.Effects;
+using Terraria.Graphics.Shaders;
+using Terraria.ID;
 
 namespace Wisplantern
 {
@@ -94,6 +97,14 @@ namespace Wisplantern
             wisplanternLoot.Add(ModContent.ItemType<Items.Tools.Pickaxes.HyperstonePick>());
             wisplanternLoot.Add(ModContent.ItemType<Items.Tools.Movement.Hooklantern>());
             wisplanternLoot.Add(ModContent.ItemType<Items.Weapons.Ranged.Bows.OtherBow>());
+
+            if (Terraria.Main.netMode != NetmodeID.Server)
+            {
+                Ref<Effect> winterRef = new Ref<Effect>((Effect)ModContent.Request<Effect>("Wisplantern/Effects/WinterShader", AssetRequestMode.ImmediateLoad));
+                Filters.Scene["Wisplantern:WinterShader"] = new Filter(new ScreenShaderData(winterRef, "Winter"), EffectPriority.VeryHigh);
+                Filters.Scene["Wisplantern:WinterShader"].Load();
+            }
+
 
             Detours.Load();
         }

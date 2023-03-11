@@ -10,6 +10,14 @@ namespace Wisplantern.Globals.GItems
 {
     class ExtractinatorItem : GlobalItem
     {
+        //Putting this here because I don't feel like making a whole other GlobalItem for this
+        public override void SetDefaults(Item item)
+        {
+            if (item.type == ItemID.Snowball)
+            {
+                item.notAmmo = true;
+            }
+        }
 
         public override void ExtractinatorUse(int extractType, ref int resultType, ref int resultStack)
         {

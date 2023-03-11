@@ -24,7 +24,7 @@ namespace Wisplantern.Items.Weapons.Melee.Swords
             Item.height = 40;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.rare = ItemRarityID.Blue;
-            Item.damage = 17;
+            Item.damage = 14;
             Item.useTime = 35;
             Item.useAnimation = 35;
             Item.UseSound = SoundID.DD2_MonkStaffSwing;

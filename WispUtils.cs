@@ -136,6 +136,32 @@ namespace Wisplantern
             return false;
         }
 
+        public static bool TileShouldBeSnow(int i, int j)
+        {
+            if (Main.tile[i, j - 1].TileType == TileID.VanityTreeSakura || Main.tile[i, j - 1].TileType == TileID.VanityTreeYellowWillow)
+            {
+                return false;
+            }
+            if (WorldGen.TileEmpty(i + 1, j) || !Main.tileSolid[Main.tile[i + 1, j].TileType])
+            {
+                return true;
+            }
+            else if (WorldGen.TileEmpty(i - 1, j) || !Main.tileSolid[Main.tile[i - 1, j].TileType])
+            {
+                return true;
+            }
+            else if (WorldGen.TileEmpty(i, j + 1) || !Main.tileSolid[Main.tile[i, j + 1].TileType])
+            {
+                return true;
+            }
+            else if (WorldGen.TileEmpty(i, j - 1) || !Main.tileSolid[Main.tile[i, j - 1].TileType])
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public static Vector2 FindGroundUnder(this Vector2 position)
         {
             Vector2 returned = position;

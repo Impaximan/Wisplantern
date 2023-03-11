@@ -30,6 +30,19 @@ namespace Wisplantern.Globals.GNPCs
                     pool.Add(NPCID.Firefly, 5f);
                 }
             }
+
+            if (spawnInfo.Player.InModBiome<Biomes.FallenSnow>() && spawnInfo.Player.ZoneOverworldHeight)
+            {
+                if (Main.dayTime)
+                {
+                    pool.Add(NPCID.IceSlime, 0.5f);
+                }
+                else
+                {
+                    pool.Add(NPCID.ZombieEskimo, 0.8f);
+                    pool.Add(NPCID.ArmedZombieEskimo, 0.25f);
+                }
+            }
         }
     }
 }
