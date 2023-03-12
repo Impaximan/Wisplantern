@@ -9,20 +9,7 @@ namespace Wisplantern.Globals.GNPCs
     {
         public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
         {
-            if (NPCID.Sets.Skeletons[npc.type])
-            {
-                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Items.Weapons.Manipulative.Canes.SoultouchingStaff>(), 50));
-            }
 
-            if (NPCID.Sets.Zombies[npc.type])
-            {
-                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Items.Weapons.Manipulative.Canes.SoultouchingStaff>(), 75));
-            }
-
-            if (NPCID.Sets.DemonEyes[npc.type])
-            {
-                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Items.Weapons.Manipulative.Canes.SoultouchingStaff>(), 100));
-            }
         }
     }
 }

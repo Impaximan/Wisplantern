@@ -4,6 +4,7 @@ using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria.DataStructures;
 using System.Collections.Generic;
+using Terraria.ModLoader.IO;
 
 namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 {
@@ -23,7 +24,7 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 			Item.damage = 20;
 			Item.shootSpeed = 3f;
 			Item.crit = 8;
-			Item.rare = ItemRarityID.White;
+			Item.rare = ItemRarityID.Blue;
 			Item.DamageType = DamageClass.Melee;
 			Item.UseSound = SoundID.Item8;
 			Item.value = Item.buyPrice(0, 5, 0, 0);
@@ -39,6 +40,7 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 
 				if (firstHit)
 				{
+					player.GetModPlayer<BaseballBatPlayer>().totalHomeRuns++;
 					CombatText.NewText(target.getRect(), Color.Orange, Main.rand.Next(new List<string>()
 					{
 						"HOME RUN!",
@@ -46,11 +48,33 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 						"A swing... and a hit!",
 						player.name + " makes yet another beautiful hit!",
 						"Yet another home run for " + player.name + "'s collection...",
-						"The legend strikes (not out) once again!"
+						"The legend strikes (not out) once again!",
+						"Home run number " + player.GetModPlayer<BaseballBatPlayer>().totalHomeRuns + " for " + player.name + "!",
 					}));
 				}
 			}
 		}
-	}
+
+        public override void ModifyTooltips(List<TooltipLine> tooltips)
+        {
+            base.ModifyTooltips(tooltips);
+			tooltips.Add(new TooltipLine(Mod, "BaseballBat", "Total number of 'home runs': [c/ffa500:" + Main.LocalPlayer.GetModPlayer<BaseballBatPlayer>().totalHomeRuns + "]"));
+        }
+    }
+
+	internal class BaseballBatPlayer : ModPlayer
+    {
+		public int totalHomeRuns = 0;
+
+        public override void SaveData(TagCompound tag)
+        {
+			tag.Add("totalHomeRuns", totalHomeRuns);
+        }
+
+        public override void LoadData(TagCompound tag)
+        {
+			totalHomeRuns = tag.GetInt("totalHomeRuns");
+        }
+    }
 }
 
