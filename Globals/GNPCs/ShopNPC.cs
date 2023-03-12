@@ -12,6 +12,8 @@ namespace Wisplantern.Globals.GNPCs
         {
             if (type == NPCID.Merchant)
             {
+                shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Weapons.Melee.Zweihanders.BaseballBat>());
+                nextSlot++;
                 shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Equipable.Accessories.Pill>());
                 nextSlot++;
             }

@@ -16,7 +16,6 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 
 		public override void ZweihanderDefaults()
 		{
-			Item.shootSpeed = 1f;
 			Item.knockBack = 9f;
 			Item.width = 48;
 			Item.height = 48;
@@ -37,7 +36,7 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 		public override void AddRecipes()
 		{
 			CreateRecipe()
-				.AddIngredient(ItemID.TungstenBar, 12)
+				.AddIngredient(ItemID.TungstenBar, 16)
 				.AddIngredient(ItemID.StoneBlock, 25)
 				.AddIngredient(ItemID.Wood, 5)
 				.AddTile(TileID.Anvils)

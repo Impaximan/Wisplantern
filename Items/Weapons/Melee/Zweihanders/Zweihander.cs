@@ -6,12 +6,13 @@ using Terraria.DataStructures;
 using System;
 using Terraria.Audio;
 using Terraria.Graphics.CameraModifiers;
+using System.Collections.Generic;
 
 namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 {
     abstract class Zweihander : ModItem
 	{
-		const int perfectChargeLeeway = 8;
+		public const int perfectChargeLeeway = 8;
 
 		public override void SetStaticDefaults()
 		{
@@ -83,12 +84,12 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 
         public virtual int DustType => DustID.Torch;
 		public virtual int ChargeTime => 55;
-		float chargeProgress = 0f;
+		public float chargeProgress = 0f;
 
         float rotation = 0f;
 		float swordRotationAdd = 0f;
 		bool goneYet = false;
-		int perfectChargeTime = 0;
+		public int perfectChargeTime = 0;
 		bool hasHitAlready = false;
 		float ogRotation = 0f;
 		public virtual bool HasSwungDust => false;
@@ -157,6 +158,8 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 			}
             else
 			{
+				player.bodyFrame.Y = player.bodyFrame.Height;
+
 				player.itemAnimation = player.itemAnimationMax;
 				player.itemTime = player.itemTimeMax;
 
@@ -181,7 +184,24 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 					perfectChargeTime++;
                 }
 
-				if (chargeProgress >= 0.15f && perfectChargeTime <= perfectChargeLeeway)
+				if (player.channel)
+                {
+					WhileCharging(player);
+				}
+
+				if (!player.channel && chargeProgress >= 0.15f)
+				{
+					goneYet = true;
+					if (perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f)
+					{
+						SoundEngine.PlaySound(SoundID.Item117, player.Center);
+					}
+					player.velocity += rotation.ToRotationVector2() * Item.shootSpeed * chargeProgress * 0.85f;
+					ogRotation = rotation;
+					OnSwing(player);
+					SoundEngine.PlaySound(SoundID.DD2_MonkStaffSwing, player.Center);
+				}
+				else if (chargeProgress >= 0.15f && perfectChargeTime <= perfectChargeLeeway)
 				{
 					Vector2 dustPos = player.itemLocation + Item.Size.RotatedBy(rotation + MathHelper.Pi * 0.75f) * chargeProgress;
 					int num3 = Dust.NewDust(dustPos - new Vector2(5, 5), 10, 10, 45, 0f, 0f, 255, default(Color), (float)Main.rand.Next(20, 26) * 0.1f);
@@ -193,24 +213,6 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 					obj.velocity.Y -= 1;
 					if (perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f) obj.scale *= 1.5f;
 				}
-
-				if (player.channel)
-                {
-					WhileCharging(player);
-				}
-                
-				if (!player.channel && chargeProgress >= 0.15f)
-                {
-					goneYet = true;
-					if (perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f)
-					{
-						SoundEngine.PlaySound(SoundID.Item117, player.Center);
-					}
-					player.velocity += rotation.ToRotationVector2() * Item.shootSpeed * chargeProgress * 0.85f;
-					ogRotation = rotation;
-					OnSwing(player);
-					SoundEngine.PlaySound(SoundID.DD2_MonkStaffSwing, player.Center);
-                }
 			}
 
 			player.compositeBackArm = player.compositeFrontArm;
@@ -247,7 +249,28 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 			ModifyHitNPCZweihanderVersion(player, target, perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f, ref damage, ref knockBack, ref crit);
 		}
 
-		public virtual void ModifyHitNPCZweihanderVersion(Player player, NPC target, bool perfectCharge, ref int damage, ref float knockBack, ref bool crit)
+        public override void ModifyTooltips(List<TooltipLine> tooltips)
+        {
+			int index = tooltips.FindIndex(x => x.Name == "Speed");
+			if (index != -1)
+            {
+				tooltips.RemoveAt(index);
+
+				int speedUsed = (Item.useTime + ChargeTime) / 2;
+				string speedDesc = "Insanely fast";
+				if (speedUsed > 8) speedDesc = "Very fast";
+				if (speedUsed > 20) speedDesc = "Fast";
+				if (speedUsed > 25) speedDesc = "Average";
+				if (speedUsed > 30) speedDesc = "Slow";
+				if (speedUsed > 35) speedDesc = "Very slow";
+				if (speedUsed > 45) speedDesc = "Extremely slow";
+				if (speedUsed >= 56) speedDesc = "Snail";
+
+				tooltips.Insert(index, new TooltipLine(Mod, "ZweihanderSpeed", speedDesc + " speed"));
+            }
+        }
+
+        public virtual void ModifyHitNPCZweihanderVersion(Player player, NPC target, bool perfectCharge, ref int damage, ref float knockBack, ref bool crit)
         {
 
         }
