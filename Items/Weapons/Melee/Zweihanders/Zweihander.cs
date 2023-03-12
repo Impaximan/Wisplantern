@@ -241,12 +241,12 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 				}
 				player.velocity -= velocityChange;
 			}
-			hasHitAlready = true;
 			if (player.GetModPlayer<Equipable.Accessories.FlintPlayer>().equipped && perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f)
 			{
 				target.AddBuff(BuffID.OnFire, 180);
 			}
-			ModifyHitNPCZweihanderVersion(player, target, perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f, ref damage, ref knockBack, ref crit);
+			ModifyHitNPCZweihanderVersion(player, target, perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f, !hasHitAlready, ref damage, ref knockBack, ref crit);
+			hasHitAlready = true;
 		}
 
         public override void ModifyTooltips(List<TooltipLine> tooltips)
@@ -270,7 +270,7 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
             }
         }
 
-        public virtual void ModifyHitNPCZweihanderVersion(Player player, NPC target, bool perfectCharge, ref int damage, ref float knockBack, ref bool crit)
+        public virtual void ModifyHitNPCZweihanderVersion(Player player, NPC target, bool perfectCharge, bool firstHit, ref int damage, ref float knockBack, ref bool crit)
         {
 
         }

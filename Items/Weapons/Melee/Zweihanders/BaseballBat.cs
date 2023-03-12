@@ -31,40 +31,24 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 
         public override int ChargeTime => 90;
 
-        public override void ModifyHitNPCZweihanderVersion(Player player, NPC target, bool perfectCharge, ref int damage, ref float knockBack, ref bool crit)
+        public override void ModifyHitNPCZweihanderVersion(Player player, NPC target, bool perfectCharge, bool firstHit, ref int damage, ref float knockBack, ref bool crit)
 		{
 			if (perfectCharge)
 			{
 				knockBack *= 3f;
-				CombatText.NewText(target.getRect(), Color.Orange, Main.rand.Next(new List<string>()
+
+				if (firstHit)
 				{
-					"HOME RUN!",
-					"Nice swing!",
-					"A swing... and a hit!",
-					player.name + " makes yet another beautiful hit!",
-					"Yet another home run for " + player.name + "'s collection...",
-					"The legend strikes (not out) once again!"
-				}));
-			}
-			if (!perfectCharge && chargeProgress > 0.9f && perfectChargeTime <= 0)
-			{
-				CombatText.NewText(target.getRect(), Color.DarkOrange, Main.rand.Next(new List<string>()
-				{
-					"Youch... just a little early, but it'll do.",
-					"So close-",
-					"So close to being a home run.",
-					"Unfortunate, but good enough.",
-				}));
-			}
-			if (!perfectCharge && perfectChargeTime > perfectChargeLeeway && perfectChargeTime < perfectChargeLeeway + ChargeTime / 10)
-			{
-				CombatText.NewText(target.getRect(), Color.DarkOrange, Main.rand.Next(new List<string>()
-				{
-					"A tad bit late, that'll be a fowl.",
-					"So close-",
-					"So close to being a home run.",
-					"Unfortunate, but good enough.",
-				}));
+					CombatText.NewText(target.getRect(), Color.Orange, Main.rand.Next(new List<string>()
+					{
+						"HOME RUN!",
+						"Nice swing!",
+						"A swing... and a hit!",
+						player.name + " makes yet another beautiful hit!",
+						"Yet another home run for " + player.name + "'s collection...",
+						"The legend strikes (not out) once again!"
+					}));
+				}
 			}
 		}
 	}

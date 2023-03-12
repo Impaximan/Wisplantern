@@ -25,7 +25,7 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 			Item.DamageType = DamageClass.Melee;
 		}
 
-        public override void ModifyHitNPCZweihanderVersion(Player player, NPC target, bool perfectCharge, ref int damage, ref float knockBack, ref bool crit)
+        public override void ModifyHitNPCZweihanderVersion(Player player, NPC target, bool perfectCharge, bool firstHit, ref int damage, ref float knockBack, ref bool crit)
         {
 			if (perfectCharge)
             {
