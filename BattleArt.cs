@@ -79,7 +79,7 @@ namespace Wisplantern
         /// <param name="damage"></param>
         /// <param name="knockBack"></param>
         /// <param name="crit"></param>
-        public virtual void ModifyHitNPC(Item item, Player player, NPC target, ref int damage, ref float knockBack, ref bool crit)
+        public virtual void ModifyHitNPC(Item item, Player player, NPC target, ref NPC.HitModifiers modifiers)
         {
 
         }

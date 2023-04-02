@@ -19,7 +19,7 @@ namespace Wisplantern.Systems.Worldgen
         //TODO:
         //Make mountain work with various different biomes again
 
-        public override void ModifyWorldGenTasks(List<GenPass> tasks, ref float totalWeight)
+        public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
         {
             GenPass jungleGrass = tasks.Find(x => x.Name.Equals("Mud Caves To Grass"));
 

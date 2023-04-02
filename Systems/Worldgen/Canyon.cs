@@ -20,7 +20,7 @@ namespace Wisplantern.Systems.Worldgen
             extraOrePositions.Clear();
         }
 
-        public override void ModifyWorldGenTasks(List<GenPass> tasks, ref float totalWeight)
+        public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
         {
             int genIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Jungle"));
             tasks.Insert(genIndex + 1, new PassLegacy("Canyon", delegate (GenerationProgress progress, GameConfiguration config)
@@ -99,7 +99,7 @@ namespace Wisplantern.Systems.Worldgen
             {
                 int maxDistanceFromSpawnOnDungeonSide = Main.maxTilesX / 4;
                 positionX = Main.rand.Next(450, Main.maxTilesX - 450);
-                while (Math.Abs(positionX - Main.spawnTileX) < minDistanceFromSpawn || Math.Sign(positionX - Main.spawnTileX) == WorldGen.dungeonSide && Math.Abs(positionX - Main.spawnTileX) > maxDistanceFromSpawnOnDungeonSide || checkForPreviousCanyon && Math.Abs(positionX - previousCanyon) < Main.maxTilesX / 4)
+                while (Math.Abs(positionX - Main.spawnTileX) < minDistanceFromSpawn || Math.Sign(positionX - Main.spawnTileX) == GenVars.dungeonSide && Math.Abs(positionX - Main.spawnTileX) > maxDistanceFromSpawnOnDungeonSide || checkForPreviousCanyon && Math.Abs(positionX - previousCanyon) < Main.maxTilesX / 4)
                 {
                     positionX = Main.rand.Next(450, Main.maxTilesX - 450);
                 }
@@ -241,7 +241,7 @@ namespace Wisplantern.Systems.Worldgen
                         if (new Vector2(i - position.X, (j - position.Y) * yMult).Length() <= radiusX)
                         {
                             WorldGen.KillTile(i, j, noItem: true);
-                            if (j > position.Y) WorldGen.PlaceLiquid(i, j, LiquidID.Water, 100);
+                            if (j > position.Y) WorldGen.PlaceLiquid(i, j, (byte)LiquidID.Water, 100);
                         }
                     }
                 }
@@ -261,7 +261,7 @@ namespace Wisplantern.Systems.Worldgen
                         if (new Vector2(i - position.X, (j - position.Y) * yMult).Length() <= radiusX)
                         {
                             WorldGen.KillTile(i, j, noItem: true);
-                            if (j > position.Y) WorldGen.PlaceLiquid(i, j, LiquidID.Lava, 100);
+                            if (j > position.Y) WorldGen.PlaceLiquid(i, j, (byte)LiquidID.Lava, 100);
                         }
                     }
                 }

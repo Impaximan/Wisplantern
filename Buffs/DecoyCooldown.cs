@@ -8,8 +8,8 @@ namespace Wisplantern.Buffs
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Decoy Cooldown");
-            Description.SetDefault("You must wait to create another decoy");
+            // DisplayName.SetDefault("Decoy Cooldown");
+            // Description.SetDefault("You must wait to create another decoy");
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = false;
             Main.buffNoSave[Type] = true;

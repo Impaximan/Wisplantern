@@ -12,8 +12,8 @@ namespace Wisplantern.Items.Weapons.Ranged.Bows
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Fires in reverse and relative to you" +
-                "\n'Weirdly strange, oddly'");
+            /* Tooltip.SetDefault("Fires in reverse and relative to you" +
+                "\n'Weirdly strange, oddly'"); */
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -125,7 +125,7 @@ namespace Wisplantern.Items.Weapons.Ranged.Bows
             }
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (Projectile.damage > 5)
             {

@@ -7,7 +7,7 @@ namespace Wisplantern.Globals.GNPCs
     {
         public override bool InstancePerEntity => true;
 
-        public override bool? CanHitNPC(NPC npc, NPC target)
+        public override bool CanHitNPC(NPC npc, NPC target)/* tModPorter Suggestion: Return true instead of null */
         {
             if (target.type == ModContent.NPCType<NPCs.Critters.Bugs.Lushfly>())
             {

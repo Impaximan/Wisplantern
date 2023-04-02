@@ -12,7 +12,7 @@ namespace Wisplantern.Items.Weapons.Ranged.Bows
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Fires supercharged arrows");
+            // Tooltip.SetDefault("Fires supercharged arrows");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -81,7 +81,7 @@ namespace Wisplantern.Items.Weapons.Ranged.Bows
             }
         }
 
-        public override void OnHitNPC(Projectile projectile, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (Main.myPlayer == projectile.owner && supercharged)
             {
@@ -99,7 +99,7 @@ namespace Wisplantern.Items.Weapons.Ranged.Bows
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Fulgarite Lightning");
+            // DisplayName.SetDefault("Fulgarite Lightning");
         }
 
         public override void SetDefaults()

@@ -8,32 +8,22 @@ namespace Wisplantern.Globals.GNPCs
     {
         public override bool InstancePerEntity => true;
 
-        public override void SetupShop(int type, Chest shop, ref int nextSlot)
+        public override void ModifyShop(NPCShop shop)
         {
-            if (type == NPCID.Merchant)
+            if (shop.NpcType == NPCID.Merchant)
             {
-                shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Weapons.Melee.Zweihanders.BaseballBat>());
-                nextSlot++;
-                shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Equipable.Accessories.Pill>());
-                nextSlot++;
+                shop.Add(ModContent.ItemType<Items.Weapons.Melee.Zweihanders.BaseballBat>());
+                shop.Add(ModContent.ItemType<Items.Equipable.Accessories.Pill>());
             }
 
-            if (type == NPCID.TravellingMerchant)
+            if (shop.NpcType == NPCID.TravellingMerchant)
             {
-                if (Main.moonPhase % 3 == 0)
-                {
-                    shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Info.FourLeafClover>());
-                    nextSlot++;
-                }
+                shop.Add(ModContent.ItemType<Items.Info.FourLeafClover>(), Condition.MoonPhasesEven);
             }
 
-            if (type == NPCID.SkeletonMerchant)
+            if (shop.NpcType == NPCID.SkeletonMerchant)
             {
-                if (Main.moonPhase % 2 == 0)
-                {
-                    shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Equipable.Accessories.GlintstoneGlove>());
-                    nextSlot++;
-                }
+                shop.Add(ModContent.ItemType<Items.Equipable.Accessories.GlintstoneGlove>(), Condition.MoonPhasesOdd);
             }
         }
     }

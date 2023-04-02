@@ -10,7 +10,7 @@ namespace Wisplantern.Items.Placeable.Furniture
         public override void SetStaticDefaults()
         {
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 5;
-            Tooltip.SetDefault("Smells nice under the moonlight");
+            // Tooltip.SetDefault("Smells nice under the moonlight");
         }
 
         public override void SetDefaults()

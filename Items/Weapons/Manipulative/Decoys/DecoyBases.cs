@@ -77,7 +77,7 @@ namespace Wisplantern.Items.Weapons.Manipulative.Decoys
                     if (npc.active && npc.GetGlobalNPC<InfightingNPC>().decoy)
                     {
                         npc.life = 1;
-                        npc.StrikeNPC(npc.lifeMax, 0f, 0, true);
+                        npc.StrikeNPC(npc.CalculateHitInfo(npc.lifeMax, 0, true, 0));
                     }
                 }
                 Item.stack++;
@@ -208,8 +208,8 @@ namespace Wisplantern.Items.Weapons.Manipulative.Decoys
                 {
                     if (target.active && target.whoAmI != NPC.whoAmI && target.Hitbox.Intersects(NPC.Hitbox) && target.GetGlobalNPC<InfightingNPC>().infightIframes <= 0 && !target.friendly)
                     {
-                        int damage = Main.DamageVar(NPC.damage, Main.player[(int)NPC.ai[0]].luck);
-                        int struckDamage = (int)target.StrikeNPC(damage, 0f, Math.Sign(target.Center.X - NPC.Center.X), Main.rand.NextBool((int)NPC.ai[1], 100));
+                        int damage = NPC.damage;
+                        int struckDamage = target.StrikeNPC(target.CalculateHitInfo(damage, Math.Sign(target.Center.X - NPC.Center.X), Main.rand.NextBool((int)NPC.ai[1], 100), 0f, ModContent.GetInstance<DamageClasses.Manipulative>(), true, Main.player[(int)NPC.ai[0]].luck));
                         Main.player[(int)NPC.ai[0]].addDPS(struckDamage);
                         target.GetGlobalNPC<InfightingNPC>().infightIframes = 10;
                     }
@@ -227,7 +227,7 @@ namespace Wisplantern.Items.Weapons.Manipulative.Decoys
             return false;
         }
 
-        public override bool? CanHitNPC(NPC target)
+        public override bool CanHitNPC(NPC target)/* tModPorter Suggestion: Return true instead of null */
         {
             return false;
         }

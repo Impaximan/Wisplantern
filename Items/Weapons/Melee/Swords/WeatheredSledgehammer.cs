@@ -13,8 +13,8 @@ namespace Wisplantern.Items.Weapons.Melee.Swords
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Guarenteed critical strike on uninjured enemies" +
-                "\nCan be upgraded with better stone");
+            /* Tooltip.SetDefault("Guarenteed critical strike on uninjured enemies" +
+                "\nCan be upgraded with better stone"); */
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -37,11 +37,11 @@ namespace Wisplantern.Items.Weapons.Melee.Swords
             Item.hammer = 40;
         }
 
-        public override void ModifyHitNPC(Player player, NPC target, ref int damage, ref float knockBack, ref bool crit)
+        public override void ModifyHitNPC(Player player, NPC target, ref NPC.HitModifiers modifiers)
         {
             if (target.life == target.lifeMax)
             {
-                crit = true;
+                modifiers.SetCrit();
                 Wisplantern.freezeFrames = 5;
 
                 PunchCameraModifier modifier = new PunchCameraModifier(target.Center, new Vector2(Math.Sign(target.Center.X - player.Center.X), 0), 20f, 10f, 10, 1000f);

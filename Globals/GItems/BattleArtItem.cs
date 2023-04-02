@@ -46,7 +46,7 @@ namespace Wisplantern.Globals.GItems
             multiplayerShouldApplyBattleArt = reader.ReadInt32() == 1;
         }
 
-        public override void OnCreate(Item item, ItemCreationContext context)
+        public override void OnCreated(Item item, ItemCreationContext context)
         {
 
         }
@@ -247,19 +247,19 @@ namespace Wisplantern.Globals.GItems
             return base.CanUseItem(item, player);
         }
 
-        public override void OnHitNPC(Item item, Player player, NPC target, int damage, float knockBack, bool crit)
+        public override void OnHitNPC(Item item, Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (ShouldApplyBattleArt(player))
             {
-                battleArt.OnHitNPC(item, player, target, damage, knockBack, crit);
+                battleArt.OnHitNPC(item, player, target, hit.Damage, hit.Knockback, hit.Crit);
             }
         }
 
-        public override void ModifyHitNPC(Item item, Player player, NPC target, ref int damage, ref float knockBack, ref bool crit)
+        public override void ModifyHitNPC(Item item, Player player, NPC target, ref NPC.HitModifiers modifiers)
         {
             if (ShouldApplyBattleArt(player))
             {
-                battleArt.ModifyHitNPC(item, player, target, ref damage, ref knockBack, ref crit);
+                battleArt.ModifyHitNPC(item, player, target, ref modifiers);
             }
         }
 

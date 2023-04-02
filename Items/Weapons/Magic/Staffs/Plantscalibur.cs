@@ -13,8 +13,8 @@ namespace Wisplantern.Items.Weapons.Magic.Staffs
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Unleashes a lingering, blinding light that confuses victims" +
-                "\nDoes more damage the closer the target is");
+            /* Tooltip.SetDefault("Unleashes a lingering, blinding light that confuses victims" +
+                "\nDoes more damage the closer the target is"); */
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             Item.staff[Type] = true;
         }
@@ -49,7 +49,7 @@ namespace Wisplantern.Items.Weapons.Magic.Staffs
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Plantscalibur beam");
+            // DisplayName.SetDefault("Plantscalibur beam");
         }
 
         Vector2 properScale;
@@ -75,13 +75,13 @@ namespace Wisplantern.Items.Weapons.Magic.Staffs
             Projectile.idStaticNPCHitCooldown = 7;
         }
 
-        public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            damage = (int)(damage * MathHelper.Lerp(1f - target.Distance(Main.player[Projectile.owner].Center) / 1000f, 1f, 0.35f));
-            knockback *= MathHelper.Lerp(1f - target.Distance(Main.player[Projectile.owner].Center) / 500f, 1f, 0.1f);
+            modifiers.SourceDamage *= MathHelper.Lerp(1f - target.Distance(Main.player[Projectile.owner].Center) / 1000f, 1f, 0.35f);
+            modifiers.Knockback *= MathHelper.Lerp(1f - target.Distance(Main.player[Projectile.owner].Center) / 500f, 1f, 0.1f);
             if (target.Distance(Main.player[Projectile.owner].Center) > 500f)
             {
-                knockback = 0f;
+                modifiers.Knockback.Base = 0f;
             }
         }
 
@@ -111,7 +111,7 @@ namespace Wisplantern.Items.Weapons.Magic.Staffs
             }
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (Main.rand.NextBool(12) && target.Distance(Main.player[Projectile.owner].Center) <= 650f)
             {

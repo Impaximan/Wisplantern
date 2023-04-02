@@ -60,7 +60,7 @@ namespace Wisplantern.Prefixes
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Steadfast");
+            // DisplayName.SetDefault("Steadfast");
         }
 
         public override void ModifyValue(ref float valueMult)
@@ -75,7 +75,7 @@ namespace Wisplantern.Prefixes
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Hopeful");
+            // DisplayName.SetDefault("Hopeful");
         }
 
         public override void ModifyValue(ref float valueMult)
@@ -90,7 +90,7 @@ namespace Wisplantern.Prefixes
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Lively");
+            // DisplayName.SetDefault("Lively");
         }
 
         public override void ModifyValue(ref float valueMult)
@@ -105,7 +105,7 @@ namespace Wisplantern.Prefixes
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Vital");
+            // DisplayName.SetDefault("Vital");
         }
 
 

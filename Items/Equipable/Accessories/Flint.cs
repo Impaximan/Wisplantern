@@ -10,10 +10,10 @@ namespace Wisplantern.Items.Equipable.Accessories
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Perfectly timed strikes with zweihanders set enemies ablaze" +
+            /* Tooltip.SetDefault("Perfectly timed strikes with zweihanders set enemies ablaze" +
                 "\nChance to set wooden arrows ablaze" +
-                "\nGuarantees that flaming arrows will ignite enemies");
-            SacrificeTotal = 1;
+                "\nGuarantees that flaming arrows will ignite enemies"); */
+            Item.ResearchUnlockCount = 1;
         }
 
         public override void SetDefaults()
@@ -58,7 +58,7 @@ namespace Wisplantern.Items.Equipable.Accessories
 
     class FlintProjectile : GlobalProjectile
     {
-        public override void OnHitNPC(Projectile projectile, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (Main.player[projectile.owner].GetModPlayer<FlintPlayer>().equipped)
             {

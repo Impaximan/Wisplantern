@@ -29,22 +29,22 @@ namespace Wisplantern.BattleArts
             item.noMelee = false;
         }
 
-        public override void ModifyHitNPC(Item item, Player player, NPC target, ref int damage, ref float knockBack, ref bool crit)
+        public override void ModifyHitNPC(Item item, Player player, NPC target, ref NPC.HitModifiers modifiers)
         {
             if (target.boss && target.life <= target.lifeMax * 0.05f)
             {
-                damage = target.life * 10;
-                crit = true;
+                modifiers.SourceDamage.Base = target.life * 10;
+                modifiers.SetCrit();
             }
             else if (!target.boss && target.life <= target.lifeMax * 0.5f)
             {
-                damage = target.life * 10;
-                crit = true;
+                modifiers.SourceDamage.Base = target.life * 10;
+                modifiers.SetCrit();
             }
             else
             {
-                crit = false;
-                damage = 1;
+                modifiers.DisableCrit();
+                modifiers.SourceDamage.Base = 1;
             }
         }
     }

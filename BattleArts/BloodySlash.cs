@@ -115,10 +115,10 @@ namespace Wisplantern.BattleArts
             return false;
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             BloodySlashNPC sNPC = target.GetGlobalNPC<BloodySlashNPC>();
-            sNPC.stacks.Add((int)(damage * 1.8f));
+            sNPC.stacks.Add((int)(hit.Damage * 1.8f));
             sNPC.timeToDecreaseStack = 120;
             NetMessage.SendData(MessageID.SyncNPC, number: target.whoAmI);
         }

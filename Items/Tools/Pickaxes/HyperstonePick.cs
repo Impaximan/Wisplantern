@@ -10,8 +10,8 @@ namespace Wisplantern.Items.Tools.Pickaxes
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Timid Pick");
-            Tooltip.SetDefault("Gains more speed from hyperstone and wisplanterns than most pickaxes");
+            // DisplayName.SetDefault("Timid Pick");
+            // Tooltip.SetDefault("Gains more speed from hyperstone and wisplanterns than most pickaxes");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 

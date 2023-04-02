@@ -2,10 +2,7 @@
 Mods: {
 	Wisplantern: {
 		InfoDisplays.LuckIndicator.DisplayName: Luck
-
-		DamageClassName: {
-			Manipulative: manipulative damage
-		}
+		DamageClassName.Manipulative: manipulative damage
 
 		Projectiles: {
 			BloodySlashProjectile.DisplayName: Bloody Slash Projectile
@@ -16,12 +13,15 @@ Mods: {
 			FulgariteLongbowBolt.DisplayName: Fulgarite Lightning
 			OtherArrow.DisplayName: Other Arrow
 			WisplanternVortex.DisplayName: Wisplantern Vortex
+			AccursedShardProjectile.DisplayName: Accursed Shard Projectile
 		}
 
 		Biomes: {
 			CalmNightClairDeLune.DisplayName: Calm Night Clair De Lune
 			FarUnderground.DisplayName: Far Underground
 			LushCave.DisplayName: Lush Cave
+			FallenSnow.DisplayName: Fallen Snow
+			Snowstorm.DisplayName: Snowstorm
 		}
 
 		Buffs: {
@@ -39,14 +39,38 @@ Mods: {
 				DisplayName: Pensive
 				Description: Max stats increased and monster spawns reduced
 			}
+
+			DecoyCooldown: {
+				DisplayName: Decoy Cooldown
+				Description: Mods.Wisplantern.Buffs.DecoyCooldown.Description
+			}
 		}
 
 		Items: {
-			AerialRetreat.DisplayName: Aerial Retreat
-			BloodySlash.DisplayName: Bloody Slash
-			SwordParry.DisplayName: Sword Parry
-			TriCast.DisplayName: Tri-Cast
-			Uppercut.DisplayName: Uppercut
+			AerialRetreat: {
+				DisplayName: Aerial Retreat
+				Tooltip: ""
+			}
+
+			BloodySlash: {
+				DisplayName: Bloody Slash
+				Tooltip: ""
+			}
+
+			SwordParry: {
+				DisplayName: Sword Parry
+				Tooltip: ""
+			}
+
+			TriCast: {
+				DisplayName: Tri-Cast
+				Tooltip: ""
+			}
+
+			Uppercut: {
+				DisplayName: Uppercut
+				Tooltip: ""
+			}
 
 			FocusingCrystal: {
 				DisplayName: Focusing Crystal
@@ -90,7 +114,10 @@ Mods: {
 				Tooltip: Displays your current luck
 			}
 
-			Depthrock.DisplayName: Depthrock Block
+			Depthrock: {
+				DisplayName: Depthrock Block
+				Tooltip: ""
+			}
 
 			Fulgarite: {
 				DisplayName: Fulgarite Block
@@ -102,7 +129,10 @@ Mods: {
 				Tooltip: "'It's lukewarm'"
 			}
 
-			LushLantern.DisplayName: Lush Lantern
+			LushLantern: {
+				DisplayName: Lush Lantern
+				Tooltip: ""
+			}
 
 			Moonflower: {
 				DisplayName: Moonflower
@@ -169,11 +199,153 @@ Mods: {
 					'Weirdly strange, oddly'
 					'''
 			}
+
+			ExtendedSmokeBomb: {
+				DisplayName: Extended Smoke Bomb
+				Tooltip: ""
+			}
+
+			FinishOff: {
+				DisplayName: Finish Off
+				Tooltip: ""
+			}
+
+			FocusShot: {
+				DisplayName: Focus Shot
+				Tooltip: ""
+			}
+
+			RadialCast: {
+				DisplayName: Radial Cast
+				Tooltip: ""
+			}
+
+			Siphon: {
+				DisplayName: Siphon
+				Tooltip: ""
+			}
+
+			Flint: {
+				DisplayName: Flint
+				Tooltip: ""
+			}
+
+			AccursedShard: {
+				DisplayName: Accursed Shard
+				Tooltip: ""
+			}
+
+			CopperCane: {
+				DisplayName: Copper Cane
+				Tooltip: ""
+			}
+
+			EnchantedCane: {
+				DisplayName: Enchanted Cane
+				Tooltip: ""
+			}
+
+			GoldCane: {
+				DisplayName: Gold Cane
+				Tooltip: ""
+			}
+
+			IronCane: {
+				DisplayName: Iron Cane
+				Tooltip: ""
+			}
+
+			LeadCane: {
+				DisplayName: Lead Cane
+				Tooltip: ""
+			}
+
+			PlatinumCane: {
+				DisplayName: Platinum Cane
+				Tooltip: ""
+			}
+
+			SilverCane: {
+				DisplayName: Silver Cane
+				Tooltip: ""
+			}
+
+			TinCane: {
+				DisplayName: Tin Cane
+				Tooltip: ""
+			}
+
+			TungstenCane: {
+				DisplayName: Tungsten Cane
+				Tooltip: ""
+			}
+
+			WoodenCane: {
+				DisplayName: Wooden Cane
+				Tooltip: ""
+			}
+
+			BouncyDummy: {
+				DisplayName: Bouncy Dummy
+				Tooltip: ""
+			}
+
+			Bramblesprout: {
+				DisplayName: Bramblesprout
+				Tooltip: ""
+			}
+
+			BaseballBat: {
+				DisplayName: Baseball Bat
+				Tooltip: ""
+			}
+
+			CopperZweihander: {
+				DisplayName: Copper Zweihander
+				Tooltip: ""
+			}
+
+			GoldZweihander: {
+				DisplayName: Gold Zweihander
+				Tooltip: ""
+			}
+
+			IronZweihander: {
+				DisplayName: Iron Zweihander
+				Tooltip: ""
+			}
+
+			LeadZweihander: {
+				DisplayName: Lead Zweihander
+				Tooltip: ""
+			}
+
+			PlatinumZweihander: {
+				DisplayName: Platinum Zweihander
+				Tooltip: ""
+			}
+
+			SilverZweihander: {
+				DisplayName: Silver Zweihander
+				Tooltip: ""
+			}
+
+			TinZweihander: {
+				DisplayName: Tin Zweihander
+				Tooltip: ""
+			}
+
+			TungstenZweihander: {
+				DisplayName: Tungsten Zweihander
+				Tooltip: ""
+			}
 		}
 
 		NPCs: {
 			Lushfly.DisplayName: Lushfly
 			WisplanternNPC.DisplayName: Wisplantern
+			BouncyDummyDecoy.DisplayName: Bouncy Dummy Decoy
+			BramblesproutDecoy.DisplayName: Bramblesprout Decoy
 		}
 
 		Prefixes: {

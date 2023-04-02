@@ -10,7 +10,7 @@ namespace Wisplantern.Systems.Worldgen
 {
     class LushGen : ModSystem
     {
-        public override void ModifyWorldGenTasks(List<GenPass> tasks, ref float totalWeight)
+        public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
         {
             int genIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Micro Biomes"));
             tasks.Insert(genIndex + 1, new PassLegacy("Lush", delegate (GenerationProgress progress, GameConfiguration config)
@@ -107,7 +107,7 @@ namespace Wisplantern.Systems.Worldgen
 
             for (int i = 10; i < Main.maxTilesX - 10; i++)
             {
-                for (int j = (int)WorldGen.rockLayer; j < Main.maxTilesY - 10; j++)
+                for (int j = (int)GenVars.rockLayer; j < Main.maxTilesY - 10; j++)
                 {
                     Tile tile = Main.tile[i, j];
 
@@ -132,7 +132,7 @@ namespace Wisplantern.Systems.Worldgen
 
                             if (!tile.HasTile && Main.rand.NextBool(8) && j < Main.UnderworldLayer)
                             {
-                                WorldGen.PlaceLiquid(i, j, LiquidID.Water, 255);
+                                WorldGen.PlaceLiquid(i, j, (byte)LiquidID.Water, 255);
                             }
                         }
                     }
@@ -141,7 +141,7 @@ namespace Wisplantern.Systems.Worldgen
 
             for (int i = 10; i < Main.maxTilesX - 10; i++)
             {
-                for (int j = (int)WorldGen.rockLayer; j < Main.maxTilesY - 10; j++)
+                for (int j = (int)GenVars.rockLayer; j < Main.maxTilesY - 10; j++)
                 {
                     if (noise.GetNoise(i / 12f, j / 12f) >= 0.75f)
                     {

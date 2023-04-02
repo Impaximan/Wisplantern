@@ -21,7 +21,7 @@ namespace Wisplantern.NPCs.Other
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Wisplantern");
+            // DisplayName.SetDefault("Wisplantern");
             Main.npcFrameCount[Type] = 9;
         }
 
@@ -69,7 +69,7 @@ namespace Wisplantern.NPCs.Other
         }
 
         int timeUntilRainbowGun = 0;
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
         {
             if (!protecting)
             {

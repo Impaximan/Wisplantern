@@ -10,8 +10,8 @@ namespace Wisplantern.Items.Equipable.Accessories
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Critical strikes are more deadly" +
-                "\n5% increased critical strike chance");
+            /* Tooltip.SetDefault("Critical strikes are more deadly" +
+                "\n5% increased critical strike chance"); */
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -55,19 +55,19 @@ namespace Wisplantern.Items.Equipable.Accessories
         }
 
         const float critDamageMult = 1.3f;
-        public override void ModifyHitNPC(Item item, NPC target, ref int damage, ref float knockback, ref bool crit)
+        public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)/* tModPorter If you don't need the Item, consider using ModifyHitNPC instead */
         {
-            if (equipped && crit)
+            if (equipped)
             {
-                damage = (int)(damage * critDamageMult);
+                modifiers.CritDamage *= critDamageMult;
             }
         }
 
-        public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)/* tModPorter If you don't need the Projectile, consider using ModifyHitNPC instead */
         {
-            if (equipped && crit)
+            if (equipped)
             {
-                damage = (int)(damage * critDamageMult);
+                modifiers.CritDamage *= critDamageMult;
             }
         }
     }

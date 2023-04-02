@@ -14,8 +14,8 @@ namespace Wisplantern.Items.Weapons.Magic.Misc
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("\nA mysterious shard, carrying a curse" +
-                "\nCan be flung telekinetically at enemies");
+            /* Tooltip.SetDefault("\nA mysterious shard, carrying a curse" +
+                "\nCan be flung telekinetically at enemies"); */
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -66,7 +66,7 @@ namespace Wisplantern.Items.Weapons.Magic.Misc
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Accursed Shard");
+            // DisplayName.SetDefault("Accursed Shard");
         }
 
         public override void SetDefaults()

@@ -15,7 +15,7 @@ namespace Wisplantern.Items.Weapons.Melee.Shortswords
     {
         public override void SetStaticDefaults()
         {
-			Tooltip.SetDefault("Every fourth hit will jab a dagger into the target");
+			// Tooltip.SetDefault("Every fourth hit will jab a dagger into the target");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 100;
         }
 
@@ -127,7 +127,7 @@ namespace Wisplantern.Items.Weapons.Melee.Shortswords
 
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Depthrock Dagger");
+			// DisplayName.SetDefault("Depthrock Dagger");
 		}
 
 		public override void SetDefaults()
@@ -147,7 +147,7 @@ namespace Wisplantern.Items.Weapons.Melee.Shortswords
 			Projectile.localNPCHitCooldown = 20;
 		}
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
 			if (stuckNPC == null && Projectile.ai[1] == 1)
             {
@@ -168,12 +168,13 @@ namespace Wisplantern.Items.Weapons.Melee.Shortswords
 			}
         }
 
-        public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
 			if (stuckNPC != null && stuckNPC == target)
             {
-				knockback = 0f;
-				damage = (int)(damage * 0.35f) + (int)MathHelper.Clamp(target.defense - 10, 0, target.defense) / 2;
+				modifiers.Knockback *= 0f;
+				modifiers.SourceDamage *= 0.35f;
+				modifiers.SourceDamage += (int)MathHelper.Clamp(target.defense - 10, 0, target.defense) / 2;
             }
         }
 
