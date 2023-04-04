@@ -47,6 +47,15 @@ Mods: {
 		}
 
 		Items: {
+			MoonsBoon: {
+				DisplayName: Moon's Boon
+				Tooltip:
+					'''
+					Perfectly timed strikes teleport you forward, within a certain distance
+					Cannot teleport you through tiles
+					'''
+			}
+
 			AerialRetreat: {
 				DisplayName: Aerial Retreat
 				Tooltip: ""
@@ -227,12 +236,21 @@ Mods: {
 
 			Flint: {
 				DisplayName: Flint
-				Tooltip: ""
+				Tooltip:
+					'''
+					Perfectly timed strikes with zweihanders set enemies ablaze
+					Chance to set wooden arrows ablaze
+					Guarantees that flaming arrows will ignite enemies
+					'''
 			}
 
 			AccursedShard: {
 				DisplayName: Accursed Shard
-				Tooltip: ""
+				Tooltip:
+					'''
+					A mysterious shard, carrying a curse
+					Can be flung telekinetically at enemies
+					'''
 			}
 
 			CopperCane: {
@@ -242,7 +260,7 @@ Mods: {
 
 			EnchantedCane: {
 				DisplayName: Enchanted Cane
-				Tooltip: ""
+				Tooltip: Causes nearby fallen stars to gravitate towards aggravated enemies
 			}
 
 			GoldCane: {
@@ -297,47 +315,47 @@ Mods: {
 
 			BaseballBat: {
 				DisplayName: Baseball Bat
-				Tooltip: ""
+				Tooltip: Perfectly timed strikes have thrice as much knockback
 			}
 
 			CopperZweihander: {
 				DisplayName: Copper Zweihander
-				Tooltip: ""
+				Tooltip: Perfectly timed strikes guarentee critical hits
 			}
 
 			GoldZweihander: {
 				DisplayName: Gold Zweihander
-				Tooltip: ""
+				Tooltip: Perfectly timed strikes guarentee critical hits
 			}
 
 			IronZweihander: {
 				DisplayName: Iron Zweihander
-				Tooltip: ""
+				Tooltip: Perfectly timed strikes guarentee critical hits
 			}
 
 			LeadZweihander: {
 				DisplayName: Lead Zweihander
-				Tooltip: ""
+				Tooltip: Perfectly timed strikes guarentee critical hits
 			}
 
 			PlatinumZweihander: {
 				DisplayName: Platinum Zweihander
-				Tooltip: ""
+				Tooltip: Perfectly timed strikes guarentee critical hits
 			}
 
 			SilverZweihander: {
 				DisplayName: Silver Zweihander
-				Tooltip: ""
+				Tooltip: Perfectly timed strikes guarentee critical hits
 			}
 
 			TinZweihander: {
 				DisplayName: Tin Zweihander
-				Tooltip: ""
+				Tooltip: Perfectly timed strikes guarentee critical hits
 			}
 
 			TungstenZweihander: {
 				DisplayName: Tungsten Zweihander
-				Tooltip: ""
+				Tooltip: Perfectly timed strikes guarentee critical hits
 			}
 		}
 

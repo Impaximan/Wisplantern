@@ -25,7 +25,7 @@ namespace Wisplantern.Items.Weapons.Manipulative.Canes
         public override void CaneSetDefaults()
         {
             Item.damage = 16;
-            Item.SetManipulativePower(0.105f);
+            Item.SetManipulativePower(0.16f);
             Item.DamageType = ModContent.GetInstance<DamageClasses.Manipulative>();
             Item.width = 40;
             Item.height = 40;

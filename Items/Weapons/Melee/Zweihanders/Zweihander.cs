@@ -62,7 +62,7 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 
         }
 
-		public virtual void OnSwing(Player player)
+		public virtual void OnSwing(Player player, bool perfectCharge)
         {
 
         }
@@ -80,7 +80,7 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
             {
                 closestPointOnHitbox += target.DirectionTo(player.itemLocation);
             }
-            return !target.friendly && closestPointOnHitbox.Distance(player.itemLocation) < Item.Size.Length() && AngleDifference(player.DirectionTo(target.Center).ToRotation(), rotation + swordRotationAdd * player.direction) <= MathHelper.ToRadians(15f) && goneYet;
+            return closestPointOnHitbox.Distance(player.itemLocation) < Item.Size.Length() && AngleDifference(player.DirectionTo(target.Center).ToRotation(), rotation + swordRotationAdd * player.direction) <= MathHelper.ToRadians(15f) && goneYet;
         }
 
         public virtual int DustType => DustID.Torch;
@@ -199,7 +199,7 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 					}
 					player.velocity += rotation.ToRotationVector2() * Item.shootSpeed * chargeProgress * 0.85f;
 					ogRotation = rotation;
-					OnSwing(player);
+					OnSwing(player, perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f);
 					SoundEngine.PlaySound(SoundID.DD2_MonkStaffSwing, player.Center);
 				}
 				else if (chargeProgress >= 0.15f && perfectChargeTime <= perfectChargeLeeway)
@@ -222,7 +222,7 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 
         public override void ModifyHitNPC(Player player, NPC target, ref NPC.HitModifiers modifiers)
         {
-			modifiers.SourceDamage.Base *= MathHelper.Lerp(chargeProgress, 1f, 0.2f);
+			modifiers.SourceDamage *= MathHelper.Lerp(chargeProgress, 1f, 0.2f);
 			modifiers.Knockback *= chargeProgress + 0.2f;
 			if (!hasHitAlready)
 			{
