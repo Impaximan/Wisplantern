@@ -28,6 +28,7 @@ namespace Wisplantern.Items.Equipable.Accessories
             Item.defense = 1;
             Item.rare = ItemRarityID.Blue;
             Item.value = Item.sellPrice(0, 1, 0, 0);
+            Item.SetScholarlyDescription("Found mysteriously from the mystical remains of Wisplanterns underground");
         }
 
         public override void UpdateEquip(Player player)

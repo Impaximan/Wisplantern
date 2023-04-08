@@ -25,6 +25,7 @@ namespace Wisplantern.Items.Info
             Item.height = 24;
             Item.rare = ItemRarityID.Blue;
             Item.value = Item.buyPrice(0, 5, 0, 0);
+            Item.SetScholarlyDescription("Sold on occassion by the Traveling Merchant, a useful tool for keeping up with the superstitious");
         }
 
         public override void UpdateInventory(Player player)

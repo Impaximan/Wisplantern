@@ -138,7 +138,7 @@ namespace Wisplantern
 
         public static bool TileShouldBeSnow(int i, int j)
         {
-            if (Main.tile[i, j - 1].TileType == TileID.VanityTreeSakura || Main.tile[i, j - 1].TileType == TileID.VanityTreeYellowWillow)
+            if (Main.tile[i, j - 1].TileType == TileID.VanityTreeSakura || Main.tile[i, j - 1].TileType == TileID.VanityTreeYellowWillow || Main.tile[i, j - 1].TileType == TileID.Sunflower)
             {
                 return false;
             }
@@ -234,6 +234,11 @@ namespace Wisplantern
             item.GetGlobalItem<BattleArtItem>().battleArtItemBattleArt = battleArt;
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[item.type] = 1;
             item.maxStack = 20;
+        }
+
+        public static void SetScholarlyDescription(this Item item, string description)
+        {
+            item.GetGlobalItem<ScholarsItem>().scholarsDescription = description;
         }
 
         /// <summary>

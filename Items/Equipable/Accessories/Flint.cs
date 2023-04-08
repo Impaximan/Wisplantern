@@ -23,6 +23,8 @@ namespace Wisplantern.Items.Equipable.Accessories
             Item.height = 24;
             Item.rare = ItemRarityID.Blue;
             Item.value = Item.buyPrice(0, 3, 0, 0);
+            Item.SetScholarlyDescription("Extracted from silt, the flint is a handy stone when it comes to fire" +
+                "\n'No steel needed this time!'");
         }
 
         public override void UpdateEquip(Player player)

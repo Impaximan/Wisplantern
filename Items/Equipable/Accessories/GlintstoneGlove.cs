@@ -28,6 +28,7 @@ namespace Wisplantern.Items.Equipable.Accessories
             Item.height = 22;
             Item.rare = ItemRarityID.Blue;
             Item.value = Item.sellPrice(0, 1, 0, 0);
+            Item.SetScholarlyDescription("Sold by undead merchants underground, but only under certain phases of the moon");
         }
 
         public override void UpdateEquip(Player player)

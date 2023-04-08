@@ -31,6 +31,7 @@ namespace Wisplantern.Items.Tools.Movement
             Item.mana = 20;
             Item.rare = ItemRarityID.Blue;
             Item.UseSound = SoundID.Item1;
+            Item.SetScholarlyDescription("Found mysteriously from the mystical remains of Wisplanterns underground");
         }
 
         public override Color? GetAlpha(Color lightColor)

@@ -26,6 +26,7 @@ namespace Wisplantern.Items.Tools.FishingPoles
             Item.fishingPole = 25;
             Item.shootSpeed = 5f;
             Item.shoot = ModContent.ProjectileType<WispcasterBobber>();
+            Item.SetScholarlyDescription("Found mysteriously from the mystical remains of Wisplanterns underground");
         }
 
         public override Color? GetAlpha(Color lightColor)

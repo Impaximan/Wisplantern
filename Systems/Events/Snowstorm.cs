@@ -9,20 +9,17 @@ namespace Wisplantern.Systems.Events
     {
         public static bool snowing = false;
         bool wasRaining = false;
-        int timeUntilSnowMelt = 0;
 
         public override void SaveWorldData(TagCompound tag)
         {
             tag.Add("snowing", snowing);
             tag.Add("wasRaining", wasRaining);
-            tag.Add("timeUntilSnowMelt", timeUntilSnowMelt);
         }
 
         public override void LoadWorldData(TagCompound tag)
         {
             snowing = tag.GetBool("snowing");
             wasRaining = tag.GetBool("wasRaining");
-            timeUntilSnowMelt = tag.GetInt("timeUntilSnowMelt");
         }
 
         public override void PostUpdateEverything()
@@ -46,7 +43,6 @@ namespace Wisplantern.Systems.Events
 
             if (snowing)
             {
-                timeUntilSnowMelt = 36000;
                 for (int i = 0; i < Main.maxTilesX / 5; i++)
                 {
                     int x = Main.rand.Next(0, Main.maxTilesX);
@@ -58,12 +54,8 @@ namespace Wisplantern.Systems.Events
                     }
                 }
             }
-            else if (timeUntilSnowMelt > 0)
-            {
-                timeUntilSnowMelt--;
-            }
 
-            if (!snowing && timeUntilSnowMelt <= 0)
+            if (!snowing)
             {
                 for (int i1 = 0; i1 < Main.maxTilesX / 10; i1++)
                 {

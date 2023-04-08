@@ -35,6 +35,7 @@ namespace Wisplantern.Items.Weapons.Ranged.Bows
             Item.autoReuse = true;
             Item.shootSpeed = 0f;
             Item.value = Item.sellPrice(0, 1, 0, 0);
+            Item.SetScholarlyDescription("Found mysteriously from the mystical remains of Wisplanterns underground");
         }
 
         public override Color? GetAlpha(Color lightColor)
