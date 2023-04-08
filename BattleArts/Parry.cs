@@ -80,7 +80,7 @@ namespace Wisplantern.BattleArts
             {
                 if (npc.active && !npc.CountsAsACritter && !npc.friendly && npc.Distance(Player.Center) <= Player.HeldItem.Size.Length() * 3f)
                 {
-                    npc.StrikeNPC(Player.HeldItem.damage * 3, 8f, (int)(npc.Center.X - Player.Center.X), true, false, false);
+                    npc.StrikeNPC(npc.CalculateHitInfo(Player.HeldItem.damage * 3, (int)(npc.Center.X - Player.Center.X), true, 8f, Player.HeldItem.DamageType, true, Player.luck));
                     npc.netUpdate = true;
                     NetMessage.SendData(MessageID.DamageNPC, number: npc.whoAmI, number2: Player.HeldItem.damage * 3, number3: 8f, number4: (int)(npc.Center.X - Player.Center.X), number5: 1);
                 }
@@ -90,29 +90,29 @@ namespace Wisplantern.BattleArts
             Player.ClearBuff(ModContent.BuffType<Buffs.BattleArtCooldown>());
         }
 
-        public override void ModifyHitByNPC(NPC npc, ref int damage, ref bool crit)
+        public override void ModifyHitByNPC(NPC npc, ref Player.HurtModifiers modifiers)
         {
             if (parryTime > 0)
             {
                 Parry();
-                damage /= 5;
+                modifiers.IncomingDamageMultiplier /= 5;
             }
             else if (parryDangerTime > 0)
             {
-                damage *= 2;
+                modifiers.IncomingDamageMultiplier *= 2;
             }
         }
 
-        public override void ModifyHitByProjectile(Projectile proj, ref int damage, ref bool crit)
+        public override void ModifyHitByProjectile(Projectile proj, ref Player.HurtModifiers modifiers)
         {
             if (parryTime > 0)
             {
                 Parry();
-                damage /= 5;
+                modifiers.IncomingDamageMultiplier /= 5;
             }
             else if (parryDangerTime > 0)
             {
-                damage *= 2;
+                modifiers.IncomingDamageMultiplier *= 2;
             }
         }
 

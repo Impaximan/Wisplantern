@@ -12,8 +12,8 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 	{
 		public override void SetStaticDefaults()
 		{
-			Tooltip.SetDefault("Perfectly timed strikes have thrice as much knockback");
-			SacrificeTotal = 1;
+			// Tooltip.SetDefault("Perfectly timed strikes have thrice as much knockback");
+			Item.ResearchUnlockCount = 1;
 		}
 
 		public override void ZweihanderDefaults()
@@ -32,11 +32,11 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 
         public override int ChargeTime => 90;
 
-        public override void ModifyHitNPCZweihanderVersion(Player player, NPC target, bool perfectCharge, bool firstHit, ref int damage, ref float knockBack, ref bool crit)
+        public override void ModifyHitNPCZweihanderVersion(Player player, NPC target, bool perfectCharge, bool firstHit, ref NPC.HitModifiers modifiers)
 		{
 			if (perfectCharge)
 			{
-				knockBack *= 3f;
+				modifiers.Knockback *= 3f;
 
 				if (firstHit)
 				{

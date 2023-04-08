@@ -16,8 +16,8 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 
 		public override void SetStaticDefaults()
 		{
-			Tooltip.SetDefault("Perfectly timed strikes guarentee critical hits");
-			SacrificeTotal = 1;
+			// Tooltip.SetDefault("Perfectly timed strikes guarentee critical hits");
+			Item.ResearchUnlockCount = 1;
 		}
 
 		/// <summary>
@@ -62,24 +62,25 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 
         }
 
-		public virtual void OnSwing(Player player)
+		public virtual void OnSwing(Player player, bool perfectCharge)
         {
 
         }
+
 		public static double AngleDifference(double angle1, double angle2)
 		{
 			double diff = (angle2 - angle1 + Math.PI / 2) % Math.PI - Math.PI / 2;
 			return diff < -Math.PI / 2 ? diff + Math.PI : diff;
 		}
 
-		public override bool? CanHitNPC(Player player, NPC target)
+        public override bool? CanMeleeAttackCollideWithNPC(Rectangle meleeAttackHitbox, Player player, NPC target)
         {
-			Vector2 closestPointOnHitbox = target.Hitbox.Center.ToVector2();
-			while (target.Hitbox.Contains((int)closestPointOnHitbox.X, (int)closestPointOnHitbox.Y))
+            Vector2 closestPointOnHitbox = target.Hitbox.Center.ToVector2();
+            while (target.Hitbox.Contains((int)closestPointOnHitbox.X, (int)closestPointOnHitbox.Y))
             {
-				closestPointOnHitbox += target.DirectionTo(player.itemLocation);
+                closestPointOnHitbox += target.DirectionTo(player.itemLocation);
             }
-            return !target.friendly && closestPointOnHitbox.Distance(player.itemLocation) < Item.Size.Length() && AngleDifference(player.DirectionTo(target.Center).ToRotation(), rotation + swordRotationAdd * player.direction) <= MathHelper.ToRadians(15f) && goneYet;
+            return closestPointOnHitbox.Distance(player.itemLocation) < Item.Size.Length() && AngleDifference(player.DirectionTo(target.Center).ToRotation(), rotation + swordRotationAdd * player.direction) <= MathHelper.ToRadians(15f) && goneYet;
         }
 
         public virtual int DustType => DustID.Torch;
@@ -198,7 +199,7 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 					}
 					player.velocity += rotation.ToRotationVector2() * Item.shootSpeed * chargeProgress * 0.85f;
 					ogRotation = rotation;
-					OnSwing(player);
+					OnSwing(player, perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f);
 					SoundEngine.PlaySound(SoundID.DD2_MonkStaffSwing, player.Center);
 				}
 				else if (chargeProgress >= 0.15f && perfectChargeTime <= perfectChargeLeeway)
@@ -219,10 +220,10 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 			player.compositeBackArm.rotation += swordRotationAdd * player.direction / 2f;
 		}
 
-        public override void ModifyHitNPC(Player player, NPC target, ref int damage, ref float knockBack, ref bool crit)
+        public override void ModifyHitNPC(Player player, NPC target, ref NPC.HitModifiers modifiers)
         {
-			damage = (int)(damage * MathHelper.Lerp(chargeProgress, 1f, 0.2f));
-			knockBack *= chargeProgress + 0.2f;
+			modifiers.SourceDamage *= MathHelper.Lerp(chargeProgress, 1f, 0.2f);
+			modifiers.Knockback *= chargeProgress + 0.2f;
 			if (!hasHitAlready)
 			{
 				Vector2 velocityChange = ogRotation.ToRotationVector2() * Item.shootSpeed * chargeProgress;
@@ -245,7 +246,7 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 			{
 				target.AddBuff(BuffID.OnFire, 180);
 			}
-			ModifyHitNPCZweihanderVersion(player, target, perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f, !hasHitAlready, ref damage, ref knockBack, ref crit);
+			ModifyHitNPCZweihanderVersion(player, target, perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f, !hasHitAlready, ref modifiers);
 			hasHitAlready = true;
 		}
 
@@ -270,7 +271,7 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
             }
         }
 
-        public virtual void ModifyHitNPCZweihanderVersion(Player player, NPC target, bool perfectCharge, bool firstHit, ref int damage, ref float knockBack, ref bool crit)
+        public virtual void ModifyHitNPCZweihanderVersion(Player player, NPC target, bool perfectCharge, bool firstHit, ref NPC.HitModifiers modifiers)
         {
 
         }

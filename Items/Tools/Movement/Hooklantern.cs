@@ -12,8 +12,8 @@ namespace Wisplantern.Items.Tools.Movement
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Can be thrown and grappled to" +
-                "\nOnly two can be active at once");
+            /* Tooltip.SetDefault("Can be thrown and grappled to" +
+                "\nOnly two can be active at once"); */
         }
 
         public override void SetDefaults()
@@ -64,7 +64,7 @@ namespace Wisplantern.Items.Tools.Movement
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Hooklantern");
+            // DisplayName.SetDefault("Hooklantern");
         }
 
         public override Color? GetAlpha(Color lightColor)

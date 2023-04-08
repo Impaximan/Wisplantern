@@ -32,7 +32,7 @@ namespace Wisplantern.Items.Weapons.Manipulative.Canes
             Item.useAnimation = 35;
             Item.rare = ItemRarityID.White;
             Item.value = Item.sellPrice(0, 0, 0, 25);
-            Item.SetManipulativePower(0.085f);
+            Item.SetManipulativePower(0.13f);
         }
 
         public override float MaxDistance => 225f;

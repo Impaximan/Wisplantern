@@ -12,19 +12,19 @@ namespace Wisplantern
     {
         public static void Load()
         {
-            On.Terraria.Main.DoUpdate += DoUpdate;
-            On.Terraria.Main.DrawInterface += DrawOvertopGraphics;
-			On.Terraria.Rain.MakeRain += MakeRain;
+            Terraria.On_Main.DoUpdate += DoUpdate;
+            Terraria.On_Main.DrawInterface += DrawOvertopGraphics;
+			Terraria.On_Rain.MakeRain += MakeRain;
 		}
 
         public static void Unload()
         {
-            On.Terraria.Main.DoUpdate -= DoUpdate;
-            On.Terraria.Main.DrawInterface -= DrawOvertopGraphics;
-			On.Terraria.Rain.MakeRain -= MakeRain;
+            Terraria.On_Main.DoUpdate -= DoUpdate;
+            Terraria.On_Main.DrawInterface -= DrawOvertopGraphics;
+			Terraria.On_Rain.MakeRain -= MakeRain;
 		}
 
-        public static void DoUpdate(On.Terraria.Main.orig_DoUpdate orig, Main self, ref GameTime gameTime)
+        public static void DoUpdate(Terraria.On_Main.orig_DoUpdate orig, Main self, ref GameTime gameTime)
         {
             if (Wisplantern.freezeFrames > 0)
             {
@@ -43,7 +43,7 @@ namespace Wisplantern
         }
 
         static float freezeFrameLightAlpha = 0f;
-        private static void DrawOvertopGraphics(On.Terraria.Main.orig_DrawInterface orig, Main self, GameTime gameTime)
+        private static void DrawOvertopGraphics(Terraria.On_Main.orig_DrawInterface orig, Main self, GameTime gameTime)
         {
             orig(self, gameTime);
 
@@ -63,7 +63,7 @@ namespace Wisplantern
             Main.spriteBatch.End();
         }
 
-		private static void MakeRain(On.Terraria.Rain.orig_MakeRain orig)
+		private static void MakeRain(Terraria.On_Rain.orig_MakeRain orig)
 		{
 			if (!Systems.Events.Snowstorm.snowing)
 			{

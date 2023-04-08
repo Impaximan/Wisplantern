@@ -12,7 +12,7 @@ namespace Wisplantern.Items.Tools.FishingPoles
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Creates a bobber at your cursor position, within a certain distance");
+            // Tooltip.SetDefault("Creates a bobber at your cursor position, within a certain distance");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 

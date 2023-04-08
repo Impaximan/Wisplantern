@@ -9,8 +9,8 @@ namespace Wisplantern.Items.Placeable.Blocks
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Igneous Stone Block");
-            Tooltip.SetDefault("'It's lukewarm'");
+            // DisplayName.SetDefault("Igneous Stone Block");
+            // Tooltip.SetDefault("'It's lukewarm'");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 100;
         }
 

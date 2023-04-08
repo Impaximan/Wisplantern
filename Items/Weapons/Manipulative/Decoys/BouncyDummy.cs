@@ -39,7 +39,7 @@ namespace Wisplantern.Items.Weapons.Manipulative.Decoys
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Bouncy Dummy");
+            // DisplayName.SetDefault("Bouncy Dummy");
             Main.npcFrameCount[Type] = 2;
         }
 
@@ -56,7 +56,7 @@ namespace Wisplantern.Items.Weapons.Manipulative.Decoys
             NPC.knockBackResist = 0.5f;
         }
 
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
         {
             SoundStyle newStyle = Main.rand.Next(3) switch
             {
@@ -66,7 +66,7 @@ namespace Wisplantern.Items.Weapons.Manipulative.Decoys
             };
             
             NPC.HitSound = newStyle;
-            NPC.spriteDirection = -hitDirection;
+            NPC.spriteDirection = -hit.HitDirection;
         }
 
         int timeUntilBounce = 5;

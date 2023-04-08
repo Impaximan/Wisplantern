@@ -10,8 +10,8 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 	{
 		public override void SetStaticDefaults()
 		{
-			Tooltip.SetDefault("Perfectly timed strikes guarentee critical hits");
-			SacrificeTotal = 1;
+			// Tooltip.SetDefault("Perfectly timed strikes guarentee critical hits");
+			Item.ResearchUnlockCount = 1;
 		}
 
 		public override void ZweihanderDefaults()
@@ -25,11 +25,11 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 			Item.DamageType = DamageClass.Melee;
 		}
 
-        public override void ModifyHitNPCZweihanderVersion(Player player, NPC target, bool perfectCharge, bool firstHit, ref int damage, ref float knockBack, ref bool crit)
+        public override void ModifyHitNPCZweihanderVersion(Player player, NPC target, bool perfectCharge, bool firstHit, ref NPC.HitModifiers modifiers)
         {
 			if (perfectCharge)
             {
-				crit = true;
+				modifiers.SetCrit();
             }
         }
 

@@ -9,7 +9,7 @@ namespace Wisplantern.Items.BattleArtItems
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Tri-Cast");
+            // DisplayName.SetDefault("Tri-Cast");
         }
 
         public override void SetDefaults()

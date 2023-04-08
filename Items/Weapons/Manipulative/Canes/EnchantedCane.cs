@@ -14,7 +14,7 @@ namespace Wisplantern.Items.Weapons.Manipulative.Canes
         public override void SetStaticDefaults()
         {
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-            Tooltip.SetDefault("Causes nearby fallen stars to gravitate towards aggravated enemies");
+            // Tooltip.SetDefault("Causes nearby fallen stars to gravitate towards aggravated enemies");
         }
 
         public override void AddRecipes()

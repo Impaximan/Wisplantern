@@ -11,8 +11,8 @@ namespace Wisplantern.Items.Equipable.Accessories
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Allows you to swing magic staffs, recovering mana on melee hits" +
-                "\n+20 max mana");
+            /* Tooltip.SetDefault("Allows you to swing magic staffs, recovering mana on melee hits" +
+                "\n+20 max mana"); */
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -69,16 +69,16 @@ namespace Wisplantern.Items.Equipable.Accessories
             originallyNoMelee = item.noMelee;
         }
 
-        public override void ModifyHitNPC(Item item, Player player, NPC target, ref int damage, ref float knockBack, ref bool crit)
+        public override void ModifyHitNPC(Item item, Player player, NPC target, ref NPC.HitModifiers modifiers)
         {
             if (player.GetModPlayer<GlintstoneGlovePlayer>().equipped && Item.staff[item.type])
             {
-                knockBack *= 1.5f;  
-                damage = (int)(damage * 0.85f);
+                modifiers.Knockback *= 1.5f;  
+                modifiers.FinalDamage *= 0.85f;
             }
         }
 
-        public override void OnHitNPC(Item item, Player player, NPC target, int damage, float knockBack, bool crit)
+        public override void OnHitNPC(Item item, Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (player.GetModPlayer<GlintstoneGlovePlayer>().equipped && Item.staff[item.type])
             {

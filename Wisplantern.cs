@@ -9,6 +9,7 @@ using Terraria;
 using Terraria.Graphics.Effects;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
+using Terraria.Achievements;
 
 namespace Wisplantern
 {
@@ -104,7 +105,6 @@ namespace Wisplantern
                 Filters.Scene["Wisplantern:WinterShader"] = new Filter(new ScreenShaderData(winterRef, "Winter"), EffectPriority.VeryHigh);
                 Filters.Scene["Wisplantern:WinterShader"].Load();
             }
-
 
             Detours.Load();
         }

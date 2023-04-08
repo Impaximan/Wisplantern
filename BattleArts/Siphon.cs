@@ -79,7 +79,7 @@ namespace Wisplantern.BattleArts
     {
         public override bool InstancePerEntity => true;
 
-        public override void OnHitByProjectile(NPC npc, Projectile projectile, int damage, float knockback, bool crit)
+        public override void OnHitByProjectile(NPC npc, Projectile projectile, NPC.HitInfo hit, int damageDone)
         {
             if (projectile.GetGlobalProjectile<SiphonProjectile>().siphoning && npc.life <= 0)
             {

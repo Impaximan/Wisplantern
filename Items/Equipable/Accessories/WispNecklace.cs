@@ -10,8 +10,8 @@ namespace Wisplantern.Items.Equipable.Accessories
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Weapons benefit from mining speed" +
-                "\n10% increased mining speed");
+            /* Tooltip.SetDefault("Weapons benefit from mining speed" +
+                "\n10% increased mining speed"); */
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 

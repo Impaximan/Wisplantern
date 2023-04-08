@@ -19,7 +19,7 @@ namespace Wisplantern.Globals.GItems
             }
         }
 
-        public override void ExtractinatorUse(int extractType, ref int resultType, ref int resultStack)
+        public override void ExtractinatorUse(int extractType, int extractinatorBlockType, ref int resultType, ref int resultStack)
         {
             if (extractType == 0)
             {

@@ -39,7 +39,7 @@ namespace Wisplantern.Systems.Worldgen
                 ModContent.TileType<Tiles.Depthrock>()
             };
 
-        public override void ModifyWorldGenTasks(List<GenPass> tasks, ref float totalWeight)
+        public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
         {
             int genIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Underworld"));
             tasks.Insert(genIndex + 1, new PassLegacy("Igneous City", delegate (GenerationProgress progress, GameConfiguration config)
@@ -168,7 +168,7 @@ namespace Wisplantern.Systems.Worldgen
 
             for (int i = 10 + 1; i < Main.maxTilesX - 10 - 1; i++)
             {
-                for (int j = (int)WorldGen.rockLayer; j < Main.maxTilesY - 200; j++)
+                for (int j = (int)GenVars.rockLayer; j < Main.maxTilesY - 200; j++)
                 {
                     Tile tile = Main.tile[i, j];
 
@@ -288,7 +288,7 @@ namespace Wisplantern.Systems.Worldgen
 
             for (int i = 10 + 1; i < Main.maxTilesX - 10 - 1; i++)
             {
-                for (int j = (int)WorldGen.rockLayer; j < Main.maxTilesY - 200 - 1; j++)
+                for (int j = (int)GenVars.rockLayer; j < Main.maxTilesY - 200 - 1; j++)
                 {
                     Tile tile = Main.tile[i, j];
 
@@ -313,7 +313,7 @@ namespace Wisplantern.Systems.Worldgen
 
                             if (!tile.HasTile && Main.rand.NextBool(5))
                             {
-                                WorldGen.PlaceLiquid(i, j, LiquidID.Lava, 255);
+                                WorldGen.PlaceLiquid(i, j, (byte)LiquidID.Lava, 255);
                             }
                         }
                     }

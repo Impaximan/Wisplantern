@@ -146,8 +146,8 @@ namespace Wisplantern.Globals.GNPCs
                 {
                     if (target.active && target.whoAmI != npc.whoAmI && target.Hitbox.Intersects(npc.Hitbox) && target.GetGlobalNPC<InfightingNPC>().infightIframes <= 0 && !target.friendly)
                     {
-                        int damage = Main.DamageVar(infightDamage, Main.player[infightPlayer].luck);
-                        int struckDamage = (int)target.StrikeNPC(damage, infightKnockback, Math.Sign(target.Center.X - npc.Center.X), Main.rand.NextBool(infightCritChance, 100));
+                        int damage = infightDamage;
+                        int struckDamage = target.StrikeNPC(target.CalculateHitInfo(damage, Math.Sign(target.Center.X - npc.Center.X), Main.rand.NextBool(infightCritChance, 100), infightKnockback, ModContent.GetInstance<DamageClasses.Manipulative>(), true, Main.player[infightPlayer].luck));
                         Main.player[infightPlayer].addDPS(struckDamage);
                         target.GetGlobalNPC<InfightingNPC>().infightIframes = infightGivenIframes;
                     }
@@ -195,11 +195,11 @@ namespace Wisplantern.Globals.GNPCs
             }
         }
 
-        public override void ModifyHitNPC(Projectile projectile, NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitNPC(Projectile projectile, NPC target, ref NPC.HitModifiers modifiers)
         {
             if (originalNPC != null)
             {
-                damage = originalNPC.GetGlobalNPC<InfightingNPC>().infightDamage * 2;
+                modifiers.SourceDamage.Base = originalNPC.GetGlobalNPC<InfightingNPC>().infightDamage * 2;
             }
         }
 

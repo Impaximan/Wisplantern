@@ -41,7 +41,7 @@ namespace Wisplantern.Items.Weapons.Manipulative.Decoys
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Bramblesprout");
+            // DisplayName.SetDefault("Bramblesprout");
         }
 
         public override void SetStats()

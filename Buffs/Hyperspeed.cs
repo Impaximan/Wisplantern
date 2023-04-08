@@ -8,8 +8,8 @@ namespace Wisplantern.Buffs
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Hyperspeed");
-            Description.SetDefault("Greatly increased mining speed");
+            // DisplayName.SetDefault("Hyperspeed");
+            // Description.SetDefault("Greatly increased mining speed");
             Main.debuff[Type] = false;
             Main.pvpBuff[Type] = false;
             Main.buffNoSave[Type] = false;

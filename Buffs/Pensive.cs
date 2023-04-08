@@ -8,8 +8,8 @@ namespace Wisplantern.Buffs
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Pensive");
-            Description.SetDefault("Max stats increased and monster spawns reduced");
+            // DisplayName.SetDefault("Pensive");
+            // Description.SetDefault("Max stats increased and monster spawns reduced");
             Main.debuff[Type] = false;
             Main.pvpBuff[Type] = false;
             Main.buffNoSave[Type] = false;
