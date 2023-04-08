@@ -47,6 +47,24 @@ Mods: {
 		}
 
 		Items: {
+			TinRodOfActivation: {
+				DisplayName: Tin Rod of Activation
+				Tooltip:
+					'''
+					Activates wirable mechanisms when used
+					'Useful for the manipulative...'
+					'''
+			}
+
+			CopperRodOfActivation: {
+				DisplayName: Copper Rod of Activation
+				Tooltip:
+					'''
+					Activates wirable mechanisms when used
+					'Useful for the manipulative...'
+					'''
+			}
+
 			MoonsBoon: {
 				DisplayName: Moon's Boon
 				Tooltip:
@@ -241,6 +259,8 @@ Mods: {
 					Perfectly timed strikes with zweihanders set enemies ablaze
 					Chance to set wooden arrows ablaze
 					Guarantees that flaming arrows will ignite enemies
+					Aggravated enemies set eachother on fire
+					'No steel needed this time!'
 					'''
 			}
 

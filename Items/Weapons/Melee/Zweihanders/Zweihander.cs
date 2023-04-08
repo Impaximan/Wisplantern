@@ -47,16 +47,6 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 			ZweihanderDefaults();
 		}
 
-        public override void AddRecipes()
-        {
-			CreateRecipe()
-				.AddIngredient(ItemID.CopperBar, 12)
-				.AddIngredient(ItemID.StoneBlock, 25)
-				.AddIngredient(ItemID.Wood, 5)
-				.AddTile(TileID.Anvils)
-				.Register();
-        }
-
 		public virtual void WhileCharging(Player player)
         {
 

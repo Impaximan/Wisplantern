@@ -14,6 +14,7 @@ namespace Wisplantern.Globals.GNPCs
         public float infightKnockback = 3f;
         public int infightCritChance = 4;
         public int infightPlayer = 0;
+        public Item infightItem = null;
 
         /// <summary>
         /// How many infighting iframes this enemy gives other enemies on hit.
@@ -35,10 +36,11 @@ namespace Wisplantern.Globals.GNPCs
             float distance = Main.player[me.target].Distance(me.Center) * 1.5f;
             float decoyDistance = Main.player[me.target].Distance(me.Center) * 1.5f;
             bool foundDecoy = false;
+            bool foundBoss = false;
 
             foreach (NPC npc in Main.npc)
             {
-                bool prioritize = (npc.Distance(me.Center) < distance || Main.player[me.target].GetModPlayer<ModPlayers.ManipulativePlayer>().smokeBombTime > 0) && !foundDecoy;
+                bool prioritize = (npc.Distance(me.Center) < distance || Main.player[me.target].GetModPlayer<ModPlayers.ManipulativePlayer>().smokeBombTime > 0 || npc.boss) && !foundDecoy && !foundBoss;
                 if (npc.TryGetGlobalNPC(out InfightingNPC result))
                 {
                     if (result.decoy && (npc.Distance(me.Center) < decoyDistance || Main.player[me.target].GetModPlayer<ModPlayers.ManipulativePlayer>().smokeBombTime > 0)) prioritize = true;
@@ -47,10 +49,16 @@ namespace Wisplantern.Globals.GNPCs
                 {
                     target = npc;
                     distance = npc.Distance(me.Center);
+
                     if (result.decoy)
                     {
                         foundDecoy = true;
                         decoyDistance = distance;
+                    }
+
+                    if (target.boss)
+                    {
+                        foundBoss = true;
                     }
                 }
             }
@@ -147,9 +155,22 @@ namespace Wisplantern.Globals.GNPCs
                     if (target.active && target.whoAmI != npc.whoAmI && target.Hitbox.Intersects(npc.Hitbox) && target.GetGlobalNPC<InfightingNPC>().infightIframes <= 0 && !target.friendly)
                     {
                         int damage = infightDamage;
-                        int struckDamage = target.StrikeNPC(target.CalculateHitInfo(damage, Math.Sign(target.Center.X - npc.Center.X), Main.rand.NextBool(infightCritChance, 100), infightKnockback, ModContent.GetInstance<DamageClasses.ManipulativeDamageClass>(), true, Main.player[infightPlayer].luck));
+                        if (npc.SpawnedFromStatue)
+                        {
+                            damage = (int)(damage * 1.35f);
+                        }
+                        NPC.HitInfo info = target.CalculateHitInfo(damage, Math.Sign(target.Center.X - npc.Center.X), Main.rand.NextBool(infightCritChance, 100), infightKnockback, ModContent.GetInstance<DamageClasses.ManipulativeDamageClass>(), true, Main.player[infightPlayer].luck);
+                        int struckDamage = target.StrikeNPC(info);
                         Main.player[infightPlayer].addDPS(struckDamage);
+                        //foreach (int buffType in npc.buffType)
+                        //{
+                        //    target.AddBuff(buffType, npc.buffTime[npc.FindBuffIndex(buffType)]);
+                        //}
                         target.GetGlobalNPC<InfightingNPC>().infightIframes = infightGivenIframes;
+                        foreach (Instanced<GlobalNPC> gNPC in target.Globals)
+                        {
+                            gNPC.Instance.OnHitByItem(target, Main.player[infightPlayer], infightItem, info, damage);
+                        }
                     }
                 }
 
@@ -159,7 +180,9 @@ namespace Wisplantern.Globals.GNPCs
                 }
                 else
                 {
-                    aggravation -= 1f / 540f;
+                    if (npc.SpawnedFromStatue) aggravation -= 1f / 1200f;
+                    else aggravation -= 1f / 540f;
+
                     if (aggravation <= 0f)
                     {
                         aggravation = 0f;
@@ -200,6 +223,10 @@ namespace Wisplantern.Globals.GNPCs
             if (originalNPC != null)
             {
                 modifiers.SourceDamage.Base = originalNPC.GetGlobalNPC<InfightingNPC>().infightDamage * 2;
+                if (originalNPC.SpawnedFromStatue)
+                {
+                    modifiers.FinalDamage *= 1.35f;
+                }
             }
         }
 

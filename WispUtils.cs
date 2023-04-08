@@ -252,7 +252,7 @@ namespace Wisplantern
         /// <param name="player"></param>
         /// <param name="combatText"></param>
         /// <returns></returns>
-        public static bool Aggravate(this NPC npc, float amount, int damage, float knockback, int critChance, Player player, bool combatText = true)
+        public static bool Aggravate(this NPC npc, float amount, int damage, float knockback, int critChance, Player player, Item item, bool combatText = true)
         {
             InfightingNPC iNPC = npc.GetGlobalNPC<InfightingNPC>();
             amount = amount * 100 / npc.life;
@@ -282,6 +282,7 @@ namespace Wisplantern
                 iNPC.infightCritChance = critChance;
                 iNPC.infightDamage = damage;
                 iNPC.infightKnockback = knockback;
+                iNPC.infightItem = item;
                 return true;
             }
             return false;
@@ -316,7 +317,7 @@ namespace Wisplantern
         /// <returns></returns>
         public static bool AggravateNPC(this Item item, NPC npc, Player player)
         {
-            return npc.Aggravate(item.GetGlobalItem<AggravatingItem>().manipulativePower, player.GetWeaponDamage(item), player.GetWeaponKnockback(item), player.GetWeaponCrit(item), player);
+            return npc.Aggravate(item.GetGlobalItem<AggravatingItem>().manipulativePower, player.GetWeaponDamage(item), player.GetWeaponKnockback(item), player.GetWeaponCrit(item), player, item);
         }
 
         public static void SetManipulativePower(this Item item, float amount)
