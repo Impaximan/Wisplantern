@@ -2,7 +2,7 @@
 
 namespace Wisplantern.DamageClasses
 {
-    class Manipulative : DamageClass
+    class ManipulativeDamageClass : DamageClass
     {
         public override bool UseStandardCritCalcs => true;
     }

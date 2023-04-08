@@ -147,7 +147,7 @@ namespace Wisplantern.Globals.GNPCs
                     if (target.active && target.whoAmI != npc.whoAmI && target.Hitbox.Intersects(npc.Hitbox) && target.GetGlobalNPC<InfightingNPC>().infightIframes <= 0 && !target.friendly)
                     {
                         int damage = infightDamage;
-                        int struckDamage = target.StrikeNPC(target.CalculateHitInfo(damage, Math.Sign(target.Center.X - npc.Center.X), Main.rand.NextBool(infightCritChance, 100), infightKnockback, ModContent.GetInstance<DamageClasses.Manipulative>(), true, Main.player[infightPlayer].luck));
+                        int struckDamage = target.StrikeNPC(target.CalculateHitInfo(damage, Math.Sign(target.Center.X - npc.Center.X), Main.rand.NextBool(infightCritChance, 100), infightKnockback, ModContent.GetInstance<DamageClasses.ManipulativeDamageClass>(), true, Main.player[infightPlayer].luck));
                         Main.player[infightPlayer].addDPS(struckDamage);
                         target.GetGlobalNPC<InfightingNPC>().infightIframes = infightGivenIframes;
                     }

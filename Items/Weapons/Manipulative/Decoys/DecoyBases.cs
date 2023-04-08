@@ -209,7 +209,7 @@ namespace Wisplantern.Items.Weapons.Manipulative.Decoys
                     if (target.active && target.whoAmI != NPC.whoAmI && target.Hitbox.Intersects(NPC.Hitbox) && target.GetGlobalNPC<InfightingNPC>().infightIframes <= 0 && !target.friendly)
                     {
                         int damage = NPC.damage;
-                        int struckDamage = target.StrikeNPC(target.CalculateHitInfo(damage, Math.Sign(target.Center.X - NPC.Center.X), Main.rand.NextBool((int)NPC.ai[1], 100), 0f, ModContent.GetInstance<DamageClasses.Manipulative>(), true, Main.player[(int)NPC.ai[0]].luck));
+                        int struckDamage = target.StrikeNPC(target.CalculateHitInfo(damage, Math.Sign(target.Center.X - NPC.Center.X), Main.rand.NextBool((int)NPC.ai[1], 100), 0f, ModContent.GetInstance<DamageClasses.ManipulativeDamageClass>(), true, Main.player[(int)NPC.ai[0]].luck));
                         Main.player[(int)NPC.ai[0]].addDPS(struckDamage);
                         target.GetGlobalNPC<InfightingNPC>().infightIframes = 10;
                     }

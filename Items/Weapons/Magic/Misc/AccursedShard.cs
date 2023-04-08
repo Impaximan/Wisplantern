@@ -38,6 +38,7 @@ namespace Wisplantern.Items.Weapons.Magic.Misc
             Item.UseSound = SoundID.Item8;
             Item.shootSpeed = 3f;
             Item.value = Item.sellPrice(0, 0, 25, 0);
+            Item.SetScholarlyDescription("Found in random chests throughout the world");
         }
 
         public override void AddRecipes()

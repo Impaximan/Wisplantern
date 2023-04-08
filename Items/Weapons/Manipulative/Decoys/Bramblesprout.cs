@@ -19,7 +19,7 @@ namespace Wisplantern.Items.Weapons.Manipulative.Decoys
         {
             Item.width = 18;
             Item.height = 16;
-            Item.DamageType = ModContent.GetInstance<DamageClasses.Manipulative>();
+            Item.DamageType = ModContent.GetInstance<DamageClasses.ManipulativeDamageClass>();
             Item.damage = 10;
             Item.consumable = true;
             Item.maxStack = 9999;

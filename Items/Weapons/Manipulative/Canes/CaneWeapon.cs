@@ -22,7 +22,7 @@ namespace Wisplantern.Items.Weapons.Manipulative.Canes
             Item.knockBack = 3f;
             Item.UseSound = SoundID.Item152;
             Item.autoReuse = true;
-            Item.shootSpeed = 1f;
+            //Item.shootSpeed = 1f;
             CaneSetDefaults();
         }
 

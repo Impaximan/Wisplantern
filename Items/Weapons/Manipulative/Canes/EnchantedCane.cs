@@ -42,7 +42,7 @@ namespace Wisplantern.Items.Weapons.Manipulative.Canes
         {
             Item.damage = 11;
             Item.SetManipulativePower(0.075f);
-            Item.DamageType = ModContent.GetInstance<DamageClasses.Manipulative>();
+            Item.DamageType = ModContent.GetInstance<DamageClasses.ManipulativeDamageClass>();
             Item.width = 40;
             Item.height = 40;
             Item.useTime = 25;

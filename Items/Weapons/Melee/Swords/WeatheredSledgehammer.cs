@@ -35,6 +35,7 @@ namespace Wisplantern.Items.Weapons.Melee.Swords
             Item.autoReuse = false;
             Item.DamageType = DamageClass.Melee;
             Item.hammer = 40;
+            Item.SetScholarlyDescription("Found in random chests throughout the world");
         }
 
         public override void ModifyHitNPC(Player player, NPC target, ref NPC.HitModifiers modifiers)

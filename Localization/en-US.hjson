@@ -2,7 +2,7 @@
 Mods: {
 	Wisplantern: {
 		InfoDisplays.LuckIndicator.DisplayName: Luck
-		DamageClassName.Manipulative: manipulative damage
+		DamageClasses.ManipulativeDamageClass.DisplayName: manipulative damage
 
 		Projectiles: {
 			BloodySlashProjectile.DisplayName: Bloody Slash Projectile
@@ -356,6 +356,11 @@ Mods: {
 			TungstenZweihander: {
 				DisplayName: Tungsten Zweihander
 				Tooltip: Perfectly timed strikes guarentee critical hits
+			}
+
+			ScholarsLens: {
+				DisplayName: Scholar's Lens
+				Tooltip: Shows extra information on how to obtain items and more within their tooltips when equipped
 			}
 		}
 

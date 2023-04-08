@@ -10,9 +10,9 @@ namespace Wisplantern.Items.Info
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Scholar's Lens");
-            Tooltip.SetDefault("Shows extra information on how to obtain items and more within their tooltips when equipped");
-            SacrificeTotal = 1;
+            // DisplayName.SetDefault("Scholar's Lens");
+            // Tooltip.SetDefault("Shows extra information on how to obtain items and more within their tooltips when equipped");
+            Item.ResearchUnlockCount = 1;
         }
 
         public override void SetDefaults()
