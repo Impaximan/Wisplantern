@@ -45,7 +45,7 @@ namespace Wisplantern.Globals.GNPCs
                 {
                     if (result.decoy && (npc.Distance(me.Center) < decoyDistance || Main.player[me.target].GetModPlayer<ModPlayers.ManipulativePlayer>().smokeBombTime > 0)) prioritize = true;
                 }
-                if (npc.active && prioritize && npc.whoAmI != me.whoAmI && !npc.dontTakeDamage)
+                if (npc.active && prioritize && npc.whoAmI != me.whoAmI && !npc.dontTakeDamage && !(me.aiStyle == 9 && npc.whoAmI == castAIOwner) && npc.aiStyle != 9)
                 {
                     target = npc;
                     distance = npc.Distance(me.Center);
@@ -96,6 +96,7 @@ namespace Wisplantern.Globals.GNPCs
             return false;
         }
 
+        int castAIOwner = 0;
         public override void OnSpawn(NPC npc, IEntitySource source)
         {
             aggravation = 0f;

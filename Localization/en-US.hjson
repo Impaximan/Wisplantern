@@ -14,6 +14,14 @@ Mods: {
 			OtherArrow.DisplayName: Other Arrow
 			WisplanternVortex.DisplayName: Wisplantern Vortex
 			AccursedShardProjectile.DisplayName: Accursed Shard Projectile
+			CopperSummonProjectile.DisplayName: Copper Summon Projectile
+			GoldSummonProjectile.DisplayName: Gold Summon Projectile
+			IronSummonProjectile.DisplayName: Iron Summon Projectile
+			LeadSummonProjectile.DisplayName: Lead Summon Projectile
+			PlatinumSummonProjectile.DisplayName: Platinum Summon Projectile
+			SilverSummonProjectile.DisplayName: Silver Summon Projectile
+			TinSummonProjectile.DisplayName: Tin Summon Projectile
+			TungstenSummonProjectile.DisplayName: Tungsten Summon Projectile
 		}
 
 		Biomes: {
@@ -42,7 +50,47 @@ Mods: {
 
 			DecoyCooldown: {
 				DisplayName: Decoy Cooldown
-				Description: Mods.Wisplantern.Buffs.DecoyCooldown.Description
+				Description: You must wait to deply another decoy
+			}
+
+			CopperSummon: {
+				Description: A possessed copper broadsword keeps you protected!
+				DisplayName: Copper Summon
+			}
+
+			TungstenSummon: {
+				Description: Mods.Wisplantern.Buffs.TungstenSummon.Description
+				DisplayName: Tungsten Summon
+			}
+
+			TinSummon: {
+				Description: Mods.Wisplantern.Buffs.TinSummon.Description
+				DisplayName: Tin Summon
+			}
+
+			SilverSummon: {
+				Description: Mods.Wisplantern.Buffs.SilverSummon.Description
+				DisplayName: Silver Summon
+			}
+
+			PlatinumSummon: {
+				Description: Mods.Wisplantern.Buffs.PlatinumSummon.Description
+				DisplayName: Platinum Summon
+			}
+
+			LeadSummon: {
+				Description: Mods.Wisplantern.Buffs.LeadSummon.Description
+				DisplayName: Lead Summon
+			}
+
+			IronSummon: {
+				Description: Mods.Wisplantern.Buffs.IronSummon.Description
+				DisplayName: Iron Summon
+			}
+
+			GoldSummon: {
+				Description: Mods.Wisplantern.Buffs.GoldSummon.Description
+				DisplayName: Gold Summon
 			}
 		}
 
@@ -381,6 +429,46 @@ Mods: {
 			ScholarsLens: {
 				DisplayName: Scholar's Lens
 				Tooltip: Shows extra information on how to obtain items and more within their tooltips when equipped
+			}
+
+			CopperStaff: {
+				DisplayName: Copper Staff
+				Tooltip: Summons a possessed copper broadsword to fight for you
+			}
+
+			GoldStaff: {
+				DisplayName: Gold Staff
+				Tooltip: ""
+			}
+
+			IronStaff: {
+				DisplayName: Iron Staff
+				Tooltip: ""
+			}
+
+			LeadStaff: {
+				DisplayName: Lead Staff
+				Tooltip: ""
+			}
+
+			PlatinumStaff: {
+				DisplayName: Platinum Staff
+				Tooltip: ""
+			}
+
+			SilverStaff: {
+				DisplayName: Silver Staff
+				Tooltip: ""
+			}
+
+			TinStaff: {
+				DisplayName: Tin Staff
+				Tooltip: ""
+			}
+
+			TungstenStaff: {
+				DisplayName: Tungsten Staff
+				Tooltip: ""
 			}
 		}
 
