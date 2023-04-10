@@ -59,37 +59,37 @@ Mods: {
 			}
 
 			TungstenSummon: {
-				Description: Mods.Wisplantern.Buffs.TungstenSummon.Description
+				Description: A possessed tungsten broadsword keeps you protected!
 				DisplayName: Tungsten Summon
 			}
 
 			TinSummon: {
-				Description: Mods.Wisplantern.Buffs.TinSummon.Description
+				Description: A possessed tin broadsword keeps you protected!
 				DisplayName: Tin Summon
 			}
 
 			SilverSummon: {
-				Description: Mods.Wisplantern.Buffs.SilverSummon.Description
+				Description: A possessed silver broadsword keeps you protected!
 				DisplayName: Silver Summon
 			}
 
 			PlatinumSummon: {
-				Description: Mods.Wisplantern.Buffs.PlatinumSummon.Description
+				Description: A possessed platinum broadsword keeps you protected!
 				DisplayName: Platinum Summon
 			}
 
 			LeadSummon: {
-				Description: Mods.Wisplantern.Buffs.LeadSummon.Description
+				Description: A possessed lead broadsword keeps you protected!
 				DisplayName: Lead Summon
 			}
 
 			IronSummon: {
-				Description: Mods.Wisplantern.Buffs.IronSummon.Description
+				Description: A possessed iron broadsword keeps you protected!
 				DisplayName: Iron Summon
 			}
 
 			GoldSummon: {
-				Description: Mods.Wisplantern.Buffs.GoldSummon.Description
+				Description: A possessed gold broadsword keeps you protected!
 				DisplayName: Gold Summon
 			}
 		}
@@ -438,37 +438,37 @@ Mods: {
 
 			GoldStaff: {
 				DisplayName: Gold Staff
-				Tooltip: ""
+				Tooltip: Summons a possessed gold broadsword to fight for you
 			}
 
 			IronStaff: {
 				DisplayName: Iron Staff
-				Tooltip: ""
+				Tooltip: Summons a possessed iron broadsword to fight for you
 			}
 
 			LeadStaff: {
 				DisplayName: Lead Staff
-				Tooltip: ""
+				Tooltip: Summons a possessed lead broadsword to fight for you
 			}
 
 			PlatinumStaff: {
 				DisplayName: Platinum Staff
-				Tooltip: ""
+				Tooltip: Summons a possessed platinum broadsword to fight for you
 			}
 
 			SilverStaff: {
 				DisplayName: Silver Staff
-				Tooltip: ""
+				Tooltip: Summons a possessed silver broadsword to fight for you
 			}
 
 			TinStaff: {
 				DisplayName: Tin Staff
-				Tooltip: ""
+				Tooltip: Summons a possessed tin broadsword to fight for you
 			}
 
 			TungstenStaff: {
 				DisplayName: Tungsten Staff
-				Tooltip: ""
+				Tooltip: Summons a possessed tungsten broadsword to fight for you
 			}
 		}
 

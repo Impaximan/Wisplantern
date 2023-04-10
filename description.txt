@@ -5,7 +5,7 @@ Though it is WIP and in its very early stages, it currently has plenty of conten
 -New types of stone for decoration, and to make the underground feel less bland when explored outside of special biomes.
 -5 new naturally generating 'structures'
 -Battle arts, which allow you to give right click functions of your choice to weapons that did not already have them.
--50+ new items to discover
+-65+ new items to discover
 
 ---Credits---
 Dev team:
