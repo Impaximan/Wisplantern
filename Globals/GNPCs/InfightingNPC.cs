@@ -168,9 +168,9 @@ namespace Wisplantern.Globals.GNPCs
                         //    target.AddBuff(buffType, npc.buffTime[npc.FindBuffIndex(buffType)]);
                         //}
                         target.GetGlobalNPC<InfightingNPC>().infightIframes = infightGivenIframes;
-                        foreach (Instanced<GlobalNPC> gNPC in target.Globals)
+                        foreach (GlobalNPC gNPC in target.Globals)
                         {
-                            gNPC.Instance.OnHitByItem(target, Main.player[infightPlayer], infightItem, info, damage);
+                            gNPC.OnHitByItem(target, Main.player[infightPlayer], infightItem, info, damage);
                         }
                     }
                 }

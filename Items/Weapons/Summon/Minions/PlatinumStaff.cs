@@ -21,7 +21,7 @@ namespace Wisplantern.Items.Weapons.Summon.Minions
             Item.mana = 8;
             Item.useTime = 35;
             Item.useAnimation = 35;
-            Item.damage = 12;
+            Item.damage = 11;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.noMelee = true;
             Item.knockBack = 3f;
@@ -76,7 +76,7 @@ namespace Wisplantern.Items.Weapons.Summon.Minions
             Projectile.minionSlots = 1f;
             Projectile.penetrate = -1;
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 10;
+            Projectile.localNPCHitCooldown = 30;
         }
 
         public override bool? CanCutTiles()
