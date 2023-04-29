@@ -1,4 +1,3 @@
-
 Mods: {
 	Wisplantern: {
 		InfoDisplays.LuckIndicator.DisplayName: Luck
@@ -22,6 +21,7 @@ Mods: {
 			SilverSummonProjectile.DisplayName: Silver Summon Projectile
 			TinSummonProjectile.DisplayName: Tin Summon Projectile
 			TungstenSummonProjectile.DisplayName: Tungsten Summon Projectile
+			Bloodsplosion_Machete.DisplayName: Bloodsplosion_ Machete
 		}
 
 		Biomes: {
@@ -469,6 +469,11 @@ Mods: {
 			TungstenStaff: {
 				DisplayName: Tungsten Staff
 				Tooltip: Summons a possessed tungsten broadsword to fight for you
+			}
+
+			MansizeMachete: {
+				DisplayName: Mansize Machete
+				Tooltip: Perfectly timed strikes create an explosion that damages multiple enemies
 			}
 		}
 

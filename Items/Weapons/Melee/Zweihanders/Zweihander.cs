@@ -77,11 +77,12 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 		public virtual int ChargeTime => 55;
 		public float chargeProgress = 0f;
 
-        float rotation = 0f;
+        public float rotation = 0f;
 		float swordRotationAdd = 0f;
 		bool goneYet = false;
 		public int perfectChargeTime = 0;
 		bool hasHitAlready = false;
+		bool hasHitAlready2 = false;
 		float ogRotation = 0f;
 		public virtual bool HasSwungDust => false;
 		public virtual int SwungDustType => DustID.Torch;
@@ -94,6 +95,7 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 			perfectChargeTime = 0;
 			goneYet = false;
 			hasHitAlready = false;
+			hasHitAlready2 = false;
 			return false;
         }
 
@@ -214,28 +216,6 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
         {
 			modifiers.SourceDamage *= MathHelper.Lerp(chargeProgress, 1f, 0.2f);
 			modifiers.Knockback *= chargeProgress + 0.2f;
-			if (!hasHitAlready)
-			{
-				Vector2 velocityChange = ogRotation.ToRotationVector2() * Item.shootSpeed * chargeProgress;
-				velocityChange.Y *= 2f;
-				if (perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f)
-				{
-					velocityChange.Y *= 1.25f;
-					velocityChange.Y += 2.5f;
-					SoundStyle style = new SoundStyle("Wisplantern/Sounds/Effects/HeavyMetal");
-					style.Volume *= 0.75f;
-					style.PitchVariance = 0.35f;
-					SoundEngine.PlaySound(style, target.Center);
-					//Wisplantern.freezeFrames = 2;
-					PunchCameraModifier modifier = new PunchCameraModifier(target.Center, player.velocity.ToRotation().ToRotationVector2().RotatedBy(swordRotationAdd * player.direction + Math.PI / 2), 15f, 10f, 8, 1000f);
-					Main.instance.CameraModifiers.Add(modifier);
-				}
-				player.velocity -= velocityChange;
-			}
-			if (player.GetModPlayer<Equipable.Accessories.FlintPlayer>().equipped && perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f)
-			{
-				target.AddBuff(BuffID.OnFire, 180);
-			}
 			ModifyHitNPCZweihanderVersion(player, target, perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f, !hasHitAlready, ref modifiers);
 			hasHitAlready = true;
 		}
@@ -261,7 +241,38 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
             }
         }
 
-        public virtual void ModifyHitNPCZweihanderVersion(Player player, NPC target, bool perfectCharge, bool firstHit, ref NPC.HitModifiers modifiers)
+        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
+		{
+			if (!hasHitAlready2)
+			{
+				Vector2 velocityChange = ogRotation.ToRotationVector2() * Item.shootSpeed * chargeProgress;
+				velocityChange.Y *= 2f;
+				if (perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f)
+				{
+					velocityChange.Y *= 1.25f;
+					velocityChange.Y += 2.5f;
+					SoundStyle style = new SoundStyle("Wisplantern/Sounds/Effects/HeavyMetal");
+					style.Volume *= 0.75f;
+					style.PitchVariance = 0.35f;
+					SoundEngine.PlaySound(style, target.Center);
+					PunchCameraModifier modifier = new PunchCameraModifier(target.Center, player.velocity.ToRotation().ToRotationVector2().RotatedBy(swordRotationAdd * player.direction + Math.PI / 2), 15f, 10f, 8, 1000f);
+					Main.instance.CameraModifiers.Add(modifier);
+				}
+				player.velocity -= velocityChange;
+			}
+			if (player.GetModPlayer<Equipable.Accessories.FlintPlayer>().equipped && perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f)
+			{
+				target.AddBuff(BuffID.OnFire, 180);
+			}
+			OnHitNPCZweihanderVersion(player, target, perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f, !hasHitAlready2, hit, damageDone);
+			hasHitAlready2 = true;
+		}
+
+		public virtual void OnHitNPCZweihanderVersion(Player player, NPC target, bool perfectCharge, bool firstHit, NPC.HitInfo hit, int damageDone)
+		{
+		}
+
+		public virtual void ModifyHitNPCZweihanderVersion(Player player, NPC target, bool perfectCharge, bool firstHit, ref NPC.HitModifiers modifiers)
         {
 
         }
