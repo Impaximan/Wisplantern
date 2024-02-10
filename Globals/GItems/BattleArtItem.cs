@@ -391,7 +391,7 @@ namespace Wisplantern.Globals.GItems
                     OverrideColor = new Color(255, 255, 200)
                 };
 
-                TooltipLine line2 = new (Mod, "BattleArt2", "Can be used on " + battleArtItemBattleArt.BattleArtApplicabilityDescription());
+                TooltipLine line2 = new (Mod, "BattleArt2", "Can be applied to " + battleArtItemBattleArt.BattleArtApplicabilityDescription());
 
                 TooltipLine line3 = new (Mod, "BattleArt3", "Grants a weapon the following attack: ");
 

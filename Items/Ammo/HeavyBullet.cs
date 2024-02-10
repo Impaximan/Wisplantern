@@ -1,11 +1,12 @@
 ﻿using Terraria.DataStructures;
 using Microsoft.Xna.Framework.Graphics;
+using Terraria.Audio;
 
 namespace Wisplantern.Items.Ammo
 {
     public class HeavyBullet_Iron : ModItem
     {
-        public const int musketBallsNeeded = 50;
+        public const int musketBallsNeeded = 70;
         public override void AddRecipes()
         {
             CreateRecipe(musketBallsNeeded)
@@ -121,6 +122,22 @@ namespace Wisplantern.Items.Ammo
         public override void ModifyDamageHitbox(ref Rectangle hitbox)
         {
             hitbox = hitbox.OffsetSize(-4, 0);
+        }
+
+        public override bool OnTileCollide(Vector2 oldVelocity)
+        {
+            SoundStyle style = new SoundStyle("Wisplantern/Sounds/Effects/BulletWhizz");
+            style.PitchVariance = 0.5f;
+            style.Pitch = -0.75f;
+            style.MaxInstances = 1;
+            style.SoundLimitBehavior = SoundLimitBehavior.ReplaceOldest;
+            SoundEngine.PlaySound(style, Projectile.Center);
+            return base.OnTileCollide(oldVelocity);
+        }
+
+        public override void OnKill(int timeLeft)
+        {
+            SoundEngine.PlaySound(SoundID.NPCDeath3, Projectile.Center);
         }
 
         public override void AI()

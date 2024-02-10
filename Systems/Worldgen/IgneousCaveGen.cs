@@ -43,7 +43,10 @@ namespace Wisplantern.Systems.Worldgen
             {
                 progress.Message = "Burying A City";
 
-                IgneousCity();
+                if (Wisplantern.generateVolcanicCaves)
+                {
+                    IgneousCity();
+                }
             }));
             
             genIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Micro Biomes"));
@@ -51,7 +54,10 @@ namespace Wisplantern.Systems.Worldgen
             {
                 progress.Message = "Volcanic Activity";
 
-                IgneousPatches();
+                if (Wisplantern.generateVolcanicCaves)
+                {
+                    IgneousPatches();
+                }
             }));
         }
 

@@ -14,7 +14,10 @@ namespace Wisplantern.Systems.Worldgen
             {
                 progress.Message = "Livening Things Up";
 
-                LushPatches();
+                if (Wisplantern.generateLushCaves)
+                {
+                    LushPatches();
+                }
             }));
         }
 

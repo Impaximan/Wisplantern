@@ -65,11 +65,17 @@ namespace Wisplantern
         private static string savingFolder = Path.Combine(Main.SavePath, "Mods", "Cache");
 
         //Config stuff
-        public static bool generateHellevators = true;
-        public static bool generateLakes = true;
-        public static bool generateFrostFortresses = true;
-        public static bool generateCanyons = true;
-        public static bool generateChastisedChurch = true;
+        public static bool generateMassiveMountain = true;
+        public static bool generatePits = true;
+        public static bool generateLushCaves = true;
+        public static bool generateVolcanicCaves = true;
+
+        public static bool playDeepUnderground = true;
+        public static bool playSnowstorm = true;
+        public static bool playClairDeLune = true;
+
+        public static bool calmNights = true;
+        public static bool snowstorms = true;
 
         public override void Load()
         {

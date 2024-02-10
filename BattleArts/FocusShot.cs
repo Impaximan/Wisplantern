@@ -11,7 +11,7 @@ namespace Wisplantern.BattleArts
 
         public override int ID => BattleArtID.FocusShot;
 
-        public override string BattleArtDescription => "Right click to focus all bullets directly towards the cursor and with increased velocity and damage" +
+        public override string BattleArtDescription => "Right click to focus all bullets directly towards the cursor with increased velocity and damage" +
             "\n5 second cooldown";
 
         public override string BattleArtName => "Focus Shot";

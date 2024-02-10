@@ -24,7 +24,7 @@ namespace Wisplantern.Systems.Events
             if (Main.raining && !wasRaining)
             {
                 wasRaining = true;
-                if (Main.rand.NextBool(4))
+                if (Main.rand.NextBool(4) && Wisplantern.snowstorms)
                 {
                     snowing = true;
                 }

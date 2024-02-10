@@ -28,8 +28,11 @@ namespace Wisplantern.Systems.Worldgen
                 progress.Message = "Generating massive caves";
                 LargeCaves();
 
-                progress.Message = "Creating sinkholes";
-                Sinkholes();
+                if (Wisplantern.generatePits)
+                {
+                    progress.Message = "Creating sinkholes";
+                    Sinkholes();    
+                }
 
                 progress.Message = "Sine caves";
                 SineCaves();
@@ -44,9 +47,13 @@ namespace Wisplantern.Systems.Worldgen
             tasks.Insert(genIndex + 1, new PassLegacy("Mountain Shinies", delegate (GenerationProgress progress, GameConfiguration config)
             {
                 progress.Message = "Mountain Shinies";
-                foreach (Tuple<Point, int> ore in oresToPlace)
+
+                if (Wisplantern.generateMassiveMountain)
                 {
-                    WorldGen.PlaceTile(ore.Item1.X, ore.Item1.Y, ore.Item2, true, false);
+                    foreach (Tuple<Point, int> ore in oresToPlace)
+                    {
+                        WorldGen.PlaceTile(ore.Item1.X, ore.Item1.Y, ore.Item2, true, false);
+                    }
                 }
             }));
 
@@ -71,37 +78,40 @@ namespace Wisplantern.Systems.Worldgen
             tasks.Insert(genIndex + 1, new PassLegacy("Mountain Chests", delegate (GenerationProgress progress, GameConfiguration config)
             {
                 progress.Message = "Mountain Chests";
-                for (int i = 0; i < mountainRect.Width / 30; i++)
+
+                if (Wisplantern.generateMassiveMountain)
                 {
-                    Point currentPosition = new Point(Main.rand.Next(mountainRect.X + mountainRect.Width / 4, (int)(mountainRect.X + mountainRect.Width * 0.75f)), Main.rand.Next(mountainRect.Y, mountainRect.Y + mountainRect.Height));
-                    if (!(Main.tile[currentPosition.X, currentPosition.Y].HasTile && Main.tileSolid[Main.tile[currentPosition.X, currentPosition.Y].TileType]))
+                    for (int i = 0; i < mountainRect.Width / 30; i++)
                     {
-                        while (!WorldUtils.Find(currentPosition, Searches.Chain(new Searches.Down(1), new GenCondition[]
-                            {
+                        Point currentPosition = new Point(Main.rand.Next(mountainRect.X + mountainRect.Width / 4, (int)(mountainRect.X + mountainRect.Width * 0.75f)), Main.rand.Next(mountainRect.Y, mountainRect.Y + mountainRect.Height));
+                        if (!(Main.tile[currentPosition.X, currentPosition.Y].HasTile && Main.tileSolid[Main.tile[currentPosition.X, currentPosition.Y].TileType]))
+                        {
+                            while (!WorldUtils.Find(currentPosition, Searches.Chain(new Searches.Down(1), new GenCondition[]
+                                {
         new Conditions.IsSolid()
-                            }), out _))
-                        {
-                            currentPosition.Y++;
-                        }
-
-                        WorldGen.KillTile(currentPosition.X, currentPosition.Y - 1);
-                        WorldGen.KillTile(currentPosition.X + 1, currentPosition.Y - 1);
-                        WorldGen.KillTile(currentPosition.X, currentPosition.Y);
-                        WorldGen.KillTile(currentPosition.X + 1, currentPosition.Y);
-                        WorldGen.PlaceTile(currentPosition.X, currentPosition.Y + 1, TileID.WoodBlock);
-                        WorldGen.SlopeTile(currentPosition.X, currentPosition.Y + 1, 0);
-                        WorldGen.PlaceTile(currentPosition.X + 1, currentPosition.Y + 1, TileID.WoodBlock);
-                        WorldGen.SlopeTile(currentPosition.X + 1, currentPosition.Y + 1, 0);
-
-                        WorldGen.PlaceChest(currentPosition.X, currentPosition.Y);
-
-                        #region Chest Loot
-                        if (Chest.FindChest(currentPosition.X, currentPosition.Y - 1) > 0)
-                        {
-                            Chest chest = Main.chest[Chest.FindChest(currentPosition.X, currentPosition.Y - 1)];
-                            if (chest != null)
+                                }), out _))
                             {
-                                List<int> mainItems = new List<int>
+                                currentPosition.Y++;
+                            }
+
+                            WorldGen.KillTile(currentPosition.X, currentPosition.Y - 1);
+                            WorldGen.KillTile(currentPosition.X + 1, currentPosition.Y - 1);
+                            WorldGen.KillTile(currentPosition.X, currentPosition.Y);
+                            WorldGen.KillTile(currentPosition.X + 1, currentPosition.Y);
+                            WorldGen.PlaceTile(currentPosition.X, currentPosition.Y + 1, TileID.WoodBlock);
+                            WorldGen.SlopeTile(currentPosition.X, currentPosition.Y + 1, 0);
+                            WorldGen.PlaceTile(currentPosition.X + 1, currentPosition.Y + 1, TileID.WoodBlock);
+                            WorldGen.SlopeTile(currentPosition.X + 1, currentPosition.Y + 1, 0);
+
+                            WorldGen.PlaceChest(currentPosition.X, currentPosition.Y);
+
+                            #region Chest Loot
+                            if (Chest.FindChest(currentPosition.X, currentPosition.Y - 1) > 0)
+                            {
+                                Chest chest = Main.chest[Chest.FindChest(currentPosition.X, currentPosition.Y - 1)];
+                                if (chest != null)
+                                {
+                                    List<int> mainItems = new List<int>
                                 {
                                     ItemID.Spear,
                                     ItemID.Blowpipe,
@@ -115,7 +125,7 @@ namespace Wisplantern.Systems.Worldgen
                                     ItemID.PortableStool
                                 };
 
-                                List<int> ammosAndThrowables = new List<int>
+                                    List<int> ammosAndThrowables = new List<int>
                                 {
                                     ItemID.WoodenArrow,
                                     ItemID.FlamingArrow,
@@ -123,7 +133,7 @@ namespace Wisplantern.Systems.Worldgen
                                     ItemID.ThrowingKnife
                                 };
 
-                                List<int> bars = new List<int>
+                                    List<int> bars = new List<int>
                                 {
                                 WorldGen.SavedOreTiers.Copper == TileID.Copper ? ItemID.CopperBar : ItemID.TinBar,
                                 WorldGen.SavedOreTiers.Iron == TileID.Iron ? ItemID.IronBar : ItemID.LeadBar,
@@ -131,7 +141,7 @@ namespace Wisplantern.Systems.Worldgen
                                 WorldGen.SavedOreTiers.Gold == TileID.Gold ? ItemID.GoldBar : ItemID.PlatinumBar,
                                 };
 
-                                List<int> commonPotions = new List<int>
+                                    List<int> commonPotions = new List<int>
                                 {
                                     ItemID.IronskinPotion,
                                     ItemID.ShinePotion,
@@ -141,70 +151,71 @@ namespace Wisplantern.Systems.Worldgen
                                     ItemID.GravitationPotion
                                 };
 
-                                List<int> lightItems = new List<int>
+                                    List<int> lightItems = new List<int>
                                 {
                                     ItemID.Torch,
                                     ItemID.Glowstick
                                 };
 
-                                int item = 0;
-                                chest.item[item].SetDefaults(WorldGen.genRand.Next(mainItems));
-                                item++;
-                                if (WorldGen.genRand.NextFloat() <= 0.1f)
-                                {
-                                    chest.item[item].SetDefaults(ItemID.SlimeCrown);
+                                    int item = 0;
+                                    chest.item[item].SetDefaults(WorldGen.genRand.Next(mainItems));
                                     item++;
-                                }
-                                if (WorldGen.genRand.NextFloat() <= 0.33f)
-                                {
-                                    chest.item[item].SetDefaults(ItemID.Dynamite);
-                                    item++;
-                                }
-                                if (WorldGen.genRand.NextFloat() <= 0.5f)
-                                {
-                                    chest.item[item].SetDefaults(WorldGen.genRand.Next(bars));
-                                    chest.item[item].stack = WorldGen.genRand.Next(5, 10);
-                                    item++;
-                                }
-                                if (WorldGen.genRand.NextFloat() <= 0.5f)
-                                {
-                                    chest.item[item].SetDefaults(WorldGen.genRand.Next(ammosAndThrowables));
-                                    chest.item[item].stack = WorldGen.genRand.Next(25, 51);
-                                    item++;
-                                }
-                                if (WorldGen.genRand.NextFloat() <= 0.5f)
-                                {
-                                    chest.item[item].SetDefaults(ItemID.LesserHealingPotion);
-                                    chest.item[item].stack = WorldGen.genRand.Next(3, 6);
-                                    item++;
-                                }
-                                if (WorldGen.genRand.NextFloat() <= 0.666f)
-                                {
-                                    chest.item[item].SetDefaults(WorldGen.genRand.Next(commonPotions));
-                                    chest.item[item].stack = WorldGen.genRand.Next(2, 5);
-                                    item++;
-                                }
-                                if (WorldGen.genRand.NextFloat() <= 0.666f)
-                                {
-                                    chest.item[item].SetDefaults(ItemID.RecallPotion);
-                                    chest.item[item].stack = WorldGen.genRand.Next(3, 6);
-                                    item++;
-                                }
-                                if (WorldGen.genRand.NextFloat() <= 0.5f)
-                                {
-                                    chest.item[item].SetDefaults(WorldGen.genRand.Next(lightItems));
-                                    chest.item[item].stack = WorldGen.genRand.Next(20, 40);
-                                    item++;
-                                }
-                                if (WorldGen.genRand.NextFloat() <= 0.5f)
-                                {
-                                    chest.item[item].SetDefaults(ItemID.SilverCoin);
-                                    chest.item[item].stack = WorldGen.genRand.Next(15, 45);
-                                    item++;
+                                    if (WorldGen.genRand.NextFloat() <= 0.1f)
+                                    {
+                                        chest.item[item].SetDefaults(ItemID.SlimeCrown);
+                                        item++;
+                                    }
+                                    if (WorldGen.genRand.NextFloat() <= 0.33f)
+                                    {
+                                        chest.item[item].SetDefaults(ItemID.Dynamite);
+                                        item++;
+                                    }
+                                    if (WorldGen.genRand.NextFloat() <= 0.5f)
+                                    {
+                                        chest.item[item].SetDefaults(WorldGen.genRand.Next(bars));
+                                        chest.item[item].stack = WorldGen.genRand.Next(5, 10);
+                                        item++;
+                                    }
+                                    if (WorldGen.genRand.NextFloat() <= 0.5f)
+                                    {
+                                        chest.item[item].SetDefaults(WorldGen.genRand.Next(ammosAndThrowables));
+                                        chest.item[item].stack = WorldGen.genRand.Next(25, 51);
+                                        item++;
+                                    }
+                                    if (WorldGen.genRand.NextFloat() <= 0.5f)
+                                    {
+                                        chest.item[item].SetDefaults(ItemID.LesserHealingPotion);
+                                        chest.item[item].stack = WorldGen.genRand.Next(3, 6);
+                                        item++;
+                                    }
+                                    if (WorldGen.genRand.NextFloat() <= 0.666f)
+                                    {
+                                        chest.item[item].SetDefaults(WorldGen.genRand.Next(commonPotions));
+                                        chest.item[item].stack = WorldGen.genRand.Next(2, 5);
+                                        item++;
+                                    }
+                                    if (WorldGen.genRand.NextFloat() <= 0.666f)
+                                    {
+                                        chest.item[item].SetDefaults(ItemID.RecallPotion);
+                                        chest.item[item].stack = WorldGen.genRand.Next(3, 6);
+                                        item++;
+                                    }
+                                    if (WorldGen.genRand.NextFloat() <= 0.5f)
+                                    {
+                                        chest.item[item].SetDefaults(WorldGen.genRand.Next(lightItems));
+                                        chest.item[item].stack = WorldGen.genRand.Next(20, 40);
+                                        item++;
+                                    }
+                                    if (WorldGen.genRand.NextFloat() <= 0.5f)
+                                    {
+                                        chest.item[item].SetDefaults(ItemID.SilverCoin);
+                                        chest.item[item].stack = WorldGen.genRand.Next(15, 45);
+                                        item++;
+                                    }
                                 }
                             }
+                            #endregion
                         }
-                        #endregion
                     }
                 }
             }));
@@ -213,45 +224,48 @@ namespace Wisplantern.Systems.Worldgen
 
             tasks.Insert(genIndex + 1, new PassLegacy("Mountain Cleanup", delegate (GenerationProgress progress, GameConfiguration config)
             {
-                progress.Message = "Cleaning Up Mountain";
+                if (Wisplantern.generateMassiveMountain)
+                {
+                    progress.Message = "Cleaning Up Mountain";
 
-                List<int> snowWalls = new()
+                    List<int> snowWalls = new()
                 {
                     WallID.Dirt,
                     WallID.GrassUnsafe,
                 };
 
-                List<int> iceWalls = new()
+                    List<int> iceWalls = new()
                 {
                     WallID.Stone,
                     WallID.Cave5Unsafe,
                 };
 
-                List<int> mudWalls = new()
+                    List<int> mudWalls = new()
                 {
                     WallID.Dirt,
                     WallID.GrassUnsafe,
                 };
 
-                for (int i = -1000; i < 1000; i++)
-                {
-                    for (int j = -1000; j < 1000; j++)
+                    for (int i = -1000; i < 1000; i++)
                     {
-                        int rI = mountainPosition.ToPoint().X + i;
-                        int rJ = mountainPosition.ToPoint().Y + j;
-                        if (rI > 0 && rI < Main.maxTilesX && rJ > 0 && rJ < Main.maxTilesY)
+                        for (int j = -1000; j < 1000; j++)
                         {
-                            if (snowWalls.Contains(Main.tile[rI, rJ].WallType))
+                            int rI = mountainPosition.ToPoint().X + i;
+                            int rJ = mountainPosition.ToPoint().Y + j;
+                            if (rI > 0 && rI < Main.maxTilesX && rJ > 0 && rJ < Main.maxTilesY)
                             {
-                                if (CheckForTile(rI, rJ, TileID.SnowBlock)) Main.tile[rI, rJ].WallType = WallID.SnowWallUnsafe;
-                            }
-                            if (iceWalls.Contains(Main.tile[rI, rJ].WallType))
-                            {
-                                if (CheckForTile(rI, rJ, TileID.IceBlock)) Main.tile[rI, rJ].WallType = WallID.IceUnsafe;
-                            }
-                            if (mudWalls.Contains(Main.tile[rI, rJ].WallType))
-                            {
-                                if (CheckForTile(rI, rJ, TileID.Mud)) Main.tile[rI, rJ].WallType = WallID.MudUnsafe;
+                                if (snowWalls.Contains(Main.tile[rI, rJ].WallType))
+                                {
+                                    if (CheckForTile(rI, rJ, TileID.SnowBlock)) Main.tile[rI, rJ].WallType = WallID.SnowWallUnsafe;
+                                }
+                                if (iceWalls.Contains(Main.tile[rI, rJ].WallType))
+                                {
+                                    if (CheckForTile(rI, rJ, TileID.IceBlock)) Main.tile[rI, rJ].WallType = WallID.IceUnsafe;
+                                }
+                                if (mudWalls.Contains(Main.tile[rI, rJ].WallType))
+                                {
+                                    if (CheckForTile(rI, rJ, TileID.Mud)) Main.tile[rI, rJ].WallType = WallID.MudUnsafe;
+                                }
                             }
                         }
                     }
@@ -354,6 +368,11 @@ namespace Wisplantern.Systems.Worldgen
         Rectangle mountainRect = new Rectangle();
         void Mountain()
         {
+            if (!Wisplantern.generateMassiveMountain)
+            {
+                return;
+            }
+
             #region Noise
             FastNoiseLite mountainNoise = new FastNoiseLite(WorldGen.genRand.Next(5000, 10000));
             mountainNoise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
@@ -744,7 +763,7 @@ namespace Wisplantern.Systems.Worldgen
                         {
                             if (j > 0 && j < Main.maxTilesY)
                             {
-                                Point tilePos = new (i, j);
+                                Point tilePos = new(i, j);
                                 float multAmount = WorldGen.genRand.Next(97, 104);
                                 Vector2 rotationPosition = position.ToVector2().DirectionTo(tilePos.ToVector2()) * multAmount;
                                 float distance = MathHelper.Lerp((noise.GetNoise(rotationPosition.X, rotationPosition.Y) + 1f) / 2f, 1f, 0.5f) * maxDistance;

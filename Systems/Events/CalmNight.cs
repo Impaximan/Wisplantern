@@ -40,7 +40,7 @@ namespace Wisplantern.Systems.Events
                 wasDay = false;
                 if (!Main.bloodMoon)
                 {
-                    if (Main.rand.NextBool(10))
+                    if (Main.rand.NextBool(10) && Wisplantern.calmNights)
                     {
                         calmNight = true;
                     }

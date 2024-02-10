@@ -10,7 +10,7 @@
         {
             int checkedY = (int)MathHelper.Lerp((int)Main.rockLayer, Main.UnderworldLayer, 0.5f) + 85;
             //Main.NewText("Player Y: " + (int)player.position.Y + "\nChecked Y: " + checkedY + "\nChecked Y x16: " + checkedY * 16);
-            return player.ZoneRockLayerHeight && player.position.Y > checkedY * 16;
+            return player.ZoneRockLayerHeight && player.position.Y > checkedY * 16 && Wisplantern.playDeepUnderground;
         }
     }
 }

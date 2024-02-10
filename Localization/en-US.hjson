@@ -1,5 +1,6 @@
 Mods: {
 	Wisplantern: {
+		ServerConfig.WorldgenHeader: World generation
 		InfoDisplays.LuckIndicator.DisplayName: Luck
 		DamageClasses.ManipulativeDamageClass.DisplayName: manipulative damage
 
@@ -182,7 +183,7 @@ Mods: {
 					'''
 					Allows you to swing magic staffs, recovering mana on melee hits
 					+20 max mana
-					'An item from a land far far away, across the fog'
+					'From across the fog, in the lands between'
 					'''
 			}
 
@@ -335,7 +336,6 @@ Mods: {
 				Tooltip:
 					'''
 					Perfectly timed strikes with zweihanders set enemies ablaze
-					Aggravated enemies set eachother on fire
 					'No steel needed this time!'
 					'''
 			}
@@ -508,8 +508,8 @@ Mods: {
 				DisplayName: Heavy Bullet
 				Tooltip:
 					'''
-						Affected by gravity
-						Causes recoil and inaccuracy on use
+					Affected by gravity
+					Causes recoil and inaccuracy on use
 					'''
 			}
 
@@ -524,7 +524,11 @@ Mods: {
 
 			Gasoline: {
 				DisplayName: Gasoline
-				Tooltip: ""
+				Tooltip:
+					'''
+					Aggravated enemies set one another ablaze
+					'Gasliting and gatekeeping'
+					'''
 			}
 		}
 
@@ -541,6 +545,71 @@ Mods: {
 			Steadfast.DisplayName: Steadfast
 			Vital.DisplayName: Vital
 		}
+
+		Configs: {
+			ServerConfig: {
+				DisplayName: Server Config
+
+				generateCanyon: {
+					Label: Generate canyons
+					Tooltip: ""
+				}
+
+				generateChastisedChurch: {
+					Label: Generate Chastised Church
+					Tooltip: ""
+				}
+
+				generateMassiveMountain: {
+					Label: Generate massive mountain
+					Tooltip: Whether or not the 'massive mountain' structure will generate
+				}
+
+				generatePits: {
+					Label: Generate sinkholes
+					Tooltip: Whether or not the 'sinkhole' structure will generate (includes large water ponds)
+				}
+
+				generateLushCaves: {
+					Label: Generate lush caves
+					Tooltip: Whether or not the lush cave minibiome will generate
+				}
+
+				generateVolcanicCaves: {
+					Label: Generate volcanic caves
+					Tooltip: Whether or not the volcanic cave minibiome will generate
+				}
+
+				playDeepUnderground: {
+					Label: Play 'Far Underground'
+					Tooltip: Whether or not the 'Far Underground' music track will play in the lava layer
+				}
+
+				playSnowstorm: {
+					Label: Play 'Snowstorm'
+					Tooltip: Whether or not 'Snowstorm' will play in blizzards or during the snowstorm event
+				}
+
+				playClairDeLune: {
+					Label: Play 'Clair de Lune'
+					Tooltip: Whether or not 'Clair de Lune' will play during calm nights
+				}
+
+				calmNights: {
+					Label: Calm nights
+					Tooltip: Whether or not the 'Calm Night' event can occur.
+				}
+
+				snowstorms: {
+					Label: Snowstorms
+					Tooltip: Whether or not the 'Snowstorm' event can occur.
+				}
+			}
+		}
+
+		WorldgenHeader: World generation
+		MusicHeader: Music
+		EventHeader: Events
 	}
 
 	GameTips: {

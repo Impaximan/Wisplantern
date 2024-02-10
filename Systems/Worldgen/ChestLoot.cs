@@ -108,7 +108,6 @@ namespace Wisplantern.Systems.Worldgen
                                 }
                             }
                         }
-
                     }
 
                     if (Main.tile[chest.x, chest.y].TileType == TileID.Containers && Main.tile[chest.x, chest.y].TileFrameX == 8 * 36) //Rich mahogany chest
@@ -127,6 +126,18 @@ namespace Wisplantern.Systems.Worldgen
                                     {
                                         chest.item[inventoryIndex].SetDefaults(ModContent.ItemType<Items.Weapons.Magic.Misc.AccursedShard>());
                                     }
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (WorldGen.genRand.NextBool(5))
+                        {
+                            for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)
+                            {
+                                if (chest.item[inventoryIndex].type == ItemID.None)
+                                {
+                                    chest.item[inventoryIndex].SetDefaults(ModContent.ItemType<Items.Equipable.Accessories.Gasoline>());
                                     break;
                                 }
                             }
@@ -153,6 +164,18 @@ namespace Wisplantern.Systems.Worldgen
                                 }
                             }
                         }
+
+                        if (WorldGen.genRand.NextBool(5))
+                        {
+                            for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)
+                            {
+                                if (chest.item[inventoryIndex].type == ItemID.None)
+                                {
+                                    chest.item[inventoryIndex].SetDefaults(ModContent.ItemType<Items.Equipable.Accessories.Gasoline>());
+                                    break;
+                                }
+                            }
+                        }
                     }
 
                     if (Main.tile[chest.x, chest.y].TileType == TileID.Containers && Main.tile[chest.x, chest.y].TileFrameX == 11 * 36) //Ice chest
@@ -171,6 +194,18 @@ namespace Wisplantern.Systems.Worldgen
                                     {
                                         chest.item[inventoryIndex].SetDefaults(ModContent.ItemType<Items.Weapons.Magic.Misc.AccursedShard>());
                                     }
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (WorldGen.genRand.NextBool(5))
+                        {
+                            for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)
+                            {
+                                if (chest.item[inventoryIndex].type == ItemID.None)
+                                {
+                                    chest.item[inventoryIndex].SetDefaults(ModContent.ItemType<Items.Equipable.Accessories.Gasoline>());
                                     break;
                                 }
                             }

@@ -1,15 +1,32 @@
-Welcome to Wisplantern, a content mod designed with one, sole purpose: being fun! By adding content in areas that were previously boring to many players and adding tools that let you get more creative than ever before in many areas, Wisplantern's goal is to create a truly smooth experience with little frustration. It makes the world feel more alive and interesting to explore and hopes to ensure that you don't get moments in your playthrough where you just feel stuck or bored.
+Welcome to Wisplantern, a small content mod designed with one, sole purpose: being fun! We try to make all additions feel at home within the game, synergizing with existing content and expanding on areas that maybe felt a bit empty before.
 
-Though it is WIP and in its very early stages, it currently has plenty of content early game, boasting:
--2 new underground minibiomes, the lush caves and the volcanic caves, that you can find randomly, adding a ton of visual variety.
+Unless you want the content to feel mostly like a vanilla playthrough, it's recommended that you play Wisplantern in addition to another mod. The mod is designed around working with other mods, so it shouldn't be too problematic.
+
+Additionally, although the mod can run in multiplayer it's likely a bit buggy. Please report any bugs you find here or in our discord server!
+
+The mod could be considered WIP, although for the time being it's not meant to be the main attraction of your playthrough. To that end, however, we've added:
+-2 new underground minibiomes, the lush caves and the volcanic caves, which you can find randomly.
+-2 new events
+  -Snowstorms, which have a chance to take place instead of rain and will actually cover the world in snow.
+  -Calm nights, in which enemies will cease to spawn and lovely classical music will play.
+-Multiple new music tracks, including a new track that plays in the lava layer.
+-A new class, manipulative damage, which allows you to cause infighting by aggravating enemies.
+  -The class is very WIP and only has content early game.
+  -This may seem bad for fighting bosses, but you can use statues to summon enemies to fight with you, activating them early game using a copper/tin rod of activation.
+-A new weapon type for melee, the zweihanders, which have slower but more damaging charged attacks and special effects when perfectly timing strikes.
+-Wisplanterns, which spawn underground and drop unique loot once hit multiple times... chasing them down could be a challenge, though.
 -New types of stone for decoration, and to make the underground feel less bland when explored outside of special biomes.
--5 new naturally generating 'structures'
+-Several new additions to world generation, which can be toggled in the config files.
+  -This includes a massive mountain that can generate anywhere in the world and will "blend in" with whatever biome it generates in (it is very massive however)
 -Battle arts, which allow you to give right click functions of your choice to weapons that did not already have them.
--65+ new items to discover
+-The Scholar's Lens, an accessory sold by the merchant which can help you figure out how to obtain certain items.
+-Lots more!
+
+Remember; if you want to support the mod, the best you can do is tell some of your friends about it :)
 
 ---Credits---
 Dev team:
--Penumbral (lead dev, coder, and composer)
+-Impaxim (lead dev, does a lot of things)
 -JellyBru (spriter)
 -Torra th (spriter)
 -Sir Pogsalot (spriter)

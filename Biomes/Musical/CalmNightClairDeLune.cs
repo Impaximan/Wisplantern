@@ -8,7 +8,7 @@
 
         public override bool IsBiomeActive(Player player)
         {
-            return !Main.dayTime && player.ZoneOverworldHeight && Systems.Events.CalmNight.calmNight;
+            return !Main.dayTime && player.ZoneOverworldHeight && Systems.Events.CalmNight.calmNight && Wisplantern.playClairDeLune;
         }
     }
 }

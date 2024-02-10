@@ -9,7 +9,7 @@
         public override bool IsBiomeActive(Player player)
         {
             //Main.NewText("Player Y: " + (int)player.position.Y + "\nChecked Y: " + checkedY + "\nChecked Y x16: " + checkedY * 16);
-            return player.ZoneRain && (player.ZoneSnow || Systems.Events.Snowstorm.snowing);
+            return player.ZoneRain && (player.ZoneSnow || Systems.Events.Snowstorm.snowing) && Wisplantern.playSnowstorm;
         }
     }
 }
