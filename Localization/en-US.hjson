@@ -22,6 +22,7 @@ Mods: {
 			TinSummonProjectile.DisplayName: Tin Summon Projectile
 			TungstenSummonProjectile.DisplayName: Tungsten Summon Projectile
 			Bloodsplosion_Machete.DisplayName: Bloodsplosion_ Machete
+			HeavyBullet.DisplayName: Heavy Bullet
 		}
 
 		Biomes: {
@@ -207,10 +208,10 @@ Mods: {
 			DraconicDacron: {
 				DisplayName: Draconic Dacron
 				Tooltip:
-				'''
-				Chance to set wooden arrows ablaze with any bow
-				Flaming arrows will *always* set enemies ablaze
-				'''
+					'''
+					Chance to set wooden arrows ablaze with any bow
+					Flaming arrows will *always* set enemies ablaze
+					'''
 			}
 
 			FourLeafClover: {
@@ -501,6 +502,24 @@ Mods: {
 			MansizeMachete: {
 				DisplayName: Mansize Machete
 				Tooltip: Perfectly timed strikes create an explosion that damages multiple enemies
+			}
+
+			HeavyBullet_Iron: {
+				DisplayName: Heavy Bullet
+				Tooltip:
+					'''
+						Affected by gravity
+						Causes recoil and inaccuracy on use
+					'''
+			}
+
+			HeavyBullet_Lead: {
+				DisplayName: Heavy Bullet
+				Tooltip:
+					'''
+					Affected by gravity
+					Causes recoil and inaccuracy on use
+					'''
 			}
 		}
 

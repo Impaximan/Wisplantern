@@ -17,7 +17,7 @@ namespace Wisplantern.Items.Weapons.Melee.Shortswords
 
         public override void SetDefaults()
         {
-            Item.damage = 15;
+            Item.damage = 14;
             Item.knockBack = 3f;
             Item.shoot = ModContent.ProjectileType<DepthrockDaggerProjectile>();
             Item.shootSpeed = 2.5f;
@@ -58,7 +58,7 @@ namespace Wisplantern.Items.Weapons.Melee.Shortswords
             {
 				velocity *= 2.3f;
 				damage = (int)(damage * 1.5f);
-				knockback *= 3f;
+				knockback *= 2f;
             }
         }
 
@@ -150,7 +150,7 @@ namespace Wisplantern.Items.Weapons.Melee.Shortswords
 				stuckNPC = target;
 				stuckOffset = Projectile.position + Projectile.velocity * 2f - target.position;
 
-				PunchCameraModifier modifier = new PunchCameraModifier(Projectile.Center, Projectile.velocity.ToRotation().ToRotationVector2(), 15f, 10f, 8, 1000f);
+				PunchCameraModifier modifier = new PunchCameraModifier(Projectile.Center, Projectile.velocity.ToRotation().ToRotationVector2(), 10f, 10f, 8, 1000f);
 				Main.instance.CameraModifiers.Add(modifier);
 
 				SoundStyle style = SoundID.DD2_MonkStaffGroundImpact;
@@ -159,7 +159,7 @@ namespace Wisplantern.Items.Weapons.Melee.Shortswords
 
 				Wisplantern.freezeFrames = 5;
 
-				Projectile.localNPCHitCooldown = 10;
+				Projectile.localNPCHitCooldown = 20;
 				Projectile.ownerHitCheck = false;
 			}
         }
@@ -169,7 +169,7 @@ namespace Wisplantern.Items.Weapons.Melee.Shortswords
 			if (stuckNPC != null && stuckNPC == target)
             {
 				modifiers.Knockback *= 0f;
-				modifiers.SourceDamage *= 0.35f;
+				modifiers.SourceDamage *= 0.25f;
 				modifiers.SourceDamage += (int)MathHelper.Clamp(target.defense - 10, 0, target.defense) / 2;
             }
         }
