@@ -521,6 +521,11 @@ Mods: {
 					Causes recoil and inaccuracy on use
 					'''
 			}
+
+			Gasoline: {
+				DisplayName: Gasoline
+				Tooltip: ""
+			}
 		}
 
 		NPCs: {

@@ -29,35 +29,8 @@ namespace Wisplantern.Items.Equipable.Accessories
 
         public override void UpdateEquip(Player player)
         {
-            player.GetModPlayer<WispNecklacePlayer>().equipped = true;
+            player.AddAccessoryEffect(Item);
             player.pickSpeed *= 0.9f;
-        }
-    }
-
-    class WispNecklacePlayer : ModPlayer
-    {
-        public bool equipped = false;
-
-        public override void ResetEffects()
-        {
-            equipped = false;
-        }
-
-        public override void PostUpdateEquips()
-        {
-            if (equipped)
-            {
-                float usedPickSpeed = Player.pickSpeed;
-                if (Player.HasBuff(ModContent.BuffType<Buffs.Hyperspeed>()))
-                {
-                    if (usedPickSpeed < 0.5f) usedPickSpeed = 0.5f;
-                }
-                else
-                {
-                    if (usedPickSpeed < 0.75f) usedPickSpeed = 0.75f;
-                }
-                Player.GetAttackSpeed(DamageClass.Generic) *= MathHelper.Lerp(1f / usedPickSpeed, 1f, 0.5f);
-            }
         }
     }
 }

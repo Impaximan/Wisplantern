@@ -1,6 +1,6 @@
 ﻿namespace Wisplantern.Items.Equipable.Accessories
 {
-    public class DraconicDacron : ModItem
+    class Gasoline : ModItem
     {
         public override void SetStaticDefaults()
         {
@@ -10,11 +10,11 @@
         public override void SetDefaults()
         {
             Item.accessory = true;
-            Item.width = 20;
-            Item.height = 24;
+            Item.width = 24;
+            Item.height = 28;
             Item.rare = ItemRarityID.Blue;
-            Item.value = Item.buyPrice(0, 3, 0, 0);
-            Item.SetScholarlyDescription("Found in chests deep underground within the lava layer");
+            Item.value = Item.sellPrice(0, 0, 20, 0);
+            Item.SetScholarlyDescription("Found in random chests underground.");
         }
 
         public override void UpdateEquip(Player player)

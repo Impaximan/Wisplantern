@@ -27,44 +27,17 @@ namespace Wisplantern.Items.Equipable.Accessories
 
         public override void UpdateEquip(Player player)
         {
-            player.GetModPlayer<FocusingCrystalPlayer>().equipped = true;
+            player.AddAccessoryEffect(Item);
             player.GetCritChance(DamageClass.Generic) += 5;
         }
 
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient<Items.Placeable.Blocks.Fulgarite>(25)
+                .AddIngredient<Placeable.Blocks.Fulgarite>(25)
                 .AddIngredient(ItemID.Sapphire, 4)
                 .AddTile(TileID.Anvils)
                 .Register();
-        }
-    }
-
-    class FocusingCrystalPlayer : ModPlayer
-    {
-        public bool equipped = false;
-
-        public override void ResetEffects()
-        {
-            equipped = false;
-        }
-
-        const float critDamageMult = 1.3f;
-        public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)/* tModPorter If you don't need the Item, consider using ModifyHitNPC instead */
-        {
-            if (equipped)
-            {
-                modifiers.CritDamage *= critDamageMult;
-            }
-        }
-
-        public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)/* tModPorter If you don't need the Projectile, consider using ModifyHitNPC instead */
-        {
-            if (equipped)
-            {
-                modifiers.CritDamage *= critDamageMult;
-            }
         }
     }
 }

@@ -130,7 +130,7 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 
 				}
 
-				if (perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f && player.GetModPlayer<Equipable.Accessories.FlintPlayer>().equipped)
+				if (perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f && player.AccessoryActive<Equipable.Accessories.Flint>())
                 {
 					for (float i = 0f; i <= 1f; i += 0.25f)
 					{
@@ -256,7 +256,7 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 				}
 				player.velocity -= velocityChange;
 			}
-			if (player.GetModPlayer<Equipable.Accessories.FlintPlayer>().equipped && perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f)
+			if (player.AccessoryActive<Equipable.Accessories.Flint>() && perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f)
 			{
 				target.AddBuff(BuffID.OnFire, 180);
 			}

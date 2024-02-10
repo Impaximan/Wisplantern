@@ -19,28 +19,7 @@
 
         public override void UpdateEquip(Player player)
         {
-            player.GetModPlayer<FlintPlayer>().equipped = true;
-        }
-    }
-
-    class FlintPlayer : ModPlayer
-    {
-        public bool equipped = false;
-
-        public override void ResetEffects()
-        {
-            equipped = false;
-        }
-    }
-
-    class FlintNPC : GlobalNPC
-    {
-        public override void OnHitByItem(NPC npc, Player player, Item item, NPC.HitInfo hit, int damageDone)
-        {
-            if (player.GetModPlayer<FlintPlayer>().equipped && item.DamageType is DamageClasses.ManipulativeDamageClass)
-            {
-                npc.AddBuff(BuffID.OnFire, 60 * 3);
-            }
+            player.AddAccessoryEffect(Item);
         }
     }
 }

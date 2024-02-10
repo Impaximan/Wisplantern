@@ -29,74 +29,8 @@ namespace Wisplantern.Items.Equipable.Accessories
 
         public override void UpdateEquip(Player player)
         {
-            player.GetModPlayer<GlintstoneGlovePlayer>().equipped = true;
+            player.AddAccessoryEffect(Item);
             player.statManaMax2 += 20;
-        }
-    }
-
-    class GlintstoneGlovePlayer : ModPlayer
-    {
-        public bool equipped = false;
-
-        public override void ResetEffects()
-        {
-            equipped = false;
-        }
-    }
-
-    class GlintstoneGloveItem : GlobalItem
-    {
-        public override bool InstancePerEntity => true;
-
-        public override void ModifyShootStats(Item item, Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
-        {
-            if (player.GetModPlayer<GlintstoneGlovePlayer>().equipped && Item.staff[item.type])
-            {
-                position += new Vector2(item.width * -player.direction, -item.height);
-                if (player.whoAmI == Main.myPlayer && item.type != ModContent.ItemType<Plantscalibur>() && !player.GetModPlayer<Globals.GItems.BattleArtPlayer>().usingBattleArt) velocity = (Main.MouseWorld - position).ToRotation().ToRotationVector2() * velocity.Length();
-            }
-        }
-
-        int originalItemUseStyle;
-        bool originallyNoMelee;
-        public override void SetDefaults(Item item)
-        {
-            originalItemUseStyle = item.useStyle;
-            originallyNoMelee = item.noMelee;
-        }
-
-        public override void ModifyHitNPC(Item item, Player player, NPC target, ref NPC.HitModifiers modifiers)
-        {
-            if (player.GetModPlayer<GlintstoneGlovePlayer>().equipped && Item.staff[item.type])
-            {
-                modifiers.Knockback *= 1.5f;  
-                modifiers.FinalDamage *= 0.85f;
-            }
-        }
-
-        public override void OnHitNPC(Item item, Player player, NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            if (player.GetModPlayer<GlintstoneGlovePlayer>().equipped && Item.staff[item.type])
-            {
-                int amount = (int)(item.mana * 1.65f);
-                player.ManaEffect(amount);
-                player.statMana += amount;
-            }
-        }
-
-        public override void HoldItem(Item item, Player player)
-        {
-
-            if (player.GetModPlayer<GlintstoneGlovePlayer>().equipped && Item.staff[item.type])
-            {
-                item.useStyle = ItemUseStyleID.Swing;
-                item.noMelee = false;
-            }
-            else
-            {
-                item.useStyle = originalItemUseStyle;
-                item.noMelee = originallyNoMelee;
-            }
         }
     }
 }

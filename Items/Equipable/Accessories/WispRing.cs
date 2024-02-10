@@ -27,17 +27,7 @@ namespace Wisplantern.Items.Equipable.Accessories
 
         public override void UpdateEquip(Player player)
         {
-            player.GetModPlayer<WispRingPlayer>().equipped = true;
-        }
-    }
-
-    class WispRingPlayer : ModPlayer
-    {
-        public bool equipped = false;
-
-        public override void ResetEffects()
-        {
-            equipped = false;
+            player.AddAccessoryEffect(Item);
         }
     }
 
@@ -48,7 +38,7 @@ namespace Wisplantern.Items.Equipable.Accessories
             if (!Main.gameMenu)
             {
                 Player player = Main.player[Player.FindClosest(new Vector2(i * 16, j * 16), 16, 16)];
-                if (player != null && player.GetModPlayer<WispRingPlayer>().equipped && !player.HasBuff(ModContent.BuffType<Buffs.Hyperspeed>()))
+                if (player != null && player.AccessoryActive<WispRing>() && !player.HasBuff(ModContent.BuffType<Buffs.Hyperspeed>()))
                 {
                     if (!fail && !effectOnly && Main.rand.NextBool(75 - (int)(player.luck * 5f)))
                     {

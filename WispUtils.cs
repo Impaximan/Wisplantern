@@ -29,6 +29,38 @@ namespace Wisplantern
                 action();
         }
 
+        /// <summary>
+        /// Registers that an accessory is equipped.
+        /// </summary>
+        /// <param name="player"></param>
+        /// <param name="item"></param>
+        public static void AddAccessoryEffect(this Player player, Item item)
+        {
+            player.GetModPlayer<AccessoryPlayer>().accessoryEffects.Add(item.type);
+        }
+
+        /// <summary>
+        /// Checks if a certain accessory is equipped according to this player's AccessoryPlayer.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="player"></param>
+        /// <returns></returns>
+        public static bool AccessoryActive<T>(this Player player) where T : ModItem
+        {
+            return player.AccessoryActive(ModContent.ItemType<T>());
+        }
+
+        /// <summary>
+        /// Checks if a certain accessory is equipped according to this player's AccessoryPlayer.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="player"></param>
+        /// <returns></returns>
+        public static bool AccessoryActive(this Player player, int type)
+        {
+            return player.GetModPlayer<AccessoryPlayer>().accessoryEffects.Contains(type);
+        }
+
         public static void DoManaRechargeEffect(this Player player)
         {
             if (player.whoAmI == Main.myPlayer) SoundEngine.PlaySound(SoundID.MaxMana);
