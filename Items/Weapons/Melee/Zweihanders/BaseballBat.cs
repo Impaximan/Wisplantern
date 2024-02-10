@@ -1,14 +1,9 @@
-﻿using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
-using Microsoft.Xna.Framework;
-using Terraria.DataStructures;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Terraria.ModLoader.IO;
 
 namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 {
-	internal class BaseballBat : Zweihander
+    internal class BaseballBat : Zweihander
 	{
 		public override void SetStaticDefaults()
 		{

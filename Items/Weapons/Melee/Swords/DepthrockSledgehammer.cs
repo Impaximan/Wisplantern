@@ -1,8 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.GameContent.Creative;
-using Terraria.ID;
-using Terraria.ModLoader;
+﻿using Terraria.GameContent.Creative;
 using Terraria.Graphics.CameraModifiers;
 using System;
 using Terraria.Audio;
@@ -33,6 +29,7 @@ namespace Wisplantern.Items.Weapons.Melee.Swords
             Item.crit = 10;
             Item.value = Item.sellPrice(0, 1, 25, 0);
             Item.autoReuse = false;
+            Item.useTurn = true;
             Item.DamageType = DamageClass.Melee;
             Item.hammer = 60;
         }

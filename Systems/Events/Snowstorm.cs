@@ -1,7 +1,4 @@
-﻿using Terraria.ModLoader;
-using Terraria.ModLoader.IO;
-using Terraria;
-using Terraria.ID;
+﻿using Terraria.ModLoader.IO;
 
 namespace Wisplantern.Systems.Events
 {

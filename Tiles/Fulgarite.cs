@@ -1,8 +1,4 @@
-﻿using Terraria;
-using Terraria.ModLoader;
-using Terraria.ID;
-using Microsoft.Xna.Framework;
-using Terraria.Audio;
+﻿using Terraria.Audio;
 
 namespace Wisplantern.Tiles
 {
@@ -57,7 +53,7 @@ namespace Wisplantern.Tiles
             MinPick = 0;
             MineResist = 1f;
             DustType = DustID.Stone;
-            ItemDrop = ModContent.ItemType<Items.Placeable.Blocks.Fulgarite>();
+            //ItemDrop = ModContent.ItemType<Items.Placeable.Blocks.Fulgarite>();
             AddMapEntry(new Color(202, 212, 155));
         }
     }

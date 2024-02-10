@@ -1,8 +1,4 @@
-﻿using Terraria;
-using Terraria.ModLoader;
-using Terraria.ID;
-
-namespace Wisplantern.Globals.GTiles
+﻿namespace Wisplantern.Globals.GTiles
 {
     class SnowTile : GlobalTile
     {

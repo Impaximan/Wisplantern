@@ -1,5 +1,4 @@
-﻿using Terraria.ModLoader;
-using System;
+﻿using System;
 
 namespace Wisplantern.Systems
 {

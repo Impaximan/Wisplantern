@@ -1,7 +1,4 @@
-﻿using Terraria;
-using Terraria.ModLoader;
-using Terraria.ID;
-using Terraria.Graphics.Effects;
+﻿using Terraria.Graphics.Effects;
 
 namespace Wisplantern.Biomes
 {

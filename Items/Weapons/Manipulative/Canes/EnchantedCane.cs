@@ -1,10 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.DataStructures;
-using Terraria.ID;
-using Terraria.ModLoader;
-using Terraria.GameContent.Creative;
-using System.Runtime.InteropServices;
+﻿using Terraria.GameContent.Creative;
 using Wisplantern.Globals.GNPCs;
 
 namespace Wisplantern.Items.Weapons.Manipulative.Canes

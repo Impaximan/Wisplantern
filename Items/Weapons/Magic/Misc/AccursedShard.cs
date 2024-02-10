@@ -1,12 +1,6 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Terraria;
-using Terraria.DataStructures;
-using Terraria.ID;
-using Terraria.ModLoader;
+﻿using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.Audio;
-using System;
 
 namespace Wisplantern.Items.Weapons.Magic.Misc
 {

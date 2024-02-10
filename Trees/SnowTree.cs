@@ -1,9 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
-using Terraria;
 using Terraria.GameContent;
-using Terraria.ModLoader;
-using Terraria.ID;
 
 namespace Wisplantern.Trees
 {

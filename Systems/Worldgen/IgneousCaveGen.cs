@@ -1,7 +1,4 @@
-﻿using Terraria;
-using Terraria.ModLoader;
-using Terraria.WorldBuilding;
-using Terraria.ID;
+﻿using Terraria.WorldBuilding;
 using System.Collections.Generic;
 using Terraria.GameContent.Generation;
 using Terraria.IO;
@@ -309,6 +306,11 @@ namespace Wisplantern.Systems.Worldgen
                             if (tile.LiquidType == LiquidID.Water)
                             {
                                 tile.LiquidType = LiquidID.Lava;
+                            }
+
+                            if (tile.TileType == TileID.WaterDrip)
+                            {
+                                tile.TileType = TileID.LavaDrip;
                             }
 
                             if (!tile.HasTile && Main.rand.NextBool(5))

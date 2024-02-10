@@ -1,8 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.ModLoader;
-
-namespace Wisplantern.Dusts
+﻿namespace Wisplantern.Dusts
 {
     class HyperstoneDust : ModDust
     {

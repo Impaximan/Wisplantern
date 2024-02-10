@@ -1,16 +1,12 @@
-﻿using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.DataStructures;
+﻿using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
-using Terraria.ID;
 using Terraria.Enums;
-using Terraria.ModLoader;
 using Terraria.Graphics.CameraModifiers;
 using Terraria.Audio;
 
 namespace Wisplantern.Items.Weapons.Melee.Shortswords
 {
-	//TODO: Add an indicator for when the fourth hit is charged up and for when you lose the jab counter
+    //TODO: Add an indicator for when the fourth hit is charged up and for when you lose the jab counter
     class DepthrockDagger : ModItem
     {
         public override void SetStaticDefaults()

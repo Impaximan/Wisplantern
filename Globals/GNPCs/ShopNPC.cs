@@ -1,8 +1,4 @@
-﻿using Terraria;
-using Terraria.ModLoader;
-using Terraria.ID;
-
-namespace Wisplantern.Globals.GNPCs
+﻿namespace Wisplantern.Globals.GNPCs
 {
     class ShopNPC : GlobalNPC
     {
@@ -19,6 +15,7 @@ namespace Wisplantern.Globals.GNPCs
             if (shop.NpcType == NPCID.TravellingMerchant)
             {
                 shop.Add(ModContent.ItemType<Items.Info.FourLeafClover>(), Condition.MoonPhasesEven);
+                shop.Add(ModContent.ItemType<Items.Equipable.Accessories.GlintstoneGlove>(), Condition.MoonPhasesOdd);
             }
 
             if (shop.NpcType == NPCID.SkeletonMerchant)

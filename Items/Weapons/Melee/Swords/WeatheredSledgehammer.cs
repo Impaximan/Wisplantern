@@ -1,8 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.GameContent.Creative;
-using Terraria.ID;
-using Terraria.ModLoader;
+﻿using Terraria.GameContent.Creative;
 using Terraria.Graphics.CameraModifiers;
 using System;
 using Terraria.Audio;
@@ -34,6 +30,7 @@ namespace Wisplantern.Items.Weapons.Melee.Swords
             Item.value = Item.sellPrice(0, 0, 50, 0);
             Item.autoReuse = false;
             Item.DamageType = DamageClass.Melee;
+            Item.useTurn = true;
             Item.hammer = 40;
             Item.SetScholarlyDescription("Found in random chests throughout the world");
         }

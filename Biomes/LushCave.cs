@@ -1,7 +1,4 @@
-﻿using Terraria;
-using Terraria.ModLoader;
-
-namespace Wisplantern.Biomes
+﻿namespace Wisplantern.Biomes
 {
     class LushCave : ModBiome
     {

@@ -1,7 +1,4 @@
-﻿using Terraria;
-using Terraria.ModLoader;
-using Microsoft.Xna.Framework;
-using Terraria.UI;
+﻿using Terraria.UI;
 using Wisplantern.UI.AggravationMeter;
 using System.Collections.Generic;
 

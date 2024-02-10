@@ -1,9 +1,4 @@
-﻿using Terraria;
-using Terraria.ModLoader;
-using Microsoft.Xna.Framework;
-using Terraria.ID;
-
-namespace Wisplantern.ModPlayers
+﻿namespace Wisplantern.ModPlayers
 {
     class ManipulativePlayer : ModPlayer
     {

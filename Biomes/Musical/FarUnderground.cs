@@ -1,8 +1,4 @@
-﻿using Terraria;
-using Terraria.ModLoader;
-using Microsoft.Xna.Framework;
-
-namespace Wisplantern.Biomes
+﻿namespace Wisplantern.Biomes
 {
     class FarUnderground : ModBiome
     {

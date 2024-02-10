@@ -1,12 +1,4 @@
-﻿using Terraria;
-using Terraria.ModLoader;
-using Terraria.ID;
-using Terraria.GameContent.ItemDropRules;
-using Wisplantern.Globals.GNPCs;
-using Terraria.DataStructures;
-using Microsoft.Xna.Framework;
-
-namespace Wisplantern.Items.Weapons.Manipulative.Decoys
+﻿namespace Wisplantern.Items.Weapons.Manipulative.Decoys
 {
     class Bramblesprout : DecoyItem
     {

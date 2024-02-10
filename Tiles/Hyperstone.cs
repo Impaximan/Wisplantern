@@ -1,9 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.ModLoader;
-using Terraria.ID;
-
-namespace Wisplantern.Tiles
+﻿namespace Wisplantern.Tiles
 {
     class Hyperstone : ModTile
     {

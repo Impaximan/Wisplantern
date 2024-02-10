@@ -1,12 +1,4 @@
-﻿using Terraria;
-using Terraria.ModLoader;
-using Microsoft.Xna.Framework;
-using System.Collections.Generic;
-using System;
-using Terraria.ID;
-using Terraria.Utilities;
-
-namespace Wisplantern.Globals.GItems
+﻿namespace Wisplantern.Globals.GItems
 {
     class ExtractinatorItem : GlobalItem
     {

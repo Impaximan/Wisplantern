@@ -1,7 +1,4 @@
-﻿using Terraria;
-using Terraria.ModLoader;
-using Microsoft.Xna.Framework;
-using Terraria.DataStructures;
+﻿using Terraria.DataStructures;
 using System;
 
 namespace Wisplantern.Globals.GNPCs

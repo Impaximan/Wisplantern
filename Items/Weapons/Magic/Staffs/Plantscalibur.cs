@@ -1,9 +1,5 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Terraria;
+﻿using Microsoft.Xna.Framework.Graphics;
 using Terraria.DataStructures;
-using Terraria.ID;
-using Terraria.ModLoader;
 using Terraria.GameContent.Creative;
 using System;
 
@@ -37,6 +33,7 @@ namespace Wisplantern.Items.Weapons.Magic.Staffs
             Item.autoReuse = true;
             Item.shootSpeed = 1f;
             Item.value = Item.sellPrice(0, 1, 0, 0);
+            Item.SetScholarlyDescription("Found rarely growing within the lush caves underground");
         }
 
         public override Color? GetAlpha(Color lightColor)

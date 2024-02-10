@@ -1,8 +1,4 @@
-﻿using Terraria;
-using Terraria.ModLoader;
-using Microsoft.Xna.Framework;
-
-namespace Wisplantern.ModPlayers
+﻿namespace Wisplantern.ModPlayers
 {
     class LushPlayer : ModPlayer
     {

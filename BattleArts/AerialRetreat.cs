@@ -1,8 +1,4 @@
-﻿using Terraria;
-using Terraria.ModLoader;
-using Terraria.ID;
-using Wisplantern.ID;
-using Microsoft.Xna.Framework;
+﻿using Wisplantern.ID;
 using Terraria.Audio;
 
 namespace Wisplantern.BattleArts

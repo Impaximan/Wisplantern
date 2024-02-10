@@ -1,10 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
-using Terraria.GameContent.Creative;
-
-namespace Wisplantern.Items.Info
+﻿namespace Wisplantern.Items.Info
 {
     class ScholarsLens : ModItem
     {

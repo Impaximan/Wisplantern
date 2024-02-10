@@ -1,7 +1,4 @@
-﻿using Terraria;
-using Terraria.ModLoader;
-
-namespace Wisplantern.Items.BattleArtItems
+﻿namespace Wisplantern.Items.BattleArtItems
 {
     class RadialCast : ModItem
     {

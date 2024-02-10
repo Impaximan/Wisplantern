@@ -1,10 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
-using Terraria.GameContent.Creative;
-
-namespace Wisplantern.Items.Equipable.Accessories
+﻿namespace Wisplantern.Items.Equipable.Accessories
 {
     class Flint : ModItem
     {
@@ -39,21 +33,6 @@ namespace Wisplantern.Items.Equipable.Accessories
         }
     }
 
-    class FlintItem : GlobalItem
-    {
-        public override void ModifyShootStats(Item item, Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
-        {
-            if (player.GetModPlayer<FlintPlayer>().equipped)
-            {
-                if (type == ProjectileID.WoodenArrowFriendly && Main.rand.NextBool(6))
-                {
-                    type = ProjectileID.FireArrow;
-                    damage += 2;
-                }
-            }
-        }
-    }
-
     class FlintNPC : GlobalNPC
     {
         public override void OnHitByItem(NPC npc, Player player, Item item, NPC.HitInfo hit, int damageDone)
@@ -61,24 +40,6 @@ namespace Wisplantern.Items.Equipable.Accessories
             if (player.GetModPlayer<FlintPlayer>().equipped && item.DamageType is DamageClasses.ManipulativeDamageClass)
             {
                 npc.AddBuff(BuffID.OnFire, 60 * 3);
-            }
-        }
-    }
-
-    class FlintProjectile : GlobalProjectile
-    {
-        public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            if (Main.player[projectile.owner].GetModPlayer<FlintPlayer>().equipped)
-            {
-                if (projectile.type == ProjectileID.FireArrow)
-                {
-                    target.AddBuff(BuffID.OnFire, 180);
-                }
-                if (projectile.type == ProjectileID.FrostburnArrow)
-                {
-                    target.AddBuff(BuffID.Frostburn, 180);
-                }
             }
         }
     }

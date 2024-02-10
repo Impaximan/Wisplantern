@@ -1,9 +1,5 @@
-﻿using Terraria;
-using Terraria.ModLoader;
-using Microsoft.Xna.Framework;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System;
-using Terraria.Utilities;
 
 namespace Wisplantern.Globals.GItems
 {

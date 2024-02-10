@@ -1,12 +1,6 @@
-﻿using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
-using Microsoft.Xna.Framework;
-using Terraria.DataStructures;
-
-namespace Wisplantern.Items.Weapons.Melee.Zweihanders
+﻿namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 {
-	internal class PlatinumZweihander : Zweihander
+    internal class PlatinumZweihander : Zweihander
 	{
 		public override void SetStaticDefaults()
 		{

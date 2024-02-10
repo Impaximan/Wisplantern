@@ -1,11 +1,8 @@
-﻿using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.WorldBuilding;
+﻿using Terraria.WorldBuilding;
 using System.Threading;
 using System;
 using ReLogic.Content;
 using Terraria.Audio;
-using Terraria.ID;
 using Wisplantern.Globals.GItems;
 using Terraria.GameContent.Creative;
 using Wisplantern.Globals.GNPCs;

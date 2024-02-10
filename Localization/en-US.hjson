@@ -25,11 +25,30 @@ Mods: {
 		}
 
 		Biomes: {
-			CalmNightClairDeLune.DisplayName: Calm Night Clair De Lune
-			FarUnderground.DisplayName: Far Underground
-			LushCave.DisplayName: Lush Cave
-			FallenSnow.DisplayName: Fallen Snow
-			Snowstorm.DisplayName: Snowstorm
+			CalmNightClairDeLune: {
+				DisplayName: Calm Night Clair De Lune
+				TownNPCDialogueName: the Calm Night Clair De Lune
+			}
+
+			FarUnderground: {
+				DisplayName: Far Underground
+				TownNPCDialogueName: the Far Underground
+			}
+
+			LushCave: {
+				DisplayName: Lush Cave
+				TownNPCDialogueName: the Lush Cave
+			}
+
+			FallenSnow: {
+				DisplayName: Fallen Snow
+				TownNPCDialogueName: the Fallen Snow
+			}
+
+			Snowstorm: {
+				DisplayName: Snowstorm
+				TownNPCDialogueName: the Snowstorm
+			}
 		}
 
 		Buffs: {
@@ -162,6 +181,7 @@ Mods: {
 					'''
 					Allows you to swing magic staffs, recovering mana on melee hits
 					+20 max mana
+					'An item from a land far far away, across the fog'
 					'''
 			}
 
@@ -182,6 +202,15 @@ Mods: {
 			WispRing: {
 				DisplayName: Wisp Ring
 				Tooltip: Chance when mining to get the 'Hyperspeed' buff for 3 seconds
+			}
+
+			DraconicDacron: {
+				DisplayName: Draconic Dacron
+				Tooltip:
+				'''
+				Chance to set wooden arrows ablaze with any bow
+				Flaming arrows will *always* set enemies ablaze
+				'''
 			}
 
 			FourLeafClover: {
@@ -305,8 +334,6 @@ Mods: {
 				Tooltip:
 					'''
 					Perfectly timed strikes with zweihanders set enemies ablaze
-					Chance to set wooden arrows ablaze
-					Guarantees that flaming arrows will ignite enemies
 					Aggravated enemies set eachother on fire
 					'No steel needed this time!'
 					'''

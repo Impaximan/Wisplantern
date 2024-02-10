@@ -1,7 +1,4 @@
-﻿using Terraria;
-using Terraria.ModLoader;
-using Wisplantern.ID;
-using Microsoft.Xna.Framework;
+﻿using Wisplantern.ID;
 using System;
 using Terraria.DataStructures;
 

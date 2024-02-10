@@ -1,8 +1,4 @@
-﻿using Terraria;
-using Terraria.ModLoader;
-using Terraria.ID;
-
-namespace Wisplantern.Buffs
+﻿namespace Wisplantern.Buffs
 {
     class Pensive : ModBuff
     {

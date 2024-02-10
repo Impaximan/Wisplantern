@@ -1,10 +1,5 @@
-﻿using Terraria;
-using Terraria.ModLoader;
-using Terraria.ID;
-using Terraria.GameContent.ItemDropRules;
-using Wisplantern.Globals.GNPCs;
+﻿using Wisplantern.Globals.GNPCs;
 using Terraria.DataStructures;
-using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 

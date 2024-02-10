@@ -1,8 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
-using Terraria.GameContent.Creative;
+﻿using Terraria.GameContent.Creative;
 
 namespace Wisplantern.Items.Tools.Pickaxes
 {
@@ -30,6 +26,7 @@ namespace Wisplantern.Items.Tools.Pickaxes
             Item.useStyle = ItemUseStyleID.Swing;
             Item.rare = ItemRarityID.Blue;
             Item.autoReuse = true;
+            Item.useTurn = true;
         }
 
         public override Color? GetAlpha(Color lightColor)

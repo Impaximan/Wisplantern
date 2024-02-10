@@ -1,6 +1,4 @@
-﻿using Terraria.ModLoader;
-
-namespace Wisplantern.DamageClasses
+﻿namespace Wisplantern.DamageClasses
 {
     class ManipulativeDamageClass : DamageClass
     {

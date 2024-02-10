@@ -1,16 +1,11 @@
-﻿using Terraria;
-using Terraria.ModLoader;
-using Terraria.ID;
-using Terraria.ModLoader.IO;
+﻿using Terraria.ModLoader.IO;
 using Wisplantern.BattleArts;
 using Wisplantern.ID;
-using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Input;
 using Terraria.DataStructures;
 using Terraria.Audio;
 using System.IO;
-using Microsoft.VisualBasic;
 
 namespace Wisplantern.Globals.GItems
 {
@@ -398,7 +393,7 @@ namespace Wisplantern.Globals.GItems
 
                 TooltipLine line2 = new (Mod, "BattleArt2", "Can be used on " + battleArtItemBattleArt.BattleArtApplicabilityDescription());
 
-                TooltipLine line3 = new (Mod, "BattleArt3", "Gives a weapon the following effect: ");
+                TooltipLine line3 = new (Mod, "BattleArt3", "Grants a weapon the following attack: ");
 
                 TooltipLine line4 = new(Mod, "BattleArt4", battleArtItemBattleArt.BattleArtDescription)
                 {

@@ -1,8 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
-using Terraria.GameContent.Creative;
+﻿using Terraria.GameContent.Creative;
 using Wisplantern.Items.Weapons.Magic.Staffs;
 
 namespace Wisplantern.Items.Equipable.Accessories
@@ -28,7 +24,7 @@ namespace Wisplantern.Items.Equipable.Accessories
             Item.height = 22;
             Item.rare = ItemRarityID.Blue;
             Item.value = Item.sellPrice(0, 1, 0, 0);
-            Item.SetScholarlyDescription("Sold by undead merchants underground, but only under certain phases of the moon");
+            Item.SetScholarlyDescription("Sold by undead merchants underground and travelling merchants during certain moon phases");
         }
 
         public override void UpdateEquip(Player player)

@@ -1,9 +1,4 @@
-﻿using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
-using Microsoft.Xna.Framework;
-using Terraria.DataStructures;
-using System;
+﻿using System;
 
 namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 {

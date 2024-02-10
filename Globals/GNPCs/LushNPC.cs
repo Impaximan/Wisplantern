@@ -1,7 +1,4 @@
-﻿using Terraria;
-using Terraria.ModLoader;
-
-namespace Wisplantern.Globals.GNPCs
+﻿namespace Wisplantern.Globals.GNPCs
 {
     class LushNPC : GlobalNPC
     {

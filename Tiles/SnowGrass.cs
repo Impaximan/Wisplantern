@@ -1,8 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.ModLoader;
-using Terraria.ID;
-using Terraria.DataStructures;
+﻿using Terraria.DataStructures;
 using Terraria.Audio;
 
 namespace Wisplantern.Tiles
@@ -31,7 +27,7 @@ namespace Wisplantern.Tiles
             //Main.treeStyle[Type] = 4;
 
             DustType = DustID.Snow;
-            ItemDrop = ItemID.Snowball;
+            RegisterItemDrop(ItemID.Snowball);
             MinPick = 0;
             MineResist = 0f;
             AddMapEntry(new Color(240, 245, 255));
@@ -39,10 +35,15 @@ namespace Wisplantern.Tiles
 
         public override void KillTile(int i, int j, ref bool fail, ref bool effectOnly, ref bool noItem)
         {
+            if (Main.gameMenu)
+            {
+                return;
+            }
+
             effectOnly = true;
             noItem = false;
             Main.tile[i, j].TileType = TileID.Grass;
-            Item.NewItem(new EntitySource_TileBreak(i, j), new Vector2(i, j) * 16f, ItemDrop, Main.rand.Next(1, 3));
+            Item.NewItem(new EntitySource_TileBreak(i, j), new Vector2(i, j) * 16f, ItemID.Snowball, Main.rand.Next(1, 3));
             SoundEngine.PlaySound(SoundID.Item48, new Vector2(i, j) * 16f);
         }
 

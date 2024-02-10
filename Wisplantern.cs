@@ -1,15 +1,14 @@
-using Terraria.ModLoader;
+global using Terraria;
+global using Terraria.ModLoader;
+global using Terraria.ID;
+global using Microsoft.Xna.Framework;
 using ReLogic.Content;
 using Microsoft.Xna.Framework.Audio;
 using System.IO;
-using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
-using Terraria;
 using Terraria.Graphics.Effects;
 using Terraria.Graphics.Shaders;
-using Terraria.ID;
-using Terraria.Achievements;
 
 namespace Wisplantern
 {

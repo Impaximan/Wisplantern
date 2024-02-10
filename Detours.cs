@@ -1,9 +1,5 @@
-﻿using Terraria.ModLoader;
-using Microsoft.Xna.Framework.Graphics;
-using Terraria;
+﻿using Microsoft.Xna.Framework.Graphics;
 using Terraria.Graphics.Effects;
-using Terraria.ID;
-using Microsoft.Xna.Framework;
 using System;
 
 namespace Wisplantern
