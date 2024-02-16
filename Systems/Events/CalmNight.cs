@@ -48,7 +48,7 @@ namespace Wisplantern.Systems.Events
                     if (forcedCalmNightState == 0 || (forcedCalmNightState == 1 && Main.hardMode))
                     {
                         forcedCalmNightState++;
-                        calmNight = true;
+                        if (Wisplantern.calmNights) calmNight = true;
                     }
 
                     if (calmNight)
