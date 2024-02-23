@@ -537,6 +537,7 @@ Mods: {
 			WisplanternNPC.DisplayName: Wisplantern
 			BouncyDummyDecoy.DisplayName: Bouncy Dummy Decoy
 			BramblesproutDecoy.DisplayName: Bramblesprout Decoy
+			Moonfly.DisplayName: Moonfly
 		}
 
 		Prefixes: {
