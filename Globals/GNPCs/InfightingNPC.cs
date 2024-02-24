@@ -33,6 +33,8 @@ namespace Wisplantern.Globals.GNPCs
             NPCID.EaterofWorldsTail
         };
 
+        public List<int> eaterOfWorldsSegments = new List<int>();
+
         public NPC GetNPCTarget(NPC me)
         {
             NPC target = null;
@@ -49,7 +51,7 @@ namespace Wisplantern.Globals.GNPCs
                     if (result.decoy && (npc.Distance(me.Center) < decoyDistance || Main.player[me.target].GetModPlayer<ModPlayers.ManipulativePlayer>().smokeBombTime > 0)) prioritize = true;
                 }
                 if (npc.active && prioritize && npc.whoAmI != me.whoAmI && !npc.dontTakeDamage && !(me.aiStyle == 9 && npc.whoAmI == castAIOwner) && npc.aiStyle != 9 && npc.whoAmI != me.realLife && npc.realLife != me.whoAmI && (npc.realLife != me.realLife || npc.realLife == -1) &&
-                        !(me.type == NPCID.EaterofWorldsHead && npc.ai[1] == me.whoAmI))
+                        !(me.type == NPCID.EaterofWorldsHead && eaterOfWorldsSegments.Contains(npc.whoAmI)))
                 {
                     target = npc;
                     distance = npc.Distance(me.Center);
@@ -143,10 +145,40 @@ namespace Wisplantern.Globals.GNPCs
                 Main.player[ogTarget].position = originalPlayerPosition.Value;
                 shouldTeleportBack = false;
             }
+
+            eaterOfWorldsSegments.Clear();
         }
 
         public override void PostAI(NPC npc)
         {
+            if (npc.type == NPCID.EaterofWorldsBody || npc.type == NPCID.EaterofWorldsTail)
+            {
+                int currentSegment = npc.whoAmI;
+
+                int tries = 0;
+
+                while (Main.npc[currentSegment] == null || !Main.npc[currentSegment].active || Main.npc[currentSegment].type != NPCID.EaterofWorldsHead)
+                {
+                    currentSegment = (int)Main.npc[currentSegment].ai[1];
+                    tries++;
+
+                    if (tries > 300)
+                    {
+                        break;
+                    }
+                }
+
+                if (Main.npc[currentSegment] != null && Main.npc[currentSegment].active && Main.npc[currentSegment].type == NPCID.EaterofWorldsHead)
+                {
+                    InfightingNPC iNPC = Main.npc[currentSegment].GetGlobalNPC<InfightingNPC>();
+                    
+                    if (!iNPC.eaterOfWorldsSegments.Contains(npc.whoAmI))
+                    {
+                        iNPC.eaterOfWorldsSegments.Add(npc.whoAmI);
+                    }
+                }
+            }
+
             if (targetNPC != null && originalPlayerPosition.HasValue && shouldTeleportBack)
             {
                 Main.player[ogTarget].position = originalPlayerPosition.Value;
