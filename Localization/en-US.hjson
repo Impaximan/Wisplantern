@@ -542,6 +542,16 @@ Mods: {
 				DisplayName: Crimcane
 				Tooltip: Victims of aggravated enemies create lingering skull spirits on death
 			}
+
+			SmoothDepthrock: {
+				DisplayName: Smooth Depthrock
+				Tooltip: ""
+			}
+
+			SmoothDepthrockWall: {
+				DisplayName: Smooth Depthrock Wall
+				Tooltip: ""
+			}
 		}
 
 		NPCs: {

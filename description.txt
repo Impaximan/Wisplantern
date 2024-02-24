@@ -31,3 +31,6 @@ Dev team:
 -Torra th (spriter)
 -Sir Pogsalot (spriter)
 -RedShift (spriter)
+
+Contributors:
+-Tellio
