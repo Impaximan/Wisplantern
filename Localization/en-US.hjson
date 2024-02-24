@@ -25,6 +25,7 @@ Mods: {
 			Bloodsplosion_Machete.DisplayName: Bloodsplosion_ Machete
 			HeavyBullet.DisplayName: Heavy Bullet
 			DemoniteWisp.DisplayName: Demonite Wisp
+			CrimtaneSkull.DisplayName: Crimtane Skull
 		}
 
 		Biomes: {
@@ -535,6 +536,11 @@ Mods: {
 			DemoniteCane: {
 				DisplayName: Tall Tale
 				Tooltip: Aggravated enemies create homing shadow wisps on hit
+			}
+
+			CrimtaneCane: {
+				DisplayName: Crimcane
+				Tooltip: Victims of aggravated enemies create lingering skull spirits on death
 			}
 		}
 

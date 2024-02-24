@@ -23,7 +23,7 @@ namespace Wisplantern.Items.Weapons.Manipulative.Canes
         public override void CaneSetDefaults()
         {
             Item.damage = 20;
-            Item.SetManipulativePower(0.18f);
+            Item.SetManipulativePower(0.17f);
             Item.DamageType = ModContent.GetInstance<DamageClasses.ManipulativeDamageClass>();
             Item.width = 40;
             Item.height = 46;
@@ -45,7 +45,7 @@ namespace Wisplantern.Items.Weapons.Manipulative.Canes
                     target.Center, 
                     Main.rand.NextFloat((float)Math.PI * 2f).ToRotationVector2() * Main.rand.NextFloat(5f, 10f), 
                     ModContent.ProjectileType<DemoniteWisp>(), 
-                    Item.damage, 
+                    (int)(Item.damage * 1.5f), 
                     Item.knockBack,
                     player.whoAmI,
                     target.whoAmI);
