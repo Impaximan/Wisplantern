@@ -14,7 +14,7 @@ namespace Wisplantern.UI.AggravationMeter
             {
                 if (npc != null && npc.active && npc.TryGetGlobalNPC(out InfightingNPC iNPC))
                 {
-                    if (iNPC.aggravation > 0f)
+                    if (iNPC.aggravation > 0f && (npc.realLife == -1 || npc.realLife == npc.whoAmI))
                     {
                         Vector2 positionOnScreen = npc.Center - Main.screenPosition;
                         positionOnScreen.Y -= npc.height + 5;

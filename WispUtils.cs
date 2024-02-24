@@ -283,6 +283,11 @@ namespace Wisplantern
         /// <returns></returns>
         public static bool Aggravate(this NPC npc, float amount, int damage, float knockback, int critChance, Player player, Item item, bool combatText = true)
         {
+            if (InfightingNPC.infightingBlacklist.Contains(npc.type) || npc.dontTakeDamage || (npc.realLife != -1 && npc.realLife != npc.whoAmI))
+            {
+                return false;
+            }
+
             InfightingNPC iNPC = npc.GetGlobalNPC<InfightingNPC>();
             amount = amount * 100 / npc.life;
             if (npc.HasBuff(BuffID.Confused))
@@ -302,7 +307,7 @@ namespace Wisplantern
             {
                 if (!iNPC.aggravated)
                 {
-                    CombatText.NewText(npc.getRect(), Color.MediumPurple, "Aggravated!", true, false);
+                    CombatText.NewText(npc.getRect(), Color.Crimson, "Aggravated!", true, false);
                     SoundEngine.PlaySound(SoundID.Item113, npc.Center);
                 }
                 iNPC.aggravation = 1f;
@@ -312,6 +317,48 @@ namespace Wisplantern
                 iNPC.infightDamage = damage;
                 iNPC.infightKnockback = knockback;
                 iNPC.infightItem = item;
+
+                if (NPCID.Sets.ProjectileNPC[npc.type])
+                {
+                    float distance = 1000f;
+
+                    NPC target = null;
+
+                    for (int i = 0; i < Main.maxNPCs; i++)
+                    {
+                        NPC potentialTarget = Main.npc[i];
+                        float dist = npc.Distance(npc.Center);
+
+                        if (potentialTarget.active && !potentialTarget.friendly && dist < distance)
+                        {
+                            target = potentialTarget;
+                            distance = dist;
+                        }
+                    }
+
+                    if (target != null)
+                    {
+                        npc.velocity = npc.DirectionTo(target.Center) * npc.velocity.Length();
+                    }
+                }
+
+                for (int i = 0; i < Main.maxNPCs; i++)
+                {
+                    NPC other = Main.npc[i];
+
+                    if (other.active && other.realLife == npc.whoAmI)
+                    {
+                        InfightingNPC otherINPC = other.GetGlobalNPC<InfightingNPC>();
+
+                        otherINPC.aggravation = 1f;
+                        otherINPC.aggravated = true;
+                        otherINPC.infightPlayer = player.whoAmI;
+                        otherINPC.infightCritChance = critChance;
+                        otherINPC.infightDamage = damage;
+                        otherINPC.infightKnockback = knockback;
+                        otherINPC.infightItem = item;
+                    }
+                }
                 return true;
             }
             return false;

@@ -27,6 +27,12 @@ namespace Wisplantern.Globals.GNPCs
 
         public override bool InstancePerEntity => true;
 
+        public static List<int> infightingBlacklist = new List<int>()
+        {
+            NPCID.EaterofWorldsBody,
+            NPCID.EaterofWorldsTail
+        };
+
         public NPC GetNPCTarget(NPC me)
         {
             NPC target = null;
@@ -42,7 +48,8 @@ namespace Wisplantern.Globals.GNPCs
                 {
                     if (result.decoy && (npc.Distance(me.Center) < decoyDistance || Main.player[me.target].GetModPlayer<ModPlayers.ManipulativePlayer>().smokeBombTime > 0)) prioritize = true;
                 }
-                if (npc.active && prioritize && npc.whoAmI != me.whoAmI && !npc.dontTakeDamage && !(me.aiStyle == 9 && npc.whoAmI == castAIOwner) && npc.aiStyle != 9)
+                if (npc.active && prioritize && npc.whoAmI != me.whoAmI && !npc.dontTakeDamage && !(me.aiStyle == 9 && npc.whoAmI == castAIOwner) && npc.aiStyle != 9 && npc.whoAmI != me.realLife && npc.realLife != me.whoAmI && (npc.realLife != me.realLife || npc.realLife == -1) &&
+                        !(me.type == NPCID.EaterofWorldsHead && npc.ai[1] == me.whoAmI))
                 {
                     target = npc;
                     distance = npc.Distance(me.Center);
@@ -150,7 +157,9 @@ namespace Wisplantern.Globals.GNPCs
             {
                 foreach (NPC target in Main.npc)
                 {
-                    if (target.active && target.whoAmI != npc.whoAmI && target.Hitbox.Intersects(npc.Hitbox) && target.GetGlobalNPC<InfightingNPC>().infightIframes <= 0 && !target.friendly)
+                    if (target.active && target.whoAmI != npc.whoAmI && target.Hitbox.Intersects(npc.Hitbox) && target.GetGlobalNPC<InfightingNPC>().infightIframes <= 0 && !target.friendly && !target.dontTakeDamage && 
+                        target.realLife != npc.whoAmI && target.whoAmI != npc.realLife && (target.realLife != npc.realLife || target.realLife == -1) &&
+                        !(npc.type == NPCID.EaterofWorldsHead && target.ai[1] == npc.whoAmI))
                     {
                         int damage = infightDamage;
                         if (npc.SpawnedFromStatue)
@@ -164,6 +173,17 @@ namespace Wisplantern.Globals.GNPCs
                         //{
                         //    target.AddBuff(buffType, npc.buffTime[npc.FindBuffIndex(buffType)]);
                         //}
+
+                        if (infightItem != null && infightItem.ModItem != null)
+                        {
+                            infightItem.ModItem.OnHitNPC(Main.player[infightPlayer], target, info, struckDamage);
+
+                            foreach (GlobalItem gItem in infightItem.Globals)
+                            {
+                                gItem.OnHitNPC(infightItem, Main.player[infightPlayer], target, info, struckDamage);
+                            }
+                        }
+
                         target.GetGlobalNPC<InfightingNPC>().infightIframes = infightGivenIframes;
                         foreach (GlobalNPC gNPC in target.Globals)
                         {
@@ -197,6 +217,8 @@ namespace Wisplantern.Globals.GNPCs
     class InfightProjectile : GlobalProjectile
     {
         NPC originalNPC;
+        Item infightItem = null;
+        int infightPlayer = 0;
 
         public override bool InstancePerEntity => true;
 
@@ -208,10 +230,35 @@ namespace Wisplantern.Globals.GNPCs
                 if (parentSource.Entity is NPC)
                 {
                     originalNPC = parentSource.Entity as NPC;
-                    if (originalNPC.GetGlobalNPC<InfightingNPC>().aggravated)
+                    InfightingNPC infightingNPC = originalNPC.GetGlobalNPC<InfightingNPC>();
+
+                    if (infightingNPC.aggravated)
                     {
                         projectile.friendly = true;
+
+                        if (infightingNPC.infightItem != null)
+                        {
+                            infightItem = infightingNPC.infightItem;
+                        }
+
+                        infightPlayer = infightingNPC.infightPlayer;
                     }
+                }
+            }
+        }
+
+        public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            if (Main.player[infightPlayer] != null && infightItem != null)
+            {
+                if (infightItem != null && infightItem.ModItem != null)
+                {
+                    infightItem.ModItem.OnHitNPC(Main.player[infightPlayer], target, hit, damageDone);
+                }
+
+                foreach (GlobalNPC gNPC in target.Globals)
+                {
+                    gNPC.OnHitByItem(target, Main.player[infightPlayer], infightItem, hit, damageDone);
                 }
             }
         }

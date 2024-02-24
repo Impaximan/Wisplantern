@@ -24,6 +24,7 @@ Mods: {
 			TungstenSummonProjectile.DisplayName: Tungsten Summon Projectile
 			Bloodsplosion_Machete.DisplayName: Bloodsplosion_ Machete
 			HeavyBullet.DisplayName: Heavy Bullet
+			DemoniteWisp.DisplayName: Demonite Wisp
 		}
 
 		Biomes: {
@@ -529,6 +530,11 @@ Mods: {
 					Aggravated enemies set one another ablaze
 					'Gasliting and gatekeeping'
 					'''
+			}
+
+			DemoniteCane: {
+				DisplayName: Tall Tale
+				Tooltip: Aggravated enemies create homing shadow wisps on hit
 			}
 		}
 
