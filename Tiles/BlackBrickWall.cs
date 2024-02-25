@@ -2,7 +2,7 @@
 
 namespace Wisplantern.Tiles
 {
-	public class SmoothDepthrockWall : ModWall
+	public class BlackBrickWall : ModWall
 	{
 		public override void SetStaticDefaults()
 		{
@@ -10,14 +10,11 @@ namespace Wisplantern.Tiles
 
 			DustType = DustID.Stone;
 
-			SoundStyle style = new SoundStyle("Wisplantern/Sounds/Effects/StoneHit2")
-			{
-				PitchVariance = 0.25f
-			};
-			style.Pitch += 0.15f;
+			SoundStyle style = new SoundStyle("Wisplantern/Sounds/Effects/StoneHit2");
+			style.PitchVariance = 0.25f;
 			HitSound = style;
 
-			AddMapEntry(new Color(140 / 2, 118 / 2, 101 / 2));
+			AddMapEntry(new Color(83 / 2, 72 / 2, 69 / 2));
 		}
 
 		//public override void NumDust(int i, int j, bool fail, ref int num)

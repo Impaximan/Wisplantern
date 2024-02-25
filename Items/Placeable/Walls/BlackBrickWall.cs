@@ -2,7 +2,7 @@
 
 namespace Wisplantern.Items.Placeable.Walls
 {
-    class SmoothDepthrockWall : ModItem
+    class BlackBrickWall : ModItem
     {
         public override void SetStaticDefaults()
         {
@@ -13,7 +13,7 @@ namespace Wisplantern.Items.Placeable.Walls
         public override void AddRecipes()
         {
             CreateRecipe(4)
-                .AddIngredient<Blocks.SmoothDepthrock>()
+                .AddIngredient<Blocks.BlackBrick>()
                 .AddTile(TileID.WorkBenches)
                 .Register();
         }
@@ -29,7 +29,7 @@ namespace Wisplantern.Items.Placeable.Walls
             Item.useTime = 10;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.consumable = true;
-            Item.createWall = ModContent.WallType<Tiles.SmoothDepthrockWall>();
+            Item.createWall = ModContent.WallType<Tiles.BlackBrickWall>();
         }
     }
 }

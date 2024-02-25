@@ -22,15 +22,17 @@ namespace Wisplantern.Tiles
             Main.tileMerge[Type][ModContent.TileType<Depthrock>()] = true;
             Main.tileMerge[ModContent.TileType<Depthrock>()][Type] = true;
 
-            SoundStyle style = new SoundStyle("Wisplantern/Sounds/Effects/StoneHit2");
-            style.PitchVariance = 0.25f;
+            SoundStyle style = new SoundStyle("Wisplantern/Sounds/Effects/StoneHit3")
+            {
+                PitchVariance = 0.5f
+            };
             HitSound = style;
 
             MinPick = 0;
             MineResist = 1f;
             DustType = DustID.Stone;
             //ItemDrop = ModContent.ItemType<Items.Placeable.Blocks.IgneousStone>();
-            AddMapEntry(new Color(117, 104, 130));
+            AddMapEntry(new Color(113, 107, 105));
         }
     }
 }

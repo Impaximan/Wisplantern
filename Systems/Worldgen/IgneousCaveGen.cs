@@ -157,15 +157,15 @@ namespace Wisplantern.Systems.Worldgen
             int hallwaySpacingX = 140;
 
             int tilingType = TileID.IronBrick;
-            int brickType = TileID.IridescentBrick;
+            int brickType = ModContent.TileType<Tiles.BlackBrick>();
             int pipingType = TileID.CopperBrick;
-            int smoothType = TileID.MarbleBlock;
+            int smoothType = ModContent.TileType<Tiles.SmoothDepthrock>();
             int oreType = TileID.Iron;
 
-            int smoothWallType = WallID.MarbleBlock;
+            int smoothWallType = ModContent.WallType<Tiles.SmoothDepthrockWall>();
             int pipingWallType = WallID.CopperBrick;
             int fenceWallType = WallID.WroughtIronFence;
-            int brickWallType = WallID.IridescentBrick;
+            int brickWallType = ModContent.WallType<Tiles.BlackBrickWall>();
 
             int seedThing = WorldGen.genRand.Next(500);
 

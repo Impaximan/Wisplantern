@@ -1,27 +1,32 @@
 ﻿using Terraria.GameContent.Creative;
 
-namespace Wisplantern.Items.Placeable.Walls
+namespace Wisplantern.Items.Placeable.Blocks
 {
-    class SmoothDepthrockWall : ModItem
+    class BlackBrick : ModItem
     {
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Depthrock Block");
-            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 400;
+            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 100;
         }
 
         public override void AddRecipes()
         {
-            CreateRecipe(4)
-                .AddIngredient<Blocks.SmoothDepthrock>()
+            CreateRecipe()
+                .AddIngredient<IgneousStone>(2)
+                .AddTile(TileID.Furnaces)
+                .Register();
+
+            CreateRecipe()
+                .AddIngredient<Walls.BlackBrickWall>(4)
                 .AddTile(TileID.WorkBenches)
                 .Register();
         }
 
         public override void SetDefaults()
         {
-            Item.width = 24;
-            Item.height = 24;
+            Item.width = 16;
+            Item.height = 16;
             Item.maxStack = 9999;
             Item.useTurn = true;
             Item.autoReuse = true;
@@ -29,7 +34,7 @@ namespace Wisplantern.Items.Placeable.Walls
             Item.useTime = 10;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.consumable = true;
-            Item.createWall = ModContent.WallType<Tiles.SmoothDepthrockWall>();
+            Item.createTile = ModContent.TileType<Tiles.BlackBrick>();
         }
     }
 }

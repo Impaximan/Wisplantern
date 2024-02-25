@@ -563,6 +563,16 @@ Mods: {
 				DisplayName: Charisma
 				Tooltip: ""
 			}
+
+			BlackBrick: {
+				DisplayName: Black Brick
+				Tooltip: ""
+			}
+
+			BlackBrickWall: {
+				DisplayName: Black Brick Wall
+				Tooltip: ""
+			}
 		}
 
 		NPCs: {
