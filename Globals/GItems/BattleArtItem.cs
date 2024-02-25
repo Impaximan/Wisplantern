@@ -430,9 +430,17 @@ namespace Wisplantern.Globals.GItems
 
         public override void PostUpdate()
         {
-            if (Player.ItemAnimationActive && Player.HeldItem.GetGlobalItem<BattleArtItem>().battleArt != null && Player.HeldItem.GetGlobalItem<BattleArtItem>().battleArt is not None && Player.altFunctionUse == 2)
+            if (Player.HeldItem == null)
             {
-                Player.HeldItem.GetGlobalItem<BattleArtItem>().battleArt.PostUpdatePlayer(Player);
+                return;
+            }
+
+            if (Player.ItemAnimationActive && Player.HeldItem.TryGetGlobalItem(out BattleArtItem bItem))
+            {
+                if (bItem.battleArt != null && bItem.battleArt is not None && Player.altFunctionUse == 2)
+                {
+                    Player.HeldItem.GetGlobalItem<BattleArtItem>().battleArt.PostUpdatePlayer(Player);
+                }
             }
         }
     }

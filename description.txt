@@ -34,3 +34,4 @@ Dev team:
 
 Contributors:
 -Tellio
+-Magordito

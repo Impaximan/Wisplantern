@@ -556,7 +556,12 @@ Mods: {
 
 			ScrollOfIncantation: {
 				DisplayName: Scroll of Incantation
-				Tooltip: "Can be used to craft incantations which command the aggravated masses"
+				Tooltip: Can be used to craft incantations which command the aggravated masses
+			}
+
+			CharismaPickup: {
+				DisplayName: Charisma
+				Tooltip: ""
 			}
 		}
 

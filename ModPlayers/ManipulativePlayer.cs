@@ -1,7 +1,30 @@
-﻿namespace Wisplantern.ModPlayers
+﻿using Terraria.ModLoader.IO;
+
+namespace Wisplantern.ModPlayers
 {
     class ManipulativePlayer : ModPlayer
     {
+        public int charisma = 0;
+        public int defMaxCharisma = 3;
+        public int extraMaxCharisma = 0;
+
+        public int MaxCharisma => defMaxCharisma + extraMaxCharisma;
+
+        public override void SaveData(TagCompound tag)
+        {
+            tag.Add("maxCharisma", defMaxCharisma);
+        }
+
+        public override void LoadData(TagCompound tag)
+        {
+            defMaxCharisma = tag.GetInt("maxCharisma");
+        }
+
+        public override void ResetEffects()
+        {
+            extraMaxCharisma = 0;
+        }
+
         public int smokeBombTime = 0;
         public override void PreUpdateBuffs()
         {

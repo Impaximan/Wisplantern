@@ -51,7 +51,7 @@ namespace Wisplantern.Globals.GNPCs
                     if (result.decoy && (npc.Distance(me.Center) < decoyDistance || Main.player[me.target].GetModPlayer<ModPlayers.ManipulativePlayer>().smokeBombTime > 0)) prioritize = true;
                 }
                 if (npc.active && prioritize && npc.whoAmI != me.whoAmI && !npc.dontTakeDamage && !(me.aiStyle == 9 && npc.whoAmI == castAIOwner) && npc.aiStyle != 9 && npc.whoAmI != me.realLife && npc.realLife != me.whoAmI && (npc.realLife != me.realLife || npc.realLife == -1) &&
-                        !(me.type == NPCID.EaterofWorldsHead && eaterOfWorldsSegments.Contains(npc.whoAmI)))
+                        !(me.type == NPCID.EaterofWorldsHead && eaterOfWorldsSegments.Contains(npc.whoAmI)) && !NPCID.Sets.ProjectileNPC[npc.type])
                 {
                     target = npc;
                     distance = npc.Distance(me.Center);
@@ -147,6 +147,12 @@ namespace Wisplantern.Globals.GNPCs
             }
 
             eaterOfWorldsSegments.Clear();
+
+            ManipulativePlayer mPlayer = Main.player[infightPlayer].GetModPlayer<ManipulativePlayer>();
+            if (aggravated && !NPCID.Sets.ProjectileNPC[npc.type] && Main.rand.NextBool() && mPlayer.charisma < mPlayer.MaxCharisma)
+            {
+                Item.NewItem(new EntitySource_Loot(npc), npc.getRect(), ModContent.ItemType<Items.Powerups.CharismaPickup>());
+            }
         }
 
         public override void PostAI(NPC npc)
@@ -179,6 +185,7 @@ namespace Wisplantern.Globals.GNPCs
                 }
             }
 
+
             if (targetNPC != null && originalPlayerPosition.HasValue && shouldTeleportBack)
             {
                 Main.player[ogTarget].position = originalPlayerPosition.Value;
@@ -187,6 +194,11 @@ namespace Wisplantern.Globals.GNPCs
 
             if (aggravated)
             {
+                if (!Main.player[infightPlayer].dead)
+                {
+                    npc.DiscourageDespawn(300);
+                }
+
                 foreach (NPC target in Main.npc)
                 {
                     if (target.active && target.whoAmI != npc.whoAmI && target.Hitbox.Intersects(npc.Hitbox) && target.GetGlobalNPC<InfightingNPC>().infightIframes <= 0 && !target.friendly && !target.dontTakeDamage && 

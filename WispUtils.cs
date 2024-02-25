@@ -310,6 +310,7 @@ namespace Wisplantern
                     CombatText.NewText(npc.getRect(), Color.Crimson, "Aggravated!", true, false);
                     SoundEngine.PlaySound(SoundID.Item113, npc.Center);
 
+                    //Redirect projectile NPCs
                     if (NPCID.Sets.ProjectileNPC[npc.type])
                     {
                         float distance = 1000f;
@@ -321,7 +322,7 @@ namespace Wisplantern
                             NPC potentialTarget = Main.npc[i];
                             float dist = npc.Distance(potentialTarget.Center);
 
-                            if (potentialTarget.active && !potentialTarget.friendly && dist < distance && potentialTarget != npc)
+                            if (potentialTarget.active && !potentialTarget.friendly && dist < distance && potentialTarget != npc && !NPCID.Sets.ProjectileNPC[potentialTarget.type])
                             {
                                 target = potentialTarget;
                                 distance = dist;
@@ -419,6 +420,19 @@ namespace Wisplantern
                 int d = Dust.NewDust(player.position, player.width, player.height, DustID.Smoke);
                 Main.dust[d].velocity += new Vector2(player.velocity.X, player.velocity.Y - Main.rand.Next(10));
             }
+        }
+
+        public static void GainCharisma(this Player player, int amount = 1)
+        {
+            ManipulativePlayer mPlayer = player.GetModPlayer<ManipulativePlayer>();
+            mPlayer.charisma += amount;
+
+            if (mPlayer.charisma > mPlayer.MaxCharisma)
+            {
+                mPlayer.charisma = mPlayer.MaxCharisma;
+            }
+
+            CombatText.NewText(player.getRect(), new Color(252, 156, 80), amount);
         }
     }
 }
