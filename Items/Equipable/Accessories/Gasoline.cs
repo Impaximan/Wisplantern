@@ -20,6 +20,8 @@
         public override void UpdateEquip(Player player)
         {
             player.AddAccessoryEffect(Item);
+
+            player.GetCritChance<DamageClasses.ManipulativeDamageClass>() += 10;
         }
     }
 }

@@ -309,7 +309,32 @@ namespace Wisplantern
                 {
                     CombatText.NewText(npc.getRect(), Color.Crimson, "Aggravated!", true, false);
                     SoundEngine.PlaySound(SoundID.Item113, npc.Center);
+
+                    if (NPCID.Sets.ProjectileNPC[npc.type])
+                    {
+                        float distance = 1000f;
+
+                        NPC target = null;
+
+                        for (int i = 0; i < Main.maxNPCs; i++)
+                        {
+                            NPC potentialTarget = Main.npc[i];
+                            float dist = npc.Distance(potentialTarget.Center);
+
+                            if (potentialTarget.active && !potentialTarget.friendly && dist < distance && potentialTarget != npc)
+                            {
+                                target = potentialTarget;
+                                distance = dist;
+                            }
+                        }
+
+                        if (target != null)
+                        {
+                            npc.velocity = npc.DirectionTo(target.Center) * npc.velocity.Length();
+                        }
+                    }
                 }
+
                 iNPC.aggravation = 1f;
                 iNPC.aggravated = true;
                 iNPC.infightPlayer = player.whoAmI;
@@ -317,30 +342,6 @@ namespace Wisplantern
                 iNPC.infightDamage = damage;
                 iNPC.infightKnockback = knockback;
                 iNPC.infightItem = item;
-
-                if (NPCID.Sets.ProjectileNPC[npc.type])
-                {
-                    float distance = 1000f;
-
-                    NPC target = null;
-
-                    for (int i = 0; i < Main.maxNPCs; i++)
-                    {
-                        NPC potentialTarget = Main.npc[i];
-                        float dist = npc.Distance(npc.Center);
-
-                        if (potentialTarget.active && !potentialTarget.friendly && dist < distance)
-                        {
-                            target = potentialTarget;
-                            distance = dist;
-                        }
-                    }
-
-                    if (target != null)
-                    {
-                        npc.velocity = npc.DirectionTo(target.Center) * npc.velocity.Length();
-                    }
-                }
 
                 for (int i = 0; i < Main.maxNPCs; i++)
                 {

@@ -529,6 +529,7 @@ Mods: {
 				Tooltip:
 					'''
 					Aggravated enemies set one another ablaze
+					10% increased manipulative critical strike chance
 					'Gasliting and gatekeeping'
 					'''
 			}
@@ -551,6 +552,11 @@ Mods: {
 			SmoothDepthrockWall: {
 				DisplayName: Smooth Depthrock Wall
 				Tooltip: ""
+			}
+
+			ScrollOfIncantation: {
+				DisplayName: Scroll of Incantation
+				Tooltip: "Can be used to craft incantations which command the aggravated masses"
 			}
 		}
 
