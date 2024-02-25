@@ -99,7 +99,7 @@ namespace Wisplantern.Items.Weapons.Manipulative.Canes
             for (int i = 0; i < Main.maxNPCs; i++)
             {
                 NPC npc = Main.npc[i];
-                float dist = npc.Distance(Projectile.Center);
+                float dist = npc.Distance(Projectile.Center) - npc.Size.Length() / 2f;
 
                 if (npc.active && !npc.friendly && dist < distance)
                 {

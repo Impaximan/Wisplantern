@@ -24,7 +24,9 @@ namespace Wisplantern.Tiles
 
             SoundStyle style = new SoundStyle("Wisplantern/Sounds/Effects/StoneHit3")
             {
-                PitchVariance = 0.5f
+                PitchVariance = 0.5f,
+                Pitch = 0.5f,
+                Volume = 1.5f,
             };
             HitSound = style;
 
