@@ -13,11 +13,13 @@ namespace Wisplantern.ModPlayers
         public override void SaveData(TagCompound tag)
         {
             tag.Add("maxCharisma", defMaxCharisma);
+            tag.Add("charisma", charisma);
         }
 
         public override void LoadData(TagCompound tag)
         {
             defMaxCharisma = tag.GetInt("maxCharisma");
+            charisma = tag.GetInt("charisma");
         }
 
         public override void ResetEffects()
@@ -42,6 +44,14 @@ namespace Wisplantern.ModPlayers
                 {
                     Player.SmokeBombEffect();
                 }
+            }
+        }
+
+        public override void PostUpdate()
+        {
+            if (charisma > MaxCharisma)
+            {
+                charisma = MaxCharisma;
             }
         }
     }
