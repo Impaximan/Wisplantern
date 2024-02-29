@@ -22,11 +22,11 @@ namespace Wisplantern.Tiles
             Main.tileMerge[Type][ModContent.TileType<Depthrock>()] = true;
             Main.tileMerge[ModContent.TileType<Depthrock>()][Type] = true;
 
-            SoundStyle style = new SoundStyle("Wisplantern/Sounds/Effects/StoneHit3")
+            SoundStyle style = new SoundStyle("Wisplantern/Sounds/Effects/StoneHit4")
             {
                 PitchVariance = 0.5f,
-                Pitch = 0.5f,
-                Volume = 1.5f,
+                Pitch = 0.3f,
+                Volume = 2f,
             };
             HitSound = style;
 

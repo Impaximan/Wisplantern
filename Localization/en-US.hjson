@@ -573,6 +573,16 @@ Mods: {
 				DisplayName: Black Brick Wall
 				Tooltip: ""
 			}
+
+			FarUnderground: {
+				DisplayName: Music Box (Far Underground)
+				Tooltip: ""
+			}
+
+			Snowstorm: {
+				DisplayName: Music Box (Snowstorm)
+				Tooltip: ""
+			}
 		}
 
 		NPCs: {
@@ -654,6 +664,11 @@ Mods: {
 		WorldgenHeader: World generation
 		MusicHeader: Music
 		EventHeader: Events
+
+		Tiles: {
+			FarUnderground.MapEntry: Far Underground
+			Snowstorm.MapEntry: Snowstorm
+		}
 	}
 
 	GameTips: {
