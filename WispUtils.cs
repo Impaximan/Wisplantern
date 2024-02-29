@@ -403,6 +403,17 @@ namespace Wisplantern
             item.GetGlobalItem<AggravatingItem>().manipulativePower = amount;
         }
 
+        public static void SetCharisma(this Item item, int amount)
+        {
+            item.GetGlobalItem<AggravatingItem>().charisma = amount;
+        }
+
+        public static int EvenSimplerStrikeNPC(this NPC npc, Player player, Item item, int damage, float knockback, int hitDirection)
+        {
+            int dealtDamage = npc.SimpleStrikeNPC(damage, hitDirection, Main.rand.NextBool(player.GetWeaponCrit(item), 100), knockback, item.DamageType, true, player.luck);
+            return dealtDamage;
+        }
+
         public static void SmokeBomb(this Player player, int time)
         {
             player.GetModPlayer<ManipulativePlayer>().smokeBombTime = time;

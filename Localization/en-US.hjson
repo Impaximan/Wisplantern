@@ -556,7 +556,11 @@ Mods: {
 
 			ScrollOfIncantation: {
 				DisplayName: Scroll of Incantation
-				Tooltip: Can be used to craft incantations which command the aggravated masses
+				Tooltip:
+					'''
+					Can be used to craft incantations which command the aggravated masses
+					Incantations require 'charisma', which drops from enemies who are slain while aggravated
+					'''
 			}
 
 			CharismaPickup: {
@@ -582,6 +586,16 @@ Mods: {
 			Snowstorm: {
 				DisplayName: Music Box (Snowstorm)
 				Tooltip: ""
+			}
+
+			WontYouBurnForMe: {
+				DisplayName: Incantation: 'Won't You Burn For Me?'
+				Tooltip: Use to damage all aggravated enemies and set them ablaze
+			}
+
+			EatYourHeartOut: {
+				DisplayName: Incantation: 'Eat Your Heart Out'
+				Tooltip: Use to damage all aggravated enemies and cause them to drop hearts
 			}
 		}
 
@@ -634,6 +648,20 @@ Mods: {
 					Tooltip: Whether or not the volcanic cave minibiome will generate
 				}
 
+				calmNights: {
+					Label: Calm nights
+					Tooltip: Whether or not the 'Calm Night' event can occur.
+				}
+
+				snowstorms: {
+					Label: Snowstorms
+					Tooltip: Whether or not the 'Snowstorm' event can occur.
+				}
+			}
+
+			ClientConfig: {
+				DisplayName: Client Config
+
 				playDeepUnderground: {
 					Label: Play 'Far Underground'
 					Tooltip: Whether or not the 'Far Underground' music track will play in the lava layer
@@ -649,14 +677,9 @@ Mods: {
 					Tooltip: Whether or not 'Clair de Lune' will play during calm nights
 				}
 
-				calmNights: {
-					Label: Calm nights
-					Tooltip: Whether or not the 'Calm Night' event can occur.
-				}
-
-				snowstorms: {
-					Label: Snowstorms
-					Tooltip: Whether or not the 'Snowstorm' event can occur.
+				classTags: {
+					Label: Class tags
+					Tooltip: Whether or not items from custom classes added by Wisplantern will contain a class tag (like those of Thorium, for examplescr)
 				}
 			}
 		}
@@ -669,6 +692,8 @@ Mods: {
 			FarUnderground.MapEntry: Far Underground
 			Snowstorm.MapEntry: Snowstorm
 		}
+
+		TooltipHeader: Item tooltips
 	}
 
 	GameTips: {

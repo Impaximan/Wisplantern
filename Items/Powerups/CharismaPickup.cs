@@ -2,6 +2,7 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
+using Terraria.Audio;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Wisplantern.Items.Powerups
@@ -37,6 +38,11 @@ namespace Wisplantern.Items.Powerups
         public override bool OnPickup(Player player)
         {
             player.GainCharisma(1);
+
+            SoundStyle style = SoundID.NPCHit48;
+            style.Pitch = 0.5f;
+
+            SoundEngine.PlaySound(style, player.position);
             return false;
         }
     }

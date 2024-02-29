@@ -10,7 +10,7 @@ namespace Wisplantern.Items.Weapons.Manipulative.Canes
         /// Don't override this for canes, use CaneSetDefaults instead.
         /// Automatically sets useStyle, shoot, noMelee, knockBack, UseSound, autoReuse, and shootSpeed.
         /// </summary>
-        public override void SetDefaults()
+        public sealed override void SetDefaults()
         {
             Item.useStyle = ItemUseStyleID.Swing;
             Item.shoot = 1;
@@ -58,7 +58,7 @@ namespace Wisplantern.Items.Weapons.Manipulative.Canes
         /// <param name="damage"></param>
         /// <param name="knockback"></param>
         /// <returns></returns>
-        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        public sealed override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             if (player.altFunctionUse == 2)
             {

@@ -33,21 +33,6 @@ namespace Wisplantern
         [BackgroundColor(123, 225, 255)]
         public bool generateVolcanicCaves;
 
-
-        [Header("$Mods.Wisplantern.MusicHeader")]
-
-        [DefaultValue(true)]
-        [BackgroundColor(123, 225, 255)]
-        public bool playDeepUnderground = true;
-
-        [DefaultValue(true)]
-        [BackgroundColor(123, 225, 255)]
-        public bool playSnowstorm = true;
-
-        [DefaultValue(true)]
-        [BackgroundColor(123, 225, 255)]
-        public bool playClairDeLune = true;
-
         [Header("$Mods.Wisplantern.EventHeader")]
 
         [DefaultValue(true)]
@@ -64,10 +49,6 @@ namespace Wisplantern
             Wisplantern.generatePits = generatePits;
             Wisplantern.generateLushCaves = generateLushCaves;
             Wisplantern.generateVolcanicCaves = generateVolcanicCaves;
-
-            Wisplantern.playDeepUnderground = playDeepUnderground;
-            Wisplantern.playSnowstorm = playSnowstorm;
-            Wisplantern.playClairDeLune = playClairDeLune;
 
             Wisplantern.calmNights = calmNights;
             Wisplantern.snowstorms = snowstorms;

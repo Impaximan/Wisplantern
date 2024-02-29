@@ -74,6 +74,8 @@ namespace Wisplantern
         public static bool playSnowstorm = true;
         public static bool playClairDeLune = true;
 
+        public static bool classTags = false;
+
         public static bool calmNights = true;
         public static bool snowstorms = true;
 
