@@ -597,6 +597,11 @@ Mods: {
 				DisplayName: Incantation: 'Eat Your Heart Out'
 				Tooltip: Use to damage all aggravated enemies and cause them to drop hearts
 			}
+
+			ShepherdsCane: {
+				Tooltip: Aggravating enemies will briefly smoke bomb you, rendering you invulnerable to damage
+				DisplayName: Shepherd's Cane
+			}
 		}
 
 		NPCs: {
@@ -605,6 +610,42 @@ Mods: {
 			BouncyDummyDecoy.DisplayName: Bouncy Dummy Decoy
 			BramblesproutDecoy.DisplayName: Bramblesprout Decoy
 			Moonfly.DisplayName: Moonfly
+
+			Shepherd: {
+				TownNPCMood: {
+					Princess_LovesNPC: "{NPCName} is so rambunctious... fun to be around!"
+					LikeNPC_Princess: "{NPCName} is a fine young lady... I recognize her accent."
+					HateBiome: There so much darn water in {BiomeName}... I hate it, I hate it, I hate it!
+					DislikeBiome: It's far too humid in {BiomeName}, could you maybe put me somewhere- almost anywhere- else?
+					LikeBiome: Glad to be mostly free of water here in {BiomeName}. Either way the landscape here is quite nice.
+					LoveBiome: Ahh... {BiomeName} feels just like home to me.
+					HateCrowded: Get all these darn cretins away from me! I can't even here my own thoughts.
+					DislikeCrowded: The number of folk around here is maybe a bit uncomfortable.
+					LoveSpace: I can say whatever I want! %$^#@&! %$^#@&!
+					FarFromHome: Where the !%@$ is my house!?
+					NoHome: As used as I am to wandering, it'd be nice to have a place to settle down, at long last.
+					Content: I'm feeling pretty alright right now, actually.
+					HateNPC: "{NPCName} is so darn boring to be around!"
+					DislikeNPC: "{NPCName} keeps trying to take my horns. Probably to resell them."
+					LikeNPC: I enjoy being around good ol' {NPCName}. It's a shame he likes the ocean so much.
+					LoveNPC: I feel so welcome around {NPCName}, a fellow part-animal!
+				}
+
+				DisplayName: Shepherd
+			}
+		}
+
+		Dialogue: {
+			Shepherd: {
+				Talk1: Back in the days when I used to shepherd, I tought my sheep how to moonwalk. If you aren't impressed then you're lying.
+				Talk2: Let's play a game. First, I say a word. Then, you repeat the word that I said louder than I said it. Ready? Penguin. Pizza. Chicken tenders. Mutton. Cucumber! Parrot! MARCO! IAMGULITYOFTAXFRAUD!  ...Woah, that's a serious crime, bud.
+				Talk3: I bet I know words that you don't.
+				Talk4: A lot of the things that they used to say about Satyrs in ancient mythology are not true, trust me.
+				Talk5: Where the !%@$ are all the sheep around here!? I guess those are the people, actually. Nevermind.
+				Talk6: If this world is T rated, it's time to change that. !%@$ $&%# #%&@... ok I'll stop.
+				Talk7: Rock, paper, scissor, shoot! ...I win, as per usual.
+				Talk8: Back in my day I would carefully convince travelling merchants to give me their wares for free. My secret? Peer pressure...
+			}
 		}
 
 		Prefixes: {

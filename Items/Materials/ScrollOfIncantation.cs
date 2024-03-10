@@ -16,6 +16,7 @@ namespace Wisplantern.Items.Materials
             Item.height = 28;
             Item.maxStack = 9999;
             Item.rare = ItemRarityID.Blue;
+            Item.value = Item.sellPrice(0, 0, 10, 0);
         }
     }
 }

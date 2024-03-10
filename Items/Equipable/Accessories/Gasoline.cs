@@ -13,7 +13,7 @@
             Item.width = 24;
             Item.height = 28;
             Item.rare = ItemRarityID.Blue;
-            Item.value = Item.sellPrice(0, 0, 20, 0);
+            Item.value = Item.buyPrice(0, 2, 50, 0);
             Item.SetScholarlyDescription("Found in random chests underground.");
         }
 

@@ -289,6 +289,12 @@ namespace Wisplantern
             }
 
             InfightingNPC iNPC = npc.GetGlobalNPC<InfightingNPC>();
+
+            if (iNPC.aggravated)
+            {
+                return false;
+            }
+
             amount = amount * 100 / npc.life;
             if (npc.HasBuff(BuffID.Confused))
             {

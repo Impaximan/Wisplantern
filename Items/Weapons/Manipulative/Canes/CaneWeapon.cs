@@ -15,7 +15,10 @@ namespace Wisplantern.Items.Weapons.Manipulative.Canes
             Item.useStyle = ItemUseStyleID.Swing;
             Item.shoot = 1;
             Item.knockBack = 3f;
-            Item.UseSound = SoundID.Item152;
+            SoundStyle style = SoundID.Item152;
+            style.PitchVariance = 0.5f;
+            style.MaxInstances = 0;
+            Item.UseSound = style;
             Item.autoReuse = true;
             CaneSetDefaults();
         }
@@ -68,7 +71,7 @@ namespace Wisplantern.Items.Weapons.Manipulative.Canes
             {
                 if (npc.active && !npc.friendly && npc.Distance(player.Center) <= MaxDistance)
                 {
-                     if (Item.AggravateNPC(npc, player)) OnAggravate(npc);
+                     if (Item.AggravateNPC(npc, player)) OnAggravate(npc, player);
                 }
             }
             for (int i = 0; i < 150; i++)
@@ -83,11 +86,16 @@ namespace Wisplantern.Items.Weapons.Manipulative.Canes
                     Main.dust[dust].noLight = true;
                 }
             }
-            SoundEngine.PlaySound(SoundID.Item8, player.Center);
+
+            SoundStyle sound = SoundID.Item8;
+            sound.PitchVariance = 0.15f;
+            sound.MaxInstances = 4;
+            sound.SoundLimitBehavior = SoundLimitBehavior.ReplaceOldest;
+            SoundEngine.PlaySound(sound, player.Center);
             return false;
         }
 
-        public virtual void OnAggravate(NPC npc)
+        public virtual void OnAggravate(NPC npc, Player player)
         {
 
         }

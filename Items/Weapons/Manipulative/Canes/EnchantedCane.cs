@@ -59,7 +59,7 @@ namespace Wisplantern.Items.Weapons.Manipulative.Canes
             }
         }
 
-        public override void OnAggravate(NPC npc)
+        public override void OnAggravate(NPC npc, Player player)
         {
             npc.GetGlobalNPC<EnchantedCaneNPC>().affected = true;
         }

@@ -18,6 +18,7 @@ namespace Wisplantern.Items.Weapons.Manipulative.Decoys
             Item.consumable = true;
             Item.maxStack = 9999;
             Item.useStyle = ItemUseStyleID.Swing;
+            Item.value = Item.buyPrice(0, 1, 0, 0);
         }
 
         public override void AddRecipes()
