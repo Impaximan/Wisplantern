@@ -713,7 +713,7 @@ namespace Wisplantern.Systems.Worldgen
                 noise.SetFractalGain(0.5f);
                 noise.SetFractalPingPongStrength(2f);
 
-                Point position = new Point(WorldGen.genRand.Next(Main.maxTilesX), WorldGen.genRand.Next(Main.maxTilesY));
+                Point position = new Point(WorldGen.genRand.Next(Main.maxTilesX), WorldGen.genRand.Next(Main.maxTilesY - 100));
                 int overallLength = WorldGen.genRand.Next(500, 1500);
                 int defHeight = WorldGen.genRand.Next(10, 20);
                 for (int i = position.X - overallLength / 2; i < position.X + overallLength / 2; i++)
@@ -722,11 +722,11 @@ namespace Wisplantern.Systems.Worldgen
                     {
                         for (int j = position.Y - overallLength / 2; j < position.Y + overallLength / 2; j++)
                         {
-                            if (j > 0 && j < Main.maxTilesY)
+                            int jAdd = (int)(Math.Sin(i / 20f) * noise.GetNoise(i * 0.5f, 0f) * (defHeight / 2f + 5) * 2f);
+                            int height = (int)((float)(overallLength / 2f - Math.Abs(i - position.X)) / overallLength * 2f * defHeight);
+
+                            if (j + jAdd> 0 && j + jAdd < Main.maxTilesY)
                             {
-                                int jAdd = (int)(Math.Sin(i / 20f) * noise.GetNoise(i * 0.5f, 0f) * (defHeight / 2f + 5) * 2f);
-                                int height = (int)((float)(overallLength / 2f - Math.Abs(i - position.X)) / overallLength * 2f * defHeight);
-                                //height += (int)(5f * noise.GetNoise(i * 10f, 1000f));
 
                                 if (Math.Abs(j - position.Y) <= height)
                                 {
