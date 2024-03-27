@@ -1,6 +1,6 @@
 ﻿namespace Wisplantern.Globals.GTiles
 {
-    class SnowTile : GlobalTile
+    class LushTile : GlobalTile
     {
         public override void RandomUpdate(int i, int j, int type)
         {
@@ -8,10 +8,10 @@
 
         public override void PlaceInWorld(int i, int j, int type, Item item)
         {
-            DestroyBadGrass(i + 1, j);
-            DestroyBadGrass(i - 1, j);
-            DestroyBadGrass(i, j + 1);
-            DestroyBadGrass(i, j - 1);
+            if (i < Main.maxTilesX - 1) DestroyBadGrass(i + 1, j);
+            if (i > 0) DestroyBadGrass(i - 1, j);
+            if (j < Main.maxTilesY - 1) DestroyBadGrass(i, j + 1);
+            if (j > 0) DestroyBadGrass(i, j - 1);
         }
 
         public void DestroyBadGrass(int i, int j)
@@ -27,10 +27,10 @@
 
         public override void KillTile(int i, int j, int type, ref bool fail, ref bool effectOnly, ref bool noItem)
         {
-            DestroyBadGrass(i + 1, j);
-            DestroyBadGrass(i - 1, j);
-            DestroyBadGrass(i, j + 1);
-            DestroyBadGrass(i, j - 1);
+            if (i < Main.maxTilesX - 1) DestroyBadGrass(i + 1, j);
+            if (i > 0) DestroyBadGrass(i - 1, j);
+            if (j < Main.maxTilesY - 1) DestroyBadGrass(i, j + 1);
+            if (j > 0) DestroyBadGrass(i, j - 1);
             base.KillTile(i, j, type, ref fail, ref effectOnly, ref noItem);
         }
     }
