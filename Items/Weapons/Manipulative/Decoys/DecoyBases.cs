@@ -151,7 +151,7 @@ namespace Wisplantern.Items.Weapons.Manipulative.Decoys
                 tooltips.RemoveAll(x => x.Name == "CritChance");
             }
 
-            TooltipLine rightClickLine = new TooltipLine(Mod, "decoyRightClick", "Right click to kill all decoys insantly");
+            TooltipLine rightClickLine = new(Mod, "decoyRightClick", "Right click to kill all decoys insantly");
             rightClickLine.IsModifier = true;
             tooltips.Add(rightClickLine);
         }

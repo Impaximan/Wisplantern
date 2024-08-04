@@ -150,7 +150,7 @@ namespace Wisplantern.Items.Weapons.Melee.Shortswords
 				stuckNPC = target;
 				stuckOffset = Projectile.position + Projectile.velocity * 2f - target.position;
 
-				PunchCameraModifier modifier = new PunchCameraModifier(Projectile.Center, Projectile.velocity.ToRotation().ToRotationVector2(), 10f, 10f, 8, 1000f);
+				PunchCameraModifier modifier = new(Projectile.Center, Projectile.velocity.ToRotation().ToRotationVector2(), 10f, 10f, 8, 1000f);
 				Main.instance.CameraModifiers.Add(modifier);
 
 				SoundStyle style = SoundID.DD2_MonkStaffGroundImpact;

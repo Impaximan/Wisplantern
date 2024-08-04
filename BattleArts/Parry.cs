@@ -69,7 +69,7 @@ namespace Wisplantern.BattleArts
 
             parryDangerTime = 0;
 
-            PunchCameraModifier modifier = new PunchCameraModifier(Player.Center, new Vector2(Player.direction, 0), 15f, 10f, 8, 1000f);
+            PunchCameraModifier modifier = new(Player.Center, new Vector2(Player.direction, 0), 15f, 10f, 8, 1000f);
             Main.instance.CameraModifiers.Add(modifier);
 
             foreach (NPC npc in Main.npc)

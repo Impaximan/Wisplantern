@@ -14,7 +14,7 @@ namespace Wisplantern.UI.Charisma
         {
             Texture2D charisma = ModContent.Request<Texture2D>("Wisplantern/UI/Charisma/Charisma", AssetRequestMode.ImmediateLoad).Value;
 
-            Vector2 position = new Vector2(Main.screenWidth - ((Main.screenWidth / 6f) + charisma.Width - 8) * Main.UIScale, Main.UIScale * 50f);
+            Vector2 position = new(Main.screenWidth - ((Main.screenWidth / 6f) + charisma.Width - 8) * Main.UIScale, Main.UIScale * 50f);
 
             if (Main.playerInventory)
             {

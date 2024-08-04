@@ -129,8 +129,8 @@ namespace Wisplantern.BattleArts
     class BloodySlashNPC : GlobalNPC
     {
         public int timeToDecreaseStack = 0;
-        public List<int> stacks = new List<int>();
-        public List<int> multiPlayerStacks = new List<int>();
+        public List<int> stacks = new();
+        public List<int> multiPlayerStacks = new();
 
         public override bool InstancePerEntity => true;
 

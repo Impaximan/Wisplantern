@@ -78,7 +78,7 @@ namespace Wisplantern.NPCs.Other
                     Wisplantern.freezeFrames = 10;
                     Wisplantern.freezeFrameLight = true;
 
-                    PunchCameraModifier modifier = new PunchCameraModifier(NPC.Center, Main.rand.NextVector2CircularEdge(1f, 1f), Main.rand.NextFloat(15f, 25f), 6f, 20, 1000f);
+                    PunchCameraModifier modifier = new(NPC.Center, Main.rand.NextVector2CircularEdge(1f, 1f), Main.rand.NextFloat(15f, 25f), 6f, 20, 1000f);
                     Main.instance.CameraModifiers.Add(modifier);
 
                     for (int i = 0; i < Main.rand.Next(125, 150); i++)

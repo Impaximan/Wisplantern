@@ -36,7 +36,7 @@ namespace Wisplantern.Items.Weapons.Summon.Minions
 
     class MinionPlayer : ModPlayer
     {
-        public List<MinionHandler> minionHandlers = new List<MinionHandler>();
+        public List<MinionHandler> minionHandlers = new();
 
         public override void PostUpdateBuffs()
         {

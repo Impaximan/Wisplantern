@@ -70,7 +70,7 @@ namespace Wisplantern.Globals.GItems
         {
             if (ShouldShowScholarsDesc())
             {
-                TooltipLine scholarLine = new TooltipLine(Mod, "ScholarsLensTooltip", scholarsDescription);
+                TooltipLine scholarLine = new(Mod, "ScholarsLensTooltip", scholarsDescription);
                 scholarLine.OverrideColor = Color.Goldenrod;
                 tooltips.Add(scholarLine);
             }

@@ -91,7 +91,7 @@ namespace Wisplantern.Systems.Worldgen
 
         public int GetRandomFromInt(int min, int max, int number, int seed)
         {
-            Random rand = new Random(seed + number);
+            Random rand = new(seed + number);
 
             return rand.Next(min, max);
         }
@@ -107,7 +107,7 @@ namespace Wisplantern.Systems.Worldgen
             noise.SetFractalGain(0.5f);
             noise.SetFractalPingPongStrength(2f);
 
-            FastNoiseLite lackNoise = new FastNoiseLite(WorldGen.genRand.Next(5000, 10000));
+            FastNoiseLite lackNoise = new(WorldGen.genRand.Next(5000, 10000));
             lackNoise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
             lackNoise.SetFrequency(0.01f);
             lackNoise.SetFractalOctaves(5);
@@ -115,7 +115,7 @@ namespace Wisplantern.Systems.Worldgen
             lackNoise.SetFractalGain(0.5f);
             lackNoise.SetFractalPingPongStrength(2f);
 
-            FastNoiseLite lackNoise2 = new FastNoiseLite(WorldGen.genRand.Next(5000, 10000));
+            FastNoiseLite lackNoise2 = new(WorldGen.genRand.Next(5000, 10000));
             lackNoise2.SetNoiseType(FastNoiseLite.NoiseType.Perlin);
             lackNoise2.SetFrequency(0.01f);
             lackNoise2.SetFractalOctaves(5);

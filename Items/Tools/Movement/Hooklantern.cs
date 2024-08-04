@@ -137,7 +137,7 @@ namespace Wisplantern.Items.Tools.Movement
             Projectile.ai[1] = 0;
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             Projectile.netUpdate = true;
             NetMessage.SendData(MessageID.KillProjectile, number: Projectile.whoAmI);

@@ -35,7 +35,7 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 			Item.useAnimation = 18;
 			Item.useTime = 18;
 			Item.autoReuse = true;
-			SoundStyle useSound = new SoundStyle("Wisplantern/Sounds/Effects/SwordUnsheath");
+			SoundStyle useSound = new("Wisplantern/Sounds/Effects/SwordUnsheath");
 			useSound.Pitch -= 0.25f;
 			useSound.Volume *= 0.65f;
 			useSound.PitchVariance = 0.15f;
@@ -247,11 +247,11 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 				{
 					velocityChange.Y *= 1.25f;
 					velocityChange.Y += 2.5f;
-					SoundStyle style = new SoundStyle("Wisplantern/Sounds/Effects/HeavyMetal");
+					SoundStyle style = new("Wisplantern/Sounds/Effects/HeavyMetal");
 					style.Volume *= 0.75f;
 					style.PitchVariance = 0.35f;
 					SoundEngine.PlaySound(style, target.Center);
-					PunchCameraModifier modifier = new PunchCameraModifier(target.Center, player.velocity.ToRotation().ToRotationVector2().RotatedBy(swordRotationAdd * player.direction + Math.PI / 2), 15f, 10f, 8, 1000f);
+					PunchCameraModifier modifier = new(target.Center, player.velocity.ToRotation().ToRotationVector2().RotatedBy(swordRotationAdd * player.direction + Math.PI / 2), 15f, 10f, 8, 1000f);
 					Main.instance.CameraModifiers.Add(modifier);
 				}
 				player.velocity -= velocityChange;

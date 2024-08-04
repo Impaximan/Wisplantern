@@ -1,4 +1,5 @@
-﻿using Terraria.GameContent.Creative;
+﻿using Microsoft.Xna.Framework;
+using Terraria.GameContent.Creative;
 
 namespace Wisplantern.Items.Info
 {
@@ -53,7 +54,7 @@ namespace Wisplantern.Items.Info
             return Main.LocalPlayer.GetModPlayer<LuckInfoPlayer>().fourLeafClover;
         }
 
-        public override string DisplayValue(ref Color displayColor)/* tModPorter Suggestion: Set displayColor to InactiveInfoTextColor if your display value is "zero"/shows no valuable information */
+        public override string DisplayValue(ref Color displayColor, ref Color displayShadowColor)/* tModPorter Suggestion: Set displayColor to InactiveInfoTextColor if your display value is "zero"/shows no valuable information */
         {
             if (Main.LocalPlayer.luck >= 1f)
             {

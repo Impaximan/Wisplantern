@@ -12,7 +12,7 @@ namespace Wisplantern.Systems.Worldgen
             {
                 Chest chest = Main.chest[i];
 
-                List<int> availableBattleArts = new List<int>()
+                List<int> availableBattleArts = new()
                 {
                     ModContent.ItemType<SwordParry>(),
                     ModContent.ItemType<AerialRetreat>(),

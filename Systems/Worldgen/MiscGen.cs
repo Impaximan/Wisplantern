@@ -83,7 +83,7 @@ namespace Wisplantern.Systems.Worldgen
                 {
                     for (int i = 0; i < mountainRect.Width / 30; i++)
                     {
-                        Point currentPosition = new Point(Main.rand.Next(mountainRect.X + mountainRect.Width / 4, (int)(mountainRect.X + mountainRect.Width * 0.75f)), Main.rand.Next(mountainRect.Y, mountainRect.Y + mountainRect.Height));
+                        Point currentPosition = new(Main.rand.Next(mountainRect.X + mountainRect.Width / 4, (int)(mountainRect.X + mountainRect.Width * 0.75f)), Main.rand.Next(mountainRect.Y, mountainRect.Y + mountainRect.Height));
                         if (!(Main.tile[currentPosition.X, currentPosition.Y].HasTile && Main.tileSolid[Main.tile[currentPosition.X, currentPosition.Y].TileType]))
                         {
                             while (!WorldUtils.Find(currentPosition, Searches.Chain(new Searches.Down(1), new GenCondition[]
@@ -111,8 +111,8 @@ namespace Wisplantern.Systems.Worldgen
                                 Chest chest = Main.chest[Chest.FindChest(currentPosition.X, currentPosition.Y - 1)];
                                 if (chest != null)
                                 {
-                                    List<int> mainItems = new List<int>
-                                {
+                                    List<int> mainItems = new()
+                                    {
                                     ItemID.Spear,
                                     ItemID.Blowpipe,
                                     ItemID.WoodenBoomerang,
@@ -125,24 +125,24 @@ namespace Wisplantern.Systems.Worldgen
                                     ItemID.PortableStool
                                 };
 
-                                    List<int> ammosAndThrowables = new List<int>
-                                {
+                                    List<int> ammosAndThrowables = new()
+                                    {
                                     ItemID.WoodenArrow,
                                     ItemID.FlamingArrow,
                                     ItemID.Shuriken,
                                     ItemID.ThrowingKnife
                                 };
 
-                                    List<int> bars = new List<int>
-                                {
+                                    List<int> bars = new()
+                                    {
                                 WorldGen.SavedOreTiers.Copper == TileID.Copper ? ItemID.CopperBar : ItemID.TinBar,
                                 WorldGen.SavedOreTiers.Iron == TileID.Iron ? ItemID.IronBar : ItemID.LeadBar,
                                 WorldGen.SavedOreTiers.Silver == TileID.Silver ? ItemID.SilverBar : ItemID.TungstenBar,
                                 WorldGen.SavedOreTiers.Gold == TileID.Gold ? ItemID.GoldBar : ItemID.PlatinumBar,
                                 };
 
-                                    List<int> commonPotions = new List<int>
-                                {
+                                    List<int> commonPotions = new()
+                                    {
                                     ItemID.IronskinPotion,
                                     ItemID.ShinePotion,
                                     ItemID.NightOwlPotion,
@@ -151,8 +151,8 @@ namespace Wisplantern.Systems.Worldgen
                                     ItemID.GravitationPotion
                                 };
 
-                                    List<int> lightItems = new List<int>
-                                {
+                                    List<int> lightItems = new()
+                                    {
                                     ItemID.Torch,
                                     ItemID.Glowstick
                                 };
@@ -299,7 +299,7 @@ namespace Wisplantern.Systems.Worldgen
 
             for (int a = 0; a < amount; a++)
             {
-                FastNoiseLite noise = new FastNoiseLite(WorldGen.genRand.Next(5000, 10000));
+                FastNoiseLite noise = new(WorldGen.genRand.Next(5000, 10000));
                 noise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
                 noise.SetFrequency(0.01f);
                 noise.SetFractalOctaves(5);
@@ -309,7 +309,7 @@ namespace Wisplantern.Systems.Worldgen
 
 
                 int side = WorldGen.genRand.NextBool() ? 1 : -1;
-                Vector2 currentPosition = new Vector2(Main.maxTilesX / 2 + side * WorldGen.genRand.Next(0, Main.maxTilesX / 2 - 300), 100);
+                Vector2 currentPosition = new(Main.maxTilesX / 2 + side * WorldGen.genRand.Next(0, Main.maxTilesX / 2 - 300), 100);
                 while (!(Main.tileSolid[Main.tile[(int)currentPosition.X, (int)currentPosition.Y].TileType] || currentPosition.Y >= Main.maxTilesY * 0.75f))
                 {
                     currentPosition.Y++;
@@ -364,8 +364,8 @@ namespace Wisplantern.Systems.Worldgen
         #region Mountain
 
         Vector2 mountainPosition;
-        List<Tuple<Point, int>> oresToPlace = new List<Tuple<Point, int>>();
-        Rectangle mountainRect = new Rectangle();
+        List<Tuple<Point, int>> oresToPlace = new();
+        Rectangle mountainRect = new();
         void Mountain()
         {
             if (!Wisplantern.generateMassiveMountain)
@@ -374,7 +374,7 @@ namespace Wisplantern.Systems.Worldgen
             }
 
             #region Noise
-            FastNoiseLite mountainNoise = new FastNoiseLite(WorldGen.genRand.Next(5000, 10000));
+            FastNoiseLite mountainNoise = new(WorldGen.genRand.Next(5000, 10000));
             mountainNoise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
             mountainNoise.SetFrequency(0.01f);
             mountainNoise.SetFractalOctaves(5);
@@ -382,7 +382,7 @@ namespace Wisplantern.Systems.Worldgen
             mountainNoise.SetFractalGain(0.5f);
             mountainNoise.SetFractalPingPongStrength(2f);
 
-            FastNoiseLite dirtNoise = new FastNoiseLite(WorldGen.genRand.Next(5000, 10000));
+            FastNoiseLite dirtNoise = new(WorldGen.genRand.Next(5000, 10000));
             dirtNoise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
             dirtNoise.SetFrequency(0.01f);
             dirtNoise.SetFractalOctaves(5);
@@ -390,7 +390,7 @@ namespace Wisplantern.Systems.Worldgen
             dirtNoise.SetFractalGain(0.5f);
             dirtNoise.SetFractalPingPongStrength(2f);
 
-            FastNoiseLite wallNoise1 = new FastNoiseLite(WorldGen.genRand.Next(5000, 10000));
+            FastNoiseLite wallNoise1 = new(WorldGen.genRand.Next(5000, 10000));
             wallNoise1.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
             wallNoise1.SetFrequency(0.01f);
             wallNoise1.SetFractalOctaves(5);
@@ -398,7 +398,7 @@ namespace Wisplantern.Systems.Worldgen
             wallNoise1.SetFractalGain(0.5f);
             wallNoise1.SetFractalPingPongStrength(2f);
 
-            FastNoiseLite wallNoise2 = new FastNoiseLite(WorldGen.genRand.Next(5000, 10000));
+            FastNoiseLite wallNoise2 = new(WorldGen.genRand.Next(5000, 10000));
             wallNoise2.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
             wallNoise2.SetFrequency(0.01f);
             wallNoise2.SetFractalOctaves(5);
@@ -406,9 +406,9 @@ namespace Wisplantern.Systems.Worldgen
             wallNoise2.SetFractalGain(0.5f);
             wallNoise2.SetFractalPingPongStrength(2f);
 
-            FastNoiseLite wallNoise3 = new FastNoiseLite(WorldGen.genRand.Next(5000, 10000));
+            FastNoiseLite wallNoise3 = new(WorldGen.genRand.Next(5000, 10000));
 
-            FastNoiseLite caveNoise = new FastNoiseLite(WorldGen.genRand.Next(5000, 10000));
+            FastNoiseLite caveNoise = new(WorldGen.genRand.Next(5000, 10000));
             caveNoise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
             caveNoise.SetFrequency(0.01f);
             caveNoise.SetFractalOctaves(5);
@@ -416,7 +416,7 @@ namespace Wisplantern.Systems.Worldgen
             caveNoise.SetFractalGain(0.5f);
             caveNoise.SetFractalPingPongStrength(2f);
 
-            FastNoiseLite liquidNoise1 = new FastNoiseLite(WorldGen.genRand.Next(5000, 10000));
+            FastNoiseLite liquidNoise1 = new(WorldGen.genRand.Next(5000, 10000));
             liquidNoise1.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
             liquidNoise1.SetFrequency(0.01f);
             liquidNoise1.SetFractalOctaves(5);
@@ -424,7 +424,7 @@ namespace Wisplantern.Systems.Worldgen
             liquidNoise1.SetFractalGain(0.5f);
             liquidNoise1.SetFractalPingPongStrength(2f);
 
-            FastNoiseLite topNoise = new FastNoiseLite(WorldGen.genRand.Next(5000, 10000));
+            FastNoiseLite topNoise = new(WorldGen.genRand.Next(5000, 10000));
             topNoise.SetNoiseType(FastNoiseLite.NoiseType.Perlin);
             topNoise.SetFrequency(0.01f);
             topNoise.SetFractalOctaves(5);
@@ -432,7 +432,7 @@ namespace Wisplantern.Systems.Worldgen
             topNoise.SetFractalGain(0.5f);
             topNoise.SetFractalPingPongStrength(2f);
 
-            FastNoiseLite oreNoise1 = new FastNoiseLite(WorldGen.genRand.Next(5000, 10000));
+            FastNoiseLite oreNoise1 = new(WorldGen.genRand.Next(5000, 10000));
             oreNoise1.SetNoiseType(FastNoiseLite.NoiseType.Perlin);
             oreNoise1.SetFrequency(0.01f);
             oreNoise1.SetFractalOctaves(5);
@@ -440,7 +440,7 @@ namespace Wisplantern.Systems.Worldgen
             oreNoise1.SetFractalGain(0.5f);
             oreNoise1.SetFractalPingPongStrength(2f);
 
-            FastNoiseLite oreNoise2 = new FastNoiseLite(WorldGen.genRand.Next(5000, 10000));
+            FastNoiseLite oreNoise2 = new(WorldGen.genRand.Next(5000, 10000));
             oreNoise2.SetNoiseType(FastNoiseLite.NoiseType.Perlin);
             oreNoise2.SetFrequency(0.01f);
             oreNoise2.SetFractalOctaves(5);
@@ -448,7 +448,7 @@ namespace Wisplantern.Systems.Worldgen
             oreNoise2.SetFractalGain(0.5f);
             oreNoise2.SetFractalPingPongStrength(2f);
 
-            FastNoiseLite oreNoise3 = new FastNoiseLite(WorldGen.genRand.Next(5000, 10000));
+            FastNoiseLite oreNoise3 = new(WorldGen.genRand.Next(5000, 10000));
             oreNoise3.SetNoiseType(FastNoiseLite.NoiseType.Perlin);
             oreNoise3.SetFrequency(0.01f);
             oreNoise3.SetFractalOctaves(5);
@@ -456,7 +456,7 @@ namespace Wisplantern.Systems.Worldgen
             oreNoise3.SetFractalGain(0.5f);
             oreNoise3.SetFractalPingPongStrength(2f);
 
-            FastNoiseLite snowNoise = new FastNoiseLite(WorldGen.genRand.Next(5000, 10000));
+            FastNoiseLite snowNoise = new(WorldGen.genRand.Next(5000, 10000));
             snowNoise.SetNoiseType(FastNoiseLite.NoiseType.Perlin);
             snowNoise.SetFrequency(0.01f);
             snowNoise.SetFractalOctaves(5);
@@ -468,7 +468,7 @@ namespace Wisplantern.Systems.Worldgen
             oresToPlace.Clear();
 
             int side = WorldGen.genRand.NextBool() ? 1 : -1;
-            Vector2 currentPosition = new Vector2(Main.maxTilesX / 2 + side * WorldGen.genRand.Next(0, Main.maxTilesX / 2 - 300), 100);
+            Vector2 currentPosition = new(Main.maxTilesX / 2 + side * WorldGen.genRand.Next(0, Main.maxTilesX / 2 - 300), 100);
             while (!(Main.tileSolid[Main.tile[(int)currentPosition.X, (int)currentPosition.Y].TileType] || currentPosition.Y >= Main.maxTilesY * 0.75f))
             {
                 currentPosition.Y++;
@@ -665,7 +665,7 @@ namespace Wisplantern.Systems.Worldgen
 
             for (int a = 0; a < amount; a++)
             {
-                FastNoiseLite noise = new FastNoiseLite(WorldGen.genRand.Next(5000, 10000));
+                FastNoiseLite noise = new(WorldGen.genRand.Next(5000, 10000));
                 noise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
                 noise.SetFrequency(0.01f);
                 noise.SetFractalOctaves(5);
@@ -673,7 +673,7 @@ namespace Wisplantern.Systems.Worldgen
                 noise.SetFractalGain(0.5f);
                 noise.SetFractalPingPongStrength(2f);
 
-                Point position = new Point(WorldGen.genRand.Next(Main.maxTilesX), WorldGen.genRand.Next(Main.maxTilesY - 400 - Main.maxTilesY / 12, Main.maxTilesY));
+                Point position = new(WorldGen.genRand.Next(Main.maxTilesX), WorldGen.genRand.Next(Main.maxTilesY - 400 - Main.maxTilesY / 12, Main.maxTilesY));
                 int overallLength = Main.maxTilesY / 4;
                 int defWidth = WorldGen.genRand.Next(10, 20);
                 for (int i = position.X - overallLength / 2; i < position.X + overallLength / 2; i++)
@@ -705,7 +705,7 @@ namespace Wisplantern.Systems.Worldgen
 
             for (int a = 0; a < amount; a++)
             {
-                FastNoiseLite noise = new FastNoiseLite(WorldGen.genRand.Next(5000, 10000));
+                FastNoiseLite noise = new(WorldGen.genRand.Next(5000, 10000));
                 noise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
                 noise.SetFrequency(0.01f);
                 noise.SetFractalOctaves(5);
@@ -713,7 +713,7 @@ namespace Wisplantern.Systems.Worldgen
                 noise.SetFractalGain(0.5f);
                 noise.SetFractalPingPongStrength(2f);
 
-                Point position = new Point(WorldGen.genRand.Next(Main.maxTilesX), WorldGen.genRand.Next(Main.maxTilesY - 100));
+                Point position = new(WorldGen.genRand.Next(Main.maxTilesX), WorldGen.genRand.Next(Main.maxTilesY - 100));
                 int overallLength = WorldGen.genRand.Next(500, 1500);
                 int defHeight = WorldGen.genRand.Next(10, 20);
                 for (int i = position.X - overallLength / 2; i < position.X + overallLength / 2; i++)
@@ -745,7 +745,7 @@ namespace Wisplantern.Systems.Worldgen
 
             for (int a = 0; a < amount; a++)
             {
-                FastNoiseLite noise = new FastNoiseLite(WorldGen.genRand.Next(5000, 10000));
+                FastNoiseLite noise = new(WorldGen.genRand.Next(5000, 10000));
                 noise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
                 noise.SetFrequency(0.01f);
                 noise.SetFractalOctaves(5);
@@ -753,7 +753,7 @@ namespace Wisplantern.Systems.Worldgen
                 noise.SetFractalGain(0.5f);
                 noise.SetFractalPingPongStrength(2f);
 
-                Point position = new Point(WorldGen.genRand.Next(Main.maxTilesX), WorldGen.genRand.Next(Main.maxTilesY));
+                Point position = new(WorldGen.genRand.Next(Main.maxTilesX), WorldGen.genRand.Next(Main.maxTilesY));
                 float maxDistance = WorldGen.genRand.Next(30, 65);
                 for (int i = position.X - 100; i < position.X + 100; i++)
                 {
@@ -786,9 +786,9 @@ namespace Wisplantern.Systems.Worldgen
         {
             for (int it = 0; it < Main.maxTilesX * 0.005f; it++)
             {
-                Vector2 currentPosition = new Vector2();
+                Vector2 currentPosition = new();
 
-                List<int> sandTiles = new List<int>()
+                List<int> sandTiles = new()
                 {
                     TileID.Sand,
                     TileID.Sandstone,

@@ -115,6 +115,11 @@ Mods: {
 				Description: A possessed gold broadsword keeps you protected!
 				DisplayName: Gold Summon
 			}
+
+			VisciousFrenzy: {
+				Description: Mods.Wisplantern.Buffs.VisciousFrenzy.Description
+				DisplayName: Viscious Frenzy
+			}
 		}
 
 		Items: {
@@ -601,6 +606,11 @@ Mods: {
 			ShepherdsCane: {
 				Tooltip: Aggravating enemies will briefly smoke bomb you, rendering you invulnerable to damage
 				DisplayName: Shepherd's Cane
+			}
+
+			ShowNoMercy: {
+				Tooltip: Use to send all aggravated enemies into a frenzy, increasing their attack speed by 100%
+				DisplayName: Incantation: "Show No Mercy"
 			}
 		}
 

@@ -215,7 +215,7 @@ namespace Wisplantern.Globals.GItems
         {
             if (ShouldApplyBattleArt(player) && player.statMana >= item.mana)
             {
-                Item dummy = new Item(item.type);
+                Item dummy = new(item.type);
                 ogDamage = dummy.damage;
                 ogShootSpeed = dummy.shootSpeed;
                 ogUseAnimation = dummy.useAnimation;
@@ -336,7 +336,7 @@ namespace Wisplantern.Globals.GItems
                         {
                             player.QuickSpawnItem(new EntitySource_Misc("BattleArtReplacement"), Main.mouseItem.GetGlobalItem<BattleArtItem>().battleArt.ItemType);
                         }
-                        SoundStyle sound = new SoundStyle("Wisplantern/Sounds/Effects/Enchant" + Main.rand.Next(1, 4));
+                        SoundStyle sound = new("Wisplantern/Sounds/Effects/Enchant" + Main.rand.Next(1, 4));
                         sound.Volume = 2f;
                         SoundEngine.PlaySound(sound);
                         Main.mouseItem.GetGlobalItem<BattleArtItem>().battleArt = battleArtItemBattleArt;
@@ -347,7 +347,7 @@ namespace Wisplantern.Globals.GItems
                         {
                             player.QuickSpawnItem(new EntitySource_Misc("BattleArtReplacement"), player.HeldItem.GetGlobalItem<BattleArtItem>().battleArt.ItemType);
                         }
-                        SoundStyle sound = new SoundStyle("Wisplantern/Sounds/Effects/Enchant" + Main.rand.Next(1, 4));
+                        SoundStyle sound = new("Wisplantern/Sounds/Effects/Enchant" + Main.rand.Next(1, 4));
                         sound.Volume = 2f;
                         SoundEngine.PlaySound(sound);
                         player.HeldItem.GetGlobalItem<BattleArtItem>().battleArt = battleArtItemBattleArt;
@@ -362,7 +362,7 @@ namespace Wisplantern.Globals.GItems
         {
             if (battleArt != null && battleArt is not None)
             {
-                TooltipLine nameLine = new TooltipLine(Mod, "BattleArtName", battleArt.BattleArtName)
+                TooltipLine nameLine = new(Mod, "BattleArtName", battleArt.BattleArtName)
                 {
                     OverrideColor = battleArt.Color
                 };
@@ -370,13 +370,13 @@ namespace Wisplantern.Globals.GItems
 
                 if (Main.keyState.IsKeyDown(Keys.LeftAlt))
                 {
-                    TooltipLine descLine = new TooltipLine(Mod, "BattleArtDesc", battleArt.BattleArtDescription);
+                    TooltipLine descLine = new(Mod, "BattleArtDesc", battleArt.BattleArtDescription);
                     descLine.OverrideColor = new Color(255, 255, 200);
                     tooltips.Add(descLine);
                 }
                 else
                 {
-                    TooltipLine holdLAlt = new TooltipLine(Mod, "HoldLAlt", "Hold left alt to see battle art description");
+                    TooltipLine holdLAlt = new(Mod, "HoldLAlt", "Hold left alt to see battle art description");
                     holdLAlt.IsModifier = true;
                     tooltips.Add(holdLAlt);
                 }
@@ -411,7 +411,7 @@ namespace Wisplantern.Globals.GItems
 
             if (!CanGetBattleArt(item, Main.player[Main.myPlayer]) && !item.consumable)
             {
-                TooltipLine noBattleArtLine = new TooltipLine(Mod, "NoBattleArt", "Cannot be given a battle art");
+                TooltipLine noBattleArtLine = new(Mod, "NoBattleArt", "Cannot be given a battle art");
                 noBattleArtLine.IsModifier = true;
                 noBattleArtLine.IsModifierBad = true;
                 tooltips.Add(noBattleArtLine);

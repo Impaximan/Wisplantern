@@ -12,7 +12,7 @@ namespace Wisplantern.Tiles
             Main.tileSpelunker[Type] = false;
             Main.tileMerge[Type] = Main.tileMerge[TileID.MarbleBlock];
 
-            SoundStyle style = new SoundStyle("Wisplantern/Sounds/Effects/StoneHit2")
+            SoundStyle style = new("Wisplantern/Sounds/Effects/StoneHit2")
             {
                 PitchVariance = 0.25f
             };

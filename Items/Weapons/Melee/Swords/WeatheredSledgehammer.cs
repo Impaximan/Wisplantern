@@ -42,10 +42,10 @@ namespace Wisplantern.Items.Weapons.Melee.Swords
                 modifiers.SetCrit();
                 Wisplantern.freezeFrames = 5;
 
-                PunchCameraModifier modifier = new PunchCameraModifier(target.Center, new Vector2(Math.Sign(target.Center.X - player.Center.X), 0), 20f, 10f, 10, 1000f);
+                PunchCameraModifier modifier = new(target.Center, new Vector2(Math.Sign(target.Center.X - player.Center.X), 0), 20f, 10f, 10, 1000f);
                 Main.instance.CameraModifiers.Add(modifier);
 
-                SoundStyle style = new SoundStyle("Wisplantern/Sounds/Effects/HeavyHit")
+                SoundStyle style = new("Wisplantern/Sounds/Effects/HeavyHit")
                 {
                     MaxInstances = 0,
                     PitchVariance = 0.5f

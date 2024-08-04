@@ -102,7 +102,7 @@ namespace Wisplantern.Items.Ammo
 
         public override bool PreDraw(ref Color lightColor)
         {
-            Vector2 drawOrigin = new Vector2(ModContent.Request<Texture2D>(Texture).Value.Width * 0.5f, Projectile.height * 0.5f);
+            Vector2 drawOrigin = new(ModContent.Request<Texture2D>(Texture).Value.Width * 0.5f, Projectile.height * 0.5f);
             for (int i = 0; i < Projectile.oldPos.Length; i++)
             {
                 Vector2 drawPos = Projectile.oldPos[i] - Main.screenPosition + drawOrigin + new Vector2(0f, Projectile.gfxOffY);
@@ -126,7 +126,7 @@ namespace Wisplantern.Items.Ammo
 
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            SoundStyle style = new SoundStyle("Wisplantern/Sounds/Effects/BulletWhizz");
+            SoundStyle style = new("Wisplantern/Sounds/Effects/BulletWhizz");
             style.PitchVariance = 0.5f;
             style.Pitch = -0.75f;
             style.MaxInstances = 1;

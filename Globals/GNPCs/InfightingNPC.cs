@@ -13,6 +13,14 @@ namespace Wisplantern.Globals.GNPCs
         public int infightPlayer = 0;
         public Item infightItem = null;
 
+        public float attackSpeedMult = 1f;
+        public float attackSpeedCounter = 0f;
+
+        public override void ResetEffects(NPC npc)
+        {
+            attackSpeedMult = 1f;
+        }
+
         /// <summary>
         /// How many infighting iframes this enemy gives other enemies on hit.
         /// </summary>
@@ -27,13 +35,13 @@ namespace Wisplantern.Globals.GNPCs
 
         public override bool InstancePerEntity => true;
 
-        public static List<int> infightingBlacklist = new List<int>()
+        public static List<int> infightingBlacklist = new()
         {
             NPCID.EaterofWorldsBody,
             NPCID.EaterofWorldsTail
         };
 
-        public List<int> eaterOfWorldsSegments = new List<int>();
+        public List<int> eaterOfWorldsSegments = new();
 
         public NPC GetNPCTarget(NPC me)
         {

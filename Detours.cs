@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Terraria.Graphics.Effects;
 using System;
+using Wisplantern.Globals.GNPCs;
 
 namespace Wisplantern
 {
@@ -11,13 +12,33 @@ namespace Wisplantern
             Terraria.On_Main.DoUpdate += DoUpdate;
             Terraria.On_Main.DrawInterface += DrawOvertopGraphics;
 			Terraria.On_Rain.MakeRain += MakeRain;
-		}
+            On_NPC.AI += AI;
+        }
 
         public static void Unload()
         {
             Terraria.On_Main.DoUpdate -= DoUpdate;
             Terraria.On_Main.DrawInterface -= DrawOvertopGraphics;
 			Terraria.On_Rain.MakeRain -= MakeRain;
+			On_NPC.AI -= AI;
+		}
+
+		public static void AI(On_NPC.orig_AI orig, NPC self)
+		{
+			if (self.TryGetGlobalNPC(out InfightingNPC iNPC))
+			{
+				iNPC.attackSpeedCounter += iNPC.attackSpeedMult;
+
+				while (iNPC.attackSpeedCounter >= 1f)
+				{
+					iNPC.attackSpeedCounter -= 1f;
+					orig(self);
+				}
+			}
+			else
+			{
+				orig(self);
+			}
 		}
 
         public static void DoUpdate(Terraria.On_Main.orig_DoUpdate orig, Main self, ref GameTime gameTime)

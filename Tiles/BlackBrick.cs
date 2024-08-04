@@ -14,7 +14,7 @@ namespace Wisplantern.Tiles
             Main.tileMerge[Type][ModContent.TileType<IgneousStone>()] = true;
 
 
-            SoundStyle style = new SoundStyle("Wisplantern/Sounds/Effects/StoneHit2");
+            SoundStyle style = new("Wisplantern/Sounds/Effects/StoneHit2");
             style.PitchVariance = 0.25f;
             HitSound = style;
 

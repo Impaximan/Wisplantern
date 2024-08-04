@@ -25,7 +25,7 @@ namespace Wisplantern.NPCs.Town
 			//NPCID.Sets.ShimmerTownTransform[NPC.type] = true;
 			//NPCID.Sets.FaceEmote[Type] = ModContent.EmoteBubbleType<ExamplePersonEmote>();
 
-			NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers()
+			NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new()
 			{
 				Velocity = 1f,
 				Direction = -1

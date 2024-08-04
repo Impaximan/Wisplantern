@@ -37,7 +37,7 @@ namespace Wisplantern.Globals.GItems
                 int index = tooltips.FindIndex(x => x.Name == "Damage" && x.Mod == "Terraria");
                 if (index != -1)
                 {
-                    TooltipLine powerLine = new TooltipLine(Mod, "ManipulativePower", Math.Round(manipulativePower * 100f, 1).ToString() + "% manipulative power");
+                    TooltipLine powerLine = new(Mod, "ManipulativePower", Math.Round(manipulativePower * 100f, 1).ToString() + "% manipulative power");
                     tooltips.Insert(index + 1, powerLine);
                 }
             }
@@ -47,7 +47,7 @@ namespace Wisplantern.Globals.GItems
                 int index = tooltips.FindIndex(x => x.Name == "ItemName" && x.Mod == "Terraria");
                 if (index != -1)
                 {
-                    TooltipLine manipLine = new TooltipLine(Mod, "ManipulativeWeapon", "-Shepherd Class-");
+                    TooltipLine manipLine = new(Mod, "ManipulativeWeapon", "-Shepherd Class-");
                     manipLine.OverrideColor = Color.MediumPurple;
                     tooltips.Insert(index + 1, manipLine);
                 }
@@ -64,7 +64,7 @@ namespace Wisplantern.Globals.GItems
 
                 if (index != -1)
                 {
-                    TooltipLine powerLine = new TooltipLine(Mod, "CharismaCost", "Uses " + charisma.ToString() + " charisma");
+                    TooltipLine powerLine = new(Mod, "CharismaCost", "Uses " + charisma.ToString() + " charisma");
                     tooltips.Insert(index + 1, powerLine);
                 }
             }

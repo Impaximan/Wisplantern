@@ -19,7 +19,7 @@ namespace Wisplantern
         #region Image Generation
         public virtual void SetColors(ref Color[] colors, int width, int height)
         {
-            FastNoiseLite noise = new FastNoiseLite();
+            FastNoiseLite noise = new();
             noise.SetNoiseType(FastNoiseLite.NoiseType.Perlin);
 
             int centerX = width / 2;
@@ -28,8 +28,8 @@ namespace Wisplantern
             {
                 for (int i = 0; i < width; i++)
                 {
-                    Vector2 center = new Vector2(centerX, centerY);
-                    Vector2 position = new Vector2(i, j);
+                    Vector2 center = new(centerX, centerY);
+                    Vector2 position = new(i, j);
                     float rotation = (position - center).ToRotation();
                     float distance = Vector2.Distance(position, center);
 
@@ -49,7 +49,7 @@ namespace Wisplantern
         {
             var graphics = Main.instance.GraphicsDevice;
             Color[] colors = new Color[width * height];
-            Texture2D output = new Texture2D(graphics, width, height, false, SurfaceFormat.Color);
+            Texture2D output = new(graphics, width, height, false, SurfaceFormat.Color);
             SetColors(ref colors, width, height);
             output.SetData(colors);
             return output;
@@ -60,7 +60,7 @@ namespace Wisplantern
         public static int freezeFrames = 0;
         public static bool freezeFrameLight = false;
 
-        public static List<int> wisplanternLoot = new List<int>();
+        public static List<int> wisplanternLoot = new();
 
         private static string savingFolder = Path.Combine(Main.SavePath, "Mods", "Cache");
 
@@ -110,7 +110,7 @@ namespace Wisplantern
 
             if (Terraria.Main.netMode != NetmodeID.Server)
             {
-                Ref<Effect> winterRef = new Ref<Effect>((Effect)ModContent.Request<Effect>("Wisplantern/Effects/WinterShader", AssetRequestMode.ImmediateLoad));
+                Ref<Effect> winterRef = new((Effect)ModContent.Request<Effect>("Wisplantern/Effects/WinterShader", AssetRequestMode.ImmediateLoad));
                 Filters.Scene["Wisplantern:WinterShader"] = new Filter(new ScreenShaderData(winterRef, "Winter"), EffectPriority.VeryHigh);
                 Filters.Scene["Wisplantern:WinterShader"].Load();
             }

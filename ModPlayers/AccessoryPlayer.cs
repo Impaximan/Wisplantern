@@ -7,7 +7,7 @@ namespace Wisplantern.ModPlayers
         /// <summary>
         /// A list containing the ID of every Wisplantern accessory currently equipped.
         /// </summary>
-        public List<int> accessoryEffects = new List<int>();
+        public List<int> accessoryEffects = new();
 
         public override void ResetEffects()
         {

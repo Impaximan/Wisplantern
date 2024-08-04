@@ -6,8 +6,8 @@ namespace Wisplantern.Trees
 {
     class SnowTree : ModTree
     {
-		public override TreePaintingSettings TreeShaderSettings => new TreePaintingSettings
-		{
+		public override TreePaintingSettings TreeShaderSettings => new()
+        {
 			UseSpecialGroups = true,
 			SpecialGroupMinimalHueValue = 11f / 72f,
 			SpecialGroupMaximumHueValue = 0.25f,

@@ -43,6 +43,12 @@ namespace Wisplantern.Items.Tools.FishingPoles
                 position = player.Center + direction * distance;
             }
         }
+
+        public override void ModifyFishingLine(Projectile bobber, ref Vector2 lineOriginOffset, ref Color lineColor)
+        {
+            lineOriginOffset = new Vector2(52, -38);
+            lineColor = new Color(187, 206, 238);
+        }
     }
 
     class WispcasterBobber : ModProjectile
@@ -61,12 +67,6 @@ namespace Wisplantern.Items.Tools.FishingPoles
             Projectile.penetrate = -1;
             Projectile.netImportant = true;
             DrawOriginOffsetY = -4;
-        }
-
-        public override void ModifyFishingLine(ref Vector2 lineOriginOffset, ref Color lineColor)
-        {
-            lineOriginOffset = new Vector2(52, -38);
-            lineColor = new Color(187, 206, 238);
         }
 
         public override void OnSpawn(IEntitySource source)

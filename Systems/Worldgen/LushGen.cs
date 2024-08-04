@@ -83,7 +83,7 @@ namespace Wisplantern.Systems.Worldgen
 
         public void LushPatches()
         {
-            FastNoiseLite noise = new FastNoiseLite(WorldGen.genRand.Next(1, 5000));
+            FastNoiseLite noise = new(WorldGen.genRand.Next(1, 5000));
             noise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
             noise.SetFrequency(0.01f);
             noise.SetFractalOctaves(5);
@@ -91,7 +91,7 @@ namespace Wisplantern.Systems.Worldgen
             noise.SetFractalGain(0.5f);
             noise.SetFractalPingPongStrength(2f);
 
-            List<int> convertableStoneTiles = new List<int>()
+            List<int> convertableStoneTiles = new()
             {
                 TileID.Stone,
                 TileID.ArgonMoss,
