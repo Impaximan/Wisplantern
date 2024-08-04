@@ -6,7 +6,6 @@ using Terraria.Audio;
 
 namespace Wisplantern.Items.Weapons.Melee.Shortswords
 {
-    //TODO: Add an indicator for when the fourth hit is charged up and for when you lose the jab counter
     class DepthrockDagger : ModItem
     {
         public override void SetStaticDefaults()

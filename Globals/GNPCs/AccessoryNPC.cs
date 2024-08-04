@@ -4,7 +4,7 @@ namespace Wisplantern.Globals.GNPCs
 {
     public class AccessoryNPC : GlobalNPC
     {
-        public override bool InstancePerEntity => true;
+        public override bool InstancePerEntity => false;
 
         public override void OnHitByItem(NPC npc, Player player, Item item, NPC.HitInfo hit, int damageDone)
         {

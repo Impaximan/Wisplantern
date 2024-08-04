@@ -14,7 +14,8 @@
             Item.height = 28;
             Item.rare = ItemRarityID.Blue;
             Item.value = Item.buyPrice(0, 2, 50, 0);
-            Item.SetScholarlyDescription("Found in random chests underground.");
+            Item.SetScholarlyDescription("Bought from the Shepherd NPC.");
+            Item.MarkAsShepherd();
         }
 
         public override void UpdateEquip(Player player)

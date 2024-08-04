@@ -2,15 +2,15 @@
 {
     class LushNPC : GlobalNPC
     {
-        public override bool InstancePerEntity => true;
+        public override bool InstancePerEntity => false;
 
-        public override bool CanHitNPC(NPC npc, NPC target)/* tModPorter Suggestion: Return true instead of null */
+        public override bool CanHitNPC(NPC npc, NPC target)
         {
             if (target.type == ModContent.NPCType<NPCs.Critters.Bugs.Lushfly>())
             {
                 return false;
             }
-            return base.CanHitNPC(npc, target);
+            return true;
         }
     }
 }

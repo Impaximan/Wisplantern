@@ -39,7 +39,7 @@ namespace Wisplantern.Systems.UI
 
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
         {
-            int index = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Fancy UI"));
+            int index = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Mouse Text"));
 
             if (index != -1)
             {
@@ -53,7 +53,7 @@ namespace Wisplantern.Systems.UI
                         }
                         return true;
                     },
-                       InterfaceScaleType.Game));
+                       InterfaceScaleType.UI));
             }
 
         }

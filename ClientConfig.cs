@@ -30,6 +30,22 @@ namespace Wisplantern
         [BackgroundColor(123, 225, 255)]
         public bool classTags = true;
 
+        [Header("$Mods.Wisplantern.UIHeader")]
+
+        [DefaultValue(0.78f)]
+        [BackgroundColor(123, 225, 255)]
+        [Increment(0.01f)]
+        public float charismaX = 0f;
+
+        [DefaultValue(0.06f)]
+        [BackgroundColor(123, 225, 255)]
+        [Increment(0.01f)]
+        public float charismaY = 0f;
+
+        [DefaultValue(true)]
+        [BackgroundColor(123, 225, 255)]
+        public bool pushCharismaDown = true;
+
         public override void OnChanged()
         {
             Wisplantern.playDeepUnderground = playDeepUnderground;
@@ -37,6 +53,10 @@ namespace Wisplantern
             Wisplantern.playClairDeLune = playClairDeLune;
 
             Wisplantern.classTags = classTags;
+
+            Wisplantern.charismaX = charismaX;
+            Wisplantern.charismaY = charismaY;
+            Wisplantern.pushCharismaDown = pushCharismaDown;
         }
     }
 }

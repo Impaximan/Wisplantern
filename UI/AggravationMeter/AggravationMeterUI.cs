@@ -12,6 +12,11 @@ namespace Wisplantern.UI.AggravationMeter
             Texture2D aggravationMeter = ModContent.Request<Texture2D>("Wisplantern/UI/AggravationMeter/AggravationLevel", AssetRequestMode.ImmediateLoad).Value;
             foreach (NPC npc in Main.npc)
             {
+                if (npc.IsABestiaryIconDummy)
+                {
+                    continue;
+                }
+
                 if (npc != null && npc.active && npc.TryGetGlobalNPC(out InfightingNPC iNPC))
                 {
                     if (iNPC.aggravation > 0f && (npc.realLife == -1 || npc.realLife == npc.whoAmI))

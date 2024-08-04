@@ -17,6 +17,8 @@ namespace Wisplantern.Items.Materials
             Item.maxStack = 9999;
             Item.rare = ItemRarityID.Blue;
             Item.value = Item.sellPrice(0, 0, 10, 0);
+            Item.SetScholarlyDescription("Bought from the Shepherd NPC.");
+            Item.MarkAsShepherd();
         }
     }
 }

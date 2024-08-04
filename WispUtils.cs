@@ -39,6 +39,22 @@ namespace Wisplantern
             player.GetModPlayer<AccessoryPlayer>().accessoryEffects.Add(item.type);
         }
 
+        public static void MarkAsHuntingWeapon(this Item item)
+        {
+            if (item.TryGetGlobalItem(out HuntingItem hItem))
+            {
+                hItem.huntingWeapon = true;
+            }
+        }
+
+        public static void MarkAsShepherd(this Item item)
+        {
+            if (item.TryGetGlobalItem(out AggravatingItem aItem))
+            {
+                aItem.markedAsManipulative = true;
+            }
+        }
+
         /// <summary>
         /// Checks if a certain accessory is equipped according to this player's AccessoryPlayer.
         /// </summary>

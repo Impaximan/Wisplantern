@@ -79,6 +79,10 @@ namespace Wisplantern
         public static bool calmNights = true;
         public static bool snowstorms = true;
 
+        public static float charismaX = 0f;
+        public static float charismaY = 0f;
+        public static bool pushCharismaDown = true;
+
         public override void Load()
         {
             //WispUtils.InvokeOnMainThread(() =>

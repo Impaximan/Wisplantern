@@ -2,7 +2,7 @@
 {
     class ShopNPC : GlobalNPC
     {
-        public override bool InstancePerEntity => true;
+        public override bool InstancePerEntity => false;
 
         public override void ModifyShop(NPCShop shop)
         {

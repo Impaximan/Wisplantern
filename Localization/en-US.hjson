@@ -26,6 +26,7 @@ Mods: {
 			HeavyBullet.DisplayName: Heavy Bullet
 			DemoniteWisp.DisplayName: Demonite Wisp
 			CrimtaneSkull.DisplayName: Crimtane Skull
+			HuntingJavelinProjectile.DisplayName: Hunting Javelin Projectile
 		}
 
 		Biomes: {
@@ -563,7 +564,7 @@ Mods: {
 				DisplayName: Scroll of Incantation
 				Tooltip:
 					'''
-					Can be used to craft incantations which command the aggravated masses
+					Can be used to craft incantations which command the aggravated hordes
 					Incantations require 'charisma', which drops from enemies who are slain while aggravated
 					'''
 			}
@@ -611,6 +612,15 @@ Mods: {
 			ShowNoMercy: {
 				Tooltip: Use to send all aggravated enemies into a frenzy, increasing their attack speed by 100%
 				DisplayName: Incantation: "Show No Mercy"
+			}
+
+			HuntingJavelin: {
+				DisplayName: Hunting Javelin
+				Tooltip:
+					'''
+					A quick javelin that pierces multiple enemies
+					More likely to be picked up if you miss
+					'''
 			}
 		}
 
@@ -732,6 +742,21 @@ Mods: {
 					Label: Class tags
 					Tooltip: Whether or not items from custom classes added by Wisplantern will contain a class tag (like those of Thorium, for examplescr)
 				}
+
+				charismaX: {
+					Label: Charisma X
+					Tooltip: The X position of the charisma UI element on the screen
+				}
+
+				charismaY: {
+					Label: Charisma Y
+					Tooltip: The Y position of the charisma UI element on the screen
+				}
+
+				pushCharismaDown: {
+					Label: Push charisma down while inventory is open
+					Tooltip: Self explanatory. May keep it out of the way of certain UI elements.
+				}
 			}
 		}
 
@@ -745,7 +770,10 @@ Mods: {
 		}
 
 		TooltipHeader: Item tooltips
+		UIHeader: UI
 	}
+
+	ItemDropConditionDescriptions.HuntingWeapon: yeah
 
 	GameTips: {
 		MountainTip0: "[Wisplantern] Tales tell of a massive mountain found on the surface, containing an abundance of minerals inside..."

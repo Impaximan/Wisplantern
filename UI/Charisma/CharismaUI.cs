@@ -14,9 +14,9 @@ namespace Wisplantern.UI.Charisma
         {
             Texture2D charisma = ModContent.Request<Texture2D>("Wisplantern/UI/Charisma/Charisma", AssetRequestMode.ImmediateLoad).Value;
 
-            Vector2 position = new(Main.screenWidth - ((Main.screenWidth / 6f) + charisma.Width - 8) * Main.UIScale, Main.UIScale * 50f);
+            Vector2 position = new Vector2(Main.screenWidth, Main.screenHeight) * new Vector2(Wisplantern.charismaX, Wisplantern.charismaY);
 
-            if (Main.playerInventory)
+            if (Main.playerInventory && Wisplantern.pushCharismaDown)
             {
                 position.Y += Main.UIScale * 50f;
             }
@@ -27,11 +27,12 @@ namespace Wisplantern.UI.Charisma
             Player player = Main.LocalPlayer;
             ManipulativePlayer mPlayer = player.GetModPlayer<ManipulativePlayer>();
 
+            //spriteBatch.Draw(charisma, /*position + new Vector2(0f, 2f * Main.UIScale)*/Vector2.Zero, new Rectangle(0, 0, charisma.Width, charisma.Height), Color.White, 0f, charisma.Size() / 2f, 10f * Main.UIScale, SpriteEffects.None, 0f);
             for (int i = 0; i < mPlayer.MaxCharisma; i++)
             {
                 if (mPlayer.charisma > i)
                 {
-                    spriteBatch.Draw(charisma, position + new Vector2(0f, 2f * Main.UIScale), null, Color.White, 0f, charisma.Size() / 2f, 1f * Main.UIScale, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(charisma, position + new Vector2(0f, 2f * Main.UIScale), new Rectangle(0, 0, charisma.Width, charisma.Height), Color.White, 0f, charisma.Size() / 2f, 0.8f * Main.UIScale, SpriteEffects.None, 0f);
                 }
 
                 if (i != mPlayer.MaxCharisma - 1)

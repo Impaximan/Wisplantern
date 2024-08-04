@@ -11,6 +11,8 @@ namespace Wisplantern.Globals.GItems
 
         public int charisma = 0;
 
+        public bool markedAsManipulative = false;
+
         public override bool CanUseItem(Item item, Player player)
         {
             if (charisma > 0)
@@ -42,7 +44,7 @@ namespace Wisplantern.Globals.GItems
                 }
             }
 
-            if (item.DamageType == ModContent.GetInstance<DamageClasses.ManipulativeDamageClass>() && Wisplantern.classTags)
+            if ((item.DamageType == ModContent.GetInstance<DamageClasses.ManipulativeDamageClass>() || markedAsManipulative) && Wisplantern.classTags)
             {
                 int index = tooltips.FindIndex(x => x.Name == "ItemName" && x.Mod == "Terraria");
                 if (index != -1)
