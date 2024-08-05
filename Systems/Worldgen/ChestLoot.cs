@@ -30,6 +30,19 @@ namespace Wisplantern.Systems.Worldgen
                 {
                     if (Main.tile[chest.x, chest.y].TileType == TileID.Containers) //All chests
                     {
+                        if (WorldGen.genRand.NextBool(3))
+                        {
+                            for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)
+                            {
+                                if (chest.item[inventoryIndex].type == ItemID.None)
+                                {
+                                    chest.item[inventoryIndex].SetDefaults(ModContent.ItemType<Items.Weapons.Ranged.Javelins.HuntingJavelin>());
+                                    chest.item[inventoryIndex].stack = Main.rand.Next(15, 41);
+                                    break;
+                                }
+                            }
+                        }
+
                         if (WorldGen.genRand.NextBool(4))
                         {
                             for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)
@@ -68,6 +81,7 @@ namespace Wisplantern.Systems.Worldgen
                     }
                     if (Main.tile[chest.x, chest.y].TileType == TileID.Containers && Main.tile[chest.x, chest.y].TileFrameX == 0 * 36) //Wooden chest
                     {
+
                         if (WorldGen.genRand.NextBool(7))
                         {
                             for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)
@@ -90,6 +104,7 @@ namespace Wisplantern.Systems.Worldgen
 
                     if (Main.tile[chest.x, chest.y].TileType == TileID.Containers && Main.tile[chest.x, chest.y].TileFrameX == 12 * 36) //Living wood chest
                     {
+
                         if (WorldGen.genRand.NextBool(7))
                         {
                             for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)

@@ -154,6 +154,7 @@ namespace Wisplantern.NPCs.Town
 		{
 			new NPCShop(Type)
 				.Add<Items.Weapons.Manipulative.Decoys.BouncyDummy>()
+				.Add<Items.Tools.Movement.Lasso>()
 				.Add(new Item(ModContent.ItemType<Items.Materials.ScrollOfIncantation>()) { shopCustomPrice = Item.buyPrice(0, 4, 50, 0) })
 				.Add<Items.Equipable.Accessories.Gasoline>()
 				.Add<Items.Weapons.Manipulative.Canes.ShepherdsCane>()

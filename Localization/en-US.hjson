@@ -27,6 +27,7 @@ Mods: {
 			DemoniteWisp.DisplayName: Demonite Wisp
 			CrimtaneSkull.DisplayName: Crimtane Skull
 			HuntingJavelinProjectile.DisplayName: Hunting Javelin Projectile
+			LassoProjectile.DisplayName: Lasso Projectile
 		}
 
 		Biomes: {
@@ -619,7 +620,17 @@ Mods: {
 				Tooltip:
 					'''
 					A quick javelin that pierces multiple enemies
-					More likely to be picked up if you miss
+					More likely to be retrievable after hitting targets
+					'''
+			}
+
+			Lasso: {
+				DisplayName: Lasso
+				Tooltip:
+					'''
+					Throw onto an enemy or NPC to grab them, pulling them along
+					Does not work on enemies impervious to knockback
+					When attached, press left click to retrieve
 					'''
 			}
 		}

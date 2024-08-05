@@ -123,7 +123,7 @@ namespace Wisplantern.Items.Weapons.Ranged.Javelins
 
         public override void OnKill(int timeLeft)
         {
-            if (Main.rand.NextBool(2 + numHits))
+            if (Main.rand.NextBool(Math.Clamp(5 - numHits * 2, 1, 5)))
             {
                 Item.NewItem(new EntitySource_DropAsItem(Projectile), Projectile.getRect(), ModContent.ItemType<HuntingJavelin>());
             }

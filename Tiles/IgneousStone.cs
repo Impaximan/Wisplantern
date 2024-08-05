@@ -26,7 +26,7 @@ namespace Wisplantern.Tiles
             {
                 PitchVariance = 0.5f,
                 Pitch = 0.3f,
-                Volume = 1f,
+                Volume = 0.6f,
             };
             HitSound = style;
 

@@ -35,6 +35,7 @@ namespace Wisplantern.Items.Tools.Movement
             return Color.White;
         }
 
+
         public override bool CanUseItem(Player player)
         {
             int count = 0;
