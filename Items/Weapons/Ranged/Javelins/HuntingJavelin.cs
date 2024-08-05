@@ -44,7 +44,7 @@ namespace Wisplantern.Items.Weapons.Ranged.Javelins
         public override void AddRecipes()
         {
             CreateRecipe(15)
-                .AddRecipeGroup(RecipeGroupID.Wood, 5)
+                .AddRecipeGroup(RecipeGroupID.Wood, 3)
                 .AddRecipeGroup(RecipeGroupID.IronBar)
                 .AddTile(TileID.Anvils)
                 .Register();
@@ -79,7 +79,7 @@ namespace Wisplantern.Items.Weapons.Ranged.Javelins
             for (int i = 0; i < Projectile.oldPos.Length; i++)
             {
                 Vector2 drawPos = Projectile.oldPos[i] - Main.screenPosition + drawOrigin + new Vector2(0f, Projectile.gfxOffY);
-                Color color = Projectile.GetAlpha(Color.Lerp(Color.White, Color.Blue, 1f - ((Projectile.oldPos.Length - i) / (float)Projectile.oldPos.Length))) * ((Projectile.oldPos.Length - i) / (float)Projectile.oldPos.Length);
+                Color color = Projectile.GetAlpha(lightColor) * ((Projectile.oldPos.Length - i) / (float)Projectile.oldPos.Length);
                 Main.spriteBatch.Draw(ModContent.Request<Texture2D>(Texture).Value, drawPos, new Rectangle?(), color, Projectile.rotation, drawOrigin, Projectile.scale, SpriteEffects.None, 0f);
             }
             return false;
@@ -97,8 +97,14 @@ namespace Wisplantern.Items.Weapons.Ranged.Javelins
             hitbox = hitbox.OffsetSize(-15, -15);
         }
 
+        public override bool? CanHitNPC(NPC target)
+        {
+            return (pauseTime > 0) ? false : null;
+        }
+
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            pauseTime += 6;
             numHits++;
             SoundStyle style = new("Wisplantern/Sounds/Effects/SharpHit2");
             style.PitchVariance = 0.35f;
@@ -132,13 +138,22 @@ namespace Wisplantern.Items.Weapons.Ranged.Javelins
             }
         }
 
+        int pauseTime = 0;
         int gravityCounter = 0;
         public override void AI()
         {
-            gravityCounter++;
-            if (gravityCounter > 10) Projectile.velocity.Y += 0.4f;
-            Projectile.velocity *= 0.98f;
-            Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.Pi / 4f;
+            if (pauseTime > 0)
+            {
+                pauseTime--;
+                Projectile.position -= Projectile.velocity;
+            }
+            else
+            {
+                gravityCounter++;
+                if (gravityCounter > 10) Projectile.velocity.Y += 0.4f;
+                Projectile.velocity *= 0.98f;
+                Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.Pi / 4f;
+            }
         }
     }
 }

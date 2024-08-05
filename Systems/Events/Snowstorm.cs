@@ -66,6 +66,10 @@ namespace Wisplantern.Systems.Events
                         {
                             for (int j = y - 5; j <= y + 5; j++)
                             {
+                                if (i < 0 || i >= Main.maxTilesX || j < 0 || j >= Main.maxTilesY)
+                                {
+                                    continue;
+                                }
                                 if (Main.tile[i, j].TileType == TileID.HallowedGrass)
                                 {
                                     tile.TileType = (ushort)TileID.HallowedGrass;
@@ -77,6 +81,10 @@ namespace Wisplantern.Systems.Events
                         {
                             for (int j = y - 5; j <= y + 5; j++)
                             {
+                                if (i < 0 || i >= Main.maxTilesX || j < 0 || j >= Main.maxTilesY)
+                                {
+                                    continue;
+                                }
                                 if (Main.tile[i, j].TileType == TileID.CrimsonGrass)
                                 {
                                     tile.TileType = (ushort)TileID.CrimsonGrass;
@@ -88,6 +96,10 @@ namespace Wisplantern.Systems.Events
                         {
                             for (int j = y - 5; j <= y + 5; j++)
                             {
+                                if (i < 0 || i >= Main.maxTilesX || j < 0 || j >= Main.maxTilesY)
+                                {
+                                    continue;
+                                }
                                 if (Main.tile[i, j].TileType == TileID.CorruptGrass)
                                 {
                                     tile.TileType = (ushort)TileID.CorruptGrass;

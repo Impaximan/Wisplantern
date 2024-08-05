@@ -28,7 +28,7 @@ namespace Wisplantern.Items.Weapons.Manipulative.Incantations
         {
             npc.EvenSimplerStrikeNPC(player, Item, damage, 0f, 0);
 
-            npc.AddBuff(ModContent.BuffType<VisciousFrenzy>(), 240);
+            npc.AddBuff(ModContent.BuffType<VisciousFrenzy>(), 8 * 60);
         }
     }
 }

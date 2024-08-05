@@ -22,7 +22,7 @@ namespace Wisplantern.Globals.GItems
                     }
                 }
 
-                TooltipLine huntingDesc = new(Mod, "HuntingDescription", "Enemies killed with this weapon are significantly more likely to drop food");
+                TooltipLine huntingDesc = new(Mod, "HuntingDescription", "Enemies killed with this weapon are much more likely to drop food and hearts");
                 huntingDesc.IsModifier = true;
                 tooltips.Add(huntingDesc);
             }

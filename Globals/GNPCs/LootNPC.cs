@@ -21,5 +21,10 @@ namespace Wisplantern.Globals.GNPCs
                 }
             }
         }
+
+        public override void ModifyGlobalLoot(GlobalLoot globalLoot)
+        {
+            globalLoot.Add(ItemDropRule.ByCondition(new DropConditions.UsedHuntingWeapon(), ItemID.Heart, 3, 1, 1));
+        }
     }
 }
