@@ -30,7 +30,7 @@ namespace Wisplantern.Items.Weapons.Manipulative.Decoys
         /// <summary>
         /// The standard SetDefaults, DON'T USE THIS FOR DECOY ITEMS. Use SetStats instead.
         /// </summary>
-        public override void SetDefaults()
+        public sealed override void SetDefaults()
         {
             Item.shoot = 1;
             Item.useTime = 10;
@@ -72,10 +72,12 @@ namespace Wisplantern.Items.Weapons.Manipulative.Decoys
                     if (npc.active && npc.GetGlobalNPC<InfightingNPC>().decoy)
                     {
                         npc.life = 1;
+                        npc.ai[2] = 1f;
                         npc.StrikeNPC(npc.CalculateHitInfo(npc.lifeMax, 0, true, 0));
                     }
                 }
                 Item.stack++;
+                if (Item.stack > Item.maxStack) Item.stack = Item.maxStack;
                 return true;
             }
             if (player.HasBuff<Buffs.DecoyCooldown>())
@@ -111,6 +113,7 @@ namespace Wisplantern.Items.Weapons.Manipulative.Decoys
                 player.AddBuff(ModContent.BuffType<Buffs.DecoyCooldown>(), CooldownSeconds * 60);
                 int n = NPC.NewNPC(source, (int)player.Center.X, (int)player.Center.Y, DecoyType);
                 Main.npc[n].position.Y = player.position.Y + player.height - Main.npc[n].height;
+                Main.npc[n].velocity = velocity;
                 Main.npc[n].ai[0] = player.whoAmI;
                 Main.npc[n].ai[1] = player.GetWeaponCrit(Item);
                 Main.npc[n].damage = damage;
@@ -229,7 +232,7 @@ namespace Wisplantern.Items.Weapons.Manipulative.Decoys
 
         public override bool SpecialOnKill()
         {
-            return true;
+            return false;
         }
 
         public override void ModifyNPCLoot(NPCLoot npcLoot)

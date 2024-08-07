@@ -109,7 +109,7 @@ namespace Wisplantern.Items.Weapons.Ranged.Javelins
             SoundStyle style = new("Wisplantern/Sounds/Effects/SharpHit2");
             style.PitchVariance = 0.35f;
             style.Pitch -= 0.35f;
-            style.Volume = 0.5f;
+            style.Volume = 0.75f;
             style.MaxInstances = 1;
             SoundEngine.PlaySound(style, target.Center);
         }

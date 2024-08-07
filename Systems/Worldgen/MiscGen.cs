@@ -560,7 +560,7 @@ namespace Wisplantern.Systems.Worldgen
                     int rI = i + position.X;
                     int rJ = j + position.Y;
 
-                    int targetJ = -(int)((1f - Math.Abs(i / (mountainWidth / 2f))) * mountainHeight) + (int)(Math.Sin(i * 0.1f) * 40f * mountainNoise.GetNoise(i * 0.5f, 100f) + Math.Sign(mountainNoise.GetNoise(i * 0.5f, 100f)) * 0.35f);
+                    int targetJ = -(int)((1f - Math.Abs(i / (mountainWidth / 2f))) * mountainHeight) + (int)(Math.Sin(i * 0.1f) * 40f * MathHelper.Lerp(0.5f, 1f, (mountainNoise.GetNoise(i * 0.5f, 100f) + 1f) / 2f) + Math.Sign(mountainNoise.GetNoise(i * 0.5f, 100f)) * 0.35f);
 
                     if (j > targetJ)
                     {
@@ -587,18 +587,18 @@ namespace Wisplantern.Systems.Worldgen
                             {
                                 if (caveNoise.GetNoise(i * caveNoiseMult, j * caveNoiseMult) < caveNoiseReq)
                                 {
-                                    if (oreNoise1.GetNoise(i * 5f, j * 5f) > 0.55f)
+                                    if (oreNoise1.GetNoise(i * 5f, j * 5f) > 0.62f)
                                     {
                                         oresToPlace.Add(new Tuple<Point, int>(new Point(rI, rJ), WorldGen.SavedOreTiers.Iron));
                                     }
-                                    else if (oreNoise2.GetNoise(i * 5f, j * 5f) > 0.62f)
+                                    else if (oreNoise2.GetNoise(i * 5f, j * 5f) > 0.69f)
                                     {
                                         oresToPlace.Add(new Tuple<Point, int>(new Point(rI, rJ), WorldGen.SavedOreTiers.Silver));
                                         //WorldGen.PlaceTile(rI, rJ, WorldGen.SavedOreTiers.Silver, true, false);
                                     }
-                                    else if (oreNoise3.GetNoise(i * 5f, j * 5f) > 0.69f)
+                                    else if (oreNoise3.GetNoise(i * 5f, j * 5f) > 0.76f)
                                     {
-                                        oresToPlace.Add(new Tuple<Point, int>(new Point(rI, rJ), WorldGen.SavedOreTiers.Silver));
+                                        oresToPlace.Add(new Tuple<Point, int>(new Point(rI, rJ), WorldGen.SavedOreTiers.Gold));
                                         //WorldGen.PlaceTile(rI, rJ, WorldGen.SavedOreTiers.Gold, true, false);
                                     }
                                     else

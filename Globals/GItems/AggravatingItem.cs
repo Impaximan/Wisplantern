@@ -44,17 +44,6 @@ namespace Wisplantern.Globals.GItems
                 }
             }
 
-            if ((item.DamageType == ModContent.GetInstance<DamageClasses.ManipulativeDamageClass>() || markedAsManipulative) && Wisplantern.classTags)
-            {
-                int index = tooltips.FindIndex(x => x.Name == "ItemName" && x.Mod == "Terraria");
-                if (index != -1)
-                {
-                    TooltipLine manipLine = new(Mod, "ManipulativeWeapon", "-Shepherd Class-");
-                    manipLine.OverrideColor = Color.MediumPurple;
-                    tooltips.Insert(index + 1, manipLine);
-                }
-            }
-
             if (charisma > 0)
             {
                 int index = tooltips.FindIndex(x => x.Name == "Knockback" && x.Mod == "Terraria");
@@ -68,6 +57,17 @@ namespace Wisplantern.Globals.GItems
                 {
                     TooltipLine powerLine = new(Mod, "CharismaCost", "Uses " + charisma.ToString() + " charisma");
                     tooltips.Insert(index + 1, powerLine);
+                }
+            }
+
+            if ((item.DamageType == ModContent.GetInstance<DamageClasses.ManipulativeDamageClass>() || markedAsManipulative) && Wisplantern.classTags)
+            {
+                int index = tooltips.FindIndex(x => x.Name == "ItemName" && x.Mod == "Terraria");
+                if (index != -1)
+                {
+                    TooltipLine manipLine = new(Mod, "ManipulativeWeapon", "-Shepherd Class-");
+                    manipLine.OverrideColor = Color.MediumPurple;
+                    tooltips.Insert(index + 1, manipLine);
                 }
             }
         }

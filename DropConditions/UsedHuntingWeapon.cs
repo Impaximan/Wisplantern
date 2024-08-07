@@ -13,7 +13,7 @@ namespace Wisplantern.DropConditions
                 return false;
             }
 
-            return info.player.HeldItem.GetGlobalItem<HuntingItem>().huntingWeapon;
+            return info.player.HeldItem.TryGetGlobalItem(out HuntingItem huntingItem) && huntingItem.huntingWeapon;
         }
 
         public bool CanShowItemDropInUI()

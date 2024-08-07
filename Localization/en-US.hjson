@@ -28,6 +28,12 @@ Mods: {
 			CrimtaneSkull.DisplayName: Crimtane Skull
 			HuntingJavelinProjectile.DisplayName: Hunting Javelin Projectile
 			LassoProjectile.DisplayName: Lasso Projectile
+			AmethystSoul.DisplayName: Amethyst Soul
+			DiamondSoul.DisplayName: Diamond Soul
+			EmeraldSoul.DisplayName: Emerald Soul
+			RubySoul.DisplayName: Ruby Soul
+			SapphireSoul.DisplayName: Sapphire Soul
+			TopazSoul.DisplayName: Topaz Soul
 		}
 
 		Biomes: {
@@ -219,8 +225,8 @@ Mods: {
 				DisplayName: Draconic Dacron
 				Tooltip:
 					'''
-					Chance to set wooden arrows ablaze with any bow
-					Flaming arrows will *always* set enemies ablaze
+					Grants a chance to set wooden arrows ablaze with any bow
+					Guarentees that flaming arrows *always* set enemies ablaze
 					'''
 			}
 
@@ -633,6 +639,45 @@ Mods: {
 					When attached, press left click to retrieve
 					'''
 			}
+
+			AlluringAmethyst: {
+				DisplayName: Alluring Amethyst
+				Tooltip: The decoy explodes when killed by an enemy
+			}
+
+			AlluringDiamond: {
+				DisplayName: Alluring Diamond
+				Tooltip: The decoy explodes when killed by an enemy
+			}
+
+			AlluringEmerald: {
+				DisplayName: Alluring Emerald
+				Tooltip: The decoy explodes when killed by an enemy
+			}
+
+			AlluringRuby: {
+				DisplayName: Alluring Ruby
+				Tooltip: The decoy explodes when killed by an enemy
+			}
+
+			AlluringSapphire: {
+				DisplayName: Alluring Sapphire
+				Tooltip: The decoy explodes when killed by an enemy
+			}
+
+			AlluringTopaz: {
+				DisplayName: Alluring Topaz
+				Tooltip: The decoy explodes when killed by an enemy
+			}
+
+			Persist: {
+				DisplayName: Incantation: "Persist"
+				Tooltip:
+					'''
+					Heals all aggravated enemies by up to 50 life
+					Resets all aggravation timers and increases aggravated enemy damage by 5
+					'''
+			}
 		}
 
 		NPCs: {
@@ -664,6 +709,13 @@ Mods: {
 
 				DisplayName: Shepherd
 			}
+
+			AlluringAmethystDecoy.DisplayName: Alluring Amethyst
+			AlluringDiamondDecoy.DisplayName: Alluring Diamond
+			AlluringEmeraldDecoy.DisplayName: Alluring Emerald
+			AlluringRubyDecoy.DisplayName: Alluring Ruby
+			AlluringSapphireDecoy.DisplayName: Alluring Sapphire
+			AlluringTopazDecoy.DisplayName: Alluring Topaz
 		}
 
 		Dialogue: {

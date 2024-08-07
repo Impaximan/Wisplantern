@@ -20,6 +20,7 @@ namespace Wisplantern.Items.Weapons.Manipulative.Incantations
             Item.SetCharisma(1);
             Item.damage = 17;
             Item.knockBack = 0f;
+            Item.crit = 15;
         }
 
         public override void IncantationEffect(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 targetPosition, NPC npc, int damage)
