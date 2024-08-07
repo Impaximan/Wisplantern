@@ -90,7 +90,7 @@ namespace Wisplantern.NPCs.Town
 					if (player.inventory.Any(x => x.DamageType == ModContent.GetInstance<DamageClasses.ManipulativeDamageClass>() ||
 					x.ModItem is Items.Weapons.Manipulative.Canes.CaneWeapon || 
 					x.ModItem is Items.Weapons.Manipulative.Decoys.DecoyItem || 
-					x.ModItem is Items.Weapons.Manipulative.Incantations.Incantation))
+					x.ModItem is Items.Weapons.Manipulative.Incantations.Incantation) && player.statLifeMax >= 140)
                     {
 						return true;
                     }
