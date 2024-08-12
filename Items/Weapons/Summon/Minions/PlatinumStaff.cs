@@ -26,6 +26,7 @@ namespace Wisplantern.Items.Weapons.Summon.Minions
             Item.UseSound = SoundID.Item44;
             Item.buffType = ModContent.BuffType<PlatinumSummon>();
             Item.shoot = ModContent.ProjectileType<PlatinumSummonProjectile>();
+            Item.autoReuse = true;
         }
 
         public override void AddRecipes()

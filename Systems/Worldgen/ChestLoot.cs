@@ -17,7 +17,6 @@ namespace Wisplantern.Systems.Worldgen
                     ModContent.ItemType<SwordParry>(),
                     ModContent.ItemType<AerialRetreat>(),
                     ModContent.ItemType<Uppercut>(),
-                    ModContent.ItemType<BloodySlash>(),
                     ModContent.ItemType<TriCast>(),
                     ModContent.ItemType<Siphon>(),
                     ModContent.ItemType<RadialCast>(),

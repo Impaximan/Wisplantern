@@ -34,11 +34,15 @@ namespace Wisplantern.Items.Weapons.Manipulative.Decoys
 
     class BouncyDummyDecoy : DecoyNPC
     {
-
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Bouncy Dummy");
             Main.npcFrameCount[Type] = 2;
+
+            NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
+            {
+                Hide = true
+            };
         }
 
         public override bool DoContactDamage => false;

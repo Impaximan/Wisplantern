@@ -17,6 +17,13 @@ namespace Wisplantern.Globals.GItems
         public bool isBattleArtItem = false;
         public BattleArt battleArtItemBattleArt;
 
+        public static bool?[] canUseBattleArt = null;
+
+        public override void SetStaticDefaults()
+        {
+            canUseBattleArt ??= new bool?[ItemLoader.ItemCount];
+        }
+
         public override void NetSend(Item item, BinaryWriter writer)
         {
             if (battleArt != null && battleArt is not None)
@@ -143,29 +150,42 @@ namespace Wisplantern.Globals.GItems
 
         public bool CanGetBattleArt(Item item, Player player)
         {
+            if (canUseBattleArt[item.type].HasValue)
+            {
+                return canUseBattleArt[item.type].Value;
+            }
+
+            canUseBattleArt[item.type] = true;
             if (item.GetGlobalItem<BattleArtItem>().battleArt != null && item.GetGlobalItem<BattleArtItem>().battleArt is not None)
             {
+                canUseBattleArt[item.type] = true;
                 return true;
             }
             if (item.ModItem != null)
             {
                 if (item.ModItem.AltFunctionUse(player))
                 {
+                    canUseBattleArt[item.type] = false;
                     return false;
                 }
             }
             if (ItemLoader.AltFunctionUse(item, player))
             {
+                canUseBattleArt[item.type] = false;
                 return false;
             }
             if (blacklist.Contains(item.type))
             {
+                canUseBattleArt[item.type] = false;
                 return false;
             }
             if (item.channel)
             {
+                canUseBattleArt[item.type] = false;
                 return false;
             }
+
+            canUseBattleArt[item.type] = true;
             return true;
         }
 
@@ -213,9 +233,11 @@ namespace Wisplantern.Globals.GItems
 
         public override bool CanUseItem(Item item, Player player)
         {
+            CanGetBattleArt(item, player);
+
             if (ShouldApplyBattleArt(player) && player.statMana >= item.mana)
             {
-                Item dummy = new(item.type);
+                Item dummy = item;
                 ogDamage = dummy.damage;
                 ogShootSpeed = dummy.shootSpeed;
                 ogUseAnimation = dummy.useAnimation;
@@ -228,7 +250,7 @@ namespace Wisplantern.Globals.GItems
                 ogSoundStyle = dummy.UseSound;
                 wasJustUsed = true;
 
-                if (player.HasBuff<Buffs.BattleArtCooldown>())
+                if (player.HasBuff<Buffs.BattleArtCooldown>() || player.cursed || (player.silence && item.mana > 0))
                 {
                     return false;
                 }

@@ -30,10 +30,12 @@
 
     class BramblesproutDecoy : DecoyNPC
     {
-
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Bramblesprout");
+            NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
+            {
+                Hide = true
+            };
         }
 
         public override void SetStats()

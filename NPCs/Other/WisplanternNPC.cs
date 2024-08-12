@@ -156,7 +156,12 @@ namespace Wisplantern.NPCs.Other
 
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
-            return SpawnCondition.Cavern.Chance * 0.045f;
+            if (NPC.AnyNPCs(Type))
+            {
+                return 0f;
+            }
+
+            return SpawnCondition.Cavern.Chance * 0.05f;
         }
 
         public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)

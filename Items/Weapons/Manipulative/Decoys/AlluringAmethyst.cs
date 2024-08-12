@@ -38,6 +38,14 @@ namespace Wisplantern.Items.Weapons.Manipulative.Decoys
 
     class AlluringAmethystDecoy : DecoyNPC
     {
+        public override void SetStaticDefaults()
+        {
+            NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
+            {
+                Hide = true
+            };
+        }
+
         public override string Texture => "Wisplantern/Items/Weapons/Manipulative/Decoys/AlluringAmethyst";
 
         public override void SetStats()

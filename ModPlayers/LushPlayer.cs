@@ -16,6 +16,8 @@
             {
                 for (int j = (int)Player.Center.Y / 16 - 80; j < (int)Player.Center.Y / 16 + 80; j++)
                 {
+                    if (i < 0 || i >= Main.maxTilesX || j < 0 || j >= Main.maxTilesY) continue;
+
                     if (Main.tile[i, j] != null && (Main.tile[i, j].TileType == ModContent.TileType<Tiles.GhostRose_1>() || Main.tile[i, j].TileType == ModContent.TileType<Tiles.GhostRose_2>()))
                     {
                         if (Main.rand.NextBool(200))
