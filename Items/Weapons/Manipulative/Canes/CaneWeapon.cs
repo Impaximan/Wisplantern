@@ -1,5 +1,6 @@
 ﻿using Terraria.DataStructures;
 using Terraria.Audio;
+using Wisplantern.Items.Weapons.Manipulative.Decoys;
 
 namespace Wisplantern.Items.Weapons.Manipulative.Canes
 {
@@ -74,6 +75,8 @@ namespace Wisplantern.Items.Weapons.Manipulative.Canes
                      if (Item.AggravateNPC(npc, player)) OnAggravate(npc, player);
                 }
             }
+
+
             for (int i = 0; i < 150; i++)
             {
                 Vector2 dustPos = Main.rand.NextVector2CircularEdge(MaxDistance, MaxDistance) + player.Center;
@@ -86,6 +89,8 @@ namespace Wisplantern.Items.Weapons.Manipulative.Canes
                     Main.dust[dust].noLight = true;
                 }
             }
+
+            Mod.SendPacket(new CaneCircle(player.Center.X, player.Center.Y, MaxDistance, DustType, player.velocity.X, player.velocity.Y), -1, player.whoAmI, true);
 
             SoundStyle sound = SoundID.Item8;
             sound.PitchVariance = 0.15f;

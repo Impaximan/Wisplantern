@@ -72,25 +72,32 @@ namespace Wisplantern.Items.Weapons.Manipulative.Decoys
             return Color.White;
         }
 
-        public override void OnKill()
+        public override void HitEffect(NPC.HitInfo hit)
         {
-            if (NPC.ai[2] == 1f)
+            if (NPC.life <= 0)
             {
-                return;
-            }
+                if (NPC.ai[2] == 1f)
+                {
+                    return;
+                }
 
-            for (int n = 0; n < Main.rand.Next(4, 6); n++)
-            {
-                Projectile.NewProjectile(new EntitySource_OnHurt(NPC, null),
-                    NPC.Center,
-                    Main.rand.NextFloat((float)Math.PI * 2f).ToRotationVector2() * Main.rand.NextFloat(5f, 10f),
-                    ModContent.ProjectileType<RubySoul>(),
-                    (int)(NPC.damage * 2f),
-                    0f,
-                    (int)NPC.ai[0]);
-            }
+                if (NPC.ai[0] == Main.myPlayer && Main.netMode != NetmodeID.Server)
+                {
+                    for (int n = 0; n < Main.rand.Next(4, 6); n++)
+                    {
+                        int p = Projectile.NewProjectile(new EntitySource_OnHurt(NPC, null),
+                            NPC.Center,
+                            Main.rand.NextFloat((float)Math.PI * 2f).ToRotationVector2() * Main.rand.NextFloat(5f, 10f),
+                            ModContent.ProjectileType<RubySoul>(),
+                            (int)(NPC.damage * 2f),
+                            0f,
+                            (int)NPC.ai[0]);
+                        Main.projectile[p].netUpdate = true;
+                    }
+                }
 
-            SoundEngine.PlaySound(SoundID.DD2_BetsyFireballShot, NPC.Center);
+                SoundEngine.PlaySound(SoundID.DD2_BetsyFireballShot, NPC.Center);
+            }
         }
     }
 

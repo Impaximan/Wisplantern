@@ -70,11 +70,13 @@ namespace Wisplantern.Items.Weapons.Manipulative.Decoys
             {
                 foreach (NPC npc in Main.npc)
                 {
-                    if (npc.active && npc.GetGlobalNPC<InfightingNPC>().decoy)
+                    if (npc.active && npc.GetGlobalNPC<InfightingNPC>().decoy && npc.ai[0] == player.whoAmI)
                     {
                         npc.life = 1;
                         npc.ai[2] = 1f;
-                        npc.StrikeNPC(npc.CalculateHitInfo(npc.lifeMax, 0, true, 0));
+                        NPC.HitInfo info = npc.CalculateHitInfo(npc.lifeMax, 0, true, 0);
+                        npc.StrikeNPC(info);
+                        NetMessage.SendStrikeNPC(npc, info, player.whoAmI);
                     }
                 }
                 Item.stack++;
@@ -87,7 +89,7 @@ namespace Wisplantern.Items.Weapons.Manipulative.Decoys
             }
             foreach (NPC npc in Main.npc)
             {
-                if (npc.active && npc.GetGlobalNPC<InfightingNPC>().decoy)
+                if (npc.active && npc.GetGlobalNPC<InfightingNPC>().decoy && npc.ai[0] == player.whoAmI)
                 {
                     return false;
                 }
@@ -120,6 +122,7 @@ namespace Wisplantern.Items.Weapons.Manipulative.Decoys
                 Main.npc[n].damage = damage;
                 Main.npc[n].lifeMax = DefaultHP;
                 Main.npc[n].life = Main.npc[n].lifeMax;
+                Mod.SendPacket(new SpawnDecoy(player.Center.X, player.Center.Y, player.whoAmI, player.GetWeaponCrit(Item), damage, DefaultHP, DecoyType, velocity.X, velocity.Y), -1, player.whoAmI, true);
             }
             return false;
         }
@@ -211,16 +214,18 @@ namespace Wisplantern.Items.Weapons.Manipulative.Decoys
         /// <summary>
         /// Don't override this for DecoyNPCs.
         /// </summary>
-        public override void PostAI()
+        public sealed override void PostAI()
         {
             if (DoContactDamage)
             {
                 foreach (NPC target in Main.npc)
                 {
-                    if (target.active && target.whoAmI != NPC.whoAmI && target.Hitbox.Intersects(NPC.Hitbox) && target.GetGlobalNPC<InfightingNPC>().infightIframes <= 0 && !target.friendly)
+                    if (target.active && target.whoAmI != NPC.whoAmI && target.Hitbox.Intersects(NPC.Hitbox) && target.GetGlobalNPC<InfightingNPC>().infightIframes <= 0 && !target.friendly && Main.myPlayer == NPC.ai[0])
                     {
                         int damage = NPC.damage;
-                        int struckDamage = target.StrikeNPC(target.CalculateHitInfo(damage, Math.Sign(target.Center.X - NPC.Center.X), Main.rand.NextBool((int)NPC.ai[1], 100), 0f, ModContent.GetInstance<DamageClasses.ManipulativeDamageClass>(), true, Main.player[(int)NPC.ai[0]].luck));
+                        NPC.HitInfo info = target.CalculateHitInfo(damage, Math.Sign(target.Center.X - NPC.Center.X), Main.rand.NextBool((int)NPC.ai[1], 100), 0f, ModContent.GetInstance<DamageClasses.ManipulativeDamageClass>(), true, Main.player[(int)NPC.ai[0]].luck);
+                        int struckDamage = target.StrikeNPC(info);
+                        NetMessage.SendStrikeNPC(target, info, Main.myPlayer);
                         Main.player[(int)NPC.ai[0]].addDPS(struckDamage);
                         target.GetGlobalNPC<InfightingNPC>().infightIframes = 10;
                     }
