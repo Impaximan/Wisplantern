@@ -3,6 +3,7 @@ using System;
 using Terraria.Audio;
 using Terraria.Graphics.CameraModifiers;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 {
@@ -74,12 +75,12 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 		public float chargeProgress = 0f;
 
         public float rotation = 0f;
-		float swordRotationAdd = 0f;
-		bool goneYet = false;
+		public float swordRotationAdd = 0f;
+		public bool goneYet = false;
 		public int perfectChargeTime = 0;
-		bool hasHitAlready = false;
-		bool hasHitAlready2 = false;
-		float ogRotation = 0f;
+		public bool hasHitAlready = false;
+		public bool hasHitAlready2 = false;
+		public float ogRotation = 0f;
 		public virtual bool HasSwungDust => false;
 		public virtual int SwungDustType => DustID.Torch;
 
@@ -102,6 +103,8 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 
         public override void UseItemFrame(Player player)
 		{
+			bool useZweihander = false;
+
 			if (goneYet)
 			{
 				player.compositeFrontArm.stretch = Player.CompositeArmStretchAmount.Full;
@@ -163,7 +166,7 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 				if (chargeProgress < 1f)
 				{
 					chargeProgress += 1f / ChargeTime;
-					if (chargeProgress >= 1f)
+					if (chargeProgress >= 1f && player.whoAmI == Main.myPlayer)
 					{
 						player.DoManaRechargeEffect();
 					}
@@ -181,6 +184,7 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 				if (!player.channel && chargeProgress >= 0.15f)
 				{
 					goneYet = true;
+					useZweihander = true;
 					if (perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f)
 					{
 						SoundEngine.PlaySound(SoundID.Item117, player.Center);
@@ -189,8 +193,12 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 					ogRotation = rotation;
 					OnSwing(player, perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f);
 					SoundEngine.PlaySound(SoundID.DD2_MonkStaffSwing, player.Center);
+					if (Main.netMode != NetmodeID.SinglePlayer && player.whoAmI == Main.myPlayer)
+					{
+						NetMessage.SendData(MessageID.SyncPlayer, number: player.whoAmI);
+					}
 				}
-				else if (chargeProgress >= 0.15f && perfectChargeTime <= perfectChargeLeeway)
+				else if (chargeProgress >= 0.15f && perfectChargeTime <= perfectChargeLeeway && player.whoAmI == Main.myPlayer)
 				{
 					Vector2 dustPos = player.itemLocation + Item.Size.RotatedBy(rotation + MathHelper.Pi * 0.75f) * chargeProgress;
 					int num3 = Dust.NewDust(dustPos - new Vector2(5, 5), 10, 10, 45, 0f, 0f, 255, default(Color), (float)Main.rand.Next(20, 26) * 0.1f);
@@ -206,6 +214,11 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 
 			player.compositeBackArm = player.compositeFrontArm;
 			player.compositeBackArm.rotation += swordRotationAdd * player.direction / 2f;
+
+			if (Main.netMode != NetmodeID.SinglePlayer && player.whoAmI == Main.myPlayer)
+			{
+				Mod.SendPacket(new ZweihanderSync(player.whoAmI, chargeProgress, rotation, swordRotationAdd, goneYet, perfectChargeTime, hasHitAlready, hasHitAlready2, ogRotation, useZweihander, player.velocity.X, player.velocity.Y, player.direction), -1, Main.myPlayer, true);
+			}
 		}
 
         public override void ModifyHitNPC(Player player, NPC target, ref NPC.HitModifiers modifiers)
@@ -237,7 +250,7 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
             }
         }
 
-        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
+        public sealed override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
 		{
 			if (!hasHitAlready2)
 			{
@@ -255,6 +268,11 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 					Main.instance.CameraModifiers.Add(modifier);
 				}
 				player.velocity -= velocityChange;
+
+				if (Main.netMode != NetmodeID.SinglePlayer && player.whoAmI == Main.myPlayer)
+				{
+					Mod.SendPacket(new SyncPlayerVelocity(player.velocity.X, player.velocity.Y, player.whoAmI), -1, player.whoAmI, true);
+				}
 			}
 			if (player.AccessoryActive<Equipable.Accessories.Flint>() && perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f)
 			{
@@ -262,7 +280,7 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 			}
 			OnHitNPCZweihanderVersion(player, target, perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f, !hasHitAlready2, hit, damageDone);
 			hasHitAlready2 = true;
-		}
+        }
 
 		public virtual void OnHitNPCZweihanderVersion(Player player, NPC target, bool perfectCharge, bool firstHit, NPC.HitInfo hit, int damageDone)
 		{
@@ -271,6 +289,94 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 		public virtual void ModifyHitNPCZweihanderVersion(Player player, NPC target, bool perfectCharge, bool firstHit, ref NPC.HitModifiers modifiers)
         {
 
+        }
+    }
+
+    public readonly struct ZweihanderSync : IEasyPacket<ZweihanderSync>
+    {
+		public readonly int player;
+        public readonly float chargeProgress;
+        public readonly float rotation;
+        public readonly float swordRotationAdd;
+        public readonly bool goneYet;
+        public readonly int perfectChargeTime;
+        public readonly bool hasHitAlready;
+        public readonly bool hasHitAlready2;
+        public readonly float ogRotation;
+		public readonly bool useZweihander;
+		public readonly float vX;
+		public readonly float vY;
+		public readonly int direction;
+
+		public ZweihanderSync(int player, float chargeProgress, float rotation, float swordRotationAdd, bool goneYet, int perfectChargeTime, bool hasHitAlready, bool hasHitAlready2, float ogRotation, bool useZweihander, float vX, float vY, int direction)
+		{
+			this.player = player;
+			this.chargeProgress = chargeProgress;
+			this.rotation = rotation;
+			this.swordRotationAdd = swordRotationAdd;
+			this.goneYet = goneYet;
+			this.perfectChargeTime = perfectChargeTime;
+			this.hasHitAlready = hasHitAlready;
+			this.hasHitAlready2 = hasHitAlready2;
+			this.ogRotation = ogRotation;
+			this.useZweihander = useZweihander;
+			this.vX = vX;
+			this.vY = vY;
+			this.direction = direction;
+		}
+
+        public ZweihanderSync Deserialise(BinaryReader reader, in SenderInfo sender)
+        {
+			return new ZweihanderSync(reader.ReadInt32(), reader.ReadSingle(), reader.ReadSingle(), reader.ReadSingle(), reader.ReadBoolean(), reader.ReadInt32(), reader.ReadBoolean(), reader.ReadBoolean(), reader.ReadSingle(), reader.ReadBoolean(), reader.ReadSingle(), reader.ReadSingle(), reader.ReadInt32());
+        }
+
+        public void Serialise(BinaryWriter writer)
+        {
+			writer.Write(player);
+			writer.Write(chargeProgress);
+			writer.Write(rotation);
+			writer.Write(swordRotationAdd);
+			writer.Write(goneYet);
+			writer.Write(perfectChargeTime);
+			writer.Write(hasHitAlready);
+			writer.Write(hasHitAlready2);
+			writer.Write(ogRotation);
+			writer.Write(useZweihander);
+			writer.Write(vX);
+			writer.Write(vY);
+			writer.Write(direction);
+        }
+    }
+
+    public readonly struct ZweihanderSyncHandler : IEasyPacketHandler<ZweihanderSync>
+    {
+        void IEasyPacketHandler<ZweihanderSync>.Receive(in ZweihanderSync packet, in SenderInfo sender, ref bool handled)
+        {
+            Player player = Main.player[packet.player];
+			if (player.HeldItem.ModItem is Zweihander zweihander)
+			{
+				zweihander.chargeProgress = packet.chargeProgress;
+				zweihander.rotation = packet.rotation;
+				zweihander.swordRotationAdd = packet.swordRotationAdd;
+				zweihander.goneYet = packet.goneYet;
+				zweihander.perfectChargeTime = packet.perfectChargeTime;
+				zweihander.hasHitAlready = packet.hasHitAlready;
+				zweihander.hasHitAlready2 = packet.hasHitAlready2;
+				zweihander.ogRotation = packet.ogRotation;
+				player.direction = packet.direction;
+
+                if (packet.useZweihander)
+                {
+                    if (zweihander.perfectChargeTime <= Zweihander.perfectChargeLeeway && zweihander.chargeProgress >= 1f)
+                    {
+                        SoundEngine.PlaySound(SoundID.Item117, player.Center);
+                    }
+                    SoundEngine.PlaySound(SoundID.DD2_MonkStaffSwing, player.Center);
+                    player.velocity = new Vector2(packet.vX, packet.vY);
+                }
+			}
+
+            handled = true;
         }
     }
 }

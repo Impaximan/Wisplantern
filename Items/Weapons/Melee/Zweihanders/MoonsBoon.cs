@@ -32,6 +32,10 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
                     player.immune = true;
                     player.immuneTime = 30;
                     player.Teleport(player.position + player.DirectionTo(Main.MouseWorld) * Math.Clamp(player.Distance(Main.MouseWorld), minDistance, maxDistance), TeleportationStyleID.RodOfDiscord);
+                    if (Main.netMode != NetmodeID.SinglePlayer)
+                    {
+                        Mod.SendPacket(new SyncPlayerTeleport(player.position.X, player.position.Y, player.whoAmI, TeleportationStyleID.RodOfDiscord), -1, player.whoAmI, true);
+                    }
                 }
             }
         }

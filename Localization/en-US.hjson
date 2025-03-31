@@ -686,10 +686,11 @@ Mods: {
 
 			GuidingLight: {
 				DisplayName: Guiding Light
-				Tooltip: '''
-				Aggravated enemies become 'vulnerable'
-				Vulnerable enemies take increased [c/ffff00:non-manipulative] damage, including from allies
-				'''
+				Tooltip:
+					'''
+					Aggravated enemies become 'vulnerable'
+					Vulnerable enemies take increased [c/ffff00:non-manipulative] damage, including from allies
+					'''
 			}
 		}
 
