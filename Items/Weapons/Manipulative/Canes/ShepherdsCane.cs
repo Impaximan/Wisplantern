@@ -9,14 +9,6 @@ namespace Wisplantern.Items.Weapons.Manipulative.Canes
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
-        public override void AddRecipes()
-        {
-            CreateRecipe()
-                .AddIngredient(ItemID.PlatinumBar, 10)
-                .AddTile(TileID.Anvils)
-                .Register();
-        }
-
         public override void CaneSetDefaults()
         {
             Item.damage = 12;

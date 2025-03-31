@@ -38,6 +38,14 @@ namespace Wisplantern.Items.Weapons.Manipulative.Decoys
 
     class AlluringTopazDecoy : DecoyNPC
     {
+        public override void SetStaticDefaults()
+        {
+            NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
+            {
+                Hide = true
+            };
+        }
+
         public override string Texture => "Wisplantern/Items/Weapons/Manipulative/Decoys/AlluringTopaz";
 
         public override void SetStats()

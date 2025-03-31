@@ -26,6 +26,7 @@ namespace Wisplantern.Items.Weapons.Summon.Minions
             Item.UseSound = SoundID.Item44;
             Item.buffType = ModContent.BuffType<TungstenSummon>();
             Item.shoot = ModContent.ProjectileType<TungstenSummonProjectile>();
+            Item.autoReuse = true;
         }
 
         public override void AddRecipes()
