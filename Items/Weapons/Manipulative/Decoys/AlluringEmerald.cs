@@ -38,6 +38,8 @@ namespace Wisplantern.Items.Weapons.Manipulative.Decoys
 
     class AlluringEmeraldDecoy : DecoyNPC
     {
+        public override bool CanBeAttackedByOtherPlayers => true;
+
         public override void SetStaticDefaults()
         {
             NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()

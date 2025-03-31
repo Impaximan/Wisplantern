@@ -218,28 +218,33 @@ namespace Wisplantern.Globals.GNPCs
                         {
                             damage = (int)(damage * 1.35f);
                         }
-                        NPC.HitInfo info = target.CalculateHitInfo(damage, Math.Sign(target.Center.X - npc.Center.X), Main.rand.NextBool(infightCritChance, 100), infightKnockback, ModContent.GetInstance<DamageClasses.ManipulativeDamageClass>(), true, Main.player[infightPlayer].luck);
-                        int struckDamage = target.StrikeNPC(info);
-                        Main.player[infightPlayer].addDPS(struckDamage);
-                        //foreach (int buffType in npc.buffType)
-                        //{
-                        //    target.AddBuff(buffType, npc.buffTime[npc.FindBuffIndex(buffType)]);
-                        //}
 
-                        if (infightItem != null && infightItem.ModItem != null)
+                        if (infightPlayer == Main.myPlayer)
                         {
-                            infightItem.ModItem.OnHitNPC(Main.player[infightPlayer], target, info, struckDamage);
+                            NPC.HitInfo info = target.CalculateHitInfo(damage, Math.Sign(target.Center.X - npc.Center.X), Main.rand.NextBool(infightCritChance, 100), infightKnockback, ModContent.GetInstance<DamageClasses.ManipulativeDamageClass>(), true, Main.player[infightPlayer].luck);
+                            int struckDamage = target.StrikeNPC(info);
+                            NetMessage.SendStrikeNPC(target, info, Main.myPlayer);
+                            Main.player[infightPlayer].addDPS(struckDamage);
+                            //foreach (int buffType in npc.buffType)
+                            //{
+                            //    target.AddBuff(buffType, npc.buffTime[npc.FindBuffIndex(buffType)]);
+                            //}
 
-                            foreach (GlobalItem gItem in infightItem.Globals)
+                            if (infightItem != null && infightItem.ModItem != null)
                             {
-                                gItem.OnHitNPC(infightItem, Main.player[infightPlayer], target, info, struckDamage);
-                            }
-                        }
+                                infightItem.ModItem.OnHitNPC(Main.player[infightPlayer], target, info, struckDamage);
 
-                        target.GetGlobalNPC<InfightingNPC>().infightIframes = infightGivenIframes;
-                        foreach (GlobalNPC gNPC in target.Globals)
-                        {
-                            gNPC.OnHitByItem(target, Main.player[infightPlayer], infightItem, info, damage);
+                                foreach (GlobalItem gItem in infightItem.Globals)
+                                {
+                                    gItem.OnHitNPC(infightItem, Main.player[infightPlayer], target, info, struckDamage);
+                                }
+                            }
+
+                            target.GetGlobalNPC<InfightingNPC>().infightIframes = infightGivenIframes;
+                            foreach (GlobalNPC gNPC in target.Globals)
+                            {
+                                gNPC.OnHitByItem(target, Main.player[infightPlayer], infightItem, info, damage);
+                            }
                         }
                     }
                 }

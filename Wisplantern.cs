@@ -5,6 +5,8 @@ global using Microsoft.Xna.Framework;
 global using Wisplantern.ModPlayers;
 global using System.Collections.Generic;
 global using System;
+global using Wisplantern.EasyPackets;
+global using EasyPacketsLib;
 using ReLogic.Content;
 using Microsoft.Xna.Framework.Audio;
 using System.IO;
@@ -16,6 +18,8 @@ namespace Wisplantern
 {
     public class Wisplantern : Mod
     {
+        public static Wisplantern instance;
+
         #region Image Generation
         public virtual void SetColors(ref Color[] colors, int width, int height)
         {
@@ -95,6 +99,8 @@ namespace Wisplantern
             //    }
             //});
 
+            instance = this;
+
             ModContent.Request<SoundEffect>("Wisplantern/Sounds/Effects/StoneHit1", AssetRequestMode.ImmediateLoad);
             ModContent.Request<SoundEffect>("Wisplantern/Sounds/Effects/StoneHit2", AssetRequestMode.ImmediateLoad);
             ModContent.Request<SoundEffect>("Wisplantern/Sounds/Effects/HeavyHit", AssetRequestMode.ImmediateLoad);
@@ -111,6 +117,7 @@ namespace Wisplantern
             wisplanternLoot.Add(ModContent.ItemType<Items.Tools.Pickaxes.HyperstonePick>());
             wisplanternLoot.Add(ModContent.ItemType<Items.Tools.Movement.Hooklantern>());
             wisplanternLoot.Add(ModContent.ItemType<Items.Weapons.Ranged.Bows.OtherBow>());
+            wisplanternLoot.Add(ModContent.ItemType<Items.Weapons.Manipulative.Canes.GuidingLight>());
 
             if (Terraria.Main.netMode != NetmodeID.Server)
             {

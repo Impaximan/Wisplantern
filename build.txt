@@ -1,3 +1,5 @@
 displayName = Wisplantern Mod
 author = Impaxim
 version = 0.1.7.0
+Side = Both
+modReferences = EasyPacketsLib

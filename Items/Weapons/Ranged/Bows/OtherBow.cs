@@ -52,12 +52,9 @@ namespace Wisplantern.Items.Weapons.Ranged.Bows
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            if (player.whoAmI == Main.myPlayer)
-            {
-                int p = Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
-                Main.projectile[p].netUpdate = true;
-                NetMessage.SendData(MessageID.SyncProjectile, number: p);
-            }
+            int p = Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
+            Main.projectile[p].netUpdate = true;
+            NetMessage.SendData(MessageID.SyncProjectile, number: p);
 
             return false;
         }
@@ -99,13 +96,11 @@ namespace Wisplantern.Items.Weapons.Ranged.Bows
             Projectile.idStaticNPCHitCooldown = 10;
         }
 
-        Vector2 directionFromPlayer;
-        float distanceFromPlayer;
         float returnSpeed = 6f;
         public override void OnSpawn(IEntitySource source)
         {
-            directionFromPlayer = Main.player[Projectile.owner].DirectionTo(Projectile.Center);
-            distanceFromPlayer = Main.player[Projectile.owner].Distance(Projectile.Center);
+            Projectile.ai[0] = Main.player[Projectile.owner].DirectionTo(Projectile.Center).ToRotation();
+            Projectile.ai[1] = Main.player[Projectile.owner].Distance(Projectile.Center);
 
             if (Main.netMode != NetmodeID.Server)
             {
@@ -133,16 +128,28 @@ namespace Wisplantern.Items.Weapons.Ranged.Bows
 
         public override void AI()
         {
+            if (Main.netMode != NetmodeID.Server && Projectile.owner != Main.myPlayer && Projectile.timeLeft == 600)
+            {
+                for (int i = 0; i < Main.rand.Next(15, 22); i++)
+                {
+                    Dust dust = Main.dust[Dust.NewDust(Projectile.Center, 1, 1, ModContent.DustType<Dusts.HyperstoneDust>())];
+                    dust.velocity = Main.rand.NextVector2Circular(3f, 3f);
+                    dust.scale *= 0.75f;
+                }
+            }
+
             Projectile.rotation = Projectile.DirectionTo(Main.player[Projectile.owner].Center).ToRotation();
 
-            distanceFromPlayer -= returnSpeed;
-            if (distanceFromPlayer <= 20f)
+            Projectile.ai[1] -= returnSpeed;
+            if (Projectile.ai[1] <= 20f)
             {
                 Projectile.active = false;
             }
 
-            Projectile.position = Main.player[Projectile.owner].Center + directionFromPlayer * distanceFromPlayer;
+            Projectile.position = Main.player[Projectile.owner].Center + Projectile.ai[0].ToRotationVector2() * Projectile.ai[1];
             Projectile.position -= Projectile.Size / 2;
+
+            //Projectile.netUpdate = true;
         }
     }
 }

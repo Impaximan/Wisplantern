@@ -2,6 +2,7 @@
 using Terraria.DataStructures;
 using System;
 using System.Collections.Generic;
+using Terraria;
 
 namespace Wisplantern.Items.Weapons.Manipulative.Decoys
 {
@@ -173,6 +174,8 @@ namespace Wisplantern.Items.Weapons.Manipulative.Decoys
             SetStats();
         }
 
+        public virtual bool CanBeAttackedByOtherPlayers => false;
+
         public virtual void SetStats()
         {
 
@@ -180,11 +183,21 @@ namespace Wisplantern.Items.Weapons.Manipulative.Decoys
 
         public override bool? CanBeHitByItem(Player player, Item item)
         {
+            if (CanBeAttackedByOtherPlayers && player.whoAmI != NPC.ai[0])
+            {
+                return true;
+            }
+
             return false;
         }
 
         public override bool? CanBeHitByProjectile(Projectile projectile)
         {
+            if (CanBeAttackedByOtherPlayers && projectile.owner != NPC.ai[0])
+            {
+                return true;
+            }
+
             return null;
         }
 

@@ -678,6 +678,11 @@ Mods: {
 					Resets all aggravation timers and increases aggravated enemy damage by 5
 					'''
 			}
+
+			GuidingLight: {
+				DisplayName: Guiding Light
+				Tooltip: Grants 'hyperspeed' buff upon aggravating enemies
+			}
 		}
 
 		NPCs: {
