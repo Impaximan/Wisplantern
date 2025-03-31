@@ -1,4 +1,6 @@
 ﻿using Terraria.GameContent.Creative;
+using Wisplantern.Buffs;
+using static Wisplantern.Globals.GNPCs.InfightingNPC;
 
 namespace Wisplantern.Items.Weapons.Manipulative.Canes
 {
@@ -12,14 +14,14 @@ namespace Wisplantern.Items.Weapons.Manipulative.Canes
         public override void CaneSetDefaults()
         {
             Item.damage = 15;
-            Item.SetManipulativePower(0.25f);
+            Item.SetManipulativePower(0.3f);
             Item.DamageType = ModContent.GetInstance<DamageClasses.ManipulativeDamageClass>();
             Item.width = 40;
             Item.height = 40;
-            Item.useTime = 32;
-            Item.useAnimation = 32;
+            Item.useTime = 36;
+            Item.useAnimation = 36;
             Item.rare = ItemRarityID.Blue;
-            Item.value = Item.sellPrice(0, 0, 0, 25);
+            Item.value = Item.sellPrice(0, 1, 0, 0);
             Item.SetScholarlyDescription("Found mysteriously from the mystical remains of Wisplanterns underground");
         }
 
@@ -28,13 +30,13 @@ namespace Wisplantern.Items.Weapons.Manipulative.Canes
             return Color.White;
         }
 
-        public override float MaxDistance => 300f;
+        public override float MaxDistance => 400f;
 
         public override int DustType => ModContent.DustType<Dusts.HyperstoneDustFast>();
 
         public override void OnAggravate(NPC npc, Player player)
         {
-            player.AddBuff(ModContent.BuffType<Buffs.Hyperspeed>(), 60 * 2);
+            npc.AddBuff(ModContent.BuffType<Vulnerable>(), GetAggravationTime(npc));
         }
     }
 }

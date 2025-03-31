@@ -76,7 +76,7 @@ namespace Wisplantern.Items.Weapons.Manipulative.Decoys
                         npc.ai[2] = 1f;
                         NPC.HitInfo info = npc.CalculateHitInfo(npc.lifeMax, 0, true, 0);
                         npc.StrikeNPC(info);
-                        NetMessage.SendStrikeNPC(npc, info, player.whoAmI);
+                        if (Main.netMode != NetmodeID.SinglePlayer) NetMessage.SendStrikeNPC(npc, info, player.whoAmI);
                     }
                 }
                 Item.stack++;
@@ -122,7 +122,7 @@ namespace Wisplantern.Items.Weapons.Manipulative.Decoys
                 Main.npc[n].damage = damage;
                 Main.npc[n].lifeMax = DefaultHP;
                 Main.npc[n].life = Main.npc[n].lifeMax;
-                Mod.SendPacket(new SpawnDecoy(player.Center.X, player.Center.Y, player.whoAmI, player.GetWeaponCrit(Item), damage, DefaultHP, DecoyType, velocity.X, velocity.Y), -1, player.whoAmI, true);
+                if (Main.netMode != NetmodeID.SinglePlayer) Mod.SendPacket(new SpawnDecoy(player.Center.X, player.Center.Y, player.whoAmI, player.GetWeaponCrit(Item), damage, DefaultHP, DecoyType, velocity.X, velocity.Y), -1, player.whoAmI, true);
             }
             return false;
         }
@@ -225,7 +225,7 @@ namespace Wisplantern.Items.Weapons.Manipulative.Decoys
                         int damage = NPC.damage;
                         NPC.HitInfo info = target.CalculateHitInfo(damage, Math.Sign(target.Center.X - NPC.Center.X), Main.rand.NextBool((int)NPC.ai[1], 100), 0f, ModContent.GetInstance<DamageClasses.ManipulativeDamageClass>(), true, Main.player[(int)NPC.ai[0]].luck);
                         int struckDamage = target.StrikeNPC(info);
-                        NetMessage.SendStrikeNPC(target, info, Main.myPlayer);
+                        if (Main.netMode != NetmodeID.SinglePlayer) NetMessage.SendStrikeNPC(target, info, Main.myPlayer);
                         Main.player[(int)NPC.ai[0]].addDPS(struckDamage);
                         target.GetGlobalNPC<InfightingNPC>().infightIframes = 10;
                     }

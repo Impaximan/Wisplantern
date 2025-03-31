@@ -1,5 +1,7 @@
 ﻿using Terraria.DataStructures;
 using System;
+using Microsoft.Xna.Framework.Graphics;
+using Wisplantern.Buffs;
 
 namespace Wisplantern.Globals.GNPCs
 {
@@ -146,6 +148,22 @@ namespace Wisplantern.Globals.GNPCs
             return base.PreAI(npc);
         }
 
+        public static int GetAggravationTime(NPC NPC)
+        {
+            if (NPC.SpawnedFromStatue) return 1200;
+            return 600;
+        }
+
+        public override Color? GetAlpha(NPC npc, Color drawColor)
+        {
+            if (npc.HasBuff<Vulnerable>())
+            {
+                return Color.Lerp(drawColor, Color.LightBlue * (1f - npc.alpha / 255f), 0.5f);
+            }
+
+            return base.GetAlpha(npc, drawColor);
+        }
+
         public override void OnKill(NPC npc)
         {
             if (targetNPC != null && originalPlayerPosition.HasValue && shouldTeleportBack)
@@ -223,7 +241,7 @@ namespace Wisplantern.Globals.GNPCs
                         {
                             NPC.HitInfo info = target.CalculateHitInfo(damage, Math.Sign(target.Center.X - npc.Center.X), Main.rand.NextBool(infightCritChance, 100), infightKnockback, ModContent.GetInstance<DamageClasses.ManipulativeDamageClass>(), true, Main.player[infightPlayer].luck);
                             int struckDamage = target.StrikeNPC(info);
-                            NetMessage.SendStrikeNPC(target, info, Main.myPlayer);
+                            if (Main.netMode != NetmodeID.SinglePlayer) NetMessage.SendStrikeNPC(target, info, Main.myPlayer);
                             Main.player[infightPlayer].addDPS(struckDamage);
                             //foreach (int buffType in npc.buffType)
                             //{
@@ -268,6 +286,30 @@ namespace Wisplantern.Globals.GNPCs
             }
 
             infightIframes--;
+        }
+
+        public override void ModifyIncomingHit(NPC npc, ref NPC.HitModifiers modifiers)
+        {
+            if (npc.HasBuff<Vulnerable>() && !modifiers.DamageType.CountsAsClass(ModContent.GetInstance<DamageClasses.ManipulativeDamageClass>()))
+            {
+                modifiers.SourceDamage *= 1.35f;
+            }
+        }
+
+        float vulnerableArrowRotation = 0f;
+        public override void PostDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+            if (npc.HasBuff<Buffs.Vulnerable>())
+            {
+                vulnerableArrowRotation += MathHelper.Pi / 90f;
+
+                for (float i = 0f; i < MathHelper.TwoPi; i += MathHelper.PiOver2)
+                {
+                    float direction = i + vulnerableArrowRotation;
+                    Texture2D texture = ModContent.Request<Texture2D>("Wisplantern/Items/Weapons/Manipulative/Canes/GuidingLightArrow").Value;
+                    spriteBatch.Draw(texture, npc.Center + direction.ToRotationVector2() * (npc.Size.Length() / 2f + 15f) - Main.screenPosition, null, Color.White * 0.5f, direction, texture.Size() / 2f, 1f + (float)Math.Sin(vulnerableArrowRotation * 3f) * 0.2f, SpriteEffects.None, 0f);
+                }
+            }
         }
     }
 

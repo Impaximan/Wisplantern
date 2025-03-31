@@ -35,7 +35,7 @@ namespace Wisplantern.Items.Tools.Wiring
             Point16 point = player.Center.ToTileCoordinates16();
             if (i > point.X - range && i < point.X + range && j > point.Y - range && j < point.Y + range)
             {
-                Mod.SendPacket(new HitWire(i, j), ignoreClient: player.whoAmI, forward: true);
+                if (Main.netMode != NetmodeID.SinglePlayer) Mod.SendPacket(new HitWire(i, j), ignoreClient: player.whoAmI, forward: true);
                 typeof(Terraria.Wiring).GetMethod("HitWireSingle", BindingFlags.NonPublic | BindingFlags.Static).Invoke(null, new object[]
                 {
                     i,

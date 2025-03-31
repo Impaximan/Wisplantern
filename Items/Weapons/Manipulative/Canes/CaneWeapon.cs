@@ -90,7 +90,7 @@ namespace Wisplantern.Items.Weapons.Manipulative.Canes
                 }
             }
 
-            Mod.SendPacket(new CaneCircle(player.Center.X, player.Center.Y, MaxDistance, DustType, player.velocity.X, player.velocity.Y), -1, player.whoAmI, true);
+            if (Main.netMode != NetmodeID.SinglePlayer) Mod.SendPacket(new CaneCircle(player.Center.X, player.Center.Y, MaxDistance, DustType, player.velocity.X, player.velocity.Y), -1, player.whoAmI, true);
 
             SoundStyle sound = SoundID.Item8;
             sound.PitchVariance = 0.15f;

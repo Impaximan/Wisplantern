@@ -128,6 +128,11 @@ Mods: {
 				Description: Mods.Wisplantern.Buffs.VisciousFrenzy.Description
 				DisplayName: Viscious Frenzy
 			}
+
+			Vulnerable: {
+				DisplayName: Vulnerable
+				Description: Mods.Wisplantern.Buffs.Vulnerable.Description
+			}
 		}
 
 		Items: {
@@ -681,7 +686,10 @@ Mods: {
 
 			GuidingLight: {
 				DisplayName: Guiding Light
-				Tooltip: Grants 'hyperspeed' buff upon aggravating enemies
+				Tooltip: '''
+				Aggravated enemies become 'vulnerable'
+				Vulnerable enemies take increased [c/ffff00:non-manipulative] damage, including from allies
+				'''
 			}
 		}
 
@@ -808,7 +816,7 @@ Mods: {
 
 				classTags: {
 					Label: Class tags
-					Tooltip: Whether or not items from custom classes added by Wisplantern will contain a class tag (like those of Thorium, for examplescr)
+					Tooltip: Whether or not items from custom classes added by Wisplantern will contain a class tag (like those of Thorium, for example)
 				}
 
 				charismaX: {

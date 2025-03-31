@@ -299,7 +299,7 @@ namespace Wisplantern
         /// <returns></returns>
         public static bool Aggravate(this NPC npc, float amount, int damage, float knockback, int critChance, Player player, Item item, bool combatText = true, bool fromPacket = false)
         {
-            if (!fromPacket) Wisplantern.instance.SendPacket(new EnemyAggravated(amount, npc.whoAmI, damage, knockback, critChance, player.whoAmI, combatText), toClient: -1, ignoreClient: player.whoAmI, forward: true);
+            if (!fromPacket && Main.netMode != NetmodeID.SinglePlayer) Wisplantern.instance.SendPacket(new EnemyAggravated(amount, npc.whoAmI, damage, knockback, critChance, player.whoAmI, combatText), toClient: -1, ignoreClient: player.whoAmI, forward: true);
 
             if (InfightingNPC.infightingBlacklist.Contains(npc.type) || npc.dontTakeDamage || (npc.realLife != -1 && npc.realLife != npc.whoAmI))
             {
@@ -440,7 +440,7 @@ namespace Wisplantern
 
         public static void SmokeBomb(this Player player, int time, bool fromNet = false)
         {
-            if (!fromNet) Wisplantern.instance.SendPacket(new SmokeBomb(player.whoAmI, time), ignoreClient: player.whoAmI, forward: true);
+            if (!fromNet && Main.netMode != NetmodeID.SinglePlayer) Wisplantern.instance.SendPacket(new SmokeBomb(player.whoAmI, time), ignoreClient: player.whoAmI, forward: true);
             player.GetModPlayer<ManipulativePlayer>().smokeBombTime = time;
             player.SmokeBombEffect();
         }
