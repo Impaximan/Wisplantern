@@ -167,7 +167,7 @@ namespace Wisplantern.Items.Tools.Movement
             if (Main.projHook[projectile.type])
             {
                 float hookDistance = 300f;
-                for (int i = 0; i < Main.maxProjectiles; i++)
+                for (int i = 0; i < Main.maxProjectiles; i++) 
                 {
                     Projectile hooklantern = Main.projectile[i];
                     if (hooklantern != null && hooklantern.type == ModContent.ProjectileType<HooklanternProjectile>() && hooklantern.active && hooklantern.Distance(Main.MouseWorld) < hookDistance)
@@ -203,16 +203,21 @@ namespace Wisplantern.Items.Tools.Movement
             }
         }
 
-        public void SetGrapple(Vector2 position, Projectile projectile)
+        /// <summary>
+        /// Makes a grappling hook think it's grappled onto an object.
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="grapple"></param>
+        public void SetGrapple(Vector2 position, Projectile grapple)
         {
             hasGrappled = true;
-            projectile.ai[0] = 2;
-            projectile.position = position;
-            projectile.position -= projectile.Size / 2;
-            Main.player[projectile.owner].grappling[Main.player[projectile.owner].grapCount] = projectile.whoAmI;
-            Main.player[projectile.owner].grapCount++;
-            projectile.velocity = Vector2.Zero;
-            projectile.netUpdate = true;
+            grapple.ai[0] = 2;
+            grapple.position = position;
+            grapple.position -= grapple.Size / 2;
+            Main.player[grapple.owner].grappling[Main.player[grapple.owner].grapCount] = grapple.whoAmI;
+            Main.player[grapple.owner].grapCount++;
+            grapple.velocity = Vector2.Zero;
+            grapple.netUpdate = true;
         }
     }
 }
