@@ -10,7 +10,7 @@ namespace Wisplantern.Globals.GNPCs
         {
             if (player.AccessoryActive<Gasoline>() && item.DamageType is DamageClasses.ManipulativeDamageClass)
             {
-                npc.AddBuff(BuffID.OnFire, 60 * 3);
+                npc.AddBuff(BuffID.OnFire, 60 * 6);
             }
         }
     }

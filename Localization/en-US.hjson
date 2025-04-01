@@ -34,6 +34,7 @@ Mods: {
 			RubySoul.DisplayName: Ruby Soul
 			SapphireSoul.DisplayName: Sapphire Soul
 			TopazSoul.DisplayName: Topaz Soul
+			ShroomFume.DisplayName: Shroom Fume
 		}
 
 		Biomes: {
@@ -690,6 +691,15 @@ Mods: {
 					'''
 					Aggravated enemies become 'vulnerable'
 					Vulnerable enemies take increased [c/ffff00:non-manipulative] damage, including from allies
+					'''
+			}
+
+			FumeShroom: {
+				DisplayName: Fume Shroom
+				Tooltip:
+					'''
+					Releases shroom fumes that aggravate enemies
+					Aggravated enemies will release even more fumes, causing a chain reaction
 					'''
 			}
 		}

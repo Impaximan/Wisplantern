@@ -168,6 +168,28 @@ namespace Wisplantern.Systems.Worldgen
                         }
                     }
 
+                    if (Main.tile[chest.x, chest.y].TileType == TileID.Containers && Main.tile[chest.x, chest.y].TileFrameX == 8 * 36) //Rich mahogany chest
+                    {
+                        if (WorldGen.genRand.NextBool(4))
+                        {
+                            for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)
+                            {
+                                if (chest.item[inventoryIndex].type == ItemID.None)
+                                {
+                                    if (Main.rand.NextBool())
+                                    {
+                                        chest.item[inventoryIndex].SetDefaults(ModContent.ItemType<Items.Weapons.Melee.Swords.WeatheredSledgehammer>());
+                                    }
+                                    else
+                                    {
+                                        chest.item[inventoryIndex].SetDefaults(ModContent.ItemType<Items.Weapons.Magic.Misc.AccursedShard>());
+                                    }
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
                     if (Main.tile[chest.x, chest.y].TileType == TileID.Containers && Main.tile[chest.x, chest.y].TileFrameX == 11 * 36) //Ice chest
                     {
                         if (WorldGen.genRand.NextBool(4))
@@ -184,6 +206,21 @@ namespace Wisplantern.Systems.Worldgen
                                     {
                                         chest.item[inventoryIndex].SetDefaults(ModContent.ItemType<Items.Weapons.Magic.Misc.AccursedShard>());
                                     }
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    if (Main.tile[chest.x, chest.y].TileType == TileID.Containers && Main.tile[chest.x, chest.y].TileFrameX == 32 * 36) //Mushroom Chest
+                    {
+                        if (WorldGen.genRand.NextBool(3))
+                        {
+                            for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)
+                            {
+                                if (chest.item[inventoryIndex].type == ItemID.None)
+                                {
+                                    chest.item[inventoryIndex].SetDefaults(ModContent.ItemType<Items.Weapons.Manipulative.Misc.FumeShroom>());
                                     break;
                                 }
                             }

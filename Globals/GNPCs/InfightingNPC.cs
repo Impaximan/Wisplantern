@@ -194,13 +194,13 @@ namespace Wisplantern.Globals.GNPCs
                     currentSegment = (int)Main.npc[currentSegment].ai[1];
                     tries++;
 
-                    if (tries > 300)
+                    if (tries > 300 || currentSegment >= Main.npc.Length)
                     {
                         break;
                     }
                 }
 
-                if (Main.npc[currentSegment] != null && Main.npc[currentSegment].active && Main.npc[currentSegment].type == NPCID.EaterofWorldsHead)
+                if (currentSegment <= Main.npc.Length && Main.npc[currentSegment] != null && Main.npc[currentSegment].active && Main.npc[currentSegment].type == NPCID.EaterofWorldsHead)
                 {
                     InfightingNPC iNPC = Main.npc[currentSegment].GetGlobalNPC<InfightingNPC>();
                     
