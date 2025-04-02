@@ -47,9 +47,28 @@ namespace Wisplantern.Globals.GNPCs
 
         public NPC GetNPCTarget(NPC me)
         {
+            NPCAimedTarget data = me.GetTargetData();
+            if (data.Type != Terraria.Enums.NPCTargetType.Player)
+            {
+                switch (data.Type)
+                {
+                    case Terraria.Enums.NPCTargetType.NPC:
+                         return Main.npc[me.target - 300];
+                    default:
+                        return Main.npc[0];
+                }
+            }
+
             NPC target = null;
-            float distance = Main.player[me.target].Distance(me.Center) * 1.5f;
-            float decoyDistance = Main.player[me.target].Distance(me.Center) * 1.5f;
+
+            float distance = 500f;
+            float decoyDistance = 500f;
+
+            if (me.target < 256)
+            {
+                distance = Main.player[me.target].Distance(me.Center) * 1.5f;
+                decoyDistance = Main.player[me.target].Distance(me.Center) * 1.5f;
+            }
             bool foundDecoy = false;
             bool foundBoss = false;
 
@@ -97,7 +116,13 @@ namespace Wisplantern.Globals.GNPCs
 
         public bool AnyVisibleDecoys(NPC me)
         {
-            float distance = Main.player[me.target].Distance(me.Center);
+            NPCAimedTarget data = me.GetTargetData();
+            if (data.Type != Terraria.Enums.NPCTargetType.Player)
+            {
+                return false;
+            }
+
+             float distance = Main.player[me.target].Distance(me.Center);
 
             foreach (NPC npc in Main.npc)
             {
@@ -135,6 +160,11 @@ namespace Wisplantern.Globals.GNPCs
                 targetNPC = GetNPCTarget(npc);
                 if (targetNPC != null && npc.target != 255)
                 {
+                    NPCAimedTarget data = npc.GetTargetData();
+                    if (data.Type != Terraria.Enums.NPCTargetType.Player)
+                    {
+                        return base.PreAI(npc);
+                    }
                     ogTarget = npc.target;
                     originalPlayerPosition = Main.player[ogTarget].position;
                     Main.player[ogTarget].Center = targetNPC.Center;

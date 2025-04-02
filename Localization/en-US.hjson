@@ -35,6 +35,7 @@ Mods: {
 			SapphireSoul.DisplayName: Sapphire Soul
 			TopazSoul.DisplayName: Topaz Soul
 			ShroomFume.DisplayName: Shroom Fume
+			RadiationDiscProjectile.DisplayName: Radiation Disc Projectile
 		}
 
 		Biomes: {
@@ -701,6 +702,11 @@ Mods: {
 					Releases shroom fumes that aggravate enemies
 					Aggravated enemies will release even more fumes, causing a chain reaction
 					'''
+			}
+
+			RadiationDisc: {
+				DisplayName: Radiation Disc
+				Tooltip: A disc that flows in the air and releases aggravating radiation for a time
 			}
 		}
 

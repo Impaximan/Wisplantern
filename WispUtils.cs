@@ -419,6 +419,10 @@ namespace Wisplantern
         /// <returns></returns>
         public static bool AggravateNPC(this Item item, NPC npc, Player player)
         {
+            if (!item.TryGetGlobalItem<AggravatingItem>(out _))
+            {
+                return false;
+            }
             return npc.Aggravate(item.GetGlobalItem<AggravatingItem>().manipulativePower, player.GetWeaponDamage(item), player.GetWeaponKnockback(item), player.GetWeaponCrit(item), player, item);
         }
 
