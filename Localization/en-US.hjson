@@ -708,6 +708,14 @@ Mods: {
 				DisplayName: Radiation Disc
 				Tooltip: A disc that flows in the air and releases aggravating radiation for a time
 			}
+
+			BloodyRoots: {
+				DisplayName: Bloody Roots
+				Tooltip:
+				'''
+				Aggravated enemies will inflict their victims with a deadly poison
+				'''
+			}
 		}
 
 		NPCs: {
