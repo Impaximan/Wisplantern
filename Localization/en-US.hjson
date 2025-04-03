@@ -36,6 +36,7 @@ Mods: {
 			TopazSoul.DisplayName: Topaz Soul
 			ShroomFume.DisplayName: Shroom Fume
 			RadiationDiscProjectile.DisplayName: Radiation Disc Projectile
+			AmberSoul.DisplayName: Amber Soul
 		}
 
 		Biomes: {
@@ -706,15 +707,17 @@ Mods: {
 
 			RadiationDisc: {
 				DisplayName: Radiation Disc
-				Tooltip: A disc that flows in the air and releases aggravating radiation for a time
+				Tooltip: A disc that lingers midair and releases aggravating radiation for 3 seconds
 			}
 
 			BloodyRoots: {
 				DisplayName: Bloody Roots
-				Tooltip:
-				'''
-				Aggravated enemies will inflict their victims with a deadly poison
-				'''
+				Tooltip: Aggravated enemies will inflict their victims with a deadly poison
+			}
+
+			AlluringAmber: {
+				DisplayName: Alluring Amber
+				Tooltip: The decoy will heal all nearby players upon being destroyed
 			}
 		}
 
@@ -754,6 +757,7 @@ Mods: {
 			AlluringRubyDecoy.DisplayName: Alluring Ruby
 			AlluringSapphireDecoy.DisplayName: Alluring Sapphire
 			AlluringTopazDecoy.DisplayName: Alluring Topaz
+			AlluringAmberDecoy.DisplayName: Alluring Amber
 		}
 
 		Dialogue: {

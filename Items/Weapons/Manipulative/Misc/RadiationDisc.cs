@@ -26,7 +26,7 @@ namespace Wisplantern.Items.Weapons.Manipulative.Misc
             Item.useTime = 30;
             Item.useAnimation = 30;
             Item.noMelee = true;
-            Item.knockBack = 1f;
+            Item.knockBack = 3f;
             Item.rare = ItemRarityID.Blue;
             Item.UseSound = SoundID.Item1;
             Item.autoReuse = true;
