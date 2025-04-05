@@ -719,6 +719,21 @@ Mods: {
 				DisplayName: Alluring Amber
 				Tooltip: The decoy will heal all nearby players upon being destroyed
 			}
+
+			PandemoniumOre: {
+				DisplayName: Raw Pandemonium
+				Tooltip: "'That is not dead which can eternal lie...'"
+			}
+
+			PandemoniumBar: {
+				DisplayName: Refined Pandemonium
+				Tooltip: "'...and with strange aeons even death may die'"
+			}
+
+			PandemoniumPickaxe: {
+				DisplayName: Pandemonium Pickaxe
+				Tooltip: ""
+			}
 		}
 
 		NPCs: {
@@ -872,6 +887,9 @@ Mods: {
 		Tiles: {
 			FarUnderground.MapEntry: Far Underground
 			Snowstorm.MapEntry: Snowstorm
+			PandemoniumOre.MapEntry: Pandemonium
+			Hyperstone.MapEntry: Hyperstone
+			PandemoniumBarTile.MapEntry: Pandemonium Bar Tile
 		}
 
 		TooltipHeader: Item tooltips

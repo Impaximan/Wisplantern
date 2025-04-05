@@ -15,8 +15,8 @@
 
             MinPick = 0;
             MineResist = 0f;
-            DustType = DustID.BlueTorch;
-            AddMapEntry(new Color(187, 206, 238));
+            DustType = ModContent.DustType<Dusts.HyperstoneDust>();
+            AddMapEntry(new Color(145, 255, 245), CreateMapEntryName());
         }
 
         public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
