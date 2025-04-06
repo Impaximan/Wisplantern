@@ -1,11 +1,13 @@
-﻿using Wisplantern.Items.Equipable.Accessories;
+﻿using Terraria.DataStructures;
+using Wisplantern.Items.Equipable.Accessories;
+using Wisplantern.Items.Weapons.Melee.Swords;
 
 namespace Wisplantern.Globals.GItems
 {
     /// <summary>
     /// For changes that accessories make.
     /// </summary>
-    public class AccessoryItem : GlobalItem
+    public class EquipmentItem : GlobalItem
     {
         public override bool InstancePerEntity => true;
 
@@ -25,6 +27,23 @@ namespace Wisplantern.Globals.GItems
                 position += new Vector2(item.width * -player.direction, -item.height);
                 if (player.whoAmI == Main.myPlayer && item.type != ModContent.ItemType<Items.Weapons.Magic.Staffs.Plantscalibur>() && !player.GetModPlayer<Globals.GItems.BattleArtPlayer>().usingBattleArt) velocity = (Main.MouseWorld - position).ToRotation().ToRotationVector2() * velocity.Length();
             }
+        }
+
+        public override bool Shoot(Item item, Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
+            return base.Shoot(item, player, source, position, velocity, type, damage, knockback);
+        }
+
+        public override bool? UseItem(Item item, Player player)
+        {
+            if (player.TryGetModPlayer(out EquipmentPlayer ePlayer))
+            {
+                if (item.damage > 0 && item.pick == 0 && item.axe == 0 && item.hammer == 0 && ePlayer.pandemoniumSouls.Count > 0 && item.type != ModContent.ItemType<PandemoniumShotel>())
+                {
+                    ePlayer.firePandemoniumSouls = true;
+                }
+            }
+            return base.UseItem(item, player);
         }
 
         int originalItemUseStyle;

@@ -1,9 +1,9 @@
 ﻿using Terraria.GameContent.Creative;
 using Wisplantern.Items.Materials;
 
-namespace Wisplantern.Items.Tools.Pickaxes
+namespace Wisplantern.Items.Tools.Axes
 {
-    class PandemoniumPickaxe : ModItem
+    class PandemoniumAxe : ModItem
     {
         public override void SetStaticDefaults()
         {
@@ -14,15 +14,15 @@ namespace Wisplantern.Items.Tools.Pickaxes
 
         public override void SetDefaults()
         {
-            Item.width = 40;
+            Item.width = 46;
             Item.height = 40;
-            Item.pick = 100;
+            Item.axe = 30;
             Item.useAnimation = 23;
-            Item.useTime = 16;
+            Item.useTime = 12;
             Item.UseSound = SoundID.Item1;
             Item.value = Item.sellPrice(0, 0, 54, 0);
             Item.knockBack = 2f;
-            Item.damage = 12;
+            Item.damage = 25;
             Item.DamageType = DamageClass.Melee;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.rare = ItemRarityID.Orange;

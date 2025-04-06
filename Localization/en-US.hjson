@@ -37,6 +37,7 @@ Mods: {
 			ShroomFume.DisplayName: Shroom Fume
 			RadiationDiscProjectile.DisplayName: Radiation Disc Projectile
 			AmberSoul.DisplayName: Amber Soul
+			PandemoniumSpirit.DisplayName: Pandemonium Spirit
 		}
 
 		Biomes: {
@@ -733,6 +734,21 @@ Mods: {
 			PandemoniumPickaxe: {
 				DisplayName: Pandemonium Pickaxe
 				Tooltip: ""
+			}
+
+			PandemoniumAxe: {
+				DisplayName: Pandemonium Axe
+				Tooltip: ""
+			}
+
+			PandemoniumShotel: {
+				DisplayName: Soul Shotel
+				Tooltip:
+					'''
+					Attacking enemies with this weapon will extract up to 15 souls
+					Upon attacking with another non-tool weapon, fire all extracted souls towards the mouse cursor
+					The souls will inflict twice the weapon's base damage
+					'''
 			}
 		}
 

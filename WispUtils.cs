@@ -36,7 +36,7 @@ namespace Wisplantern
         /// <param name="item"></param>
         public static void AddAccessoryEffect(this Player player, Item item)
         {
-            player.GetModPlayer<AccessoryPlayer>().accessoryEffects.Add(item.type);
+            player.GetModPlayer<EquipmentPlayer>().accessoryEffects.Add(item.type);
         }
 
         public static void MarkAsHuntingWeapon(this Item item)
@@ -74,7 +74,7 @@ namespace Wisplantern
         /// <returns></returns>
         public static bool AccessoryActive(this Player player, int type)
         {
-            return player.GetModPlayer<AccessoryPlayer>().accessoryEffects.Contains(type);
+            return player.GetModPlayer<EquipmentPlayer>().accessoryEffects.Contains(type);
         }
 
         public static void DoManaRechargeEffect(this Player player)
