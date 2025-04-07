@@ -36,9 +36,9 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 			Item.useAnimation = 18;
 			Item.useTime = 18;
 			Item.autoReuse = true;
-			SoundStyle useSound = new("Wisplantern/Sounds/Effects/SwordUnsheath");
-			useSound.Pitch -= 0.25f;
-			useSound.Volume *= 0.65f;
+			SoundStyle useSound = new("Wisplantern/Sounds/Effects/DrawSword");
+			//useSound.Pitch -= 0.25f;
+			useSound.Volume *= 0.1f;
 			useSound.PitchVariance = 0.15f;
 			Item.UseSound = useSound;
 			ZweihanderDefaults();
@@ -81,6 +81,7 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 		public bool hasHitAlready = false;
 		public bool hasHitAlready2 = false;
 		public float ogRotation = 0f;
+		public int freezeFrames = 0;
 		public virtual bool HasSwungDust => false;
 		public virtual int SwungDustType => DustID.Torch;
 
@@ -112,10 +113,20 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 				player.compositeFrontArm.rotation = rotation;
 				if (player.direction == 1) player.compositeFrontArm.rotation -= MathHelper.Pi;
 
-				swordRotationAdd += MathHelper.Pi / ((float)Item.useAnimation / player.GetWeaponAttackSpeed(Item));
-				rotation += MathHelper.Pi / ((float)Item.useAnimation / player.GetWeaponAttackSpeed(Item)) * player.direction;
+				if (freezeFrames <= 0)
+                {
+                    swordRotationAdd += MathHelper.Pi / ((float)Item.useAnimation / player.GetWeaponAttackSpeed(Item));
+                    rotation += MathHelper.Pi / ((float)Item.useAnimation / player.GetWeaponAttackSpeed(Item)) * player.direction;
+                }
+				else
+				{
+					freezeFrames--;
+					player.itemTime++;
+					player.itemAnimation++;
 
-				player.itemRotation = rotation + swordRotationAdd * player.direction + MathHelper.ToRadians(player.direction == 1 ? -45 : -135);
+                }
+
+                player.itemRotation = rotation + swordRotationAdd * player.direction + MathHelper.ToRadians(player.direction == 1 ? -45 : -135);
 				player.itemLocation = player.Center + rotation.ToRotationVector2().RotatedBy(-90 * player.direction) * 12.5f + new Vector2(10, 0).RotatedBy(rotation);
 
 				if (perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f && HasSwungDust)
@@ -186,13 +197,20 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 					goneYet = true;
 					useZweihander = true;
 					if (perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f)
-					{
-						SoundEngine.PlaySound(SoundID.Item117, player.Center);
-					}
+                    {
+                        SoundStyle slash = new("Wisplantern/Sounds/Effects/ZweihanderWoosh");
+                        slash.Volume *= 0.4f;
+						slash.Pitch -= 0.5f;
+                        slash.PitchVariance = 0.3f;
+                        SoundEngine.PlaySound(slash, player.Center);
+                    }
 					player.velocity += rotation.ToRotationVector2() * Item.shootSpeed * chargeProgress * 0.85f;
 					ogRotation = rotation;
 					OnSwing(player, perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f);
-					SoundEngine.PlaySound(SoundID.DD2_MonkStaffSwing, player.Center);
+                    SoundStyle useSound = new("Wisplantern/Sounds/Effects/SwordSlash");
+                    useSound.Volume *= 0.5f;
+                    useSound.PitchVariance = 0.25f;
+                    SoundEngine.PlaySound(useSound, player.Center);
 					if (Main.netMode != NetmodeID.SinglePlayer && player.whoAmI == Main.myPlayer)
 					{
 						NetMessage.SendData(MessageID.SyncPlayer, number: player.whoAmI);
@@ -217,7 +235,7 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 
 			if (Main.netMode != NetmodeID.SinglePlayer && player.whoAmI == Main.myPlayer)
 			{
-				Mod.SendPacket(new ZweihanderSync(player.whoAmI, chargeProgress, rotation, swordRotationAdd, goneYet, perfectChargeTime, hasHitAlready, hasHitAlready2, ogRotation, useZweihander, player.velocity.X, player.velocity.Y, player.direction), -1, Main.myPlayer, true);
+				Mod.SendPacket(new ZweihanderSync(player.whoAmI, chargeProgress, rotation, swordRotationAdd, goneYet, perfectChargeTime, hasHitAlready, hasHitAlready2, ogRotation, useZweihander, player.velocity.X, player.velocity.Y, player.direction, freezeFrames), -1, Main.myPlayer, true);
 			}
 		}
 
@@ -225,6 +243,10 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
         {
 			modifiers.SourceDamage *= MathHelper.Lerp(chargeProgress, 1f, 0.2f);
 			modifiers.Knockback *= chargeProgress + 0.2f;
+			if (perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f)
+			{
+				modifiers.SourceDamage *= 1.3f;
+			}
 			ModifyHitNPCZweihanderVersion(player, target, perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f, !hasHitAlready, ref modifiers);
 			hasHitAlready = true;
 		}
@@ -260,9 +282,10 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 				{
 					velocityChange.Y *= 1.25f;
 					velocityChange.Y += 2.5f;
-					SoundStyle style = new("Wisplantern/Sounds/Effects/HeavyMetal");
-					style.Volume *= 0.75f;
-					style.PitchVariance = 0.35f;
+					SoundStyle style = new("Wisplantern/Sounds/Effects/ZweihanderHit");
+					style.Volume *= 0.6f;
+					style.Pitch -= 0.25f;
+					style.PitchVariance = 0.3f;
 					SoundEngine.PlaySound(style, target.Center);
 					PunchCameraModifier modifier = new(target.Center, player.velocity.ToRotation().ToRotationVector2().RotatedBy(swordRotationAdd * player.direction + Math.PI / 2), 15f, 10f, 8, 1000f);
 					Main.instance.CameraModifiers.Add(modifier);
@@ -274,6 +297,11 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 					Mod.SendPacket(new SyncPlayerVelocity(player.velocity.X, player.velocity.Y, player.whoAmI), -1, player.whoAmI, true);
 				}
 			}
+			if (perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f)
+            {
+                freezeFrames = 5;
+                target.immune[player.whoAmI] = Item.useAnimation + freezeFrames;
+            }
 			if (player.AccessoryActive<Equipable.Accessories.Flint>() && perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f)
 			{
 				target.AddBuff(BuffID.OnFire, 180);
@@ -307,8 +335,9 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 		public readonly float vX;
 		public readonly float vY;
 		public readonly int direction;
+		public readonly int freezeFrames;
 
-		public ZweihanderSync(int player, float chargeProgress, float rotation, float swordRotationAdd, bool goneYet, int perfectChargeTime, bool hasHitAlready, bool hasHitAlready2, float ogRotation, bool useZweihander, float vX, float vY, int direction)
+		public ZweihanderSync(int player, float chargeProgress, float rotation, float swordRotationAdd, bool goneYet, int perfectChargeTime, bool hasHitAlready, bool hasHitAlready2, float ogRotation, bool useZweihander, float vX, float vY, int direction, int freezeFrames)
 		{
 			this.player = player;
 			this.chargeProgress = chargeProgress;
@@ -323,11 +352,12 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 			this.vX = vX;
 			this.vY = vY;
 			this.direction = direction;
-		}
+            this.freezeFrames = freezeFrames;
+        }
 
         public ZweihanderSync Deserialise(BinaryReader reader, in SenderInfo sender)
         {
-			return new ZweihanderSync(reader.ReadInt32(), reader.ReadSingle(), reader.ReadSingle(), reader.ReadSingle(), reader.ReadBoolean(), reader.ReadInt32(), reader.ReadBoolean(), reader.ReadBoolean(), reader.ReadSingle(), reader.ReadBoolean(), reader.ReadSingle(), reader.ReadSingle(), reader.ReadInt32());
+			return new ZweihanderSync(reader.ReadInt32(), reader.ReadSingle(), reader.ReadSingle(), reader.ReadSingle(), reader.ReadBoolean(), reader.ReadInt32(), reader.ReadBoolean(), reader.ReadBoolean(), reader.ReadSingle(), reader.ReadBoolean(), reader.ReadSingle(), reader.ReadSingle(), reader.ReadInt32(), reader.ReadInt32());
         }
 
         public void Serialise(BinaryWriter writer)
@@ -345,6 +375,7 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 			writer.Write(vX);
 			writer.Write(vY);
 			writer.Write(direction);
+			writer.Write(freezeFrames);
         }
     }
 
@@ -363,15 +394,23 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 				zweihander.hasHitAlready = packet.hasHitAlready;
 				zweihander.hasHitAlready2 = packet.hasHitAlready2;
 				zweihander.ogRotation = packet.ogRotation;
+				zweihander.freezeFrames = packet.freezeFrames;
 				player.direction = packet.direction;
 
                 if (packet.useZweihander)
                 {
                     if (zweihander.perfectChargeTime <= Zweihander.perfectChargeLeeway && zweihander.chargeProgress >= 1f)
                     {
-                        SoundEngine.PlaySound(SoundID.Item117, player.Center);
+                        SoundStyle slash = new("Wisplantern/Sounds/Effects/ZweihanderWoosh");
+                        slash.Volume *= 0.4f;
+                        slash.Pitch -= 0.5f;
+                        slash.PitchVariance = 0.5f;
+                        SoundEngine.PlaySound(slash, player.Center);
                     }
-                    SoundEngine.PlaySound(SoundID.DD2_MonkStaffSwing, player.Center);
+                    SoundStyle useSound = new("Wisplantern/Sounds/Effects/SwordSlash");
+                    useSound.Volume *= 0.5f;
+                    useSound.PitchVariance = 0.25f;
+                    SoundEngine.PlaySound(useSound, player.Center);
                     player.velocity = new Vector2(packet.vX, packet.vY);
                 }
 			}
