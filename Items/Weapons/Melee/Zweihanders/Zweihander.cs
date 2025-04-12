@@ -85,6 +85,8 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 		public virtual bool HasSwungDust => false;
 		public virtual int SwungDustType => DustID.Torch;
 
+		public virtual float SwungDustSize => 1f;
+
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
 			rotation = velocity.ToRotation();
@@ -140,6 +142,7 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 						Main.dust[num3].noGravity = true;
 						Dust obj = Main.dust[num3];
 						obj.velocity *= 0.5f;
+						obj.scale *= SwungDustSize;
 					}
 
 				}
@@ -176,7 +179,7 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 
 				if (chargeProgress < 1f)
 				{
-					chargeProgress += 1f / ChargeTime;
+					chargeProgress += 1f / ChargeTime * player.GetModPlayer<EquipmentPlayer>().zweihanderSpeed;
 					if (chargeProgress >= 1f && player.whoAmI == Main.myPlayer)
 					{
 						player.DoManaRechargeEffect();
@@ -289,17 +292,16 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 					SoundEngine.PlaySound(style, target.Center);
 					PunchCameraModifier modifier = new(target.Center, player.velocity.ToRotation().ToRotationVector2().RotatedBy(swordRotationAdd * player.direction + Math.PI / 2), 15f, 10f, 8, 1000f);
 					Main.instance.CameraModifiers.Add(modifier);
-				}
+                    freezeFrames = 5;
+                }
 				player.velocity -= velocityChange;
-
-				if (Main.netMode != NetmodeID.SinglePlayer && player.whoAmI == Main.myPlayer)
+                if (Main.netMode != NetmodeID.SinglePlayer && player.whoAmI == Main.myPlayer)
 				{
 					Mod.SendPacket(new SyncPlayerVelocity(player.velocity.X, player.velocity.Y, player.whoAmI), -1, player.whoAmI, true);
 				}
 			}
 			if (perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f)
             {
-                freezeFrames = 5;
                 target.immune[player.whoAmI] = Item.useAnimation + freezeFrames;
             }
 			if (player.AccessoryActive<Equipable.Accessories.Flint>() && perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f)

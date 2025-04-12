@@ -137,6 +137,11 @@ Mods: {
 				DisplayName: Vulnerable
 				Description: Mods.Wisplantern.Buffs.Vulnerable.Description
 			}
+
+			GrassCutterBuff: {
+				DisplayName: Grass Cutter
+				Description: 200% increased zweihander attack speed
+			}
 		}
 
 		Items: {
@@ -360,7 +365,7 @@ Mods: {
 				Tooltip:
 					'''
 					Perfectly timed strikes with zweihanders set enemies ablaze
-					'No steel needed this time!'
+					'You know the line'
 					'''
 			}
 
@@ -748,6 +753,15 @@ Mods: {
 					Attacking enemies with this weapon will extract up to 15 souls
 					Upon attacking with another non-tool weapon, fire all extracted souls towards the mouse cursor
 					The souls will inflict twice the weapon's base damage
+					'''
+			}
+
+			GrassCutter: {
+				DisplayName: Kusanagi-no-Tsurugi
+				Tooltip:
+					'''
+					Perfectly timed strikes increase Zweihander attack speed by 200% for 4 seconds
+					Perfectly timed strikes also heal 5 life
 					'''
 			}
 		}

@@ -13,9 +13,12 @@ namespace Wisplantern.ModPlayers
         public List<Projectile> pandemoniumSouls = new();
         public bool firePandemoniumSouls = false;
 
+        public float zweihanderSpeed = 1f;
+
         public override void ResetEffects()
         {
             accessoryEffects.Clear();
+            zweihanderSpeed = 1f;
         }
 
         const float critDamageMult = 1.3f;

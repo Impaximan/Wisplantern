@@ -129,6 +129,7 @@ namespace Wisplantern.Items.Ammo
             SoundStyle style = new("Wisplantern/Sounds/Effects/BulletWhizz");
             style.PitchVariance = 0.5f;
             style.Pitch = -0.75f;
+            style.Volume *= 0.25f;
             style.MaxInstances = 1;
             style.SoundLimitBehavior = SoundLimitBehavior.ReplaceOldest;
             SoundEngine.PlaySound(style, Projectile.Center);
