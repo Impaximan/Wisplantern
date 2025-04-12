@@ -7,7 +7,7 @@ using System.IO;
 
 namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 {
-    abstract class Zweihander : ModItem
+    public abstract class Zweihander : ModItem
 	{
 		public const int perfectChargeLeeway = 8;
 

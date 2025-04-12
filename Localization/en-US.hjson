@@ -38,6 +38,7 @@ Mods: {
 			RadiationDiscProjectile.DisplayName: Radiation Disc Projectile
 			AmberSoul.DisplayName: Amber Soul
 			PandemoniumSpirit.DisplayName: Pandemonium Spirit
+			MagmaBlob.DisplayName: Magma Blob
 		}
 
 		Biomes: {
@@ -762,6 +763,15 @@ Mods: {
 					'''
 					Perfectly timed strikes increase Zweihander attack speed by 200% for 4 seconds
 					Perfectly timed strikes also heal 5 life
+					'''
+			}
+
+			HarvesterOfSorrow: {
+				DisplayName: Harvester Of Sorrow
+				Tooltip:
+					'''
+					Perfectly timed strikes send magma flying
+					'Language of the mad!'
 					'''
 			}
 		}
