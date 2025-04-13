@@ -17,7 +17,7 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
             Item.knockBack = 5f;
             Item.width = 72;
             Item.height = 64;
-            Item.damage = 45;
+            Item.damage = 52;
             Item.shootSpeed = 11f;
             Item.rare = ItemRarityID.Orange;
             Item.DamageType = DamageClass.Melee;
@@ -44,7 +44,7 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
                         target.Center,
                         new Vector2(Main.rand.NextFloat(-5f, 5f), Main.rand.NextFloat(-10f, -5f)),
                         ModContent.ProjectileType<MagmaBlob>(),
-                        (int)player.GetDamage(DamageClass.Melee).ApplyTo(26f),
+                        (int)player.GetDamage(DamageClass.Melee).ApplyTo(30f),
                         0.5f,
                         player.whoAmI)];
 

@@ -917,6 +917,18 @@ Mods: {
 					Label: Push charisma down while inventory is open
 					Tooltip: Self explanatory. May keep it out of the way of certain UI elements.
 				}
+
+				charismaBehavior: {
+					Label: Charisma UI Visibility
+					Tooltip: "Allows you to decide when the charisma UI is visible"
+				}
+			}
+
+			CharismaBehavior: {
+				Tooltip: ""
+				ShowOnlyWithManipulative.Label: When holding manipulative weapon
+				ShowAlways.Label: Always
+				ShowNever.Label: Never
 			}
 		}
 

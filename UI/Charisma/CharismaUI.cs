@@ -5,6 +5,7 @@ using Terraria.GameContent;
 using Microsoft.Xna.Framework;
 using ReLogic.Content;
 using ReLogic.Graphics;
+using Wisplantern.Globals.GItems;
 
 namespace Wisplantern.UI.Charisma
 {
@@ -12,6 +13,30 @@ namespace Wisplantern.UI.Charisma
     {
         public override void Draw(SpriteBatch spriteBatch)
         {
+            Player player = Main.LocalPlayer;
+            ManipulativePlayer mPlayer = player.GetModPlayer<ManipulativePlayer>();
+
+            switch (Wisplantern.charismaBehavior)
+            {
+                case CharismaBehavior.ShowOnlyWithManipulative:
+                    if (player.HeldItem != null && player.HeldItem.TryGetGlobalItem<AggravatingItem>( out _))
+                    {
+                        if (!(player.HeldItem.DamageType == ModContent.GetInstance<DamageClasses.ManipulativeDamageClass>() || player.HeldItem.GetGlobalItem<AggravatingItem>().charisma > 0))
+                        {
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        return;
+                    }
+                    break;
+                case CharismaBehavior.ShowAlways:
+                    break;
+                case CharismaBehavior.ShowNever:
+                    return;
+            }
+
             Texture2D charisma = ModContent.Request<Texture2D>("Wisplantern/UI/Charisma/Charisma", AssetRequestMode.ImmediateLoad).Value;
 
             Vector2 position = new Vector2(Main.screenWidth, Main.screenHeight) * new Vector2(Wisplantern.charismaX, Wisplantern.charismaY);
@@ -22,10 +47,6 @@ namespace Wisplantern.UI.Charisma
             }
 
             Vector2 ogPosition = position;
-
-
-            Player player = Main.LocalPlayer;
-            ManipulativePlayer mPlayer = player.GetModPlayer<ManipulativePlayer>();
 
             //spriteBatch.Draw(charisma, /*position + new Vector2(0f, 2f * Main.UIScale)*/Vector2.Zero, new Rectangle(0, 0, charisma.Width, charisma.Height), Color.White, 0f, charisma.Size() / 2f, 10f * Main.UIScale, SpriteEffects.None, 0f);
             for (int i = 0; i < mPlayer.MaxCharisma; i++)

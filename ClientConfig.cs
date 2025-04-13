@@ -42,6 +42,10 @@ namespace Wisplantern
         [Increment(0.01f)]
         public float charismaY = 0f;
 
+        [DefaultValue(CharismaBehavior.ShowOnlyWithManipulative)]
+        [BackgroundColor(123, 225, 255)]
+        public CharismaBehavior charismaBehavior;
+
         [DefaultValue(true)]
         [BackgroundColor(123, 225, 255)]
         public bool pushCharismaDown = true;
@@ -57,6 +61,14 @@ namespace Wisplantern
             Wisplantern.charismaX = charismaX;
             Wisplantern.charismaY = charismaY;
             Wisplantern.pushCharismaDown = pushCharismaDown;
+            Wisplantern.charismaBehavior = charismaBehavior;
         }
+    }
+
+    public enum CharismaBehavior : byte
+    {
+        ShowOnlyWithManipulative = 0,
+        ShowAlways = 1,
+        ShowNever = 2,
     }
 }
