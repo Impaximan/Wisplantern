@@ -39,6 +39,7 @@ Mods: {
 			AmberSoul.DisplayName: Amber Soul
 			PandemoniumSpirit.DisplayName: Pandemonium Spirit
 			MagmaBlob.DisplayName: Magma Blob
+			PandemoniumSpiritRanged.DisplayName: Pandemonium Spirit
 		}
 
 		Biomes: {
@@ -774,6 +775,15 @@ Mods: {
 					'Language of the mad!'
 					'''
 			}
+
+			Cacophony: {
+				DisplayName: Cacophony
+				Tooltip:
+					'''
+					Has a chance to fire a fireball which explodes into 5 arrows
+					The chance is equal to this weapon's current crit chance
+					'''
+			}
 		}
 
 		NPCs: {
@@ -920,7 +930,12 @@ Mods: {
 
 				charismaBehavior: {
 					Label: Charisma UI Visibility
-					Tooltip: "Allows you to decide when the charisma UI is visible"
+					Tooltip: Allows you to decide when the charisma UI is visible
+				}
+
+				noBattleArtTooltip: {
+					Label: Battle art incompatibility tooltip
+					Tooltip: Whether or not items will have a tooltip indicating that they can't be given a battle art
 				}
 			}
 

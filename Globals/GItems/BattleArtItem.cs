@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Input;
 using Terraria.DataStructures;
 using Terraria.Audio;
 using System.IO;
+using Terraria.Localization;
 
 namespace Wisplantern.Globals.GItems
 {
@@ -431,9 +432,9 @@ namespace Wisplantern.Globals.GItems
                 tooltips.Add(line5);
             }
 
-            if (!CanGetBattleArt(item, Main.player[Main.myPlayer]) && !item.consumable)
+            if (Wisplantern.noBattleArtTooltip && !CanGetBattleArt(item, Main.player[Main.myPlayer]) && !item.consumable)
             {
-                TooltipLine noBattleArtLine = new(Mod, "NoBattleArt", "Cannot be given a battle art");
+                TooltipLine noBattleArtLine = new(Mod, "NoBattleArt", Language.GetOrRegister("$Mods.Wisplantern.NoBattleArtTooltip", () => "Cannot be given a battle art").Value);
                 noBattleArtLine.IsModifier = true;
                 noBattleArtLine.IsModifierBad = true;
                 tooltips.Add(noBattleArtLine);

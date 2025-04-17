@@ -50,6 +50,10 @@ namespace Wisplantern
         [BackgroundColor(123, 225, 255)]
         public bool pushCharismaDown = true;
 
+        [DefaultValue(true)]
+        [BackgroundColor(123, 225, 255)]
+        public bool noBattleArtTooltip = true;
+
         public override void OnChanged()
         {
             Wisplantern.playDeepUnderground = playDeepUnderground;

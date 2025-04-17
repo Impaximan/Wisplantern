@@ -83,10 +83,12 @@ namespace Wisplantern
         public static bool calmNights = true;
         public static bool snowstorms = true;
 
+
         public static float charismaX = 0f;
         public static float charismaY = 0f;
         public static CharismaBehavior charismaBehavior = CharismaBehavior.ShowOnlyWithManipulative;
         public static bool pushCharismaDown = true;
+        public static bool noBattleArtTooltip = true;
 
         public override void Load()
         {
