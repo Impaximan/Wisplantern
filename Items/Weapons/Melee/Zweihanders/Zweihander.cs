@@ -67,7 +67,7 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
             {
                 closestPointOnHitbox += target.DirectionTo(player.itemLocation);
             }
-            return closestPointOnHitbox.Distance(player.itemLocation) < Item.Size.Length() && AngleDifference(player.DirectionTo(target.Center).ToRotation(), rotation + swordRotationAdd * player.direction) <= MathHelper.ToRadians(15f) && goneYet;
+            return closestPointOnHitbox.Distance(player.itemLocation) < Item.Size.Length() && Math.Abs(AngleDifference(player.DirectionTo(target.Center).ToRotation(), rotation + swordRotationAdd * player.direction)) <= MathHelper.ToRadians(15f) && goneYet;
         }
 
         public virtual int DustType => DustID.Torch;
@@ -244,7 +244,7 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 
         public override void ModifyHitNPC(Player player, NPC target, ref NPC.HitModifiers modifiers)
         {
-			modifiers.SourceDamage *= MathHelper.Lerp(chargeProgress, 1f, 0.2f);
+            modifiers.SourceDamage *= MathHelper.Lerp(chargeProgress, 1f, 0.2f);
 			modifiers.Knockback *= chargeProgress + 0.2f;
 			if (perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f)
 			{

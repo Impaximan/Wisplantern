@@ -23,6 +23,7 @@ namespace Wisplantern.Globals.GItems
         public override void SetStaticDefaults()
         {
             canUseBattleArt ??= new bool?[ItemLoader.ItemCount];
+            CantBattleArtText = Mod.GetLocalization($"{nameof(BattleArtItem)}.CantBattleArtText");
         }
 
         public override void NetSend(Item item, BinaryWriter writer)
@@ -347,6 +348,8 @@ namespace Wisplantern.Globals.GItems
             return base.CanRightClick(item);
         }
 
+        public static LocalizedText CantBattleArtText { get; private set; }
+
         public override void RightClick(Item item, Player player)
         {
             if (isBattleArtItem)
@@ -434,7 +437,7 @@ namespace Wisplantern.Globals.GItems
 
             if (Wisplantern.noBattleArtTooltip && !CanGetBattleArt(item, Main.player[Main.myPlayer]) && !item.consumable)
             {
-                TooltipLine noBattleArtLine = new(Mod, "NoBattleArt", Language.GetOrRegister("$Mods.Wisplantern.NoBattleArtTooltip", () => "Cannot be given a battle art").Value);
+                TooltipLine noBattleArtLine = new(Mod, "NoBattleArt", CantBattleArtText.Value);
                 noBattleArtLine.IsModifier = true;
                 noBattleArtLine.IsModifierBad = true;
                 tooltips.Add(noBattleArtLine);

@@ -40,7 +40,7 @@ namespace Wisplantern.Items.Weapons.Melee.Swords
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient<PandemoniumBar>(20)
+                .AddIngredient<PandemoniumBar>(18)
                 .AddTile(TileID.Anvils)
                 .Register();
         }
