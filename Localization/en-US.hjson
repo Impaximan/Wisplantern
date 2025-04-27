@@ -40,6 +40,7 @@ Mods: {
 			PandemoniumSpirit.DisplayName: Pandemonium Spirit
 			MagmaBlob.DisplayName: Magma Blob
 			PandemoniumSpiritRanged.DisplayName: Pandemonium Spirit
+			PandemoniumBulletProjectile.DisplayName: Pandemonium Bullet
 		}
 
 		Biomes: {
@@ -782,6 +783,15 @@ Mods: {
 					'''
 					Has a chance to fire a fireball which explodes into 5 arrows
 					The chance is equal to this weapon's current crit chance
+					'''
+			}
+
+			PandemoniumBullet: {
+				DisplayName: Pandemonium Bullet
+				Tooltip:
+					'''
+					Chance to [c/ffc0cb:INSTAKILL] non-boss enemies
+					Chance depends on the ratio between the bullet's damage and its target's maximum health
 					'''
 			}
 		}
