@@ -313,7 +313,7 @@ namespace Wisplantern
                 return false;
             }
 
-            amount = amount * 100 / npc.life;
+            amount = amount * 100 * player.GetModPlayer<ManipulativePlayer>().manipulativePower / npc.life;
             if (npc.HasBuff(BuffID.Confused))
             {
                 amount *= 1.5f;

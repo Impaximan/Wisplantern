@@ -805,6 +805,21 @@ Mods: {
 					Failing a perfectly timed strike will reset the multiplier
 					'''
 			}
+
+			PandemoniumBreastplate: {
+				DisplayName: Instigator's Breastplate
+				Tooltip: Increases manipulative power by 10%
+			}
+
+			PandemoniumHood: {
+				DisplayName: Instigator's Hood
+				Tooltip: Increases manipulative damage by 10%
+			}
+
+			PandemoniumLeggings: {
+				DisplayName: Instigator's Greaves
+				Tooltip: Increases maximum charisma by 1
+			}
 		}
 
 		NPCs: {
@@ -983,6 +998,12 @@ Mods: {
 		TooltipHeader: Item tooltips
 		UIHeader: UI
 		BattleArtItem.CantBattleArtText: Cannot be given a battle art
+		PandemoniumHood.SetBonus:
+			'''
+			Hold UP for 2 seconds to charge a burst jump
+			Release UP to launch yourself
+			5% increased manipulative critical strike chance
+			'''
 	}
 
 	ItemDropConditionDescriptions.HuntingWeapon: yeah

@@ -7,6 +7,7 @@ namespace Wisplantern.ModPlayers
         public int charisma = 0;
         public int defMaxCharisma = 3;
         public int extraMaxCharisma = 0;
+        public float manipulativePower = 1f;
 
         public int MaxCharisma => defMaxCharisma + extraMaxCharisma;
 
@@ -25,6 +26,7 @@ namespace Wisplantern.ModPlayers
         public override void ResetEffects()
         {
             extraMaxCharisma = 0;
+            manipulativePower = 1f;
         }
 
         public int smokeBombTime = 0;
