@@ -21,6 +21,7 @@ namespace Wisplantern.Items.Armor.Pandemonium
             Item.value = Item.sellPrice(gold: 1);
             Item.rare = ItemRarityID.Orange;
             Item.defense = 6;
+            Item.MarkAsShepherd();
         }
 
         public override void UpdateEquip(Player player)

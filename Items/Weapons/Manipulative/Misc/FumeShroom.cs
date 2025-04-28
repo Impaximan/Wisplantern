@@ -10,6 +10,11 @@ namespace Wisplantern.Items.Weapons.Manipulative.Misc
 {
     public class FumeShroom : ModItem
     {
+        public override bool WeaponPrefix()
+        {
+            return true;
+        }
+
         public override void SetStaticDefaults()
         {
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;

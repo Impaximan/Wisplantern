@@ -820,6 +820,11 @@ Mods: {
 				DisplayName: Instigator's Greaves
 				Tooltip: Increases maximum charisma by 1
 			}
+
+			GreatcaneOfChaos: {
+				DisplayName: Greatcane Of Chaos
+				Tooltip: ""
+			}
 		}
 
 		NPCs: {
@@ -879,6 +884,18 @@ Mods: {
 			Lively.DisplayName: Lively
 			Steadfast.DisplayName: Steadfast
 			Vital.DisplayName: Vital
+			Rlyehian.DisplayName: R'lyehian
+			Chaotic.DisplayName: Chaotic
+			Belligerant.DisplayName: Belligerant
+			Charismatic.DisplayName: Charismatic
+			Charming.DisplayName: Charming
+			Clever.DisplayName: Clever
+			Convincing.DisplayName: Convincing
+			Harsh.DisplayName: Harsh
+			Introverted.DisplayName: Introverted
+			Loving.DisplayName: Loving
+			Rude.DisplayName: Rude
+			Sensitive.DisplayName: Sensitive
 		}
 
 		Configs: {

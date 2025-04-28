@@ -70,6 +70,26 @@ namespace Wisplantern.Globals.GItems
                     tooltips.Insert(index + 1, manipLine);
                 }
             }
+
+            Item dummy = new Item(item.type);
+            float originalManipulativePower = dummy.GetGlobalItem<AggravatingItem>().manipulativePower;
+            
+            if (originalManipulativePower != manipulativePower)
+            {
+                if (manipulativePower > originalManipulativePower)
+                {
+                    TooltipLine powerPrefix = new(Mod, "ManipulativePowerPrefix", "+" + Math.Round(manipulativePower / (float)originalManipulativePower * 100f - 100f).ToString() + "% manipulative power");
+                    powerPrefix.IsModifier = true;
+                    tooltips.Add(powerPrefix);
+                }
+                else
+                {
+                    TooltipLine powerPrefix = new(Mod, "ManipulativePowerPrefix", "-" + Math.Round(100f - manipulativePower / (float)originalManipulativePower * 100f).ToString() + "% manipulative power");
+                    powerPrefix.IsModifier = true;
+                    powerPrefix.IsModifierBad = true;
+                    tooltips.Add(powerPrefix);
+                }
+            }
         }
     }
 }

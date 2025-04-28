@@ -1,11 +1,16 @@
 ﻿using Terraria.DataStructures;
 using Terraria.Audio;
 using Wisplantern.Items.Weapons.Manipulative.Decoys;
+using Wisplantern.DamageClasses;
 
 namespace Wisplantern.Items.Weapons.Manipulative.Canes
 {
     abstract class CaneWeapon : ModItem
     {
+        public override bool WeaponPrefix()
+        {
+            return true;
+        }
 
         /// <summary>
         /// Don't override this for canes, use CaneSetDefaults instead.
@@ -13,14 +18,20 @@ namespace Wisplantern.Items.Weapons.Manipulative.Canes
         /// </summary>
         public sealed override void SetDefaults()
         {
+            Item.DamageType = ModContent.GetInstance<ManipulativeDamageClass>();
             Item.useStyle = ItemUseStyleID.Swing;
             Item.shoot = 1;
+            Item.shootSpeed = 1f;
             Item.knockBack = 3f;
             SoundStyle style = SoundID.Item152;
             style.PitchVariance = 0.5f;
             style.MaxInstances = 0;
             Item.UseSound = style;
             Item.autoReuse = true;
+            Item.maxStack = 1;
+            Item.ammo = 0;
+            Item.useTime = 10;
+            Item.useAnimation = 10;
             CaneSetDefaults();
         }
 
