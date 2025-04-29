@@ -2,6 +2,8 @@
 using System;
 using Microsoft.Xna.Framework.Graphics;
 using Wisplantern.Buffs;
+using Terraria.ModLoader.IO;
+using System.IO;
 
 namespace Wisplantern.Globals.GNPCs
 {
@@ -17,6 +19,8 @@ namespace Wisplantern.Globals.GNPCs
 
         public float attackSpeedMult = 1f;
         public float attackSpeedCounter = 0f;
+
+        public int chaosTeleportCooldown = 120;
 
         public override void ResetEffects(NPC npc)
         {
@@ -42,6 +46,32 @@ namespace Wisplantern.Globals.GNPCs
             NPCID.EaterofWorldsBody,
             NPCID.EaterofWorldsTail
         };
+
+        public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
+        {
+            binaryWriter.Write(aggravation);
+            binaryWriter.Write(aggravated);
+            if (aggravated)
+            {
+                binaryWriter.Write(infightDamage);
+                binaryWriter.Write(infightKnockback);
+                binaryWriter.Write(infightCritChance);
+                binaryWriter.Write(infightPlayer);
+            }
+        }
+
+        public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
+        {
+            aggravation = binaryReader.ReadSingle();
+            aggravated = binaryReader.ReadBoolean();
+            if (aggravated)
+            {
+                infightDamage = binaryReader.ReadInt32();
+                infightKnockback = binaryReader.ReadSingle();
+                infightCritChance = binaryReader.ReadInt32();
+                infightPlayer = binaryReader.ReadInt32();
+            }
+        }
 
         public List<int> eaterOfWorldsSegments = new();
 

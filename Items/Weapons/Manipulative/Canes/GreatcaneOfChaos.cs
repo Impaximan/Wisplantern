@@ -2,6 +2,8 @@
 using Terraria.DataStructures;
 using Terraria.Audio;
 using Wisplantern.Items.Materials;
+using Wisplantern.Buffs;
+using Wisplantern.Globals.GNPCs;
 
 namespace Wisplantern.Items.Weapons.Manipulative.Canes
 {
@@ -22,7 +24,7 @@ namespace Wisplantern.Items.Weapons.Manipulative.Canes
 
         public override void CaneSetDefaults()
         {
-            Item.damage = 30;
+            Item.damage = 26;
             Item.SetManipulativePower(0.30f);
             Item.DamageType = ModContent.GetInstance<DamageClasses.ManipulativeDamageClass>();
             Item.width = 68;
@@ -40,6 +42,12 @@ namespace Wisplantern.Items.Weapons.Manipulative.Canes
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
 
+        }
+
+        public override void OnAggravate(NPC npc, Player player)
+        {
+            npc.AddBuff(ModContent.BuffType<ChaosElement>(), InfightingNPC.GetAggravationTime(npc));
+            npc.GetGlobalNPC<InfightingNPC>().chaosTeleportCooldown = Main.rand.Next(60);
         }
 
         public override Color? GetAlpha(Color lightColor)

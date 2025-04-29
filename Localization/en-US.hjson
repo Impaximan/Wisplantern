@@ -146,6 +146,11 @@ Mods: {
 				DisplayName: Grass Cutter
 				Description: 200% increased zweihander attack speed
 			}
+
+			ChaosElement: {
+				DisplayName: Chaos Element
+				Description: Mods.Wisplantern.Buffs.ChaosElement.Description
+			}
 		}
 
 		Items: {
@@ -823,7 +828,7 @@ Mods: {
 
 			GreatcaneOfChaos: {
 				DisplayName: Greatcane Of Chaos
-				Tooltip: ""
+				Tooltip: Aggravated enemies will teleport to their targets (unless their target is you)
 			}
 		}
 
