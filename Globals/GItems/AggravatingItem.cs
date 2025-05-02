@@ -72,22 +72,25 @@ namespace Wisplantern.Globals.GItems
             }
 
             Item dummy = new Item(item.type);
-            float originalManipulativePower = dummy.GetGlobalItem<AggravatingItem>().manipulativePower;
-            
-            if (originalManipulativePower != manipulativePower)
+            if (dummy.TryGetGlobalItem(out AggravatingItem ag))
             {
-                if (manipulativePower > originalManipulativePower)
+                float originalManipulativePower = ag.manipulativePower;
+
+                if (originalManipulativePower != manipulativePower)
                 {
-                    TooltipLine powerPrefix = new(Mod, "ManipulativePowerPrefix", "+" + Math.Round(manipulativePower / (float)originalManipulativePower * 100f - 100f).ToString() + "% manipulative power");
-                    powerPrefix.IsModifier = true;
-                    tooltips.Add(powerPrefix);
-                }
-                else
-                {
-                    TooltipLine powerPrefix = new(Mod, "ManipulativePowerPrefix", "-" + Math.Round(100f - manipulativePower / (float)originalManipulativePower * 100f).ToString() + "% manipulative power");
-                    powerPrefix.IsModifier = true;
-                    powerPrefix.IsModifierBad = true;
-                    tooltips.Add(powerPrefix);
+                    if (manipulativePower > originalManipulativePower)
+                    {
+                        TooltipLine powerPrefix = new(Mod, "ManipulativePowerPrefix", "+" + Math.Round(manipulativePower / (float)originalManipulativePower * 100f - 100f).ToString() + "% manipulative power");
+                        powerPrefix.IsModifier = true;
+                        tooltips.Add(powerPrefix);
+                    }
+                    else
+                    {
+                        TooltipLine powerPrefix = new(Mod, "ManipulativePowerPrefix", "-" + Math.Round(100f - manipulativePower / (float)originalManipulativePower * 100f).ToString() + "% manipulative power");
+                        powerPrefix.IsModifier = true;
+                        powerPrefix.IsModifierBad = true;
+                        tooltips.Add(powerPrefix);
+                    }
                 }
             }
         }

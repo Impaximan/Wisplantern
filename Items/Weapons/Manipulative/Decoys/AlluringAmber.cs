@@ -180,6 +180,7 @@ namespace Wisplantern.Items.Weapons.Manipulative.Decoys
                     if (Projectile.Distance(player.Center) < 50f)
                     {
                         player.Heal(10);
+                        if (Main.netMode != NetmodeID.SinglePlayer) NetMessage.SendData(MessageID.PlayerHeal, number: player.whoAmI, number2: 10);
                         Projectile.active = false;
                     }
                 }

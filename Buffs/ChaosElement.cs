@@ -64,7 +64,7 @@ namespace Wisplantern.Buffs
                             {
                                 iNPC.chaosTeleportCooldown = Main.rand.Next(120, 300);
                                 Teleport(npc, target);
-                                if (Main.netMode != NetmodeID.SinglePlayer) Mod.SendPacket(new SyncChaosTeleport(npc.whoAmI, target.X, target.Y));
+                                if (Main.netMode != NetmodeID.SinglePlayer) Mod.SendPacket(new SyncChaosTeleport(npc.whoAmI, target.X, target.Y), forward: true);
                             }
                             else
                             {
@@ -76,7 +76,7 @@ namespace Wisplantern.Buffs
                                     {
                                         iNPC.chaosTeleportCooldown = Main.rand.Next(120, 300);
                                         Teleport(npc, target);
-                                        if (Main.netMode != NetmodeID.SinglePlayer) Mod.SendPacket(new SyncChaosTeleport(npc.whoAmI, target.X, target.Y));
+                                        if (Main.netMode != NetmodeID.SinglePlayer) Mod.SendPacket(new SyncChaosTeleport(npc.whoAmI, target.X, target.Y), forward: true);
                                         break;
                                     }
                                 }

@@ -135,10 +135,14 @@ namespace Wisplantern.Items.Weapons.Ranged.Bows
             float offset = Main.rand.NextFloat(MathHelper.TwoPi / num);
             SoundEngine.PlaySound(SoundID.DD2_BetsyFireballImpact, Projectile.Center);
 
-            for (float t = 0; t < MathHelper.TwoPi; t += MathHelper.TwoPi / num)
+            if (Projectile.owner == Main.myPlayer)
             {
-                Vector2 velocity = (t + offset).ToRotationVector2() * 15f;
-                Projectile.NewProjectile(new EntitySource_Misc("Pandemonium Bow Spirit"), Projectile.Center, velocity, (int)Projectile.ai[0], Projectile.damage, Projectile.knockBack, Projectile.owner);
+                for (float t = 0; t < MathHelper.TwoPi; t += MathHelper.TwoPi / num)
+                {
+                    Vector2 velocity = (t + offset).ToRotationVector2() * 15f;
+                    int p = Projectile.NewProjectile(new EntitySource_Misc("Pandemonium Bow Spirit"), Projectile.Center, velocity, (int)Projectile.ai[0], Projectile.damage, Projectile.knockBack, Projectile.owner);
+                    Main.projectile[p].netUpdate = true;
+                }
             }
         }
 

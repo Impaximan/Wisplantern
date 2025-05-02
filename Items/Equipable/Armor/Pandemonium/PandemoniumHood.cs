@@ -81,6 +81,8 @@ namespace Wisplantern.Items.Equipable.Armor.Pandemonium
 
                     PunchCameraModifier modifier = new(player.Center, player.velocity.ToRotation().ToRotationVector2(), 10f, 10f, 8, 1000f);
                     Main.instance.CameraModifiers.Add(modifier);
+
+                    if (Main.netMode != NetmodeID.SinglePlayer) Mod.SendPacket(new SyncPlayerVelocity(player.velocity.X, player.velocity.Y, player.whoAmI), forward: true);
                 }
 
                 burstJumpCounter = 0;
