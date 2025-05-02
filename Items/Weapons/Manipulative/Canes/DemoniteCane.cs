@@ -17,7 +17,8 @@ namespace Wisplantern.Items.Weapons.Manipulative.Canes
             CreateRecipe()
                 .AddIngredient(ItemID.DemoniteBar, 12)
                 .AddTile(TileID.Anvils)
-                .Register();
+                .Register()
+                .SortAfterFirstRecipesOf(ItemID.LightsBane);
         }
 
         public override void CaneSetDefaults()

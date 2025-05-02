@@ -17,7 +17,8 @@ namespace Wisplantern.Items.Weapons.Manipulative.Canes
             CreateRecipe()
                 .AddIngredient(ItemID.CrimtaneBar, 12)
                 .AddTile(TileID.Anvils)
-                .Register();
+                .Register()
+                .SortAfterFirstRecipesOf(ItemID.BloodButcherer);
         }
 
         public override void CaneSetDefaults()

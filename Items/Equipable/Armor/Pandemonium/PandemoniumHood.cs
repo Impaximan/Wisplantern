@@ -8,7 +8,7 @@ using Wisplantern.DamageClasses;
 using Wisplantern.Globals.GItems;
 using Wisplantern.Items.Materials;
 
-namespace Wisplantern.Items.Armor.Pandemonium
+namespace Wisplantern.Items.Equipable.Armor.Pandemonium
 {
     [AutoloadEquip(EquipType.Head)]
     public class PandemoniumHood : ModItem

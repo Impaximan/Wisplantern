@@ -14,7 +14,8 @@ namespace Wisplantern.Items.Weapons.Manipulative.Canes
             CreateRecipe()
                 .AddIngredient(ItemID.LeadBar, 10)
                 .AddTile(TileID.Anvils)
-                .Register();
+                .Register()
+                .SortAfterFirstRecipesOf(ItemID.LeadBroadsword);
         }
 
         public override void CaneSetDefaults()

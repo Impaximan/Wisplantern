@@ -51,7 +51,8 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
                 .AddIngredient(ItemID.JungleSpores, 16)
                 .AddIngredient(ItemID.RichMahogany, 5)
                 .AddTile(TileID.Anvils)
-                .Register();
+                .Register()
+                .SortAfterFirstRecipesOf(ItemID.BladeofGrass);
         }
     }
 }

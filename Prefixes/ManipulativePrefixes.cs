@@ -140,7 +140,7 @@ namespace Wisplantern.Prefixes
 
         public override void SetStats(ref float damageMult, ref float knockbackMult, ref float useTimeMult, ref float scaleMult, ref float shootSpeedMult, ref float manaMult, ref int critBonus)
         {
-            shootSpeedMult = 1f / 1.1f;
+            useTimeMult = 1f / 1.1f;
         }
     }
 

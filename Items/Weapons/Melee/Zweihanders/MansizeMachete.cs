@@ -39,7 +39,8 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
             CreateRecipe()
                 .AddIngredient(ItemID.CrimtaneBar, 15)
                 .AddTile(TileID.Anvils)
-                .Register();
+                .Register()
+                .SortAfterFirstRecipesOf(ItemID.BloodButcherer);
         }
     }
 

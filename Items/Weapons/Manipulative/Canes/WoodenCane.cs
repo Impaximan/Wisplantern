@@ -14,7 +14,8 @@ namespace Wisplantern.Items.Weapons.Manipulative.Canes
             CreateRecipe()
                 .AddRecipeGroup(RecipeGroupID.Wood, 11)
                 .AddTile(TileID.WorkBenches)
-                .Register();
+                .Register()
+                .SortAfterFirstRecipesOf(ItemID.WoodenSword);
         }
 
         public override void CaneSetDefaults()

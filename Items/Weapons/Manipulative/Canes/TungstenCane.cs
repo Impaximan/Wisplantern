@@ -14,7 +14,8 @@ namespace Wisplantern.Items.Weapons.Manipulative.Canes
             CreateRecipe()
                 .AddIngredient(ItemID.TungstenBar, 10)
                 .AddTile(TileID.Anvils)
-                .Register();
+                .Register()
+                .SortAfterFirstRecipesOf(ItemID.TungstenBroadsword);
         }
 
         public override void CaneSetDefaults()

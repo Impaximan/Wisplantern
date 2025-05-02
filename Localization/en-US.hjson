@@ -830,6 +830,15 @@ Mods: {
 				DisplayName: Greatcane Of Chaos
 				Tooltip: Aggravated enemies will teleport to their targets (unless their target is you)
 			}
+
+			Pyrite: {
+				DisplayName: Pyrite
+				Tooltip:
+					'''
+					Can be used to smelt more efficiently
+					'Fool's gold'
+					'''
+			}
 		}
 
 		NPCs: {
@@ -1015,6 +1024,7 @@ Mods: {
 			PandemoniumOre.MapEntry: Pandemonium
 			Hyperstone.MapEntry: Hyperstone
 			PandemoniumBarTile.MapEntry: Pandemonium Bar Tile
+			Pyrite.MapEntry: Pyrite
 		}
 
 		TooltipHeader: Item tooltips

@@ -16,7 +16,8 @@ namespace Wisplantern.Items.Weapons.Manipulative.Canes
                 .AddIngredient(ItemID.Stinger, 12)
                 .AddIngredient(ItemID.JungleSpores, 15)
                 .AddTile(TileID.Anvils)
-                .Register();
+                .Register()
+                .SortAfterFirstRecipesOf(ItemID.BladeofGrass);
         }
 
         public override void CaneSetDefaults()

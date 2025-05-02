@@ -48,7 +48,8 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
             CreateRecipe()
                 .AddIngredient(ItemID.DemoniteBar, 15)
                 .AddTile(TileID.Anvils)
-                .Register();
+                .Register()
+                .SortAfterFirstRecipesOf(ItemID.LightsBane);
         }
     }
 }

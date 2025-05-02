@@ -8,9 +8,9 @@ namespace Wisplantern.Systems.Worldgen
 {
     class IgneousCaveGen : ModSystem
     {
-        FastNoiseLite noise;
+        public static FastNoiseLite noise;
 
-        List<int> cancelingTiles = new()
+        static List<int> cancelingTiles = new()
             {
                 TileID.IceBlock,
                 TileID.JungleGrass,
@@ -38,6 +38,22 @@ namespace Wisplantern.Systems.Worldgen
 
         public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
         {
+            tasks.Insert(0, new PassLegacy("Igneous Noise", delegate (GenerationProgress progress, GameConfiguration config)
+            {
+                progress.Message = "Igneous Noise";
+
+                if (Wisplantern.generateVolcanicCaves)
+                {
+                    noise = new FastNoiseLite(WorldGen.genRand.Next(5000, 10000));
+                    noise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
+                    noise.SetFrequency(0.01f);
+                    noise.SetFractalOctaves(5);
+                    noise.SetFractalLacunarity(2f);
+                    noise.SetFractalGain(0.5f);
+                    noise.SetFractalPingPongStrength(2f);
+                }
+            }));
+
             int genIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Underworld"));
             tasks.Insert(genIndex + 1, new PassLegacy("Igneous City", delegate (GenerationProgress progress, GameConfiguration config)
             {
@@ -61,7 +77,7 @@ namespace Wisplantern.Systems.Worldgen
             }));
         }
 
-        public bool CanConvertTile(int i, int j, int extraCheckAmount)
+        public static bool CanConvertTile(int i, int j, int extraCheckAmount)
         {
             for (int i2 = -extraCheckAmount; i2 <= extraCheckAmount; i2++)
             {
@@ -80,7 +96,7 @@ namespace Wisplantern.Systems.Worldgen
             return true;
         }
 
-        public bool ShouldConvertTile(int i, int j, int extraCheckAmount)
+        public static bool ShouldConvertTile(int i, int j, int extraCheckAmount)
         {
             if (noise.GetNoise((i + 8000) / 12f, (j + 8000) / 12f) >= 0.75f)
             {
@@ -99,14 +115,6 @@ namespace Wisplantern.Systems.Worldgen
         public void IgneousCity()
         {
             #region Stuff I dont need to see
-            noise = new FastNoiseLite(WorldGen.genRand.Next(5000, 10000));
-            noise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
-            noise.SetFrequency(0.01f);
-            noise.SetFractalOctaves(5);
-            noise.SetFractalLacunarity(2f);
-            noise.SetFractalGain(0.5f);
-            noise.SetFractalPingPongStrength(2f);
-
             FastNoiseLite lackNoise = new(WorldGen.genRand.Next(5000, 10000));
             lackNoise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
             lackNoise.SetFrequency(0.01f);

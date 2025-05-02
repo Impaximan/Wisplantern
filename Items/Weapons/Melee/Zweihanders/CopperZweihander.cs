@@ -34,7 +34,8 @@
 				.AddIngredient(ItemID.StoneBlock, 25)
 				.AddIngredient(ItemID.Wood, 5)
 				.AddTile(TileID.Anvils)
-				.Register();
+				.Register()
+				.SortAfterFirstRecipesOf(ItemID.CopperBroadsword);
 		}
 	}
 }

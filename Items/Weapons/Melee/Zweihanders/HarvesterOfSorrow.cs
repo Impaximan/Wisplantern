@@ -64,7 +64,8 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
             CreateRecipe()
                 .AddIngredient(ItemID.HellstoneBar, 20)
                 .AddTile(TileID.Anvils)
-                .Register();
+                .Register()
+                .SortAfterFirstRecipesOf(ItemID.FieryGreatsword);
         }
     }
 

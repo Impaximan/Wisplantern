@@ -20,6 +20,12 @@
                     resultType = ModContent.ItemType<Items.Equipable.Accessories.Flint>();
                     resultStack = 1;
                 }
+
+                if (Main.rand.NextBool(10))
+                {
+                    resultType = ModContent.ItemType<Items.Materials.Pyrite>();
+                    resultStack = Main.rand.Next(1, 3);
+                }
             }
         }
     }
