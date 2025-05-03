@@ -42,6 +42,7 @@ Mods: {
 			MagmaBlob.DisplayName: Magma Blob
 			PandemoniumSpiritRanged.DisplayName: Pandemonium Spirit
 			PandemoniumBulletProjectile.DisplayName: Pandemonium Bullet
+			MoltenCaneExplosion.DisplayName: Explosion
 		}
 
 		Biomes: {
@@ -837,6 +838,16 @@ Mods: {
 					'''
 					Can be used to smelt more efficiently
 					'Fool's gold'
+					'''
+			}
+
+			MoltenCane: {
+				DisplayName: Lying Salvation
+				Tooltip:
+					'''
+					Aggravated enemies spread oil
+					Slain enemies explode
+					'No rest for the wicked'
 					'''
 			}
 		}

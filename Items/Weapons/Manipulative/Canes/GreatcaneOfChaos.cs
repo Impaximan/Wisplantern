@@ -24,8 +24,8 @@ namespace Wisplantern.Items.Weapons.Manipulative.Canes
 
         public override void CaneSetDefaults()
         {
-            Item.damage = 26;
-            Item.SetManipulativePower(0.30f);
+            Item.damage = 25;
+            Item.SetManipulativePower(0.25f);
             Item.DamageType = ModContent.GetInstance<DamageClasses.ManipulativeDamageClass>();
             Item.width = 68;
             Item.height = 60;
@@ -35,7 +35,7 @@ namespace Wisplantern.Items.Weapons.Manipulative.Canes
             Item.value = Item.sellPrice(0, 1, 0, 0);
         }
 
-        public override float MaxDistance => 500f;
+        public override float MaxDistance => 425f;
 
         public override int DustType => DustID.GreenTorch;
 

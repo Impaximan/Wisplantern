@@ -146,7 +146,7 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
             Projectile.velocity.Y += 0.05f;
             if (Projectile.velocity.Y > 0)
             {
-                Projectile.velocity.Y += 0.15f;
+                Projectile.velocity.Y += 0.25f;
             }
             Projectile.velocity *= 0.99f;
             Projectile.rotation = Projectile.velocity.ToRotation();
