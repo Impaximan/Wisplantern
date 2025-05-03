@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.Graphics.CameraModifiers;
 using Wisplantern.Buffs;
 
 namespace Wisplantern.Items.Weapons.Melee.Zweihanders
@@ -44,7 +45,7 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
                         target.Center,
                         new Vector2(Main.rand.NextFloat(-5f, 5f), Main.rand.NextFloat(-10f, -5f)),
                         ModContent.ProjectileType<MagmaBlob>(),
-                        (int)player.GetDamage(DamageClass.Melee).ApplyTo(30f),
+                        (int)player.GetDamage(DamageClass.Melee).ApplyTo(35f),
                         0.5f,
                         player.whoAmI)];
 
@@ -73,7 +74,7 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
     {
         public override void SetStaticDefaults()
         {
-            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 5;
+            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 10;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 1;
         }
 
@@ -84,7 +85,7 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
             {
                 Vector2 drawPos = Projectile.oldPos[i] - Main.screenPosition + drawOrigin + new Vector2(0f, Projectile.gfxOffY);
                 Color color = Projectile.GetAlpha(Color.Lerp(Color.White, Color.Magenta, 1f - ((Projectile.oldPos.Length - i) / (float)Projectile.oldPos.Length))) * ((Projectile.oldPos.Length - i) / (float)Projectile.oldPos.Length);
-                Main.spriteBatch.Draw(ModContent.Request<Texture2D>(Texture).Value, drawPos, new Rectangle?(), color, Projectile.rotation, drawOrigin, Projectile.scale, SpriteEffects.None, 0f);
+                Main.spriteBatch.Draw(ModContent.Request<Texture2D>(Texture).Value, drawPos, new Rectangle?(), color, Projectile.rotation, drawOrigin, Projectile.scale * ((Projectile.oldPos.Length - i) / (float)Projectile.oldPos.Length), SpriteEffects.None, 0f);
             }
             return false;
         }
@@ -94,12 +95,15 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
             Projectile.width = 24;
             Projectile.height = 18;
             Projectile.DamageType = DamageClass.Melee;
-            Projectile.penetrate = 1;
+            Projectile.penetrate = 3;
             Projectile.timeLeft = 300;
             Projectile.friendly = true;
             Projectile.extraUpdates = 1;
             Projectile.ai[1] = 0;
             Projectile.hostile = false;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.tileCollide = false;
+            Projectile.localNPCHitCooldown = -1;
         }
 
         public override bool? CanHitNPC(NPC target)
@@ -118,7 +122,10 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 
         public override void OnKill(int timeLeft)
         {
-            SoundEngine.PlaySound(SoundID.DD2_BetsyFireballImpact, Projectile.Center);
+            SoundEngine.PlaySound(SoundID.DD2_ExplosiveTrapExplode, Projectile.Center);
+
+            PunchCameraModifier modifier = new(Projectile.Center, Projectile.velocity.ToRotation().ToRotationVector2(), 5f, 3f, 6, 1000f);
+            Main.instance.CameraModifiers.Add(modifier);
 
             for (int i = 0; i < Main.rand.Next(6, 12); i++)
             {
@@ -137,9 +144,13 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
             }
 
             Projectile.velocity.Y += 0.05f;
+            if (Projectile.velocity.Y > 0)
+            {
+                Projectile.velocity.Y += 0.15f;
+            }
             Projectile.velocity *= 0.99f;
             Projectile.rotation = Projectile.velocity.ToRotation();
-            Projectile.tileCollide = Projectile.Center.Y >= ogPosition.Y;
+            Projectile.tileCollide = Projectile.Center.Y >= ogPosition.Y && Projectile.timeLeft < 300;
 
             NPC target = Main.npc[(int)Projectile.ai[0]];
             bool hasTarget = false;
@@ -165,7 +176,7 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 
             if (hasTarget)
             {
-                Projectile.velocity.X += Math.Sign(target.Center.X - Projectile.Center.X) * 0.025f;
+                Projectile.velocity.X += Math.Sign(target.Center.X - Projectile.Center.X) * (Projectile.velocity.Y > 0 ? 0.1f : 0.025f);
             }
         }
     }

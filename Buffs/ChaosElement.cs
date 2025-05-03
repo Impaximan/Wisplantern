@@ -58,7 +58,7 @@ namespace Wisplantern.Buffs
 
                         if (t != null)
                         {
-                            Vector2 target = t.Center;
+                            Vector2 target = t.Center + new Vector2(0f, -0.1f);
 
                             if (!Collision.SolidCollision(target - npc.Size / 2, npc.width, npc.height))
                             {
