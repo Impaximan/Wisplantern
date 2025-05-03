@@ -94,7 +94,7 @@ namespace Wisplantern.Items.Weapons.Manipulative.Canes
 
         public override void AI()
         {
-            Lighting.AddLight(Projectile.Center, new Vector3(255, 70, 25) * 0.001f * (1f - Projectile.frame / 6f));
+            Lighting.AddLight(Projectile.Center, new Vector3(255, 70, 25) * 0.01f * (1f - Projectile.frame / 6f));
 
             if (Projectile.frameCounter == 0 && Projectile.frame == 0)
             {

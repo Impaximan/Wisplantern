@@ -16,8 +16,8 @@ namespace Wisplantern.Tiles
 
             HitSound = SoundID.Tink;
 
-            MinPick = 35;
-            MineResist = 2f;
+            MinPick = 0;
+            MineResist = 1f;
             DustType = ModContent.DustType<PyriteDust>();
             AddMapEntry(new Color(227, 225, 200), CreateMapEntryName());
         }
