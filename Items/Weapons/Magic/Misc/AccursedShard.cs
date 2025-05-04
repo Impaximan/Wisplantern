@@ -50,6 +50,7 @@ namespace Wisplantern.Items.Weapons.Magic.Misc
                 int p = Projectile.NewProjectile(source, position, velocity.RotatedBy(MathHelper.ToRadians(Main.rand.Next(360))) * Main.rand.NextFloat(2f) - velocity * 2, type, damage, knockback, player.whoAmI);
                 Main.projectile[p].ai[0] = velocity.X;
                 Main.projectile[p].ai[1] = velocity.Y;
+                Main.projectile[p].netUpdate = true;
             }
             return false;
         }
@@ -113,9 +114,15 @@ namespace Wisplantern.Items.Weapons.Magic.Misc
 
         public override void AI()
         {
+            Projectile.netUpdate = true;
             Projectile.velocity += new Vector2(Projectile.ai[0], Projectile.ai[1]) * 0.25f;
             Projectile.rotation += rotationAmount;
             tileCollideTime++;
+
+            if (rotationAmount == 0f && Projectile.owner != Main.myPlayer)
+            {
+                rotationAmount = Main.rand.NextFloat(-7f, 7f);
+            }
         }
     }
 }

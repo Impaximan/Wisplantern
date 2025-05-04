@@ -21,6 +21,11 @@ namespace Wisplantern.Items.Powerups
             ItemID.Sets.IgnoresEncumberingStone[Type] = true;
         }
 
+        public override bool CanPickup(Player player)
+        {
+            return true;
+        }
+
         public override Color? GetAlpha(Color lightColor)
         {
             return Color.White * (1f - (Item.alpha / 255f));

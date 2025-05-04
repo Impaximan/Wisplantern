@@ -125,6 +125,11 @@ namespace Wisplantern.Items.Weapons.Melee.Swords
             SoundEngine.PlaySound(SoundID.DD2_BetsyFireballImpact, Projectile.Center);
             Projectile.ai[0] = 3;
 
+            if (Main.netMode != NetmodeID.SinglePlayer)
+            {
+                NetMessage.PlayNetSound(new NetMessage.NetSoundInfo(Projectile.Center, 42, 15));
+            }
+
             return false;
         }
 
@@ -133,12 +138,17 @@ namespace Wisplantern.Items.Weapons.Melee.Swords
             if (Projectile.ai[0] != 3)
             {
                 SoundEngine.PlaySound(SoundID.DD2_BetsyFireballImpact, Projectile.Center);
+                if (Main.netMode != NetmodeID.SinglePlayer)
+                {
+                    NetMessage.PlayNetSound(new NetMessage.NetSoundInfo(Projectile.Center, 42, 15));
+                }
                 Projectile.ai[0] = 3;
             }
         }
 
         public override void AI()
         {
+            Projectile.netUpdate = true;
             Player player = Main.player[Projectile.owner];
 
             Lighting.AddLight(Projectile.Center, new Vector3(125, 255, 255) / 1200f);
@@ -161,6 +171,10 @@ namespace Wisplantern.Items.Weapons.Melee.Swords
             else if (Projectile.ai[0] == 1)
             {
                 SoundEngine.PlaySound(SoundID.Item73, Projectile.Center);
+                if (Main.netMode != NetmodeID.SinglePlayer)
+                {
+                    NetMessage.PlayNetSound(new NetMessage.NetSoundInfo(Projectile.Center, 2, 73));
+                }
 
                 if (Collision.SolidCollision(Projectile.position, Projectile.width, Projectile.height))
                 {

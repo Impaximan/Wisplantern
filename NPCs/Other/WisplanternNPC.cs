@@ -50,7 +50,11 @@ namespace Wisplantern.NPCs.Other
 
         public override void OnKill()
         {
-            if (Main.netMode != NetmodeID.MultiplayerClient) Projectile.NewProjectile(NPC.GetSource_Death(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<WisplanternVortex>(), 0, 0f);
+            if (Main.netMode != NetmodeID.MultiplayerClient) 
+            {
+                int p = Projectile.NewProjectile(NPC.GetSource_Death(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<WisplanternVortex>(), 0, 0f);
+                Main.projectile[p].netUpdate = true;
+            }
         }
 
         public override void OnSpawn(IEntitySource source)
@@ -72,7 +76,7 @@ namespace Wisplantern.NPCs.Other
                 NPC.DiscourageDespawn(1200);
                 NPC.ai[0] += 1;
 
-                if (Main.player[Main.myPlayer].Distance(NPC.Center) <= 3000)
+                if (Main.player[Main.myPlayer].Distance(NPC.Center) <= 1000)
                 {
                     Main.player[Main.myPlayer].AddBuff(ModContent.BuffType<Buffs.Hyperspeed>(), 900);
                     Wisplantern.freezeFrames = 10;
@@ -91,14 +95,15 @@ namespace Wisplantern.NPCs.Other
                 }
 
                 NPC.ai[3] = 3000;
-                FindNewPosition();
+                if (Main.netMode != NetmodeID.MultiplayerClient)
+                {
+                    FindNewPosition();
+                    NPC.netUpdate = true;
+                }
 
                 moveSpeed = 10f;
             }
             NPC.life = NPC.lifeMax - (int)NPC.ai[0];
-
-
-            NetMessage.SendData(MessageID.SyncNPC, number: NPC.whoAmI);
 
         }
 
@@ -258,7 +263,7 @@ namespace Wisplantern.NPCs.Other
                 if (trueTimeLeft == 90 && Wisplantern.wisplanternLoot.Count > 0)
                 {
                     Projectile.ai[0] = Main.rand.Next(Wisplantern.wisplanternLoot);
-                    NetMessage.SendData(MessageID.SyncProjectile, number: Projectile.whoAmI);
+                    Projectile.netUpdate = true;
                 }
                 if (trueTimeLeft == 60 && Wisplantern.wisplanternLoot.Count > 0)
                 {

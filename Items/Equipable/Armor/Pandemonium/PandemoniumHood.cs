@@ -73,16 +73,20 @@ namespace Wisplantern.Items.Equipable.Armor.Pandemonium
 
                     player.SmokeBomb(30);
 
-                    int direction = Math.Sign(Main.MouseWorld.X - player.Center.X);
-                    player.velocity = new Vector2(15f * direction, -15f);
+                    int direction = 0;
 
-                    Wisplantern.freezeFrameLight = true;
+                    if (player.controlLeft) direction--;
+                    if (player.controlRight) direction++;
+
+                    if (player.whoAmI == Main.myPlayer) player.velocity = new Vector2(15f * direction, -15f);
+
+                    if (player.whoAmI == Main.myPlayer) Wisplantern.freezeFrameLight = true;
                     Wisplantern.freezeFrames = 10;
 
                     PunchCameraModifier modifier = new(player.Center, player.velocity.ToRotation().ToRotationVector2(), 10f, 10f, 8, 1000f);
                     Main.instance.CameraModifiers.Add(modifier);
 
-                    if (Main.netMode != NetmodeID.SinglePlayer) Mod.SendPacket(new SyncPlayerVelocity(player.velocity.X, player.velocity.Y, player.whoAmI), forward: true);
+                    if (Main.netMode != NetmodeID.SinglePlayer && player.whoAmI == Main.myPlayer) Mod.SendPacket(new SyncPlayerVelocity(player.velocity.X, player.velocity.Y, player.whoAmI), forward: true);
                 }
 
                 burstJumpCounter = 0;

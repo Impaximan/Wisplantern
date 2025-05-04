@@ -26,7 +26,8 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
         {
             if (perfectCharge)
             {
-                Projectile.NewProjectile(Item.GetSource_OnHit(target), target.Center, Vector2.Zero, ModContent.ProjectileType<Bloodsplosion_Machete>(), (int)(damageDone * 0.7f), 0f);
+                int p = Projectile.NewProjectile(Item.GetSource_OnHit(target), target.Center, Vector2.Zero, ModContent.ProjectileType<Bloodsplosion_Machete>(), (int)(damageDone * 0.7f), 0f);
+                Main.projectile[p].netUpdate = true;
                 SoundEngine.PlaySound(SoundID.Item14, target.Center);
             }
         }
