@@ -25,7 +25,7 @@ namespace Wisplantern.Globals.GItems
             if (player.AccessoryActive<GlintstoneGlove>() && Item.staff[item.type])
             {
                 position += new Vector2(item.width * -player.direction, -item.height);
-                if (player.whoAmI == Main.myPlayer && item.type != ModContent.ItemType<Items.Weapons.Magic.Staffs.Plantscalibur>() && !player.GetModPlayer<Globals.GItems.BattleArtPlayer>().usingBattleArt) velocity = (Main.MouseWorld - position).ToRotation().ToRotationVector2() * velocity.Length();
+                if (player.whoAmI == Main.myPlayer && item.type != ModContent.ItemType<Items.Weapons.Magic.Staffs.Plantscalibur>()) velocity = (Main.MouseWorld - position).ToRotation().ToRotationVector2() * velocity.Length();
             }
         }
 

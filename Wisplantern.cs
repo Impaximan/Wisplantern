@@ -88,7 +88,6 @@ namespace Wisplantern
         public static float charismaY = 0f;
         public static CharismaBehavior charismaBehavior = CharismaBehavior.ShowOnlyWithManipulative;
         public static bool pushCharismaDown = true;
-        public static bool noBattleArtTooltip = true;
 
         public override void Load()
         {

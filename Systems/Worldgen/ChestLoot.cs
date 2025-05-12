@@ -1,5 +1,4 @@
-﻿using Wisplantern.Items.BattleArtItems;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Terraria.WorldBuilding;
 
 namespace Wisplantern.Systems.Worldgen
@@ -11,19 +10,6 @@ namespace Wisplantern.Systems.Worldgen
             for (int i = 0; i < 1000; i++)
             {
                 Chest chest = Main.chest[i];
-
-                List<int> availableBattleArts = new()
-                {
-                    ModContent.ItemType<SwordParry>(),
-                    ModContent.ItemType<AerialRetreat>(),
-                    ModContent.ItemType<Uppercut>(),
-                    ModContent.ItemType<TriCast>(),
-                    ModContent.ItemType<Siphon>(),
-                    ModContent.ItemType<RadialCast>(),
-                    ModContent.ItemType<ExtendedSmokeBomb>(),
-                    ModContent.ItemType<FinishOff>(),
-                    ModContent.ItemType<FocusShot>(),
-                };
 
                 if (chest != null)
                 {
@@ -49,18 +35,6 @@ namespace Wisplantern.Systems.Worldgen
                                 if (chest.item[inventoryIndex].type == ItemID.None)
                                 {
                                     chest.item[inventoryIndex].SetDefaults(ModContent.ItemType<Items.Weapons.Manipulative.Decoys.BouncyDummy>());
-                                    break;
-                                }
-                            }
-                        }
-
-                        if (WorldGen.genRand.NextBool(4))
-                        {
-                            for (int inventoryIndex = 0; inventoryIndex < 40; inventoryIndex++)
-                            {
-                                if (chest.item[inventoryIndex].type == ItemID.None)
-                                {
-                                    chest.item[inventoryIndex].SetDefaults(Main.rand.Next(availableBattleArts));
                                     break;
                                 }
                             }

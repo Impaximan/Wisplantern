@@ -90,21 +90,6 @@ namespace Wisplantern
             }
         }
 
-        public static void DoBattleArtRechargeEffect(this Player player)
-        {
-            SoundStyle soundStyle = SoundID.MaxMana;
-            soundStyle.Pitch -= 0.5f;
-            if (player.whoAmI == Main.myPlayer) SoundEngine.PlaySound(soundStyle);
-            for (int i = 0; i < 5; i++)
-            {
-                int num3 = Dust.NewDust(player.position, player.width, player.height, 45, 0f, 0f, 255, default(Color), (float)Main.rand.Next(20, 26) * 0.1f);
-                Main.dust[num3].noLight = true;
-                Main.dust[num3].noGravity = true;
-                Dust obj = Main.dust[num3];
-                obj.velocity *= 0.5f;
-            }
-        }
-
         public static bool TileCanBeLush(int i, int j)
         {
             if (WorldGen.TileEmpty(i + 1, j) || !Main.tileSolid[Main.tile[i + 1, j].TileType])
@@ -271,14 +256,6 @@ namespace Wisplantern
             }
 
             return returned;
-        }
-
-        public static void SetAsBattleArtItem(this Item item, BattleArt battleArt)
-        {
-            item.GetGlobalItem<BattleArtItem>().isBattleArtItem = true;
-            item.GetGlobalItem<BattleArtItem>().battleArtItemBattleArt = battleArt;
-            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[item.type] = 1;
-            item.maxStack = 20;
         }
 
         public static void SetScholarlyDescription(this Item item, string description)

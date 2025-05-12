@@ -45,7 +45,7 @@ namespace Wisplantern.Items.Weapons.Manipulative.Canes
 
         public override bool? CanHitNPC(Player player, NPC target)
         {
-            if (player.altFunctionUse == 2 && Item.GetGlobalItem<Globals.GItems.BattleArtItem>().battleArt is BattleArts.FinishOff)
+            if (player.altFunctionUse == 2)
             {
                 return base.CanHitNPC(player, target);
             }
