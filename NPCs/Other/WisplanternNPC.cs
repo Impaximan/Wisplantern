@@ -229,9 +229,150 @@ namespace Wisplantern.NPCs.Other
             Projectile.tileCollide = false;
             Projectile.scale = 0.3f;
             Projectile.alpha = 255;
+            Projectile.ai[2] = Main.rand.Next(4, 7);
+            Projectile.netUpdate = true;
         }
 
         public void SpawnItem()
+        {
+            if (Main.netMode != NetmodeID.MultiplayerClient)
+            {
+                int type = 0;
+                int stack = 1;
+
+                switch (Main.rand.Next(4))
+                {
+                    case 0:
+                        switch (Main.rand.Next(3))
+                        {
+                            case 0:
+                                type = ItemID.GoldCoin;
+                                stack = Main.rand.Next(1, 6);
+                                break;
+                            case 1:
+                                type = ItemID.SilverCoin;
+                                stack = Main.rand.Next(50, 100);
+                                break;
+                            case 2:
+                                type = ItemID.CopperCoin;
+                                stack = Main.rand.Next(50, 100);
+                                break;
+                        }
+                        break;
+                    case 1:
+                        if (Main.hardMode)
+                        {
+                            switch (Main.rand.Next(3))
+                            {
+                                case 0:
+                                    type = (WorldGen.SavedOreTiers.Cobalt == TileID.Cobalt) ? ItemID.CobaltBar : ItemID.PalladiumBar;
+                                    stack = Main.rand.Next(7, 11);
+                                    break;
+                                case 1:
+                                    type = (WorldGen.SavedOreTiers.Mythril == TileID.Mythril) ? ItemID.MythrilBar : ItemID.OrichalcumBar;
+                                    stack = Main.rand.Next(5, 10);
+                                    break;
+                                case 2:
+                                    type = (WorldGen.SavedOreTiers.Adamantite == TileID.Adamantite) ? ItemID.AdamantiteBar : ItemID.TitaniumBar;
+                                    stack = Main.rand.Next(3, 7);
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            switch (Main.rand.Next(4))
+                            {
+                                case 0:
+                                    type = (WorldGen.SavedOreTiers.Copper == TileID.Copper) ? ItemID.CopperBar : ItemID.TinBar;
+                                    stack = Main.rand.Next(9, 12);
+                                    break;
+                                case 1:
+                                    type = (WorldGen.SavedOreTiers.Iron == TileID.Iron) ? ItemID.IronBar : ItemID.LeadBar;
+                                    stack = Main.rand.Next(7, 11);
+                                    break;
+                                case 2:
+                                    type = (WorldGen.SavedOreTiers.Silver == TileID.Silver) ? ItemID.SilverBar : ItemID.TungstenBar;
+                                    stack = Main.rand.Next(5, 10);
+                                    break;
+                                case 3:
+                                    type = (WorldGen.SavedOreTiers.Gold == TileID.Gold) ? ItemID.GoldBar : ItemID.PlatinumBar;
+                                    stack = Main.rand.Next(3, 7);
+                                    break;
+                            }
+                        }
+                        break;
+                    case 2:
+                        switch (Main.rand.Next(14))
+                        {
+                            case 0:
+                                type = ItemID.HermesBoots;
+                                break;
+                            case 1:
+                                type = ItemID.CloudinaBottle;
+                                break;
+                            case 2:
+                                type = ItemID.MagicMirror;
+                                break;
+                            case 3:
+                                type = ItemID.BandofRegeneration;
+                                break;
+                            case 4:
+                                type = ItemID.Mace;
+                                break;
+                            case 5:
+                                type = ItemID.EnchantedBoomerang;
+                                break;
+                            case 6:
+                                type = ItemID.RecallPotion;
+                                break;
+                            case 7:
+                                type = ItemID.Extractinator;
+                                break;
+                            case 8:
+                                type = ItemID.AngelStatue;
+                                break;
+                            case 9:
+                                type = ItemID.Torch;
+                                stack = Main.rand.Next(10, 50);
+                                break;
+                            case 10:
+                                type = ItemID.WoodenArrow;
+                                stack = Main.rand.Next(25, 75);
+                                break;
+                            case 11:
+                                type = ItemID.Cloud;
+                                stack = Main.rand.Next(25, 75);
+                                break;
+                            case 12:
+                                type = ItemID.DirtBlock;
+                                stack = Main.rand.Next(50, 150);
+                                break;
+                            case 13:
+                                type = ItemID.RainCloud;
+                                stack = Main.rand.Next(15, 45);
+                                break;
+                        }
+                        break;
+                    case 3:
+                        switch (Main.rand.Next(2))
+                        {
+                            case 0:
+                                type = ItemID.WormholePotion;
+                                break;
+                            case 1:
+                                type = ItemID.RecallPotion;
+                                break;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+
+                Item.NewItem(Projectile.GetSource_FromThis(), Projectile.Center, type, stack);
+            }
+        }
+
+        public void SpawnLastItem()
         {
             if (Main.netMode != NetmodeID.MultiplayerClient)
             {
@@ -250,7 +391,7 @@ namespace Wisplantern.NPCs.Other
             Main.spriteBatch.Draw(ModContent.Request<Texture2D>("Wisplantern/VFX/Vortex4").Value, //Texture
                 Projectile.Center - Main.screenPosition, //Position
                 null, //Source Rectangle
-                Projectile.GetAlpha(new Color(187, 206, 238)) * 0.5f, //Color
+                Projectile.GetAlpha(new Color(100, 235, 255)) * 0.5f, //Color
                 Projectile.rotation, //Rotation
                 new Vector2(500, 500), //Origin
                 Projectile.scale, //Scale
@@ -259,9 +400,13 @@ namespace Wisplantern.NPCs.Other
             return false;
         }
 
+        int itemCounter = 0;
+        int items = 3;
         public override void AI()
         {
             Projectile.rotation += MathHelper.ToRadians(5f);
+
+            Lighting.AddLight(Projectile.Center, new Vector3(100, 235, 255) * (1f - Projectile.alpha / 255f) / 150f);
 
             if (trueTimeLeft > 0)
             {
@@ -269,7 +414,25 @@ namespace Wisplantern.NPCs.Other
                 {
                     Projectile.alpha -= 255 / 60;
                 }
+                if (Projectile.timeLeft == 180 + 59)
+                {
+                    Projectile.ai[2] = Main.rand.Next(4, 7);
+                    Projectile.netUpdate = true;
+                }
                 trueTimeLeft--;
+                if (trueTimeLeft > 90)
+                {
+                    itemCounter++;
+                    if (itemCounter > 30 && Projectile.ai[2] > 0)
+                    {
+                        Projectile.ai[2]--;
+                        trueTimeLeft += 30;
+                        Projectile.timeLeft += 30;
+                        itemCounter = 0;
+                        SoundEngine.PlaySound(SoundID.Item8, Projectile.Center);
+                        if (Main.netMode != NetmodeID.MultiplayerClient) SpawnItem();
+                    }
+                }
                 if (trueTimeLeft == 90 && Wisplantern.wisplanternLoot.Count > 0)
                 {
                     Projectile.ai[0] = Main.rand.Next(Wisplantern.wisplanternLoot);
@@ -281,8 +444,8 @@ namespace Wisplantern.NPCs.Other
                     {
                         Main.NewText("A mysterious, rabbit-like person appears from the portal...", Color.Cyan);
                     }
-
-                    if (Main.netMode != NetmodeID.MultiplayerClient) SpawnItem();
+                    SoundEngine.PlaySound(SoundID.Item29, Projectile.Center);
+                    if (Main.netMode != NetmodeID.MultiplayerClient) SpawnLastItem();
                 }
             }
             else

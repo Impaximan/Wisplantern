@@ -927,6 +927,7 @@ Mods: {
 			AlluringSapphireDecoy.DisplayName: Alluring Sapphire
 			AlluringTopazDecoy.DisplayName: Alluring Topaz
 			AlluringAmberDecoy.DisplayName: Alluring Amber
+			BoulderCarrier.DisplayName: Skeleton
 		}
 
 		Dialogue: {
