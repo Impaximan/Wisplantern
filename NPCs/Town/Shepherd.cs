@@ -18,7 +18,7 @@ namespace Wisplantern.NPCs.Town
 			NPCID.Sets.ExtraFramesCount[Type] = 9;
 			NPCID.Sets.AttackFrameCount[Type] = 4;
 			NPCID.Sets.DangerDetectRange[Type] = 500;
-			NPCID.Sets.AttackType[Type] = 0;
+			NPCID.Sets.AttackType[Type] = -1;
 			NPCID.Sets.AttackTime[Type] = 90;
 			NPCID.Sets.AttackAverageChance[Type] = 30;
 			NPCID.Sets.HatOffsetY[Type] = 4;

@@ -4,7 +4,7 @@
     {
         public override void PreUpdateBuffs()
         {
-            if (Systems.AuraTiles.moonflower && !Main.dayTime && Player.ZoneOverworldHeight)
+            if (Systems.Misc.moonflower && !Main.dayTime && Player.ZoneOverworldHeight)
             {
                 Player.AddBuff(ModContent.BuffType<Buffs.Pensive>(), 2);
             }

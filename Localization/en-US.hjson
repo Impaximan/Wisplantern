@@ -43,6 +43,7 @@ Mods: {
 			PandemoniumSpiritRanged.DisplayName: Pandemonium Spirit
 			PandemoniumBulletProjectile.DisplayName: Pandemonium Bullet
 			MoltenCaneExplosion.DisplayName: Explosion
+			PrimitiveDartProjectile.DisplayName: Primitive Dart Projectile
 		}
 
 		Biomes: {
@@ -850,6 +851,20 @@ Mods: {
 					'No rest for the wicked'
 					'''
 			}
+
+			Atlatl: {
+				DisplayName: Atlatl
+				Tooltip:
+					'''
+					Attack speed scales with your current velocity
+					30% chance to not consume dart
+					'''
+			}
+
+			PrimitiveDart: {
+				DisplayName: Primitive Dart
+				Tooltip: Pierces multiple targets
+			}
 		}
 
 		NPCs: {
@@ -882,6 +897,29 @@ Mods: {
 				DisplayName: Shepherd
 			}
 
+			Huntress: {
+				TownNPCMood: {
+					Princess_LovesNPC: "{NPCName} is cool."
+					LikeNPC_Princess: "{NPCName} is cool."
+					HateBiome: I can't see the stars at all down here!
+					DislikeBiome: The atmosphere in {BiomeName} makes it difficult to see the stars; not a fan.
+					LikeBiome: The arid atmosphere in {BiomeName} makes seeing the stars so much easier! It's great!
+					LoveBiome: It's so peaceful stargazing at {BiomeName}. I love it here.
+					HateCrowded: People won't pipe down when I wanna go stargazing; there's just too many of them! It's so annoying.
+					DislikeCrowded: I could use a bit more personal space.
+					LoveSpace: It's so peaceful around here with so few people around to bug me.
+					FarFromHome: I love being in nature and all, but it'd be nice to have a break from it. Could you get me back to my house? Please?
+					NoHome: Do you think you could get me a place to live?
+					Content: I'm feeling... okay.
+					HateNPC: "{NPCName} has no appreciation for the stars, or anything for that matter. He's SO superficial."
+					DislikeNPC: "{NPCName} NEVER stops making noise. EVER. Wish he'd pipe down."
+					LikeNPC: You know who has a really good sense of getting around in nature? {NPCName}. She's super in tune with it. Not sure how she feels about me hunting, though.
+					LoveNPC: "{NPCName} is um, really cool. Wish I could get to know more about him."
+				}
+
+				DisplayName: Huntress
+			}
+
 			AlluringAmethystDecoy.DisplayName: Alluring Amethyst
 			AlluringDiamondDecoy.DisplayName: Alluring Diamond
 			AlluringEmeraldDecoy.DisplayName: Alluring Emerald
@@ -902,6 +940,8 @@ Mods: {
 				Talk7: Rock, paper, scissor, shoot! ...I win, as per usual.
 				Talk8: Back in my day I would carefully convince travelling merchants to give me their wares for free. My secret? Peer pressure...
 			}
+
+			Huntress.Talk1: I don't have any dialogue yet. Hopefully Impaxim remembers to give me some.
 		}
 
 		Prefixes: {

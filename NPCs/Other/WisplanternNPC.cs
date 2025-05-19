@@ -5,6 +5,7 @@ using Terraria.DataStructures;
 using System;
 using Terraria.Graphics.CameraModifiers;
 using Terraria.Audio;
+using Wisplantern.Systems;
 
 namespace Wisplantern.NPCs.Other
 {
@@ -232,7 +233,16 @@ namespace Wisplantern.NPCs.Other
 
         public void SpawnItem()
         {
-            if (Main.netMode != NetmodeID.MultiplayerClient) Item.NewItem(Projectile.GetSource_FromThis(), Projectile.Center, (int)Projectile.ai[0]);
+            if (Main.netMode != NetmodeID.MultiplayerClient)
+            {
+                Item.NewItem(Projectile.GetSource_FromThis(), Projectile.Center, (int)Projectile.ai[0]);
+
+                if (!Misc.HuntressSaved)
+                {
+                    int npc = NPC.NewNPC(new EntitySource_SpawnNPC(), (int)Projectile.Center.X, (int)Projectile.Center.Y, ModContent.NPCType<Town.Huntress>());
+                    Main.npc[npc].netUpdate = true;
+                }
+            }
         }
 
         public override bool PreDraw(ref Color lightColor)
@@ -267,6 +277,11 @@ namespace Wisplantern.NPCs.Other
                 }
                 if (trueTimeLeft == 60 && Wisplantern.wisplanternLoot.Count > 0)
                 {
+                    if (Main.netMode != NetmodeID.Server && !Misc.HuntressSaved)
+                    {
+                        Main.NewText("A mysterious, rabbit-like person appears from the portal...", Color.Cyan);
+                    }
+
                     if (Main.netMode != NetmodeID.MultiplayerClient) SpawnItem();
                 }
             }
