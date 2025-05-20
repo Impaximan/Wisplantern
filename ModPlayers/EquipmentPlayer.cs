@@ -1,4 +1,6 @@
 ﻿using Terraria.Audio;
+using Wisplantern.Buffs;
+using Wisplantern.Globals.GNPCs;
 using Wisplantern.Items.Equipable.Accessories;
 
 namespace Wisplantern.ModPlayers
@@ -27,6 +29,60 @@ namespace Wisplantern.ModPlayers
             if (Player.AccessoryActive<FocusingCrystal>())
             {
                 modifiers.CritDamage *= critDamageMult;
+            }
+
+            if (target.HasBuff<Marked>())
+            {
+                modifiers.FinalDamage *= 1.3f;
+                modifiers.HideCombatText();
+            }
+        }
+
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            if (target.HasBuff<Marked>() && Main.netMode != NetmodeID.Server)
+            {
+                CombatText.NewText(target.getRect(), hit.Crit ? Color.Red : Color.Crimson, hit.Damage, hit.Crit);
+
+                SoundStyle style = new SoundStyle("Wisplantern/Sounds/Effects/DamageTick2");
+                style.MaxInstances = 10;
+                style.PitchVariance = 0.3f;
+                style.Volume *= 0.5f;
+                style.Pitch -= 0.3f;
+                style.SoundLimitBehavior = SoundLimitBehavior.ReplaceOldest;
+
+                SoundEngine.PlaySound(style);
+            }
+
+            if (Player.AccessoryActive<DeathMark>())
+            {
+                if (Main.rand.NextBool(15))
+                {
+                    target.AddBuff(ModContent.BuffType<Hemorrhaging>(), 60 * 5);
+                }
+
+                int num = 0;
+
+                foreach (int type in target.buffType)
+                {
+                    if (type > 0 && type != ModContent.BuffType<Marked>() && Main.debuff[type] && target.buffTime[target.FindBuffIndex(type)] > 0)
+                    {
+                        num++;
+                    }
+                }
+
+                if (target.TryGetGlobalNPC(out InfightingNPC iNPC))
+                {
+                    if (iNPC.aggravated)
+                    {
+                        num++;
+                    }
+                }
+
+                if (num >= 3)
+                {
+                    target.AddBuff(ModContent.BuffType<Marked>(), 60 * 10);
+                }
             }
         }
 

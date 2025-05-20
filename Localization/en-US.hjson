@@ -157,6 +157,16 @@ Mods: {
 				DisplayName: Chaos Element
 				Description: Mods.Wisplantern.Buffs.ChaosElement.Description
 			}
+
+			Marked: {
+				DisplayName: Marked
+				Description: Mods.Wisplantern.Buffs.Marked.Description
+			}
+
+			Hemorrhaging: {
+				DisplayName: Hemorrhaging
+				Description: Mods.Wisplantern.Buffs.Hemorrhaging.Description
+			}
 		}
 
 		Items: {
@@ -868,6 +878,16 @@ Mods: {
 			PrimitiveDart: {
 				DisplayName: Primitive Dart
 				Tooltip: Pierces multiple targets
+			}
+
+			DeathMark: {
+				DisplayName: Death Mark
+				Tooltip:
+					'''
+					Enemies inflicted with 3 or more debuffs will become "Marked for Death" for 10 seconds
+					Marked enemies recieve 30% increased damage from all sources
+					Grants a chance to inflict 'hemorrhaging', dealing 8 damage per second for 5 seconds
+					'''
 			}
 		}
 

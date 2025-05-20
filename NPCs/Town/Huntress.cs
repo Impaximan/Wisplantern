@@ -7,6 +7,7 @@ using Wisplantern.Systems;
 using Wisplantern.Items.Weapons.Ranged.Misc;
 using Wisplantern.Items.Ammo;
 using Wisplantern.Items.Weapons.Ranged.Javelins;
+using Wisplantern.Items.Equipable.Accessories;
 
 namespace Wisplantern.NPCs.Town
 {
@@ -182,6 +183,7 @@ namespace Wisplantern.NPCs.Town
                 .Add<HuntingJavelin>()
                 .Add<PrimitiveDart>()
                 .Add(leather)
+                .Add<DeathMark>(Condition.DownedEarlygameBoss)
                 .Register();
         }
 
