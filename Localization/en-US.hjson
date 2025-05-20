@@ -6,7 +6,7 @@ Mods: {
 
 		DamageClasses: {
 			ManipulativeDamageClass.DisplayName: manipulative damage
-			CulinaryDamageClass.DisplayName: Culinary Damage Class
+			DeliciousDamageClass.DisplayName: delicious damage
 		}
 
 		Projectiles: {
