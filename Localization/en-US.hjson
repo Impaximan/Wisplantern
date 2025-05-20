@@ -48,6 +48,8 @@ Mods: {
 			PandemoniumBulletProjectile.DisplayName: Pandemonium Bullet
 			MoltenCaneExplosion.DisplayName: Explosion
 			PrimitiveDartProjectile.DisplayName: Primitive Dart Projectile
+			FrontlinersSpearheadSpear.DisplayName: Frontliners Spearhead Spear
+			FrontlinersSpearheadJavelin.DisplayName: Frontliners Spearhead Javelin
 		}
 
 		Biomes: {
@@ -887,6 +889,15 @@ Mods: {
 					Enemies inflicted with 3 or more debuffs will become "Marked for Death" for 10 seconds
 					Marked enemies recieve 30% increased damage from all sources
 					Grants a chance to inflict 'hemorrhaging', dealing 8 damage per second for 5 seconds
+					'''
+			}
+
+			FrontlinersSpearhead: {
+				DisplayName: Front Liner's Spearhead
+				Tooltip:
+					'''
+					8% increased summon damage
+					Your first summon is equipped with a spear that it can jab and throw at foes
 					'''
 			}
 		}

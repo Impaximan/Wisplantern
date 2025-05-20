@@ -27,8 +27,6 @@ namespace Wisplantern.NPCs.Town
             NPCID.Sets.AttackTime[Type] = 90;
             NPCID.Sets.AttackAverageChance[Type] = 30;
             NPCID.Sets.HatOffsetY[Type] = 4;
-            //NPCID.Sets.ShimmerTownTransform[NPC.type] = true;
-            //NPCID.Sets.FaceEmote[Type] = ModContent.EmoteBubbleType<ExamplePersonEmote>();
 
             NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new()
             {
@@ -182,7 +180,9 @@ namespace Wisplantern.NPCs.Town
                 .Add<Atlatl>()
                 .Add<HuntingJavelin>()
                 .Add<PrimitiveDart>()
+                .Add<FrontlinersSpearhead>()
                 .Add(leather)
+                .Add(ItemID.HunterPotion)
                 .Add<DeathMark>(Condition.DownedEarlygameBoss)
                 .Register();
         }

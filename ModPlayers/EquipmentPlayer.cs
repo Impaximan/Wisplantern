@@ -59,6 +59,14 @@ namespace Wisplantern.ModPlayers
                 if (Main.rand.NextBool(15))
                 {
                     target.AddBuff(ModContent.BuffType<Hemorrhaging>(), 60 * 5);
+
+                    SoundStyle style = new("Wisplantern/Sounds/Effects/SharpHit2");
+                    style.PitchVariance = 0.35f;
+                    style.Pitch -= 0.35f;
+                    style.Volume = 0.75f;
+                    style.MaxInstances = 1;
+
+                    SoundEngine.PlaySound(style, target.Center);
                 }
 
                 int num = 0;
@@ -81,7 +89,11 @@ namespace Wisplantern.ModPlayers
 
                 if (num >= 3)
                 {
+                    if (!target.HasBuff<Marked>()) CombatText.NewText(target.getRect(), Color.Crimson, "Marked For Death", true);
+
                     target.AddBuff(ModContent.BuffType<Marked>(), 60 * 10);
+
+                    SoundEngine.PlaySound(SoundID.Item113, target.Center);
                 }
             }
         }

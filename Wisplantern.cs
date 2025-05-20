@@ -7,10 +7,10 @@ global using System.Collections.Generic;
 global using System;
 global using Wisplantern.EasyPackets;
 global using EasyPacketsLib;
+global using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Microsoft.Xna.Framework.Audio;
 using System.IO;
-using Microsoft.Xna.Framework.Graphics;
 using Terraria.Graphics.Effects;
 using Terraria.Graphics.Shaders;
 
