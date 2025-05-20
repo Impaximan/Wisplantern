@@ -6,6 +6,7 @@ using Terraria.Localization;
 using Wisplantern.Systems;
 using Wisplantern.Items.Weapons.Ranged.Misc;
 using Wisplantern.Items.Ammo;
+using Wisplantern.Items.Weapons.Ranged.Javelins;
 
 namespace Wisplantern.NPCs.Town
 {
@@ -173,9 +174,14 @@ namespace Wisplantern.NPCs.Town
 
         public override void AddShops()
         {
+            NPCShop.Entry leather = new(ItemID.Leather);
+            leather.Item.value = Item.buyPrice(0, 0, 50, 0);
+
             new NPCShop(Type)
                 .Add<Atlatl>()
+                .Add<HuntingJavelin>()
                 .Add<PrimitiveDart>()
+                .Add(leather)
                 .Register();
         }
 

@@ -30,7 +30,7 @@ namespace Wisplantern.Items.Weapons.Ranged.Misc
             Item.autoReuse = true;
             Item.shootSpeed = 12f;
             Item.value = Item.buyPrice(0, 4, 0, 0);
-
+            Item.MarkAsHuntingWeapon();
         }
 
         public override void ModifyTooltips(List<TooltipLine> tooltips)

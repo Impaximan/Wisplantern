@@ -1,33 +1,34 @@
-﻿using System.Collections.Generic;
+﻿using MonoMod.Core.Platforms;
+using System.Collections.Generic;
 
 namespace Wisplantern.Prefixes
 {
-    class MaxLifePrefixItem : GlobalItem
+    class ManipulativeAccessoryPrefixItem : GlobalItem
     {
         public override bool InstancePerEntity => true;
 
-        public int GetExtraLifeCount(Item item)
+        public int GetManipulativePowerBonus(Item item)
         {
             int prefix = item.prefix;
 
-            if (prefix == ModContent.PrefixType<Steadfast>())
+            if (prefix == ModContent.PrefixType<Cunning>())
             {
                 return 2;
             }
 
-            if (prefix == ModContent.PrefixType<Hopeful>())
+            if (prefix == ModContent.PrefixType<Scheming>())
             {
-                return 4;
+                return 3;
             }
 
-            if (prefix == ModContent.PrefixType<Lively>())
+            if (prefix == ModContent.PrefixType<Conniving>())
+            {
+                return 5;
+            }
+
+            if (prefix == ModContent.PrefixType<Diabolical>())
             {
                 return 6;
-            }
-
-            if (prefix == ModContent.PrefixType<Vital>())
-            {
-                return 8;
             }
 
             return 0;
@@ -35,15 +36,15 @@ namespace Wisplantern.Prefixes
 
         public override void UpdateEquip(Item item, Player player)
         {
-            int lifeCount = GetExtraLifeCount(item);
-            player.statLifeMax2 += (int)(player.statLifeMax * (lifeCount / 100f));
+            int manipulativePower = GetManipulativePowerBonus(item);
+            player.GetModPlayer<ManipulativePlayer>().manipulativePower += manipulativePower / 100f;
         }
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (GetExtraLifeCount(item) != 0)
+            if (GetManipulativePowerBonus(item) != 0)
             {
-                TooltipLine line = new(Mod, "MaxLifePrefix", "+" + GetExtraLifeCount(item).ToString() + "% maximum life")
+                TooltipLine line = new(Mod, "ManipulativePowerAccessoryPrefix", "+" + GetManipulativePowerBonus(item).ToString() + "% manipulative power")
                 {
                     IsModifier = true
                 };
@@ -52,14 +53,9 @@ namespace Wisplantern.Prefixes
         }
     }
 
-    class Steadfast : ModPrefix
+    class Cunning : ModPrefix
     {
         public override PrefixCategory Category => PrefixCategory.Accessory;
-
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Steadfast");
-        }
 
         public override void ModifyValue(ref float valueMult)
         {
@@ -67,14 +63,9 @@ namespace Wisplantern.Prefixes
         }
     }
 
-    class Hopeful : ModPrefix
+    class Scheming : ModPrefix
     {
         public override PrefixCategory Category => PrefixCategory.Accessory;
-
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Hopeful");
-        }
 
         public override void ModifyValue(ref float valueMult)
         {
@@ -82,14 +73,9 @@ namespace Wisplantern.Prefixes
         }
     }
 
-    class Lively : ModPrefix
+    class Conniving : ModPrefix
     {
         public override PrefixCategory Category => PrefixCategory.Accessory;
-
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Lively");
-        }
 
         public override void ModifyValue(ref float valueMult)
         {
@@ -97,15 +83,9 @@ namespace Wisplantern.Prefixes
         }
     }
 
-    class Vital : ModPrefix
+    class Diabolical : ModPrefix
     {
         public override PrefixCategory Category => PrefixCategory.Accessory;
-
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Vital");
-        }
-
 
         public override void ModifyValue(ref float valueMult)
         {

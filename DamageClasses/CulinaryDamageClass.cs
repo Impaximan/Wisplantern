@@ -1,6 +1,6 @@
 ﻿namespace Wisplantern.DamageClasses
 {
-    class ManipulativeDamageClass : DamageClass
+    class CulinaryDamageClass : DamageClass
     {
         public override bool UseStandardCritCalcs => true;
 

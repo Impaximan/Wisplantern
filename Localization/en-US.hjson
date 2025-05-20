@@ -3,7 +3,11 @@ Mods: {
 		NoBattleArtTooltip: Cannot be given a battle art
 		ServerConfig.WorldgenHeader: World generation
 		InfoDisplays.LuckIndicator.DisplayName: Luck
-		DamageClasses.ManipulativeDamageClass.DisplayName: manipulative damage
+
+		DamageClasses: {
+			ManipulativeDamageClass.DisplayName: manipulative damage
+			CulinaryDamageClass.DisplayName: Culinary Damage Class
+		}
 
 		Projectiles: {
 			BloodySlashProjectile.DisplayName: Bloody Slash Projectile
@@ -962,6 +966,10 @@ Mods: {
 			Loving.DisplayName: Loving
 			Rude.DisplayName: Rude
 			Sensitive.DisplayName: Sensitive
+			Conniving.DisplayName: Conniving
+			Cunning.DisplayName: Cunning
+			Diabolical.DisplayName: Diabolical
+			Scheming.DisplayName: Scheming
 		}
 
 		Configs: {

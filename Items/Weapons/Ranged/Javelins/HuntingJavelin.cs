@@ -32,7 +32,7 @@ namespace Wisplantern.Items.Weapons.Ranged.Javelins
             Item.maxStack = 9999;
             Item.consumable = true;
             Item.knockBack = 5f;
-            Item.value = Item.sellPrice(0, 0, 0, 50);
+            Item.value = Item.buyPrice(0, 0, 0, 50);
             Item.MarkAsHuntingWeapon();
         }
 
