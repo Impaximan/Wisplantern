@@ -1,15 +1,17 @@
 ﻿namespace Wisplantern.Items.Equipable.Accessories
 {
-    [AutoloadEquip(EquipType.Neck)]
+    [AutoloadEquip(EquipType.Face)]
     public class DeathMark : ModItem
     {
         public override void SetStaticDefaults()
         {
+            ArmorIDs.Face.Sets.OverrideHelmet[EquipLoader.GetEquipSlot(Mod, Name, EquipType.Face)] = true;
             Item.ResearchUnlockCount = 1;
         }
 
         public override void SetDefaults()
         {
+            ArmorIDs.Face.Sets.DrawInFaceUnderHairLayer[EquipLoader.GetEquipSlot(Mod, Name, EquipType.Face)] = true;
             Item.accessory = true;
             Item.width = 26;
             Item.height = 30;

@@ -129,7 +129,7 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
                 }
 
                 player.itemRotation = rotation + swordRotationAdd * player.direction + MathHelper.ToRadians(player.direction == 1 ? -45 : -135);
-				player.itemLocation = player.Center + rotation.ToRotationVector2().RotatedBy(-90 * player.direction) * 12.5f + new Vector2(10, 0).RotatedBy(rotation);
+				player.itemLocation = (player.Center + (player.MountedCenter - player.Center) * 1.2f) + rotation.ToRotationVector2().RotatedBy(-90 * player.direction) * 12.5f + new Vector2(10, 0).RotatedBy(rotation);
 
 				if (perfectChargeTime <= perfectChargeLeeway && chargeProgress >= 1f && HasSwungDust)
 				{
@@ -175,7 +175,7 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 				if (player.direction == 1) player.compositeFrontArm.rotation -= MathHelper.Pi;
 
 				player.itemRotation = rotation + swordRotationAdd * player.direction + MathHelper.ToRadians(player.direction == 1 ? -45 : -135);
-				player.itemLocation = player.Center + rotation.ToRotationVector2().RotatedBy(-90 * player.direction) * 12.5f + new Vector2(10, 0).RotatedBy(rotation);
+				player.itemLocation = (player.Center + (player.MountedCenter - player.Center) * 1.2f) + rotation.ToRotationVector2().RotatedBy(-90 * player.direction) * 12.5f + new Vector2(10, 0).RotatedBy(rotation);
 
 				if (chargeProgress < 1f)
 				{
@@ -221,7 +221,7 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
 				}
 				else if (chargeProgress >= 0.15f && perfectChargeTime <= perfectChargeLeeway && player.whoAmI == Main.myPlayer)
 				{
-					Vector2 dustPos = player.itemLocation + Item.Size.RotatedBy(rotation + MathHelper.Pi * 0.75f) * chargeProgress;
+					Vector2 dustPos = player.itemLocation + Item.Size.RotatedBy(rotation + MathHelper.Pi * 0.75f + player.fullRotation) * chargeProgress;
 					int num3 = Dust.NewDust(dustPos - new Vector2(5, 5), 10, 10, 45, 0f, 0f, 255, default(Color), (float)Main.rand.Next(20, 26) * 0.1f);
 					Main.dust[num3].noLight = true;
 					Main.dust[num3].noLightEmittence = true;

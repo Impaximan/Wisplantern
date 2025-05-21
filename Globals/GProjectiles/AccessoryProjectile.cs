@@ -16,9 +16,19 @@ namespace Wisplantern.Globals.GProjectiles
         {
             frontlinerSummon = false;
 
-            if (source is EntitySource_ItemUse itemSource)
+            if (source is EntitySource_ItemUse itemSource && projectile.minionSlots > 0)
             {
-                if (projectile.minionSlots > 0 && projectile.minionPos == 0)
+                bool b = true;
+                foreach (Projectile minion in Main.projectile)
+                {
+                    if (minion.minionSlots > 0 && minion.owner == projectile.owner && minion.active && minion != projectile && minion.GetGlobalProjectile<AccessoryProjectile>().frontlinerSummon)
+                    {
+                        b = false;
+                        break;
+                    }
+                }
+
+                if (b)
                 {
                     if (itemSource.Player.AccessoryActive<FrontlinersSpearhead>())
                     {
