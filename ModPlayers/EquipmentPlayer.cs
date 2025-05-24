@@ -65,15 +65,22 @@ namespace Wisplantern.ModPlayers
                     style.Pitch -= 0.35f;
                     style.Volume = 0.75f;
                     style.MaxInstances = 1;
-
+                    
                     SoundEngine.PlaySound(style, target.Center);
                 }
 
                 int num = 0;
 
+                List<int> oddExceptions = new()
+                {
+                    BuffID.OnFire3
+                };
+
+
                 foreach (int type in target.buffType)
                 {
-                    if (type > 0 && type != ModContent.BuffType<Marked>() && Main.debuff[type] && target.buffTime[target.FindBuffIndex(type)] > 0)
+                    if (type > 0 && type != ModContent.BuffType<Marked>() && (Main.debuff[type] || oddExceptions.Contains(type)) //FSR some debuffs from the base game are not marked as debuffs. This aims to patch some of those.
+                        && target.buffTime[target.FindBuffIndex(type)] > 0)
                     {
                         num++;
                     }
