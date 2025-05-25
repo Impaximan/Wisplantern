@@ -299,7 +299,27 @@ namespace Wisplantern.Globals.GNPCs
 
                         if (infightPlayer == Main.myPlayer)
                         {
-                            NPC.HitInfo info = target.CalculateHitInfo(damage, Math.Sign(target.Center.X - npc.Center.X), Main.rand.NextBool(infightCritChance, 100), infightKnockback, ModContent.GetInstance<DamageClasses.ManipulativeDamageClass>(), true, Main.player[infightPlayer].luck);
+                            NPC.HitModifiers modifiers = new NPC.HitModifiers();
+
+                            if (infightItem != null && infightItem.ModItem != null)
+                            {
+                                infightItem.ModItem.ModifyHitNPC(Main.player[infightPlayer], target, ref modifiers);
+
+                                foreach (GlobalItem gItem in infightItem.Globals)
+                                {
+                                    gItem.ModifyHitNPC(infightItem, Main.player[infightPlayer], target, ref modifiers);
+                                }
+
+                                foreach (ModPlayer mPlayer in Main.player[infightPlayer].ModPlayers)
+                                {
+                                    mPlayer.ModifyHitNPC(target, ref modifiers);
+                                    mPlayer.ModifyHitNPCWithItem(infightItem, target, ref modifiers);
+                                }
+                            }
+                            NPC.HitInfo baseHitInfo = modifiers.ToHitInfo(damage, Main.rand.NextBool(infightCritChance, 100), infightKnockback, false);
+                            NPC.HitInfo info = target.CalculateHitInfo(baseHitInfo.Damage, Math.Sign(target.Center.X - npc.Center.X), baseHitInfo.Crit, baseHitInfo.Knockback, ModContent.GetInstance<DamageClasses.ManipulativeDamageClass>(), true, Main.player[infightPlayer].luck);
+
+
                             int struckDamage = target.StrikeNPC(info);
                             if (Main.netMode != NetmodeID.SinglePlayer) NetMessage.SendStrikeNPC(target, info, Main.myPlayer);
                             Main.player[infightPlayer].addDPS(struckDamage);
@@ -315,6 +335,12 @@ namespace Wisplantern.Globals.GNPCs
                                 foreach (GlobalItem gItem in infightItem.Globals)
                                 {
                                     gItem.OnHitNPC(infightItem, Main.player[infightPlayer], target, info, struckDamage);
+                                }
+
+                                foreach (ModPlayer mPlayer in Main.player[infightPlayer].ModPlayers)
+                                {
+                                    mPlayer.OnHitNPC(target, info, struckDamage);
+                                    mPlayer.OnHitNPCWithItem(infightItem, target, info, struckDamage);
                                 }
                             }
 
@@ -394,6 +420,9 @@ namespace Wisplantern.Globals.GNPCs
                     if (infightingNPC.aggravated)
                     {
                         projectile.friendly = true;
+                        projectile.DamageType = ModContent.GetInstance<DamageClasses.ManipulativeDamageClass>();
+                        projectile.CritChance = infightingNPC.infightCritChance;
+                        projectile.owner = infightingNPC.infightPlayer;
 
                         if (infightingNPC.infightItem != null)
                         {

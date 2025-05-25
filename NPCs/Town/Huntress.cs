@@ -183,6 +183,7 @@ namespace Wisplantern.NPCs.Town
                 .Add<PrimitiveDart>()
                 .Add<FrontlinersSpearhead>()
                 .Add<HuntressSickle>()
+                .Add<GourdCanteen>()
                 .Add(leather)
                 .Add(ItemID.HunterPotion)
                 .Add<DeathMark>(Condition.DownedEarlygameBoss)
