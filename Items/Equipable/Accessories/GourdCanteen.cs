@@ -2,33 +2,25 @@
 
 namespace Wisplantern.Items.Equipable.Accessories
 {
-    class WispNecklace : ModItem
+    class GourdCanteen : ModItem
     {
         public override void SetStaticDefaults()
         {
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
-        public override Color? GetAlpha(Color lightColor)
-        {
-            return Color.White;
-        }
-
         public override void SetDefaults()
         {
             Item.accessory = true;
-            Item.width = 18;
-            Item.height = 26;
-            Item.defense = 1;
+            Item.width = 20;
+            Item.height = 22;
             Item.rare = ItemRarityID.Blue;
-            Item.value = Item.sellPrice(0, 1, 0, 0);
-            Item.SetScholarlyDescription("Found mysteriously from the mystical remains of Wisplanterns underground");
+            Item.value = Item.buyPrice(0, 5, 0, 0);
         }
 
         public override void UpdateEquip(Player player)
         {
             player.AddAccessoryEffect(Item);
-            player.pickSpeed *= 0.9f;
         }
     }
 }

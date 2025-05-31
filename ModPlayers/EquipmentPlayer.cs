@@ -1,4 +1,5 @@
 ﻿using Terraria.Audio;
+using Terraria.WorldBuilding;
 using Wisplantern.Buffs;
 using Wisplantern.Globals.GNPCs;
 using Wisplantern.Items.Equipable.Accessories;
@@ -65,15 +66,22 @@ namespace Wisplantern.ModPlayers
                     style.Pitch -= 0.35f;
                     style.Volume = 0.75f;
                     style.MaxInstances = 1;
-
+                    
                     SoundEngine.PlaySound(style, target.Center);
                 }
 
                 int num = 0;
 
+                List<int> oddExceptions = new()
+                {
+                    BuffID.OnFire3
+                };
+
+
                 foreach (int type in target.buffType)
                 {
-                    if (type > 0 && type != ModContent.BuffType<Marked>() && Main.debuff[type] && target.buffTime[target.FindBuffIndex(type)] > 0)
+                    if (type > 0 && type != ModContent.BuffType<Marked>() && (Main.debuff[type] || oddExceptions.Contains(type)) //FSR some debuffs from the base game are not marked as debuffs. This aims to patch some of those.
+                        && target.buffTime[target.FindBuffIndex(type)] > 0)
                     {
                         num++;
                     }
@@ -141,6 +149,7 @@ namespace Wisplantern.ModPlayers
             }
         }
 
+        int lastHealth = 1000;
         public override void PostUpdateEquips()
         {
             if (Player.AccessoryActive<WispNecklace>())
@@ -155,6 +164,29 @@ namespace Wisplantern.ModPlayers
                     if (usedPickSpeed < 0.75f) usedPickSpeed = 0.75f;
                 }
                 Player.GetAttackSpeed(DamageClass.Generic) *= MathHelper.Lerp(1f / usedPickSpeed, 1f, 0.5f);
+            }
+
+            int diff = Player.statLife - lastHealth;
+            lastHealth = Player.statLife;
+
+            if (diff >= 5 && Player.AccessoryActive<GourdCanteen>())
+            {
+                int time = 60 + (int)(diff * 4.5f);
+
+                if (Main.netMode != NetmodeID.Server)
+                {
+                    SoundStyle style = new("Wisplantern/Sounds/Effects/GourdBuff");
+                    style.Volume *= 0.5f;
+                    style.PitchVariance = 0.5f;
+                    style.MaxInstances = 10;
+
+                    SoundEngine.PlaySound(style, Player.Center);
+
+                    Player.DoManaRechargeEffect();
+                    CombatText.NewText(Player.getRect(), Color.CornflowerBlue, Math.Round(time / 60f, 1).ToString() + "s");
+                }
+
+                Player.AddBuff(ModContent.BuffType<GourdCanteenBuff>(), time);
             }
         }
     }
