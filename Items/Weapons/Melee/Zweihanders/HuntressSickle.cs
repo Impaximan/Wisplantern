@@ -39,15 +39,7 @@ namespace Wisplantern.Items.Weapons.Melee.Zweihanders
                 return base.Shoot(player, source, position, velocity, type, damage, knockback);
             }
 
-            foreach (NPC npc in Main.npc)
-            {
-                if (npc.active && !npc.friendly && !npc.CountsAsACritter && npc.Distance(player.Center) < 200)
-                {
-                    return base.Shoot(player, source, position, velocity, type, damage, knockback);
-                }
-            }
-
-            player.SmokeBomb((int)(ChargeTime / player.GetModPlayer<EquipmentPlayer>().zweihanderSpeed));
+            player.SmokeBomb((int)(ChargeTime / player.GetModPlayer<EquipmentPlayer>().zweihanderSpeed) + 5);
             player.AddBuff(ModContent.BuffType<SickleSmokeBombCooldown>(), 60 * 5);
             return base.Shoot(player, source, position, velocity, type, damage, knockback);
         }

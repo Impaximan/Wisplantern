@@ -171,8 +171,8 @@ Mods: {
 			}
 
 			SickleSmokeBombCooldown: {
-				DisplayName: Sickle Smoke Bomb Cooldown
-				Description: Mods.Wisplantern.Buffs.SickleSmokeBombCooldown.Description
+				DisplayName: Huntress's Sickle Cooldown
+				Description: The Huntress's Sickle's smoke bomb is on cooldown
 			}
 		}
 
@@ -910,7 +910,7 @@ Mods: {
 				DisplayName: Huntress's Sickle
 				Tooltip:
 					'''
-					Attacking from sufficiently far away will smoke bomb you while you time your strike
+					Charging the zweihander will smoke bomb you while you time your strike
 					Smoke bomb effect has a cooldown of 5 seconds
 					'''
 			}
