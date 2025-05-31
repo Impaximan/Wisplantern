@@ -18,10 +18,13 @@ namespace Wisplantern.ModPlayers
 
         public float zweihanderSpeed = 1f;
 
+        public float huntingWeaponDamage = 1f;
+
         public override void ResetEffects()
         {
             accessoryEffects.Clear();
             zweihanderSpeed = 1f;
+            huntingWeaponDamage = 1f;
         }
 
         const float critDamageMult = 1.3f;

@@ -51,7 +51,7 @@ namespace Wisplantern.Items.Equipable.Armor.Pandemonium
             {
                 burstJumpCounter++;
 
-                if (burstJumpCounter == 120)
+                if (burstJumpCounter == 90)
                 {
                     SoundEngine.PlaySound(SoundID.Item37, player.Center);
                     CombatText.NewText(player.getRect(), Color.LightGreen, "Burst jump ready...");
@@ -59,7 +59,7 @@ namespace Wisplantern.Items.Equipable.Armor.Pandemonium
             }
             else
             {
-                if (burstJumpCounter > 120)
+                if (burstJumpCounter > 90)
                 {
                     SoundEngine.PlaySound(SoundID.Item62, player.Center);
                     CombatText.NewText(player.getRect(), Color.LimeGreen, Main.rand.Next(new List<string>()

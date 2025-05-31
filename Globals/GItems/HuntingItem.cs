@@ -7,6 +7,17 @@ namespace Wisplantern.Globals.GItems
 
         public bool huntingWeapon = false;
 
+        public override void ModifyWeaponDamage(Item item, Player player, ref StatModifier damage)
+        {
+            if (!huntingWeapon)
+            {
+                return;
+            }
+
+            EquipmentPlayer equipPlayer = player.GetModPlayer<EquipmentPlayer>();
+            damage *= equipPlayer.huntingWeaponDamage;
+        }
+
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
             if (huntingWeapon)

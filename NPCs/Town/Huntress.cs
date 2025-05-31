@@ -9,6 +9,7 @@ using Wisplantern.Items.Ammo;
 using Wisplantern.Items.Weapons.Ranged.Javelins;
 using Wisplantern.Items.Equipable.Accessories;
 using Wisplantern.Items.Weapons.Melee.Zweihanders;
+using Wisplantern.Items.Equipable.Armor.Hunter;
 
 namespace Wisplantern.NPCs.Town
 {
@@ -186,6 +187,9 @@ namespace Wisplantern.NPCs.Town
                 .Add<GourdCanteen>()
                 .Add(leather)
                 .Add(ItemID.HunterPotion)
+                .Add<HunterHelmet>()
+                .Add<HunterTunic>()
+                .Add<HunterLeggings>()
                 .Add<DeathMark>(Condition.DownedEarlygameBoss)
                 .Register();
         }

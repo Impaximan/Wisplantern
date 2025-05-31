@@ -2,6 +2,7 @@
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
+using Wisplantern.Items.Equipable.Armor.Hunter;
 using Wisplantern.Items.Weapons.Melee.Shortswords;
 
 namespace Wisplantern.Items.Weapons.Ranged.Javelins
@@ -39,6 +40,21 @@ namespace Wisplantern.Items.Weapons.Ranged.Javelins
         public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {
             position.Y -= 8;
+        }
+
+        public override float UseSpeedMultiplier(Player player)
+        {
+            if (player.AccessoryActive<HunterHelmet>())
+            {
+                foreach (int buff in player.buffType)
+                {
+                    if (BuffID.Sets.IsWellFed[buff])
+                    {
+                        return 1.5f;
+                    }
+                }
+            }
+            return base.UseSpeedMultiplier(player);
         }
 
         public override void AddRecipes()

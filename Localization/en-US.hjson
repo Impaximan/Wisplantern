@@ -929,6 +929,29 @@ Mods: {
 					Note that healing while at maximum life does not count
 					'''
 			}
+
+			HunterHelmet: {
+				DisplayName: Hunter's Helmet
+				Tooltip:
+					'''
+					8% increased hunting weapon damage
+					4% increased critical strike chance
+					'''
+			}
+
+			HunterLeggings: {
+				DisplayName: Hunter's Leggings
+				Tooltip:
+					'''
+					8% increased hunting weapon damage
+					10% increased movement speed
+					'''
+			}
+
+			HunterTunic: {
+				DisplayName: Hunter's Tunic
+				Tooltip: 14% increased hunting weapon damage
+			}
 		}
 
 		NPCs: {
@@ -1156,6 +1179,7 @@ Mods: {
 			Release UP to launch yourself
 			5% increased manipulative critical strike chance
 			'''
+		HunterHelmet.SetBonus: Hunting javelins gain greatly increased attack speed while you have any food buff
 	}
 
 	ItemDropConditionDescriptions.HuntingWeapon: yeah

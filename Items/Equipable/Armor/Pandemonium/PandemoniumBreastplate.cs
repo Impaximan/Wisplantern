@@ -17,7 +17,7 @@ namespace Wisplantern.Items.Equipable.Armor.Pandemonium
         public override void SetDefaults()
         {
             Item.width = 30;
-            Item.height = 20;
+            Item.height = 28;
             Item.value = Item.sellPrice(gold: 1);
             Item.rare = ItemRarityID.Orange;
             Item.defense = 6;
